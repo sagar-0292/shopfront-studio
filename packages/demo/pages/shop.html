@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-IN" data-sf-smooth>
+<head>
+<title>Shop – Mithai Market</title>
+<meta name="description" content="All our sweets, namkeen and gift boxes, with prices and live stock.">
+<!-- @head -->
+</head>
+<body>
+<!-- @header -->
+<main id="main" class="block">
+  <div class="wrap">
+    <p class="eyebrow">Shop</p>
+    <h1 style="font-size:clamp(2.2rem,6vw,4rem);margin:8px 0 24px" data-sf-split="words">All sweets & snacks</h1>
+    <div class="shop-layout">
+      <form data-sf-filters data-for="shop" aria-label="Filters"></form>
+      <div>
+        <div class="toolbar">
+          <input data-sf-search data-for="shop" placeholder="Search kaju katli, bhujia…" aria-label="Search products">
+          <select data-sf-sort data-for="shop" aria-label="Sort products"></select>
+        </div>
+        <h2 class="sf-sr">Products</h2>
+        <div data-sf-products id="shop" data-sync-url>
+<!-- @card -->
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<!-- @footer -->
+</body>
+</html>

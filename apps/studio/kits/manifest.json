@@ -1,0 +1,22 @@
+{
+  "motion": {
+    "latest": "1.0.0",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "released_at": "2026-09-25",
+        "notes": "First release. Scroll reveals (8 styles), split-text headlines, parallax, pinned horizontal scroll, marquee, magnetic buttons, tilt cards, custom cursor with labels, progress bar, auto-hiding header, smooth scrolling, aurora/particles/waves backgrounds, video hero, 3D objects (ring, gem, knot, blob, cup, orbit, stack) and client .glb models. Respects reduced motion, scales down on phones and low-power devices, pauses off-screen, and includes a visitor \"Pause animations\" button."
+      }
+    ]
+  },
+  "commerce": {
+    "latest": "1.0.0",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "released_at": "2026-09-25",
+        "notes": "First release. Product grids from live data with card templates and slots, automatic filters, search and sorting, cart drawer, checkout by WhatsApp (Razorpay ready for Phase 6), coupons, delivery charges with free-delivery threshold, wishlist, stock status and variants, seller and category pages, and a booking form with live free slots."
+      }
+    ]
+  }
+}

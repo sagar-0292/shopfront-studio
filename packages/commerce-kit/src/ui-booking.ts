@@ -42,7 +42,7 @@ export function mountBooking(el: HTMLElement, kit: Kit) {
       ...Array.from({ length: days }, (_, i) => {
         const d = addDays(todayIST(), i);
         const l = dayLabel(d);
-        return h('button', { type: 'button', role: 'radio', 'aria-checked': String(d === date), class: 'sf-day', 'aria-label': l.long, 'data-date': d,
+        return h('button', { type: 'button', role: 'radio', 'aria-checked': String(d === date), class: 'sf-day', title: l.long, 'data-date': d,
           onclick: () => { date = d; slot = null; message = null; loadSlots(); } },
           h('span', {}, i === 0 ? 'Today' : l.weekday), h('strong', {}, String(l.day)), h('span', {}, l.month));
       }));
@@ -95,10 +95,18 @@ export function mountBooking(el: HTMLElement, kit: Kit) {
     el.dataset.state = loading ? 'loading' : 'ready';
   }
 
-  kit.source.services().then((list) => {
+  kit.source.services().then(async (list) => {
     services = list;
     service = list.find((s) => s.id === el.getAttribute('data-service')) ?? list[0];
     render();
+    // Open on the first day that still has free times (e.g. today may be over).
+    if (service) {
+      for (let i = 0; i < days; i++) {
+        const d = addDays(todayIST(), i);
+        const s = await kit.source.slots(service.id, d).catch(() => []);
+        if (s.some((x) => x.available)) { date = d; break; }
+      }
+    }
     loadSlots();
   });
   // Keep availability fresh while the page is open.

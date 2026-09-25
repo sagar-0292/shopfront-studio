@@ -113,7 +113,8 @@ export const backgrounds: Feature = {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     const paint: Painter = kind === 'particles' ? particles(palette, env, host) : kind === 'waves' ? waves(palette) : aurora(palette);
-    const dpr = Math.min(window.devicePixelRatio || 1, env.tier === 'full' ? 2 : 1);
+    // Phones draw at half resolution (backgrounds are soft, nobody can tell).
+    const dpr = env.tier === 'full' ? Math.min(window.devicePixelRatio || 1, 2) : 0.5;
     let w = 0, h = 0;
     const resize = () => {
       w = host.clientWidth; h = host.clientHeight;

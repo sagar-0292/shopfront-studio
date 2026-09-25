@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en-IN" data-sf-smooth data-sf-cursor>
+<head>
+<title>Kit showcase – every Shopfront effect and component</title>
+<meta name="description" content="Live reference of every motion and commerce hook in the Shopfront kits.">
+<!-- @head -->
+<style>
+  .sc section { padding: 72px 0; border-top: 1px solid var(--sf-line); }
+  .sc h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 8px; }
+  .sc code { background: #fff; border: 1px solid var(--sf-line); border-radius: 8px; padding: 2px 8px; font-size: 0.85rem; }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); margin-top: 24px; }
+  .tile { background: #fff; border: 1px solid var(--sf-line); border-radius: 20px; padding: 28px; min-height: 150px; display: grid; place-items: center; text-align: center; font-weight: 700; }
+  .obj { aspect-ratio: 1; background: radial-gradient(circle at 50% 40%, #fff, #f1e7d6); border-radius: 24px; border: 1px solid var(--sf-line); }
+  .obj figcaption { position: absolute; left: 16px; bottom: 12px; font-size: 0.85rem; font-weight: 700; z-index: 1; }
+  .bgdemo { height: 320px; border-radius: 24px; overflow: hidden; display: grid; place-items: center; color: #fff; font-size: 1.4rem; font-weight: 700; }
+  .vid { height: 420px; border-radius: 24px; color: #fff; display: grid; place-items: center; font-size: 2rem; }
+  .par { height: 380px; overflow: hidden; border-radius: 24px; position: relative; background: #2a1418; }
+  .par .layer { position: absolute; inset: -60px 0; display: grid; place-items: center; font-size: 4rem; color: var(--saffron); font-family: ui-serif, Georgia, serif; }
+  .par .layer.back { color: #ffffff22; font-size: 9rem; }
+</style>
+</head>
+<body class="sc">
+<!-- @header -->
+<main id="main">
+  <div class="wrap" style="padding:64px 0 24px">
+    <p class="eyebrow">Shopfront kits</p>
+    <h1 style="font-size:clamp(2.6rem,7vw,5rem)" data-sf-split="chars">Kit showcase</h1>
+    <p class="lede" data-sf-reveal="up">Every effect and component a generated website can use. Each one is switched on by an HTML attribute — the AI never writes animation, cart or checkout code. Motion kit <b id="v-motion">…</b> · Commerce kit <b id="v-commerce">…</b></p>
+  </div>
+
+  <section id="reveals"><div class="wrap">
+    <h2>Scroll reveals</h2><p><code>data-sf-reveal="up|down|left|right|fade|scale|blur|mask"</code> with <code>data-sf-stagger</code> on the parent</p>
+    <div class="grid" data-sf-stagger="90">
+      <div class="tile" data-sf-reveal="up">up</div><div class="tile" data-sf-reveal="down">down</div>
+      <div class="tile" data-sf-reveal="left">left</div><div class="tile" data-sf-reveal="right">right</div>
+      <div class="tile" data-sf-reveal="fade">fade</div><div class="tile" data-sf-reveal="scale">scale</div>
+      <div class="tile" data-sf-reveal="blur">blur</div><div class="tile" data-sf-reveal="mask" style="background:var(--maroon);color:#fff">mask wipe</div>
+    </div>
+  </div></section>
+
+  <section id="split"><div class="wrap">
+    <h2>Split-text headlines</h2><p><code>data-sf-split="words"</code> and <code>data-sf-split="chars"</code></p>
+    <p class="display" style="font-size:clamp(2rem,6vw,4rem);margin-top:24px" data-sf-split="words">Word by word, like a film title.</p>
+    <p class="display" style="font-size:clamp(2rem,6vw,4rem);margin-top:16px;color:var(--maroon)" data-sf-split="chars">Letter by letter.</p>
+  </div></section>
+
+  <section id="parallax"><div class="wrap">
+    <h2>Parallax</h2><p><code>data-sf-parallax="-0.3"</code> and <code>data-sf-parallax="0.2"</code></p>
+    <div class="par" style="margin-top:24px"><div class="layer back" data-sf-parallax="-0.3">मिठाई</div><div class="layer" data-sf-parallax="0.2">Mithai</div></div>
+  </div></section>
+
+  <section id="hscroll" data-sf-hscroll aria-label="Pinned horizontal scroll demo" style="padding:0">
+    <div class="panels" data-sf-hscroll-track>
+      <article class="panel p1"><h3>Pinned sideways scroll</h3><p><code style="color:#000">data-sf-hscroll</code> — keep scrolling down.</p></article>
+      <article class="panel p2"><h3>Panel two</h3><p>On phones this becomes a swipeable row.</p></article>
+      <article class="panel p3"><h3>Panel three</h3><p>With reduced motion, too.</p></article>
+      <article class="panel p4"><h3>Panel four</h3><p>Then the page carries on.</p></article>
+    </div>
+  </section>
+
+  <section id="marquee"><div class="wrap">
+    <h2>Marquee</h2><p><code>data-sf-marquee="80"</code> · <code>data-sf-direction="right"</code> · pauses on hover and off-screen</p></div>
+    <div class="strip" data-sf-marquee="80" style="margin-top:24px"><span>Kaju katli</span><span>Motichoor ladoo</span><span>Rasgulla</span><span>Soan papdi</span></div>
+    <div class="strip" data-sf-marquee="60" data-sf-direction="right" style="background:var(--saffron);color:#2a1418"><span>Free delivery over ₹999</span><span>Order on WhatsApp</span><span>Same-day in Mumbai</span></div>
+  </section>
+
+  <section id="pointer"><div class="wrap">
+    <h2>Magnetic buttons, tilt cards & cursor labels</h2><p><code>data-sf-magnetic</code> · <code>data-sf-tilt="12"</code> · <code>data-sf-cursor-label="View"</code> (mouse only)</p>
+    <p style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+      <a class="btn btn-primary" href="#pointer" data-sf-magnetic id="magnetic-demo">Magnetic button</a>
+      <a class="btn" style="background:var(--maroon);color:#fff" href="#pointer" data-sf-magnetic="0.6">Stronger pull</a>
+    </p>
+    <div class="grid">
+      <div class="tile" data-sf-tilt="12" data-sf-cursor-label="View" id="tilt-demo" style="min-height:220px">Tilt me</div>
+      <div class="tile" data-sf-tilt="20" data-sf-cursor-label="Open" style="min-height:220px;background:var(--maroon);color:#fff">More tilt</div>
+    </div>
+  </div></section>
+
+  <section id="backgrounds"><div class="wrap">
+    <h2>Animated backgrounds</h2><p><code>data-sf-bg="aurora|particles|waves"</code> with <code>data-sf-colors</code> — only drawn while on screen</p>
+    <div class="grid">
+      <div class="bgdemo" data-sf-bg="aurora" data-sf-colors="#1e1b4b,#4338ca,#f5a524,#be185d" id="bg-aurora">Aurora</div>
+      <div class="bgdemo" data-sf-bg="particles" data-sf-colors="#14132e,#f5a524,#a5b4fc" id="bg-particles">Particles</div>
+      <div class="bgdemo" data-sf-bg="waves" data-sf-colors="#3d0a14,#7a1630,#be185d,#f59e0b" id="bg-waves">Waves</div>
+    </div>
+  </div></section>
+
+  <section id="video"><div class="wrap">
+    <h2>Video hero</h2><p><code>data-sf-video data-src data-poster</code> — poster first, video only on capable devices, with a pause button</p>
+    <div class="vid" data-sf-video data-src="/kits/demo/assets/media/hero.webm" data-poster="/kits/demo/assets/img/hero-poster.svg" style="margin-top:24px"><span>Festive season is here</span></div>
+  </div></section>
+
+  <section id="objects"><div class="wrap">
+    <h2>Live 3D objects</h2><p><code>data-sf-3d="ring|gem|knot|blob|cup|orbit|stack"</code>, or <code>data-sf-3d="model" data-src="….glb"</code> for the client’s own model. Low-power phones keep the still image.</p>
+    <div class="grid">
+      <figure class="obj" data-sf-3d="ring" data-sf-3d-color="#f5a524" role="img" aria-label="Gold ring"><figcaption>ring</figcaption></figure>
+      <figure class="obj" data-sf-3d="gem" data-sf-3d-color="#be185d" role="img" aria-label="Pink gem"><figcaption>gem</figcaption></figure>
+      <figure class="obj" data-sf-3d="knot" data-sf-3d-color="#4338ca" role="img" aria-label="Blue knot"><figcaption>knot</figcaption></figure>
+      <figure class="obj" data-sf-3d="blob" data-sf-3d-color="#f59e0b" role="img" aria-label="Orange blob"><figcaption>blob</figcaption></figure>
+      <figure class="obj" data-sf-3d="cup" data-sf-3d-color="#f8f5ee" role="img" aria-label="Chai cup"><figcaption>cup</figcaption></figure>
+      <figure class="obj" data-sf-3d="orbit" data-sf-3d-color="#7a1630" role="img" aria-label="Orbiting spheres"><figcaption>orbit</figcaption></figure>
+      <figure class="obj" data-sf-3d="stack" data-sf-3d-color="#b45309" role="img" aria-label="Stack of gift boxes"><figcaption>stack</figcaption></figure>
+      <figure class="obj" data-sf-3d="model" data-src="/kits/demo/assets/models/diya.glb" role="img" aria-label="Brass diya"><figcaption>model (.glb)</figcaption></figure>
+    </div>
+  </div></section>
+
+  <section id="commerce"><div class="wrap">
+    <h2>Product grid from live data</h2><p><code>data-sf-products</code> + a <code>&lt;template data-sf-card&gt;</code> with <code>data-slot</code>s. Full shop with filters: <a href="/kits/demo/shop.html">shop page</a> · <a href="/kits/demo/seller.html?seller=kulkarni-namkeen">seller page</a> · <a href="/kits/demo/wishlist.html">wishlist</a></p>
+    <div data-sf-products id="showcase-grid" data-limit="4" data-sort="discount" style="margin-top:24px">
+<!-- @card -->
+    </div>
+  </div></section>
+
+  <section id="booking"><div class="wrap two">
+    <div><h2>Bookings with live free slots</h2><p><code>data-sf-booking data-service="bulk"</code></p></div>
+    <div data-sf-booking data-days="7"></div>
+  </div></section>
+</main>
+<!-- @footer -->
+<script type="module">
+  const set = () => {
+    document.getElementById('v-motion').textContent = window.SFMotion?.version ?? '—';
+    document.getElementById('v-commerce').textContent = window.SFCommerce?.version ?? '—';
+  };
+  window.addEventListener('load', set);
+</script>
+</body>
+</html>

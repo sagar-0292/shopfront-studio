@@ -1,0 +1,15 @@
+<template data-sf-card>
+  <article class="card-wrap" data-sf-reveal="up">
+    <div class="card" data-sf-tilt="6" data-sf-cursor-label="View">
+      <div data-slot="badges"></div>
+      <a class="media" data-slot="link"><img data-slot="image" alt=""></a>
+      <div class="body">
+        <p class="meta"><span data-slot="category"></span> · <span data-slot="seller"></span></p>
+        <h3 data-slot="name"></h3>
+        <p class="price"><span data-slot="price"></span><s data-slot="mrp"></s><i data-slot="discount"></i></p>
+        <p class="meta" data-slot="stock"></p>
+        <div class="row"><select data-slot="variant"></select><button data-slot="add">Add</button><button data-slot="wishlist">♡</button></div>
+      </div>
+    </div>
+  </article>
+</template>

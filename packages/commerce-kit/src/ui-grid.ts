@@ -14,7 +14,7 @@ const fromUrl = (v: string | null, param: string) => (v === '@url' ? new URLSear
 
 export function mountGrid(el: HTMLElement, kit: Kit): Grid {
   const tpl = templateFor(el);
-  const list = h('div', { class: 'sf-grid-list', role: 'list' });
+  const list = h('div', { class: 'sf-grid-list' });
   const status = h('p', { class: 'sf-grid-status', 'aria-live': 'polite' });
   el.append(list, status);
   const cat = fromUrl(el.getAttribute('data-category'), 'category');
@@ -38,6 +38,21 @@ export function mountGrid(el: HTMLElement, kit: Kit): Grid {
       inStock: p.get('stock') === '1' || undefined,
     };
   }
+  // Placeholder cards the size of real ones, so the page doesn't jump when products arrive.
+  const skeletons = () => {
+    const n = Math.min(Number(el.getAttribute('data-limit')) || 8, 12);
+    const dummy: Product = { id: 'skeleton', slug: '', name: '\u00a0', price_paise: 0, category: { slug: '', name: '\u00a0' }, seller: { slug: '', name: '\u00a0' }, stock: 10, image: { src: 'data:image/gif;base64,R0lGODlhAQABAAAAACw=', alt: '' } };
+    list.replaceChildren(...Array.from({ length: n }, () => {
+      const c = fillCard(tpl, dummy, { wished: false });
+      c.classList.add('sf-skeleton');
+      c.setAttribute('aria-hidden', 'true');
+      c.removeAttribute('role');
+      c.removeAttribute('data-sf-reveal');
+      c.querySelectorAll('[data-sf-reveal]').forEach((x) => x.removeAttribute('data-sf-reveal'));
+      c.querySelectorAll<HTMLElement>('button, a, select').forEach((x) => x.setAttribute('tabindex', '-1'));
+      return c;
+    }));
+  };
   function render() {
     if (kit.error) {
       list.replaceChildren();
@@ -45,7 +60,12 @@ export function mountGrid(el: HTMLElement, kit: Kit): Grid {
       el.dataset.state = 'error';
       return;
     }
-    if (!kit.loaded) { el.dataset.state = 'loading'; status.textContent = 'Loading products…'; return; }
+    if (!kit.loaded) {
+      if (el.dataset.state !== 'loading') skeletons();
+      el.dataset.state = 'loading';
+      status.textContent = 'Loading products…';
+      return;
+    }
     const items = search(kit.products, grid.query);
     const wish = new Set(kit.store.state.wishlist);
     list.replaceChildren(...items.map((p) => {
@@ -53,6 +73,7 @@ export function mountGrid(el: HTMLElement, kit: Kit): Grid {
       card.setAttribute('role', 'listitem');
       return card;
     }));
+    if (items.length) list.setAttribute('role', 'list'); else list.removeAttribute('role');
     el.dataset.state = items.length ? 'ready' : 'empty';
     el.dataset.count = String(items.length);
     status.textContent = items.length ? `${items.length} ${items.length === 1 ? 'product' : 'products'}` : (el.getAttribute('data-empty') ?? 'No products match. Try clearing the filters.');
@@ -78,6 +99,11 @@ function syncUrl(q: Query) {
 // <input data-sf-search data-for="shop">  ·  <select data-sf-sort data-for="shop">
 export function mountFilters(el: HTMLElement, grid: Grid, kit: Kit) {
   el.classList.add('sf-filters');
+  // On phones the filters fold away behind a "Filters" button.
+  const box = h('details', { class: 'sf-filters-box', open: window.matchMedia('(min-width: 900px)').matches });
+  const body = h('div', { class: 'sf-filters-body' });
+  box.append(h('summary', {}, 'Filters'), body);
+  el.replaceChildren(box);
   const build = () => {
     if (!kit.loaded) return;
     const f = facets(grid.all().filter((p) => !grid.base.categories || grid.base.categories.includes(p.category?.slug ?? '')));
@@ -93,7 +119,7 @@ export function mountFilters(el: HTMLElement, grid: Grid, kit: Kit) {
           h('label', { class: 'sf-price' }, 'Up to ', h('output', { name: 'maxOut' }, inr(grid.query.max ?? f.price.max))),
           h('input', { type: 'range', name: 'max', min: f.price.min, max: f.price.max, step: Math.max(100, Math.round((f.price.max - f.price.min) / 50 / 100) * 100), value: grid.query.max ?? f.price.max, 'aria-label': 'Maximum price' }))
       : null;
-    el.replaceChildren(
+    body.replaceChildren(
       ...[
         grid.base.categories ? null : group('Category', 'cat', f.categories, grid.query.categories),
         grid.base.sellers ? null : group('Seller', 'seller', f.sellers, grid.query.sellers),

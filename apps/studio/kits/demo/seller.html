@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<title>Seller – Mithai Market</title>
+<meta name="description" content="Products from one of our sellers.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#5b0f1f">
+<script>document.documentElement.classList.add('sf-js')</script>
+<link rel="stylesheet" href="/kits/motion/{{motion}}/sf-motion.css">
+<link rel="stylesheet" href="/kits/commerce/{{commerce}}/sf-commerce.css">
+<link rel="stylesheet" href="/kits/demo/assets/site.css">
+<script type="module" src="/kits/motion/{{motion}}/sf-motion.js"></script>
+<script type="module" src="/kits/commerce/{{commerce}}/sf-commerce.js"></script>
+<script type="application/json" id="sf-config">{
+  "site": { "id": "demo-mithai", "name": "Mithai Market", "privacyUrl": "#privacy" },
+  "whatsapp": "+919820012345",
+  "delivery": { "fee_paise": 4900, "free_above_paise": 99900 },
+  "source": { "type": "json", "url": "/kits/demo/assets/data/mithai.json" }
+}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="bar" data-sf-progress></div>
+<header class="site-header" data-sf-header="autohide">
+  <div class="wrap">
+    <a class="logo" href="/kits/demo/sample.html">Mithai Market</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/kits/demo/shop.html">Shop</a>
+      <a href="/kits/demo/seller.html?seller=joshi-sweets">Sellers</a>
+      <a href="/kits/demo/sample.html#book">Book a tasting</a>
+      <a href="/kits/demo/showcase.html">Kit showcase</a>
+    </nav>
+    <div class="icons">
+      <a class="icon-btn" href="/kits/demo/wishlist.html"><span aria-hidden="true">♡</span><span class="sf-sr">Wishlist</span> <b data-sf-wishlist-count>0</b></a>
+      <button class="icon-btn" type="button" data-sf-cart-open aria-label="Cart 0 items">Cart <b data-sf-cart-count>0</b></button>
+    </div>
+  </div>
+</header>
+<main id="main" class="block">
+  <div class="wrap">
+    <p class="eyebrow">Seller</p>
+    <div data-sf-seller-info data-seller="@url" style="margin:8px 0 24px"></div>
+    <p><a href="?seller=joshi-sweets">Joshi Sweets</a> · <a href="?seller=kulkarni-namkeen">Kulkarni Namkeen</a> · <a href="?seller=rao-dry-fruits">Rao Dry Fruits</a></p>
+    <h2 class="sf-sr">Products</h2>
+    <div data-sf-products id="seller-grid" data-seller="@url">
+<template data-sf-card>
+  <article class="card-wrap" data-sf-reveal="up">
+    <div class="card" data-sf-tilt="6" data-sf-cursor-label="View">
+      <div data-slot="badges"></div>
+      <a class="media" data-slot="link"><img data-slot="image" alt=""></a>
+      <div class="body">
+        <p class="meta"><span data-slot="category"></span> · <span data-slot="seller"></span></p>
+        <h3 data-slot="name"></h3>
+        <p class="price"><span data-slot="price"></span><s data-slot="mrp"></s><i data-slot="discount"></i></p>
+        <p class="meta" data-slot="stock"></p>
+        <div class="row"><select data-slot="variant"></select><button data-slot="add">Add</button><button data-slot="wishlist">♡</button></div>
+      </div>
+    </div>
+  </article>
+</template>
+    </div>
+  </div>
+</main>
+<footer class="site-footer" id="privacy">
+  <div class="wrap">
+    <p class="display" style="font-size:1.6rem">Mithai Market</p>
+    <p>Ranade Road, Dadar West, Mumbai 400028 · Open 10 am – 8 pm</p>
+    <button type="button" data-sf-motion-toggle>Pause animations</button>
+    <p class="note">This is a sample website made to demonstrate Shopfront's motion and commerce kits. The shop, products and prices are illustrative. Your details are only used to process your order or booking.</p>
+  </div>
+</footer>
+</body>
+</html>

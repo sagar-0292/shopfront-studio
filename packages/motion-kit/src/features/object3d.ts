@@ -15,6 +15,17 @@ export const OBJECTS = ['ring', 'gem', 'knot', 'blob', 'cup', 'orbit', 'stack', 
 let live = 0;
 export const liveScenes = () => live;
 
+// On phones the still image shows first and live 3D starts at the visitor's
+// first touch, scroll or key press, so the page is quick to use on cheap phones.
+let engaged: Promise<void> | null = null;
+function firstInteraction(): Promise<void> {
+  return (engaged ??= new Promise((resolve) => {
+    const events = ['pointerdown', 'touchstart', 'wheel', 'keydown', 'scroll'] as const;
+    const go = () => { events.forEach((e) => window.removeEventListener(e, go)); resolve(); };
+    events.forEach((e) => window.addEventListener(e, go, { passive: true, once: true }));
+  }));
+}
+
 function afterLoad(): Promise<void> {
   return new Promise((resolve) => {
     const go = () => {
@@ -46,6 +57,7 @@ export const object3d: Feature = {
         visible = true;
         if (handle) return handle.resume();
         await afterLoad();
+        if (env.tier === 'lite') await firstInteraction();
         if (cancelled || handle || !visible) return;
         const { createScene } = await import('../three/scene');
         if (cancelled) return;

@@ -171,7 +171,7 @@ export function mountCart(kit: Kit) {
   const updateCount = () => {
     const n = current().count;
     counters().forEach((c) => { c.textContent = String(n); c.dataset.count = String(n); });
-    document.querySelectorAll('[data-sf-cart-open]').forEach((b) => b.setAttribute('aria-label', `Open cart, ${n} ${n === 1 ? 'item' : 'items'}`));
+    document.querySelectorAll('[data-sf-cart-open]').forEach((b) => b.setAttribute('aria-label', `Cart ${n} ${n === 1 ? 'item' : 'items'}`));
   };
   kit.store.subscribe(async () => {
     if (kit.store.state.coupon) await refreshCoupon();

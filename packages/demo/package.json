@@ -1,0 +1,7 @@
+{
+  "name": "@shopfront/demo",
+  "private": true,
+  "type": "module",
+  "description": "Showcase and sample-site pages that exercise every hook of the kits.",
+  "scripts": { "assets": "node tools/make-assets.mjs" }
+}

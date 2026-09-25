@@ -3,10 +3,12 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   serverExternalPackages: ['pg'],
+  // Published kit files are read from disk by the /kits route.
+  outputFileTracingIncludes: { '/kits/[...path]': ['./kits/**/*'] },
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: '/((?!kits/).*)',
         headers: [
           { key: 'X-Frame-Options', value: 'DENY' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
