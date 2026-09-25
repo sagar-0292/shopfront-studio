@@ -1,0 +1,12 @@
+{
+  "name": "@shopfront/commerce-kit",
+  "version": "1.0.0",
+  "description": "Product grids, filters, cart, checkout, wishlist, coupons and bookings for Shopfront sites, driven by data-sf-* HTML hooks.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node ../build-kit.mjs commerce-kit",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  }
+}

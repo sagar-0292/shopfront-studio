@@ -1,0 +1,26 @@
+// The complete list of motion hooks. This is the contract with the AI Builder:
+// it may only use these attributes and values. Published as hooks.json with each release.
+export const HOOKS = [
+  { attr: 'data-sf-reveal', on: 'any element', values: ['up', 'down', 'left', 'right', 'fade', 'scale', 'blur', 'mask'], does: 'Animates the element in when it scrolls into view.' },
+  { attr: 'data-sf-delay', on: 'element with data-sf-reveal', values: ['number (ms)'], does: 'Waits before revealing.' },
+  { attr: 'data-sf-stagger', on: 'parent of revealed elements', values: ['number (ms)'], does: 'Reveals children one after another.' },
+  { attr: 'data-sf-split', on: 'headline', values: ['words', 'chars'], does: 'Headline slides in word by word (or letter by letter). Screen readers read it normally.' },
+  { attr: 'data-sf-parallax', on: 'image or decoration', values: ['-1 to 1 (e.g. 0.2)'], does: 'Moves at a different speed to the page while scrolling.' },
+  { attr: 'data-sf-hscroll', on: 'section', values: [''], does: 'Pins the section and scrolls its panels sideways. Needs a child with data-sf-hscroll-track. Swipeable row on phones.' },
+  { attr: 'data-sf-marquee', on: 'strip of text/logos', values: ['speed in px/s (default 60)'], does: 'Endless scrolling strip. Pauses on hover and off-screen.' },
+  { attr: 'data-sf-direction', on: 'element with data-sf-marquee', values: ['left', 'right'], does: 'Marquee direction.' },
+  { attr: 'data-sf-magnetic', on: 'button or link', values: ['0 to 1 (default 0.35)'], does: 'Button leans towards the mouse.' },
+  { attr: 'data-sf-tilt', on: 'card', values: ['max degrees (default 8)'], does: 'Card tilts in 3D under the mouse with a shine.' },
+  { attr: 'data-sf-cursor', on: '<html>', values: [''], does: 'Custom cursor ring (mouse only).' },
+  { attr: 'data-sf-cursor-label', on: 'any element', values: ['short word, e.g. View'], does: 'Word shown in the cursor ring over this element.' },
+  { attr: 'data-sf-progress', on: 'thin bar element', values: [''], does: 'Fills as the visitor scrolls the page.' },
+  { attr: 'data-sf-header', on: '<header>', values: ['autohide', 'solid'], does: 'Adds sf-scrolled after the top; autohide hides it while scrolling down.' },
+  { attr: 'data-sf-smooth', on: '<html>', values: [''], does: 'Smooth scrolling on computers.' },
+  { attr: 'data-sf-bg', on: 'section', values: ['aurora', 'particles', 'waves'], does: 'Animated background drawn behind the content.' },
+  { attr: 'data-sf-colors', on: 'element with data-sf-bg', values: ['comma-separated hex colours, first is the base'], does: 'Background colours.' },
+  { attr: 'data-sf-video', on: 'hero container', values: [''], does: 'Silent looping video hero with poster and pause button. Uses data-src, data-src-mobile, data-poster.' },
+  { attr: 'data-sf-3d', on: 'container with role="img" and aria-label', values: ['ring', 'gem', 'knot', 'blob', 'cup', 'orbit', 'stack', 'model'], does: 'Live 3D object. "model" loads data-src (.glb). Keeps its inner fallback image on low-power devices.' },
+  { attr: 'data-sf-3d-color', on: 'element with data-sf-3d', values: ['hex colour'], does: 'Object colour.' },
+  { attr: 'data-sf-3d-material', on: 'element with data-sf-3d', values: ['metal', 'glass', 'matte', 'ceramic'], does: 'Object surface.' },
+  { attr: 'data-sf-motion-toggle', on: '<button>', values: [''], does: 'Lets visitors pause all movement (required on every site).' },
+] as const;

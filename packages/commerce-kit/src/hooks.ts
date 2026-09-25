@@ -1,0 +1,18 @@
+// The complete list of commerce hooks: the contract with the AI Builder.
+export const HOOKS = [
+  { attr: 'script#sf-config[type="application/json"]', on: '<head>', does: 'Shop settings: site id and name, WhatsApp number, delivery fee, data source, payment settings.' },
+  { attr: 'data-sf-products', on: 'container (give it an id)', does: 'Product grid from live data. Options: data-category, data-seller ("@url" reads ?category= / ?seller=), data-featured, data-limit, data-sort, data-sync-url, data-template="#id", data-empty.' },
+  { attr: 'template[data-sf-card]', on: 'inside data-sf-products or data-sf-wishlist', does: 'The card design. Mark elements with data-slot.' },
+  { attr: 'data-slot', on: 'elements inside a card template', values: ['image', 'name', 'description', 'price', 'mrp', 'discount', 'category', 'seller', 'badges', 'stock', 'add', 'wishlist', 'link', 'variant'], does: 'Filled from the product. Empty slots hide themselves.' },
+  { attr: 'data-sf-filters', on: '<form> with data-for="grid id"', does: 'Builds category, seller, price and in-stock filters from the products.' },
+  { attr: 'data-sf-search', on: '<input> with data-for="grid id"', does: 'Instant search across name, description, category, seller.' },
+  { attr: 'data-sf-sort', on: '<select> with data-for="grid id"', does: 'Sort options (featured, price, newest, name, discount).' },
+  { attr: 'data-sf-cart-open', on: 'button', does: 'Opens the cart drawer.' },
+  { attr: 'data-sf-cart-count', on: 'span', does: 'Number of items in the cart.' },
+  { attr: 'data-open-cart', on: 'add button in a card template', does: 'Also opens the cart after adding.' },
+  { attr: 'data-sf-categories', on: '<nav>', does: 'Links to every category. data-href="/shop?category={slug}".' },
+  { attr: 'data-sf-seller-info', on: 'container on a seller page', does: 'Seller name and product count. data-seller="@url" or a slug.' },
+  { attr: 'data-sf-wishlist', on: 'container', does: 'Grid of saved products.' },
+  { attr: 'data-sf-wishlist-count', on: 'span', does: 'Number of saved products.' },
+  { attr: 'data-sf-booking', on: 'container', does: 'Booking form with live free slots. data-service="id", data-days="14".' },
+] as const;
