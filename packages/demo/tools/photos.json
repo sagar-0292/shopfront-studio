@@ -1,0 +1,20 @@
+{
+  "_about": "Photos for the sample site, from Wikimedia Commons (free licences, credited on the site). 'query' finds a photo; set 'file' to pin a specific one (e.g. \"File:Kaju katli.jpg\") after reviewing.",
+  "kaju-katli": { "query": "Kaju katli sweet", "alt": "Diamond-shaped kaju katli with silver leaf" },
+  "motichoor-ladoo": { "query": "Motichoor ladoo", "alt": "Orange motichoor ladoos" },
+  "rasgulla": { "query": "Rasgulla bowl", "alt": "Rasgullas in sugar syrup" },
+  "gulab-jamun": { "query": "Gulab jamun", "alt": "Gulab jamuns in rose syrup" },
+  "soan-papdi": { "query": "Soan papdi", "alt": "Flaky soan papdi cubes" },
+  "barfi": { "query": "Barfi sweet", "alt": "Squares of milk barfi" },
+  "bhujia": { "query": "Bikaneri bhujia", "alt": "A heap of crisp bhujia sev" },
+  "chakli": { "query": "Chakli snack", "alt": "Spiral chaklis" },
+  "mathri": { "query": "Mathri snack", "alt": "Flaky mathri crackers" },
+  "hamper": { "query": "Diwali sweets box", "alt": "A festive box of assorted sweets" },
+  "dry-fruit-box": { "query": "Dry fruits cashew almond pistachio", "alt": "Bowls of cashews, almonds and pistachios" },
+  "peda": { "query": "Peda sweet", "alt": "Round pedas" },
+  "hero": { "query": "Indian sweets shop display mithai", "alt": "A sweet shop counter full of mithai", "wide": true },
+  "story-milk": { "query": "Indian dairy milk cans", "alt": "Fresh milk in steel cans", "wide": true },
+  "story-ghee": { "query": "Ghee clarified butter", "alt": "Golden ghee", "wide": true },
+  "story-kitchen": { "query": "Halwai making sweets", "alt": "A halwai making sweets by hand", "wide": true },
+  "story-box": { "query": "Mithai box packed sweets", "alt": "Sweets packed in a gift box", "wide": true }
+}
