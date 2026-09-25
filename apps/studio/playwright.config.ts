@@ -1,5 +1,26 @@
 import { defineConfig, devices } from '@playwright/test';
+import { cpSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { ANON_KEY } from '../../scripts/local-keys.mjs';
+
+// Test copy of the published kits, plus a pretend motion kit 1.1.0 so the
+// compare-and-upgrade flow can be tested. (Real releases are never touched.)
+const KITS_FIXTURE = join(__dirname, 'e2e/.kits-fixture');
+if (!process.env.E2E_FIXTURE_READY) {
+  process.env.E2E_FIXTURE_READY = '1';
+  rmSync(KITS_FIXTURE, { recursive: true, force: true });
+  cpSync(join(__dirname, 'kits'), KITS_FIXTURE, { recursive: true });
+  const src = join(KITS_FIXTURE, 'motion/1.0.0');
+  const dst = join(KITS_FIXTURE, 'motion/1.1.0');
+  cpSync(src, dst, { recursive: true });
+  const js = join(dst, 'sf-motion.js');
+  writeFileSync(js, readFileSync(js, 'utf8').replace(/"1\.0\.0"/g, '"1.1.0"'));
+  writeFileSync(join(dst, 'VERSION'), '1.1.0\n');
+  const mf = JSON.parse(readFileSync(join(KITS_FIXTURE, 'manifest.json'), 'utf8'));
+  mf.motion.versions.unshift({ version: '1.1.0', released_at: '2026-10-01', notes: 'Test release: smoother reveals.' });
+  mf.motion.latest = '1.1.0';
+  writeFileSync(join(KITS_FIXTURE, 'manifest.json'), JSON.stringify(mf, null, 2));
+}
 
 // End-to-end tests run the real app against the real login server and a
 // fresh local database (shopfront_e2e). Emails are captured locally.
@@ -22,6 +43,8 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     locale: 'en-IN',
     timezoneId: 'Asia/Kolkata',
+    // Software WebGL so the 3D objects can be tested without a graphics card.
+    launchOptions: { args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] },
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: [
@@ -42,6 +65,7 @@ export default defineConfig({
         NEXT_PUBLIC_SUPABASE_ANON_KEY: ANON_KEY,
         DATABASE_URL: DB,
         NEXT_PUBLIC_APP_URL: `http://localhost:${PORT}`,
+        KITS_DIR: KITS_FIXTURE,
       },
     },
   ],

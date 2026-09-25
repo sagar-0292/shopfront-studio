@@ -88,3 +88,12 @@ export async function noHorizontalScroll(page: Page) {
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow, 'page should not scroll sideways').toBeLessThanOrEqual(0);
 }
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    SFMotion?: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    SFCommerce?: any;
+  }
+}

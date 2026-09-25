@@ -3,7 +3,7 @@
 A web app for a web agency to create, launch and run premium websites for Indian businesses.
 AI agents do most of the work; people approve. Each client gets a simple admin panel.
 
-**Status: Phase 1 (Foundation) complete.** See [docs/PHASE-1.md](docs/PHASE-1.md) for what's in it and a demo script,
+**Status: Phase 2 (Kits) complete.** See [docs/PHASE-2.md](docs/PHASE-2.md) and [docs/PHASE-1.md](docs/PHASE-1.md) for what's in them and demo scripts,
 and [SETUP.md](SETUP.md) for the accounts and settings needed to put it online.
 
 ## What's in this folder
@@ -16,7 +16,9 @@ and [SETUP.md](SETUP.md) for the accounts and settings needed to put it online.
 | `tests/db` | Security tests that prove who can and can't see or change each kind of data. |
 | `apps/studio/e2e` | Browser tests that click through the real app. |
 | `scripts` | Local tools: reset the database, run the local login server, build it. |
-| `packages/` | (Phase 2) the motion kit and commerce kit. |
+| `packages/motion-kit`, `packages/commerce-kit` | The versioned kits every website uses ([docs/KITS.md](docs/KITS.md)). |
+| `packages/demo` | Showcase and sample-shop pages. |
+| `apps/studio/kits` | Published, frozen kit versions served at `/kits/…`. |
 
 ## Key design decisions
 
@@ -43,6 +45,8 @@ pnpm dev                     # the app at http://localhost:3000 (copy apps/studi
 
 pnpm test:db                 # database security tests
 pnpm test:unit               # small logic tests (money, phone numbers, errors…)
+pnpm test:kits               # kit logic tests
+pnpm kits:release            # publish a new kit version (see docs/KITS.md)
 pnpm test:e2e                # browser tests (starts its own servers; stop `pnpm stack`/`pnpm dev` first)
 pnpm lint && pnpm typecheck
 ```

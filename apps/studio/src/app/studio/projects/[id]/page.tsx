@@ -9,6 +9,7 @@ import { requireAgency } from '@/lib/context';
 import { withUser } from '@/lib/db';
 import { SITE_STATUSES, formatDate, label, statusOf } from '@/lib/catalog';
 import { CLIENT_AREAS } from '@/lib/invites';
+import { compareVersions, KIT_LABELS, KIT_NAMES, manifest } from '@/lib/kits';
 import {
   inviteClientUser, removeClientUser, revokeInvitation, setArchived, setAssignees, updateClient, updateProject,
 } from '../actions';
@@ -16,13 +17,16 @@ import {
 export const metadata: Metadata = { title: 'Project settings' };
 
 type Site = {
+  motion_kit_version: string; commerce_kit_version: string;
   id: string; name: string; slug: string; status: string; site_types: string[]; business_kind: string; languages: string[];
   primary_domain: string | null; archived_at: string | null; created_at: string; client_id: string;
 };
 
 export default async function ProjectPage({ params, searchParams }: PageProps<'/studio/projects/[id]'>) {
   const { id } = await params;
-  const created = (await searchParams).created === '1';
+  const sp = await searchParams;
+  const created = sp.created === '1';
+  const kitUpdated = typeof sp['kit-updated'] === 'string' ? sp['kit-updated'] : null;
   if (!/^[0-9a-f-]{36}$/.test(id)) notFound();
   const { ctx, agency } = await requireAgency();
 
@@ -48,6 +52,7 @@ export default async function ProjectPage({ params, searchParams }: PageProps<'/
   if (!data) notFound();
   const { site, client, members, invites, team, assigned } = data;
   const st = statusOf(site.status);
+  const kits = manifest();
   const areaLabel = (keys: string[]) => keys.map((k) => label(CLIENT_AREAS, k)).join(', ');
 
   return (
@@ -60,6 +65,7 @@ export default async function ProjectPage({ params, searchParams }: PageProps<'/
         action={<Badge tone={st.tone}>{st.label}</Badge>}
       />
       {created && <Notice tone="good">Project created. Next, invite the business owner so they can log in to their admin.</Notice>}
+      {kitUpdated && <Notice tone="good">Kit version updated. The website uses it from its next publish.</Notice>}
       {site.archived_at && <Notice>This project is archived. Restore it at the bottom of this page.</Notice>}
 
       <Card>
@@ -83,6 +89,28 @@ export default async function ProjectPage({ params, searchParams }: PageProps<'/
             </div>
           </div>
         </ActionForm>
+      </Card>
+
+      <Card>
+        <CardTitle title="Kits" description="The motion and commerce libraries this website is built on. It stays on these versions until the agency owner upgrades it." />
+        <ul className="grid gap-3 sm:grid-cols-2" aria-label="Kit versions">
+          {KIT_NAMES.map((k) => {
+            const current = k === 'motion' ? site.motion_kit_version : site.commerce_kit_version;
+            const latest = kits[k].latest;
+            const behind = compareVersions(latest, current) > 0;
+            return (
+              <li key={k} className="rounded-xl border border-line p-4">
+                <p className="text-sm text-muted">{KIT_LABELS[k]}</p>
+                <p className="font-display text-2xl text-brand">{current}</p>
+                {behind ? (
+                  <Link className="mt-2 inline-block text-sm font-semibold text-primary underline" href={`/studio/projects/${site.id}/kits?kit=${k}&to=${latest}`}>{latest} available — compare & upgrade</Link>
+                ) : (
+                  <p className="mt-2 flex flex-wrap gap-x-3 text-sm"><span className="text-good">Up to date</span><Link className="text-primary underline" href={`/studio/projects/${site.id}/kits?kit=${k}`}>Compare versions</Link></p>
+                )}
+              </li>
+            );
+          })}
+        </ul>
       </Card>
 
       <Card>

@@ -1,5 +1,6 @@
 import type { Feature } from './types';
 import { whenVisible } from '../observe';
+import { onScroll } from '../scroll';
 
 // data-sf-reveal="up|down|left|right|fade|scale|blur|mask"
 // data-sf-delay="200" (ms)   · parent data-sf-stagger="80" staggers children
@@ -18,6 +19,17 @@ export const reveal: Feature = {
     if (env.tier === 'static') {
       el.classList.add('sf-in');
       return;
+    }
+    // A masked element is fully clipped, which browsers treat as "not visible",
+    // so for masks we check its position while scrolling instead.
+    if (el.getAttribute('data-sf-reveal') === 'mask') {
+      const check = () => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.92 && r.bottom > 0) { el.classList.add('sf-in'); off(); }
+      };
+      const off = onScroll(check);
+      requestAnimationFrame(check);
+      return off;
     }
     const stop = whenVisible(
       el,

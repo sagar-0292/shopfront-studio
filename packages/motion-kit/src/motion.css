@@ -11,6 +11,10 @@
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
+/* Elements waiting to slide in from the side must never make the page scroll sideways. */
+html.sf-js { overflow-x: hidden; }
+.sf-js body { overflow-x: clip; }
+
 /* ---------- reveals ---------- */
 .sf-js [data-sf-reveal] {
   transition: opacity var(--sf-dur) var(--sf-ease), transform var(--sf-dur) var(--sf-ease),

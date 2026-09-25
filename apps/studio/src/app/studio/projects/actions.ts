@@ -9,6 +9,7 @@ import { slugify } from '@/lib/slug';
 import { LANGUAGES, SITE_STATUSES, SITE_TYPES } from '@/lib/catalog';
 import { normaliseGstin, normaliseIndianPhone } from '@/lib/phone';
 import { cleanEmail, createInvite } from '@/lib/invites';
+import { isReleased, KIT_LABELS, manifest, type KitName } from '@/lib/kits';
 
 function siteTypes(form: FormData) {
   const types = form.getAll('site_types').map(String).filter((t) => SITE_TYPES.some((s) => s.key === t));
@@ -55,6 +56,7 @@ export const createProject = safe(async (form) => {
   const businessKind = text(form, 'business_kind', { label: 'the kind of business', max: 160 });
   const existingClient = String(form.get('client_id') ?? '');
 
+  const kits = manifest(); // new websites start on the latest kits
   const siteId = await withUser(ctx.user, async (db) => {
     let clientId = existingClient;
     if (!clientId || clientId === 'new') {
@@ -68,9 +70,9 @@ export const createProject = safe(async (form) => {
     }
     const slug = await uniqueSlug(db, agency.organisation_id, slugify(name));
     const site = await db.one<{ id: string }>(
-      `insert into sites (client_id, name, slug, site_types, business_kind, languages, created_by)
-       values ($1, $2, $3, $4, $5, $6, $7) returning id`,
-      [clientId, name, slug, types, businessKind, langs, ctx.user.id],
+      `insert into sites (client_id, name, slug, site_types, business_kind, languages, created_by, motion_kit_version, commerce_kit_version)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning id`,
+      [clientId, name, slug, types, businessKind, langs, ctx.user.id, kits.motion.latest, kits.commerce.latest],
     );
     await db.query(`insert into site_assignees (site_id, user_id) values ($1, $2)`, [site!.id, ctx.user.id]);
     return site!.id;
@@ -171,4 +173,18 @@ export const revokeInvitation = safe(async (form) => {
   await withUser(ctx.user, (db) => db.query(`update invitations set revoked_at = now() where id = $1 and accepted_at is null`, [form.get('id')]));
   revalidatePath('/studio', 'layout');
   return { ok: true, message: 'Invitation cancelled.' };
+});
+
+export const switchKitVersion = safe(async (form) => {
+  const { ctx, isOwner } = await requireAgency();
+  if (!isOwner) throw new UserError('Only the agency owner can change which kit version a website uses.');
+  const id = String(form.get('id'));
+  const kit = String(form.get('kit')) as KitName;
+  const version = String(form.get('version'));
+  if (!(kit in KIT_LABELS) || !isReleased(kit, version)) throw new UserError('That kit version doesn’t exist.');
+  const column = kit === 'motion' ? 'motion_kit_version' : 'commerce_kit_version';
+  const r = await withUser(ctx.user, (db) => db.query(`update sites set ${column} = $2 where id = $1 returning id`, [id, version]));
+  if (!r.length) throw new UserError('This project could not be found, or you no longer have access to it.');
+  revalidatePath(`/studio/projects/${id}`);
+  redirect(`/studio/projects/${id}?kit-updated=${kit}`);
 });

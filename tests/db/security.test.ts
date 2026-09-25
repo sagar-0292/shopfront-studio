@@ -420,3 +420,29 @@ describe('creating an agency', () => {
     await refused(as(w.people.ownerA, (q) => q(`update platform_settings set agency_signup_mode = 'open'`)));
   });
 });
+
+describe('kit versions', () => {
+  it('new websites start on a kit version', async () => {
+    const { rows } = await admin(`select motion_kit_version, commerce_kit_version from sites where id = $1`, [w.siteA1]);
+    expect(rows[0]).toEqual({ motion_kit_version: '1.0.0', commerce_kit_version: '1.0.0' });
+  });
+
+  it('only the agency owner can upgrade a website’s kits', async () => {
+    const err = await refused(as(w.people.teamA, (q) => q(`update sites set motion_kit_version = '1.1.0' where id = $1`, [w.siteA1])));
+    expect(err.message).toMatch(/Only the agency owner/);
+    // team members can still edit everything else
+    const ok = await as(w.people.teamA, (q) => q(`update sites set name = 'Mithai Market 2' where id = $1`, [w.siteA1]));
+    expect(ok.rowCount).toBe(1);
+    const up = await as(w.people.ownerA, (q) => q(`update sites set motion_kit_version = '1.1.0' where id = $1`, [w.siteA1]));
+    expect(up.rowCount).toBe(1);
+  });
+
+  it('clients and other agencies cannot change kit versions', async () => {
+    expect((await as(w.people.clientA1Owner, (q) => q(`update sites set commerce_kit_version = '9.9.9' where id = $1`, [w.siteA1]))).rowCount).toBe(0);
+    expect((await as(w.people.ownerB, (q) => q(`update sites set commerce_kit_version = '9.9.9' where id = $1`, [w.siteA1]))).rowCount).toBe(0);
+  });
+
+  it('rejects nonsense version numbers', async () => {
+    await refused(as(w.people.ownerA, (q) => q(`update sites set motion_kit_version = 'latest' where id = $1`, [w.siteA1])));
+  });
+});

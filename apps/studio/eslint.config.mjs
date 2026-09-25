@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Published kit builds (minified output of packages/*-kit).
+    "kits/**",
+    "e2e/.kits-fixture/**",
+    "test-results/**",
+    "playwright-report/**",
   ]),
 ]);
 

@@ -20,7 +20,9 @@ export function mountCart(kit: Kit) {
   const backdrop = h('div', { class: 'sf-drawer-backdrop', onclick: () => close() });
   const drawer = h('div', { class: 'sf-drawer', hidden: true, 'data-sf-cart': '' }, backdrop, panel);
   document.body.append(drawer);
-  drawer.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); trapFocus(panel, e); });
+  drawer.addEventListener('keydown', (e) => trapFocus(panel, e));
+  // Escape closes the cart even if focus was lost (e.g. the item you were on was removed).
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !drawer.hidden) close(); });
 
   function open() {
     lastFocus = document.activeElement as HTMLElement;
@@ -51,6 +53,13 @@ export function mountCart(kit: Kit) {
   }
 
   function render() {
+    const hadFocus = panel.contains(document.activeElement);
+    draw();
+    // Re-drawing can remove the focused button; keep keyboard focus inside the cart.
+    if (hadFocus && !panel.contains(document.activeElement)) panel.focus();
+  }
+
+  function draw() {
     const t = current();
     const head = h('div', { class: 'sf-drawer-head' },
       h('h2', { id: 'sf-cart-title' }, step === 'details' ? 'Your details' : step === 'done' ? 'Thank you' : 'Your cart'),

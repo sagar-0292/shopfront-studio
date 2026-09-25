@@ -117,7 +117,7 @@ export function mountFilters(el: HTMLElement, grid: Grid, kit: Kit) {
     const price = f.price.max > f.price.min
       ? h('fieldset', { class: 'sf-filter-group' }, h('legend', {}, 'Price'),
           h('label', { class: 'sf-price' }, 'Up to ', h('output', { name: 'maxOut' }, inr(grid.query.max ?? f.price.max))),
-          h('input', { type: 'range', name: 'max', min: f.price.min, max: f.price.max, step: Math.max(100, Math.round((f.price.max - f.price.min) / 50 / 100) * 100), value: grid.query.max ?? f.price.max, 'aria-label': 'Maximum price' }))
+          h('input', { type: 'range', name: 'max', min: f.price.min, max: f.price.max, step: 'any', value: grid.query.max ?? f.price.max, 'aria-label': 'Maximum price' }))
       : null;
     body.replaceChildren(
       ...[
@@ -133,7 +133,9 @@ export function mountFilters(el: HTMLElement, grid: Grid, kit: Kit) {
     const data = new FormData(el as HTMLFormElement);
     const cats = data.getAll('cat').map(String);
     const sellers = data.getAll('seller').map(String);
-    const max = Number(data.get('max'));
+    // Round the slider to whole rupees; the far right end always means "no limit".
+    const raw = Number(data.get('max'));
+    const max = Math.round(raw / 100) * 100;
     const out = el.querySelector('output');
     if (out && Number.isFinite(max)) out.textContent = inr(max);
     const f = facets(grid.all());
@@ -141,7 +143,7 @@ export function mountFilters(el: HTMLElement, grid: Grid, kit: Kit) {
       ...grid.query,
       categories: grid.base.categories ?? (cats.length ? cats : undefined),
       sellers: grid.base.sellers ?? (sellers.length ? sellers : undefined),
-      max: Number.isFinite(max) && max < f.price.max ? max : null,
+      max: Number.isFinite(raw) && raw < f.price.max ? max : null,
       inStock: data.get('stock') === 'on' || undefined,
     };
     grid.render();
