@@ -11,7 +11,7 @@ export default async function ResetPasswordPage() {
   await requireUser('/auth/reset-password');
   return (
     <main className="mx-auto w-full max-w-sm px-4 py-16">
-      <h1 className="font-display text-5xl">Choose a new password</h1>
+      <h1 className="font-display text-5xl text-brand">Choose a new password</h1>
       <div className="mt-8">
         <ActionForm action={setNewPassword} submitLabel="Save new password" footer={<Link href="/" className="text-sm underline">Continue</Link>}>
           <Field label="New password" htmlFor="password" hint="At least 8 characters, with letters and numbers.">

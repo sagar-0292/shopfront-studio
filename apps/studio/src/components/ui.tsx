@@ -6,9 +6,9 @@ export function cx(...c: (string | false | null | undefined)[]) {
 }
 
 const buttonStyles = {
-  primary: 'bg-ink text-paper hover:bg-ink/85',
-  accent: 'bg-accent text-accent-ink hover:bg-accent/90',
-  ghost: 'bg-transparent text-ink hover:bg-ink/5 border border-line',
+  primary: 'bg-primary text-white shadow-sm shadow-primary/25 hover:bg-primary-hover',
+  accent: 'bg-accent text-brand font-semibold shadow-sm shadow-accent/40 hover:brightness-105',
+  ghost: 'bg-card text-ink border border-line hover:border-primary/40 hover:text-primary',
   danger: 'bg-bad text-white hover:bg-bad/90',
 };
 export type ButtonVariant = keyof typeof buttonStyles;
@@ -30,7 +30,7 @@ export function ButtonLink({ variant = 'primary', className, ...p }: ComponentPr
 }
 
 const inputClass =
-  'w-full rounded-xl border border-line bg-card px-4 min-h-11 text-base sm:text-sm text-ink placeholder:text-muted/70 focus:border-ink focus:outline-none';
+  'w-full rounded-xl border border-line bg-card px-4 min-h-11 text-base sm:text-sm text-ink placeholder:text-muted/70 transition focus:border-primary focus:ring-4 focus:ring-primary/10 focus:outline-none';
 
 export function Field({
   label,
@@ -67,14 +67,14 @@ export function Textarea({ className, ...p }: ComponentProps<'textarea'>) {
 }
 
 export function Card({ className, ...p }: ComponentProps<'section'>) {
-  return <section className={cx('rounded-2xl border border-line bg-card p-5 sm:p-6', className)} {...p} />;
+  return <section className={cx('rounded-2xl border border-line bg-card p-5 shadow-[0_1px_2px_rgba(20,19,46,0.04)] sm:p-6', className)} {...p} />;
 }
 
 export function CardTitle({ title, description, action }: { title: string; description?: ReactNode; action?: ReactNode }) {
   return (
     <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
       <div>
-        <h2 className="text-lg font-semibold">{title}</h2>
+        <h2 className="text-lg font-semibold text-brand">{title}</h2>
         {description && <p className="mt-1 text-sm text-muted">{description}</p>}
       </div>
       {action}
@@ -86,8 +86,8 @@ export function PageHeader({ eyebrow, title, description, action }: { eyebrow?: 
   return (
     <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
       <div className="min-w-0">
-        {eyebrow && <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted">{eyebrow}</p>}
-        <h1 className="font-display text-4xl leading-none sm:text-5xl mt-2 break-words">{title}</h1>
+        {eyebrow && <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">{eyebrow}</p>}
+        <h1 className="font-display mt-2 break-words text-4xl leading-[1.05] text-brand sm:text-5xl">{title}</h1>
         {description && <p className="mt-3 max-w-2xl text-muted">{description}</p>}
       </div>
       {action}
@@ -96,14 +96,20 @@ export function PageHeader({ eyebrow, title, description, action }: { eyebrow?: 
 }
 
 const badgeTones = {
-  neutral: 'bg-ink/5 text-ink',
-  good: 'bg-good/10 text-good',
-  warn: 'bg-warn/10 text-warn',
-  bad: 'bg-bad/10 text-bad',
-  accent: 'bg-accent/10 text-accent',
-};
-export function Badge({ tone = 'neutral', children }: { tone?: keyof typeof badgeTones; children: ReactNode }) {
-  return <span className={cx('inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium', badgeTones[tone])}>{children}</span>;
+  neutral: ['bg-ink/5 text-ink', 'bg-muted'],
+  good: ['bg-good/10 text-good', 'bg-good'],
+  warn: ['bg-accent-soft text-warn', 'bg-accent'],
+  bad: ['bg-bad/10 text-bad', 'bg-bad'],
+  accent: ['bg-primary/10 text-primary', 'bg-primary'],
+} as const;
+export function Badge({ tone = 'neutral', dot = true, children }: { tone?: keyof typeof badgeTones; dot?: boolean; children: ReactNode }) {
+  const [box, bullet] = badgeTones[tone];
+  return (
+    <span className={cx('inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium', box)}>
+      {dot && <span aria-hidden className={cx('size-1.5 rounded-full', bullet)} />}
+      {children}
+    </span>
+  );
 }
 
 export function Notice({ tone = 'neutral', children, role }: { tone?: 'neutral' | 'good' | 'bad'; children: ReactNode; role?: string }) {
@@ -117,8 +123,8 @@ export function Notice({ tone = 'neutral', children, role }: { tone?: 'neutral' 
 
 export function EmptyState({ title, children, action }: { title: string; children?: ReactNode; action?: ReactNode }) {
   return (
-    <div className="rounded-2xl border border-dashed border-line px-6 py-14 text-center">
-      <p className="font-display text-3xl">{title}</p>
+    <div className="rounded-2xl border border-dashed border-primary/25 bg-card/60 px-6 py-14 text-center">
+      <p className="font-display text-3xl text-brand">{title}</p>
       {children && <div className="mx-auto mt-2 max-w-md text-sm text-muted">{children}</div>}
       {action && <div className="mt-6">{action}</div>}
     </div>

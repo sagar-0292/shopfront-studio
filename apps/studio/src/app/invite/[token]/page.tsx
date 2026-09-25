@@ -38,7 +38,7 @@ export default async function InvitePage({ params }: PageProps<'/invite/[token]'
   if (!invite) {
     return (
       <Shell>
-        <h1 className="font-display text-5xl">Invitation not found</h1>
+        <h1 className="font-display text-5xl text-brand">Invitation not found</h1>
         <p className="mt-3 text-muted">This link isn’t valid. Please check you copied the whole link, or ask for a new invitation.</p>
       </Shell>
     );
@@ -52,7 +52,7 @@ export default async function InvitePage({ params }: PageProps<'/invite/[token]'
   return (
     <Shell>
       <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted">Invitation</p>
-      <h1 className="mt-2 font-display text-5xl leading-tight">Join {where}</h1>
+      <h1 className="mt-2 font-display text-5xl text-brand leading-tight">Join {where}</h1>
       <p className="mt-3 text-muted">
         {invite.invited_by_name ?? 'Someone'} invited <strong className="text-ink">{invite.email}</strong> to join as {roleNames[invite.role] ?? invite.role}.
       </p>

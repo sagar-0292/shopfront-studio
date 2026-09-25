@@ -18,7 +18,7 @@ export default async function OnboardingPage() {
   return (
     <main className="mx-auto w-full max-w-xl px-4 py-16">
       <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted">Shopfront Studio</p>
-      <h1 className="mt-2 font-display text-5xl">Welcome{ctx.profile.full_name ? `, ${ctx.profile.full_name.split(' ')[0]}` : ''}</h1>
+      <h1 className="mt-2 font-display text-5xl text-brand">Welcome{ctx.profile.full_name ? `, ${ctx.profile.full_name.split(' ')[0]}` : ''}</h1>
       {open ? (
         <Card className="mt-8">
           <h2 className="text-lg font-semibold">Set up your agency workspace</h2>

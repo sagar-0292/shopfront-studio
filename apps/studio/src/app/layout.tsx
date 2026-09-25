@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Instrument_Serif } from 'next/font/google';
+import { Inter, Bricolage_Grotesque } from 'next/font/google';
 import './globals.css';
 import { Hydrated } from '@/components/hydrated';
 
 const inter = Inter({ variable: '--font-inter', subsets: ['latin'] });
-const display = Instrument_Serif({ variable: '--font-display-serif', subsets: ['latin'], weight: '400' });
+const display = Bricolage_Grotesque({ variable: '--font-bricolage', subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: { default: 'Shopfront Studio', template: '%s · Shopfront Studio' },
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export const viewport: Viewport = { themeColor: '#f7f4ee', width: 'device-width', initialScale: 1 };
+export const viewport: Viewport = { themeColor: '#1e1b4b', width: 'device-width', initialScale: 1 };
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (

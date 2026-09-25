@@ -14,7 +14,7 @@ export default async function SignupPage({ searchParams }: PageProps<'/signup'>)
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-display text-5xl">Create your account</h1>
+        <h1 className="font-display text-5xl text-brand">Create your account</h1>
         <p className="mt-2 text-muted">Joining through an invitation? Use the email address the invitation was sent to.</p>
       </div>
       <ActionForm action={signUp} submitLabel="Create account" pendingLabel="Creating…">

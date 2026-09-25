@@ -7,6 +7,23 @@ import { SITE_STATUSES, SITE_TYPES, formatDate, label, statusOf } from '@/lib/ca
 
 export const metadata: Metadata = { title: 'Projects' };
 
+const GRADIENTS = [
+  'from-indigo-500 to-violet-600',
+  'from-amber-400 to-orange-500',
+  'from-emerald-500 to-teal-600',
+  'from-rose-500 to-pink-600',
+  'from-sky-500 to-indigo-600',
+  'from-fuchsia-500 to-purple-600',
+];
+function gradientFor(name: string) {
+  let h = 0;
+  for (const ch of name) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  return GRADIENTS[h % GRADIENTS.length];
+}
+function initials(name: string) {
+  return name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]!.toUpperCase()).join('');
+}
+
 type Row = {
   id: string; name: string; slug: string; status: string; site_types: string[]; business_kind: string;
   updated_at: string; client_name: string; city: string; archived_at: string | null; assignees: string[] | null;
@@ -52,6 +69,22 @@ export default async function ProjectsPage({ searchParams }: PageProps<'/studio'
         action={<ButtonLink href="/studio/projects/new" variant="accent">+ New project</ButtonLink>}
       />
 
+      {total > 0 && (
+        <dl className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {[
+            { k: 'Active projects', v: total, cls: 'bg-brand text-white', sub: 'text-white/70' },
+            { k: 'Live', v: counts.find((c) => c.status === 'live')?.n ?? 0, cls: 'bg-card border border-line', sub: 'text-muted' },
+            { k: 'With clients for review', v: counts.find((c) => c.status === 'in_review')?.n ?? 0, cls: 'bg-accent-soft border border-accent/30', sub: 'text-warn' },
+            { k: 'Drafts & building', v: (counts.find((c) => c.status === 'draft')?.n ?? 0) + (counts.find((c) => c.status === 'building')?.n ?? 0), cls: 'bg-card border border-line', sub: 'text-muted' },
+          ].map((t) => (
+            <div key={t.k} className={cx('rounded-2xl p-4', t.cls)}>
+              <dt className={cx('text-xs font-medium', t.sub)}>{t.k}</dt>
+              <dd className="font-display mt-1 text-3xl">{t.v}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+
       <form className="mb-6 flex flex-col gap-3 sm:flex-row" role="search">
         <Input name="q" defaultValue={q} placeholder="Search by project, client, city or business…" aria-label="Search projects" className="sm:max-w-md" />
         <Select name="status" defaultValue={status} aria-label="Filter by status" className="sm:w-56">
@@ -61,7 +94,7 @@ export default async function ProjectsPage({ searchParams }: PageProps<'/studio'
           ))}
           <option value="archived">Archived</option>
         </Select>
-        <button className="min-h-11 rounded-full border border-line px-5 text-sm">Search</button>
+        <button className="min-h-11 rounded-full bg-primary px-6 text-sm font-medium text-white hover:bg-primary-hover">Search</button>
       </form>
 
       {rows.length === 0 ? (
@@ -80,19 +113,25 @@ export default async function ProjectsPage({ searchParams }: PageProps<'/studio'
               <li key={r.id}>
                 <Link
                   href={`/studio/projects/${r.id}`}
-                  className={cx('group block h-full rounded-2xl border border-line bg-card p-5 transition hover:-translate-y-0.5 hover:border-ink/40 hover:shadow-sm')}
+                  className="group relative block h-full overflow-hidden rounded-2xl border border-line bg-card p-5 shadow-[0_1px_2px_rgba(20,19,46,0.04)] transition hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <p className="truncate text-xs uppercase tracking-widest text-muted">{r.client_name}{r.city ? ` · ${r.city}` : ''}</p>
-                      <h2 className="mt-1 truncate font-display text-3xl leading-tight">{r.name}</h2>
+                  <span aria-hidden className={cx('absolute inset-x-0 top-0 h-1 bg-gradient-to-r', gradientFor(r.name))} />
+                  <div className="flex items-start gap-4">
+                    <span aria-hidden className={cx('grid size-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br font-display text-xl text-white shadow-sm', gradientFor(r.name))}>
+                      {initials(r.name)}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="truncate text-xs font-semibold uppercase tracking-wider text-muted">{r.client_name}{r.city ? ` · ${r.city}` : ''}</p>
+                        <Badge tone={st.tone}>{st.label}</Badge>
+                      </div>
+                      <h2 className="font-display mt-1 truncate text-2xl text-brand group-hover:text-primary">{r.name}</h2>
                     </div>
-                    <Badge tone={st.tone}>{st.label}</Badge>
                   </div>
-                  <p className="mt-3 line-clamp-1 text-sm text-muted">
+                  <p className="mt-4 line-clamp-1 text-sm text-muted">
                     {[r.business_kind, ...r.site_types.map((t) => label(SITE_TYPES, t))].filter(Boolean).join(' · ')}
                   </p>
-                  <div className="mt-4 flex items-center justify-between text-xs text-muted">
+                  <div className="mt-4 flex items-center justify-between border-t border-line pt-3 text-xs text-muted">
                     <span>Updated {formatDate(r.updated_at)}</span>
                     {r.assignees?.length ? <span className="truncate">{r.assignees.join(', ')}</span> : null}
                   </div>

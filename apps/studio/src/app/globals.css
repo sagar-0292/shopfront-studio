@@ -1,35 +1,48 @@
 @import "tailwindcss";
 
+/*
+ * Shopfront Studio colours — "Indigo + marigold".
+ * Change the look of the whole app by editing these values only.
+ * Every text/background pair used in the app meets WCAG AA contrast.
+ */
 :root {
-  --paper: #f7f4ee;
+  --page: #f5f6fa;        /* page background */
   --card: #ffffff;
-  --ink: #16140f;
-  --muted: #6b665c;
-  --line: #e4ded3;
-  --accent: #c2410c;
-  --accent-ink: #ffffff;
-  --good: #15803d;
-  --warn: #b45309;
-  --bad: #b91c1c;
+  --ink: #14132e;         /* main text */
+  --muted: #595e78;       /* secondary text (5.9:1 on page) */
+  --line: #e3e5ee;
+  --brand: #1e1b4b;       /* deep indigo: menu, headings accents */
+  --brand-soft: #2b2770;
+  --primary: #4338ca;     /* buttons and links (7.9:1 on white) */
+  --primary-hover: #3730a3;
+  --accent: #f5a524;      /* marigold: highlights (always with indigo text) */
+  --accent-soft: #fff4dc;
+  --good: #047857;
+  --warn: #a15c07;
+  --bad: #be123c;
 }
 
 @theme inline {
-  --color-paper: var(--paper);
+  --color-page: var(--page);
   --color-card: var(--card);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-accent: var(--accent);
-  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
   --color-good: var(--good);
   --color-warn: var(--warn);
   --color-bad: var(--bad);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display-serif), ui-serif, Georgia, serif;
+  --font-display: var(--font-bricolage), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
-  background: var(--paper);
+  background: var(--page);
   color: var(--ink);
   -webkit-text-size-adjust: 100%;
 }
@@ -38,8 +51,18 @@ body {
   font-family: var(--font-sans);
 }
 
+.font-display {
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--brand);
+}
+
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 

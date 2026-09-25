@@ -57,14 +57,14 @@ export function ActionForm({ action, children, submitLabel = 'Save', pendingLabe
 export function InviteLink({ link, email }: { link: string; email?: string }) {
   const text = `You're invited to Shopfront Studio. Open this link to join: ${link}`;
   return (
-    <div className="space-y-2 rounded-xl border border-line bg-paper p-4 text-sm">
+    <div className="space-y-2 rounded-xl border border-line bg-accent-soft/60 p-4 text-sm">
       <p className="font-medium">Invitation link{email ? ` for ${email}` : ''}</p>
       <input readOnly value={link} aria-label="Invitation link" className="w-full rounded-lg border border-line bg-card px-3 py-2 text-xs" onFocus={(e) => e.currentTarget.select()} />
       <div className="flex flex-wrap gap-2">
-        <button type="button" className="rounded-full border border-line px-3 py-1.5 text-xs" onClick={() => navigator.clipboard?.writeText(link)}>
+        <button type="button" className="rounded-full border border-line bg-card px-3 py-1.5 text-xs font-medium hover:border-primary/40" onClick={() => navigator.clipboard?.writeText(link)}>
           Copy link
         </button>
-        <a className="rounded-full border border-line px-3 py-1.5 text-xs" target="_blank" rel="noreferrer" href={`https://wa.me/?text=${encodeURIComponent(text)}`}>
+        <a className="rounded-full border border-line bg-card px-3 py-1.5 text-xs font-medium hover:border-primary/40" target="_blank" rel="noreferrer" href={`https://wa.me/?text=${encodeURIComponent(text)}`}>
           Share on WhatsApp
         </a>
       </div>

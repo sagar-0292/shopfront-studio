@@ -19,7 +19,7 @@ export default async function LoginPage({ searchParams }: PageProps<'/login'>) {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-display text-5xl">Welcome back</h1>
+        <h1 className="font-display text-5xl text-brand">Welcome back</h1>
         <p className="mt-2 text-muted">Log in to your studio or your business admin.</p>
       </div>
       {error && <Notice tone="bad">{error}</Notice>}

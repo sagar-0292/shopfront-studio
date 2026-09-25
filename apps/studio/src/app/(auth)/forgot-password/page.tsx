@@ -10,7 +10,7 @@ export default function ForgotPasswordPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-display text-5xl">Forgot password?</h1>
+        <h1 className="font-display text-5xl text-brand">Forgot password?</h1>
         <p className="mt-2 text-muted">Enter your email and we’ll send you a link to choose a new one.</p>
       </div>
       <ActionForm action={sendPasswordReset} submitLabel="Send reset link" pendingLabel="Sending…">
