@@ -61,11 +61,11 @@ Allow about an hour. Do the steps in order.
    | `RESEND_API_KEY` | from 2.2 (secret) |
    | `EMAIL_FROM` | `Your Agency <studio@youragency.in>` |
    | `PAYMENT_SECRETS_KEY` | encrypts shops' payment keys. Make one with `openssl rand -base64 32` (secret; keep a backup — without it saved keys can't be used) |
-   | `RAZORPAY_PARTNER_CLIENT_ID` / `RAZORPAY_PARTNER_CLIENT_SECRET` | optional, from step 5 — turns on one-click "Connect Razorpay" |
+   | `RAZORPAY_PARTNER_CLIENT_ID` / `RAZORPAY_PARTNER_CLIENT_SECRET` | optional, from step 4 — turns on one-click "Connect Razorpay" |
 4. **Deploy.** The app runs in Vercel's Mumbai region (`bom1`), next to the database.
 5. **Settings → Domains:** add `studio.youragency.in` and create the DNS record Vercel shows you.
 
-## 5. Razorpay Partner account (optional, for one-click "Connect Razorpay")
+## 4. Razorpay Partner account (optional, for one-click "Connect Razorpay")
 
 Without this, shops can still connect Razorpay (or any gateway) by pasting their keys.
 
@@ -76,7 +76,7 @@ Without this, shops can still connect Razorpay (or any gateway) by pasting their
 3. Copy its **Client ID** and **Client secret** into Vercel as `RAZORPAY_PARTNER_CLIENT_ID` and
    `RAZORPAY_PARTNER_CLIENT_SECRET`, then redeploy.
 
-## 4. First login
+## 5. First login
 
 1. Open `https://studio.youragency.in/signup`, create your account, and click the link in the confirmation email.
 2. You'll be asked to name your agency — you become its owner. After this, nobody else can create an agency
