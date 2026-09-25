@@ -1,0 +1,32 @@
+{
+  "name": "shopfront",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "db:reset": "node scripts/db.mjs reset",
+    "db:reset:test": "node scripts/db.mjs reset --shim --db shopfront_test",
+    "test:db": "pnpm run db:reset:test && vitest run --config vitest.db.config.ts",
+    "stack": "node scripts/local-stack.mjs",
+    "dev": "pnpm --filter studio dev",
+    "build": "pnpm --filter studio build",
+    "lint": "pnpm --filter studio lint",
+    "typecheck": "pnpm --filter studio typecheck",
+    "test:unit": "pnpm --filter studio test:unit",
+    "test:e2e": "pnpm --filter studio test:e2e",
+    "test": "pnpm run test:unit && pnpm run test:db && pnpm run test:e2e"
+  },
+  "devDependencies": {
+    "@types/mailparser": "^3.4.6",
+    "@types/pg": "^8.15.0",
+    "@types/smtp-server": "^3.5.13",
+    "mailparser": "^3.9.28",
+    "pg": "^8.16.0",
+    "smtp-server": "^3.19.13",
+    "typescript": "^5",
+    "vitest": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=20.9"
+  },
+  "packageManager": "pnpm@10.33.0"
+}
