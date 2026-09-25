@@ -1,4 +1,4 @@
-import { inviteLinkOnPage, logIn, logOut, noHorizontalScroll, signUp, test, expect, openProject } from './helpers';
+import { inviteLinkOnPage, logIn, logOut, noHorizontalScroll, signUp, sql, test, expect, openProject } from './helpers';
 
 const FOUNDER = 'sagar@mumbai-studio.test';
 const TEAM = { name: 'Tanvi Team', email: 'tanvi@mumbai-studio.test' };
@@ -120,10 +120,14 @@ test('the owner can change a team member’s role', async ({ page }) => {
   await logIn(page, FOUNDER);
   await page.goto('/studio/team');
   const tanvi = page.getByRole('listitem').filter({ hasText: TEAM.email });
-  await tanvi.getByLabel(`Role for ${TEAM.email}`).selectOption('owner');
-  await tanvi.getByRole('button', { name: 'Change' }).click();
-  await expect(tanvi.getByText('Role updated.')).toBeVisible();
-  await tanvi.getByLabel(`Role for ${TEAM.email}`).selectOption('team');
-  await tanvi.getByRole('button', { name: 'Change' }).click();
-  await expect(tanvi.getByText('Role updated.')).toBeVisible();
+  for (const role of ['owner', 'team']) {
+    await tanvi.getByLabel(`Role for ${TEAM.email}`).selectOption(role);
+    await tanvi.getByRole('button', { name: 'Change' }).click();
+    await expect(tanvi.getByText('Role updated.')).toBeVisible();
+    // Confirm it was really saved (an earlier "Role updated." could still be on screen).
+    await page.reload();
+    await expect(tanvi.getByLabel(`Role for ${TEAM.email}`)).toHaveValue(role);
+  }
+  const [row] = await sql<{ role: string }>(`select m.role from organisation_members m join profiles p on p.id = m.user_id where p.email = $1`, [TEAM.email]);
+  expect(row.role).toBe('team');
 });

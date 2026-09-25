@@ -38,6 +38,7 @@ test('the business owner adds their own inspiration and can only remove their ow
   await expect(page.getByRole('region', { name: 'Competitors' }).getByRole('button', { name: 'Remove' })).toHaveCount(0);
   await page.getByLabel('Web address').fill('lovelybakery.co.in');
   await page.getByRole('button', { name: 'Add website' }).click();
+  await expect(page.getByText('Added https://lovelybakery.co.in.')).toBeVisible();
   await page.reload();
   const insp = page.getByRole('region', { name: 'Inspiration — “make it like this”' });
   await expect(insp.getByText('lovelybakery.co.in')).toBeVisible();
