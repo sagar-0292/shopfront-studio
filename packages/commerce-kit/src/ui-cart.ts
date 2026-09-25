@@ -5,6 +5,7 @@ import { resolveLines, totals, type Totals } from './pricing';
 import { checkCustomer, indianMobile, type Customer } from './validate';
 import { waLink, whatsappOrderText } from './whatsapp';
 import { payOnline } from './razorpay';
+import { orderRef, qrSvg, upiLink, validUtr } from './upi';
 
 // The cart drawer. Added to the page automatically; any element with
 // data-sf-cart-open opens it, and data-sf-cart-count shows the number of items.
@@ -13,8 +14,10 @@ export function mountCart(kit: Kit) {
   let discount = 0;
   let couponMsg: { ok: boolean; text: string } | null = null;
   let lastFocus: HTMLElement | null = null;
-  let step: 'cart' | 'details' | 'done' = 'cart';
+  let step: 'cart' | 'details' | 'upi' | 'done' = 'cart';
   let doneMsg = '';
+  // An order waiting for its UPI payment.
+  let upiOrder: { ref: string; customer: Customer; totals: Totals; coupon: string | null } | null = null;
 
   const panel = h('div', { class: 'sf-drawer-panel', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'sf-cart-title', tabindex: '-1' });
   const backdrop = h('div', { class: 'sf-drawer-backdrop', onclick: () => close() });
@@ -62,10 +65,49 @@ export function mountCart(kit: Kit) {
   function draw() {
     const t = current();
     const head = h('div', { class: 'sf-drawer-head' },
-      h('h2', { id: 'sf-cart-title' }, step === 'details' ? 'Your details' : step === 'done' ? 'Thank you' : 'Your cart'),
+      h('h2', { id: 'sf-cart-title' }, step === 'details' ? 'Your details' : step === 'upi' ? 'Pay by UPI' : step === 'done' ? 'Thank you' : 'Your cart'),
       h('button', { type: 'button', class: 'sf-icon-btn', 'aria-label': 'Close cart', onclick: () => close() }, '✕'));
     if (step === 'done') {
       panel.replaceChildren(head, h('div', { class: 'sf-drawer-body' }, h('p', { class: 'sf-done' }, doneMsg)), h('div', { class: 'sf-drawer-foot' }, h('button', { type: 'button', class: 'sf-btn', onclick: () => close() }, 'Continue shopping')));
+      return;
+    }
+    if (step === 'upi' && upiOrder && cfg.payments?.upi) {
+      const o = upiOrder;
+      const u = cfg.payments.upi;
+      const link = upiLink(u.vpa, u.name ?? cfg.site.name, o.totals.total_paise, `Order ${o.ref}`);
+      const qrBox = h('div', { class: 'sf-upi-qr', 'aria-live': 'polite' }, h('p', { class: 'sf-note' }, 'Loading QR code…'));
+      qrSvg(link).then((svg) => qrBox.replaceChildren(svg)).catch(() => qrBox.replaceChildren(h('p', { class: 'sf-note' }, 'QR code unavailable — use the button below.')));
+      const utrForm = h('form', { class: 'sf-checkout', novalidate: true },
+        h('div', { class: 'sf-field' }, h('label', { for: 'sf-utr' }, 'UPI transaction ID (12 digits)'),
+          h('input', { id: 'sf-utr', name: 'utr', inputmode: 'numeric', autocomplete: 'off', maxlength: 14, 'aria-describedby': 'sf-utr-help' }),
+          h('p', { class: 'sf-note', id: 'sf-utr-help' }, 'Find it in your UPI app under this payment (also called UTR or reference number).'),
+          h('p', { class: 'sf-err', 'aria-live': 'polite', 'data-sf-utr-error': '' })),
+        h('button', { type: 'submit', class: 'sf-btn sf-btn-wide', 'data-sf-upi-paid': '' }, 'I’ve paid — send confirmation'));
+      utrForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const utr = String(new FormData(utrForm).get('utr') ?? '').replace(/\s/g, '');
+        if (!validUtr(utr)) {
+          utrForm.querySelector('[data-sf-utr-error]')!.textContent = 'Please enter the 12-digit transaction ID from your UPI app.';
+          (utrForm.querySelector('#sf-utr') as HTMLInputElement).focus();
+          return;
+        }
+        const text = whatsappOrderText(cfg.site.name, o.totals, o.customer, o.coupon ?? undefined,
+          `Paid ${inr(o.totals.total_paise)} by UPI to ${u.vpa} · UPI ref ${utr} · Order ${o.ref}`);
+        const wa = waLink(cfg.whatsapp!, text);
+        window.open(wa, '_blank', 'noopener');
+        drawer.dataset.lastWhatsapp = wa;
+        doneMsg = `Thank you! Your order ${o.ref} and payment details are ready in WhatsApp — press send. The shop confirms once they see the payment.`;
+        upiOrder = null; step = 'done'; render();
+      });
+      panel.replaceChildren(head,
+        h('div', { class: 'sf-drawer-body sf-upi' },
+          h('p', { class: 'sf-upi-amount' }, 'Pay ', h('strong', { 'data-sf-upi-amount': '' }, inr(o.totals.total_paise)), ` to ${u.name ?? cfg.site.name}`),
+          h('p', { class: 'sf-note' }, `Order ${o.ref} · UPI ID ${u.vpa}`),
+          h('a', { class: 'sf-btn sf-btn-wide', href: link, 'data-sf-upi-link': '' }, 'Pay with a UPI app'),
+          h('p', { class: 'sf-note' }, 'On a computer? Scan this code with any UPI app (GPay, PhonePe, Paytm, BHIM):'),
+          qrBox,
+          utrForm),
+        h('div', { class: 'sf-drawer-foot' }, h('button', { type: 'button', class: 'sf-link', onclick: () => { step = 'details'; render(); } }, '← Choose another way to pay')));
       return;
     }
     if (!t.lines.length) {
@@ -150,15 +192,26 @@ export function mountCart(kit: Kit) {
       }
       return { ...c, phone: indianMobile(c.phone)! };
     };
-    const actions = h('div', { class: 'sf-pay' },
-      cfg.whatsapp ? h('button', { type: 'button', class: 'sf-btn sf-btn-wide sf-btn-wa', 'data-sf-order-whatsapp': '', onclick: () => {
+    // Ways to pay: whatever the shop switched on (1.0.0 sites: WhatsApp only).
+    const pm = cfg.payments;
+    const canWhatsapp = !!cfg.whatsapp && (pm ? pm.whatsapp !== false : true);
+    const upi = cfg.whatsapp ? pm?.upi : undefined; // confirmations go to the shop's WhatsApp
+    const cod = cfg.whatsapp ? pm?.cod : undefined;
+    const codAllowed = !!cod && (cod.max_paise == null || t.total_paise <= cod.max_paise);
+    const finishOnWhatsapp = (c: Customer, payment: string | undefined, message: string) => {
+      const link = waLink(cfg.whatsapp!, whatsappOrderText(cfg.site.name, current(), c, kit.store.state.coupon ?? undefined, payment));
+      window.open(link, '_blank', 'noopener');
+      drawer.dataset.lastWhatsapp = link;
+      doneMsg = message;
+      kit.store.clear(); discount = 0; couponMsg = null; step = 'done'; render();
+    };
+    const actions = h('div', { class: 'sf-pay', role: 'group', 'aria-label': 'Ways to pay' },
+      upi ? h('button', { type: 'button', class: 'sf-btn sf-btn-wide', 'data-sf-pay-upi': '', onclick: () => {
         const c = read(); if (!c) return;
-        const link = waLink(cfg.whatsapp!, whatsappOrderText(cfg.site.name, current(), c, kit.store.state.coupon ?? undefined));
-        window.open(link, '_blank', 'noopener');
-        drawer.dataset.lastWhatsapp = link;
-        doneMsg = 'Your order is ready in WhatsApp — just press send. The shop will confirm it there.';
-        kit.store.clear(); discount = 0; couponMsg = null; step = 'done'; render();
-      } }, 'Order on WhatsApp') : null,
+        upiOrder = { ref: orderRef(cfg.site.name), customer: c, totals: current(), coupon: kit.store.state.coupon };
+        kit.store.clear(); discount = 0; couponMsg = null;
+        step = 'upi'; render();
+      } }, `Pay ${inr(t.total_paise)} by UPI`) : null,
       pay ? h('button', { type: 'button', class: 'sf-btn sf-btn-wide', 'data-sf-pay-online': '', onclick: async (e: Event) => {
         const c = read(); if (!c) return;
         const btn = e.currentTarget as HTMLButtonElement;
@@ -170,7 +223,16 @@ export function mountCart(kit: Kit) {
         } catch {
           form.querySelector('[data-sf-form-error]')!.textContent = 'We couldn’t reach the payment service. Please check your internet and try again.';
         } finally { btn.disabled = false; btn.textContent = `Pay ${inr(current().total_paise)} online`; }
-      } }, `Pay ${inr(t.total_paise)} online`) : null);
+      } }, `Pay ${inr(t.total_paise)} online`) : null,
+      cod ? h('button', { type: 'button', class: 'sf-btn sf-btn-wide sf-btn-ghost', 'data-sf-pay-cod': '', disabled: !codAllowed, onclick: () => {
+        const c = read(); if (!c) return;
+        finishOnWhatsapp(c, `Cash on delivery (${inr(current().total_paise)})`, 'Your cash-on-delivery order is ready in WhatsApp — press send. Pay when it arrives.');
+      } }, 'Cash on delivery') : null,
+      cod && !codAllowed ? h('p', { class: 'sf-note' }, `Cash on delivery is available for orders up to ${inr(cod.max_paise!)}.`) : null,
+      canWhatsapp ? h('button', { type: 'button', class: 'sf-btn sf-btn-wide sf-btn-wa', 'data-sf-order-whatsapp': '', onclick: () => {
+        const c = read(); if (!c) return;
+        finishOnWhatsapp(c, pm ? 'To be arranged on WhatsApp' : undefined, 'Your order is ready in WhatsApp — just press send. The shop will confirm it there.');
+      } }, 'Order on WhatsApp') : null);
     panel.replaceChildren(head,
       h('div', { class: 'sf-drawer-body' }, form),
       h('div', { class: 'sf-drawer-foot' }, summary, actions, h('button', { type: 'button', class: 'sf-link', onclick: () => { step = 'cart'; render(); } }, '← Back to cart')));

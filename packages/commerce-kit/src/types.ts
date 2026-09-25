@@ -45,6 +45,13 @@ export type Config = {
   whatsapp?: string;
   delivery?: { fee_paise: number; free_above_paise?: number; note?: string };
   checkout?: { razorpay?: { keyId: string; orderEndpoint: string; verifyEndpoint: string } };
+  /** Ways to pay (1.1.0+). Without it, checkout is by WhatsApp only. */
+  payments?: {
+    whatsapp?: boolean;
+    upi?: { vpa: string; name?: string };
+    cod?: { max_paise: number | null };
+    online?: { provider: string; publicId: string | null; mode: 'test' | 'live' };
+  };
   source:
     | { type: 'json'; url?: string; data?: CatalogData }
     | { type: 'supabase'; url: string; anonKey: string };

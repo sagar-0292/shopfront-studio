@@ -10,8 +10,13 @@
     ]
   },
   "commerce": {
-    "latest": "1.0.0",
+    "latest": "1.1.0",
     "versions": [
+      {
+        "version": "1.1.0",
+        "released_at": "2026-09-25",
+        "notes": "New ways to pay at checkout, switched on per shop from the studio's Payments settings: UPI (a QR code on computers and a \"Pay with a UPI app\" button on phones, pre-filled with the exact amount and an order reference; the shopper then sends the 12-digit UPI transaction ID to the shop on WhatsApp), and cash on delivery with an optional order limit. WhatsApp ordering can now be switched off when other ways to pay are on. Shops without these settings behave exactly as in 1.0.0."
+      },
       {
         "version": "1.0.0",
         "released_at": "2026-09-25",

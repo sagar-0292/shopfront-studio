@@ -2,7 +2,7 @@ import type { Totals } from './pricing';
 import type { Customer } from './validate';
 import { inr } from './money';
 
-export function whatsappOrderText(shop: string, t: Totals, c: Customer, coupon?: string): string {
+export function whatsappOrderText(shop: string, t: Totals, c: Customer, coupon?: string, payment?: string): string {
   const lines = [
     `Hello ${shop}, I’d like to order:`,
     '',
@@ -17,6 +17,7 @@ export function whatsappOrderText(shop: string, t: Totals, c: Customer, coupon?:
     `Phone: ${c.phone.trim()}`,
     ...(c.address ? [`Address: ${c.address.trim()}${c.pincode ? ` – ${c.pincode.trim()}` : ''}`] : []),
     ...(c.notes?.trim() ? [`Note: ${c.notes.trim()}`] : []),
+    ...(payment ? ['', `Payment: ${payment}`] : []),
   ];
   return lines.join('\n');
 }

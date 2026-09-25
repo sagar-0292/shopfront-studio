@@ -155,3 +155,26 @@ describe('WhatsApp order', () => {
     expect(waLink('+91 98200 12345', 'Hi & bye')).toBe('https://wa.me/919820012345?text=Hi%20%26%20bye');
   });
 });
+
+import { orderRef, upiLink, validUtr } from '../src/upi';
+describe('UPI', () => {
+  it('builds a UPI app link with the exact amount in rupees', () => {
+    expect(upiLink('mithaimarket@okicici', 'Mithai Market', 124150, 'Order MM-AB12C')).toBe(
+      'upi://pay?pa=mithaimarket%40okicici&pn=Mithai%20Market&am=1241.50&cu=INR&tn=Order%20MM-AB12C');
+    expect(() => upiLink('not a vpa', 'x', 100, 'y')).toThrow();
+  });
+  it('makes short, unambiguous order references', () => {
+    const r = orderRef('Mithai Market');
+    expect(r).toMatch(/^MM-[A-HJ-NP-Z2-9]{5}$/);
+    expect(orderRef('Mithai Market')).not.toBe(r);
+  });
+  it('checks the 12-digit UPI transaction ID', () => {
+    expect(validUtr('4123 4567 8901')).toBe(true);
+    expect(validUtr('12345')).toBe(false);
+    expect(validUtr('abcdefghijkl')).toBe(false);
+  });
+  it('adds the payment line to the WhatsApp order', () => {
+    const t = totals(resolveLines([{ productId: 'p2', qty: 1 }], byId), {});
+    expect(whatsappOrderText('Shop', t, { name: 'A B', phone: '+919820012345' }, undefined, 'Cash on delivery (₹120)')).toMatch(/\n\nPayment: Cash on delivery \(₹120\)$/);
+  });
+});

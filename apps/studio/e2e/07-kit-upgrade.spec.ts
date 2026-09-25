@@ -13,9 +13,9 @@ test('the kit library lists versions and hooks', async ({ page }) => {
   await logIn(page, 'tanvi@mumbai-studio.test');
   await page.getByRole('link', { name: 'Kits' }).click();
   await expect(page.getByRole('heading', { name: 'Kits', level: 1 })).toBeVisible();
-  await expect(page.getByText(/^Version 1\.1\.0/)).toBeVisible();
+  await expect(page.getByText(/^Version 1\.1\.0/)).toHaveCount(2); // motion (test copy) and commerce
   await expect(page.getByText(/^Version 1\.0\.0/).first()).toBeVisible();
-  await page.getByText(/All \d+ hooks in 1\.1\.0/).click();
+  await page.getByText(/All \d+ hooks in 1\.1\.0/).first().click();
   await expect(page.getByRole('cell', { name: 'data-sf-3d', exact: false }).first()).toBeVisible();
 });
 

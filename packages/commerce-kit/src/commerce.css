@@ -143,3 +143,9 @@
 .sf-js [data-sf-products][data-limit]:not([data-state]) { min-height: 60vh; }
 .sf-js [data-sf-seller-info]:empty { min-height: 120px; }
 .sf-js [data-sf-categories]:empty { min-height: 44px; }
+
+/* UPI payment (1.1.0) */
+.sf-upi { display: grid; gap: 12px; justify-items: stretch; }
+.sf-upi-amount { margin: 0; font-size: 1.2rem; }
+.sf-upi-qr { display: grid; place-items: center; padding: 12px; border: 1px solid var(--sf-line); border-radius: var(--sf-radius); background: #fff; }
+.sf-upi-qr svg { width: min(220px, 100%); height: auto; }

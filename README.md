@@ -3,7 +3,7 @@
 A web app for a web agency to create, launch and run premium websites for Indian businesses.
 AI agents do most of the work; people approve. Each client gets a simple admin panel.
 
-**Status: Phase 2 (Kits) complete.** See [docs/PHASE-2.md](docs/PHASE-2.md) and [docs/PHASE-1.md](docs/PHASE-1.md) for what's in them and demo scripts,
+**Status: Phase 2 (Kits) complete.** See [docs/PHASE-2.md](docs/PHASE-2.md), [docs/PAYMENTS-AND-REFERENCES.md](docs/PAYMENTS-AND-REFERENCES.md) and [docs/PHASE-1.md](docs/PHASE-1.md) for what's in them and demo scripts,
 and [SETUP.md](SETUP.md) for the accounts and settings needed to put it online.
 
 ## What's in this folder

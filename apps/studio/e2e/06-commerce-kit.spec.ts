@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import './helpers';
 
 // The commerce kit on the sample shop, as a shopper uses it.
 test.use({ viewport: { width: 1280, height: 900 } });
@@ -168,4 +169,70 @@ test('shop pages fit a 360px phone', async ({ page }) => {
   await page.goto('/kits/demo/shop.html');
   await page.getByText('Filters', { exact: true }).click();
   await expect(page.getByRole('checkbox', { name: 'Namkeen (3)', exact: true })).toBeVisible();
+});
+
+async function toCheckout(page: Page, product: string, times = 1) {
+  await page.goto('/kits/demo/shop.html');
+  await loaded(page);
+  for (let i = 0; i < times; i++) await card(page, product).getByRole('button', { name: new RegExp(`Add ${product}`) }).click();
+  await page.locator('[data-sf-cart-open]').first().click();
+  await page.getByRole('button', { name: 'Checkout' }).click();
+  const d = page.getByRole('dialog');
+  await d.getByLabel('Your name').fill('Ravi Kulkarni');
+  await d.getByLabel('Mobile number').fill('9820012345');
+  await d.getByLabel('Delivery address').fill('12 Ranade Road, Dadar West');
+  await d.getByLabel('PIN code').fill('400028');
+  await d.getByRole('checkbox').check();
+  return d;
+}
+
+test('pay by UPI: exact amount, QR code, and the payment reference sent to the shop', async ({ page }) => {
+  const d = await toCheckout(page, 'Bikaneri Bhujia 400 g');
+  await d.getByRole('button', { name: 'Pay ₹229 by UPI' }).click();
+  await expect(page.getByRole('dialog', { name: 'Pay by UPI' })).toBeVisible();
+  await expect(d.locator('[data-sf-upi-amount]')).toHaveText('₹229');
+  await expect(d.getByRole('img', { name: 'UPI QR code for this payment' })).toBeVisible();
+  const href = await d.getByRole('link', { name: 'Pay with a UPI app' }).getAttribute('href');
+  expect(href).toMatch(/^upi:\/\/pay\?pa=mithaimarket%40okicici&pn=Mithai%20Market&am=229\.00&cu=INR&tn=Order%20MM-[A-Z2-9]{5}$/);
+  await d.getByRole('button', { name: 'I’ve paid — send confirmation' }).click();
+  await expect(d.getByText('Please enter the 12-digit transaction ID from your UPI app.')).toBeVisible();
+  await d.getByLabel('UPI transaction ID (12 digits)').fill('4123 4567 8901');
+  const popup = page.waitForEvent('popup');
+  await d.getByRole('button', { name: 'I’ve paid — send confirmation' }).click();
+  await popup;
+  const text = decodeURIComponent((await page.locator('[data-sf-cart]').getAttribute('data-last-whatsapp'))!.split('text=')[1]);
+  expect(text).toMatch(/Payment: Paid ₹229 by UPI to mithaimarket@okicici · UPI ref 412345678901 · Order MM-[A-Z2-9]{5}/);
+  await expect(page.getByRole('dialog', { name: 'Thank you' })).toContainText(/Your order MM-[A-Z2-9]{5}/);
+});
+
+test('cash on delivery respects the shop’s limit', async ({ page }) => {
+  const d = await toCheckout(page, 'Diwali Grand Hamper', 3); // ₹7,497, over the ₹5,000 limit
+  await expect(d.getByRole('button', { name: 'Cash on delivery' })).toBeDisabled();
+  await expect(d.getByText('Cash on delivery is available for orders up to ₹5,000.')).toBeVisible();
+  await d.getByRole('button', { name: '← Back to cart' }).click();
+  await d.getByRole('button', { name: 'One less Diwali Grand Hamper' }).click();
+  await d.getByRole('button', { name: 'One less Diwali Grand Hamper' }).click();
+  await d.getByRole('button', { name: 'Checkout' }).click();
+  await d.getByLabel('Your name').fill('Ravi Kulkarni');
+  await d.getByLabel('Mobile number').fill('9820012345');
+  await d.getByLabel('Delivery address').fill('12 Ranade Road, Dadar West');
+  await d.getByLabel('PIN code').fill('400028');
+  await d.getByRole('checkbox').check();
+  const popup = page.waitForEvent('popup');
+  await d.getByRole('button', { name: 'Cash on delivery' }).click();
+  await popup;
+  const text = decodeURIComponent((await page.locator('[data-sf-cart]').getAttribute('data-last-whatsapp'))!.split('text=')[1]);
+  expect(text).toContain('Payment: Cash on delivery (₹2,499)');
+});
+
+test('websites still on commerce kit 1.0.0 keep WhatsApp-only checkout', async ({ page }) => {
+  await page.goto('/kits/demo/shop.html?commerce=1.0.0');
+  await loaded(page);
+  expect(await page.evaluate(() => window.SFCommerce?.version)).toBe('1.0.0');
+  await card(page, 'Bikaneri Bhujia 400 g').getByRole('button', { name: /Add Bikaneri Bhujia/ }).click();
+  await page.locator('[data-sf-cart-open]').first().click();
+  await page.getByRole('button', { name: 'Checkout' }).click();
+  await expect(page.getByRole('button', { name: 'Order on WhatsApp' })).toBeVisible();
+  await expect(page.getByRole('button', { name: /by UPI/ })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Cash on delivery' })).toHaveCount(0);
 });

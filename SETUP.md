@@ -12,7 +12,7 @@ Allow about an hour. Do the steps in order.
      backups and stops the project pausing after a week of no use.
 3. **Create the database tables and security rules:** open **SQL Editor → New query**, paste the whole of
    `supabase/migrations/20260925000001_foundation.sql`, click **Run**. It should say "Success. No rows returned".
-   Then do the same with `20260925000002_kit_versions.sql`. (Later phases add more files to that folder;
+   Then do the same with `20260925000002_kit_versions.sql` and `20260925000003_references_payments.sql`. (Later phases add more files to that folder;
    run each new one once, in name order.)
 4. **Create the app's limited database login.** In a new SQL Editor query, run this, replacing the password with a
    long random one (save it):
@@ -60,8 +60,21 @@ Allow about an hour. Do the steps in order.
    | `NEXT_PUBLIC_APP_URL` | `https://studio.youragency.in` |
    | `RESEND_API_KEY` | from 2.2 (secret) |
    | `EMAIL_FROM` | `Your Agency <studio@youragency.in>` |
+   | `PAYMENT_SECRETS_KEY` | encrypts shops' payment keys. Make one with `openssl rand -base64 32` (secret; keep a backup — without it saved keys can't be used) |
+   | `RAZORPAY_PARTNER_CLIENT_ID` / `RAZORPAY_PARTNER_CLIENT_SECRET` | optional, from step 5 — turns on one-click "Connect Razorpay" |
 4. **Deploy.** The app runs in Vercel's Mumbai region (`bom1`), next to the database.
 5. **Settings → Domains:** add `studio.youragency.in` and create the DNS record Vercel shows you.
+
+## 5. Razorpay Partner account (optional, for one-click "Connect Razorpay")
+
+Without this, shops can still connect Razorpay (or any gateway) by pasting their keys.
+
+1. Apply at [razorpay.com/partners](https://razorpay.com/partners) as a **Technology Partner** (uses your agency's
+   Razorpay account; approval takes a few days).
+2. In the Partner dashboard create an **OAuth application**. Redirect URL:
+   `https://studio.youragency.in/api/payments/razorpay/callback`.
+3. Copy its **Client ID** and **Client secret** into Vercel as `RAZORPAY_PARTNER_CLIENT_ID` and
+   `RAZORPAY_PARTNER_CLIENT_SECRET`, then redeploy.
 
 ## 4. First login
 

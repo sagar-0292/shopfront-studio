@@ -1,6 +1,6 @@
 // The complete list of commerce hooks: the contract with the AI Builder.
 export const HOOKS = [
-  { attr: 'script#sf-config[type="application/json"]', on: '<head>', does: 'Shop settings: site id and name, WhatsApp number, delivery fee, data source, payment settings.' },
+  { attr: 'script#sf-config[type="application/json"]', on: '<head>', does: 'Shop settings: site id and name, WhatsApp number, delivery fee, data source, and "payments" (whatsapp, upi {vpa, name}, cod {max_paise}, online) — generated from the studio, never written by hand.' },
   { attr: 'data-sf-products', on: 'container (give it an id)', does: 'Product grid from live data. Options: data-category, data-seller ("@url" reads ?category= / ?seller=), data-featured, data-limit, data-sort, data-sync-url, data-template="#id", data-empty.' },
   { attr: 'template[data-sf-card]', on: 'inside data-sf-products or data-sf-wishlist', does: 'The card design. Mark elements with data-slot.' },
   { attr: 'data-slot', on: 'elements inside a card template', values: ['image', 'name', 'description', 'price', 'mrp', 'discount', 'category', 'seller', 'badges', 'stock', 'add', 'wishlist', 'link', 'variant'], does: 'Filled from the product. Empty slots hide themselves.' },
