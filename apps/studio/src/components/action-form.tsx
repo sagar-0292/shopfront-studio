@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useEffect, useRef, type ReactNode } from 'react';
+import { startTransition, useActionState, useEffect, useRef, type ReactNode } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Button, Notice, type ButtonVariant } from '@/components/ui';
 import type { ActionState } from '@/lib/action';
@@ -17,8 +17,9 @@ type Props = {
   footer?: ReactNode;
 };
 
-export function SubmitButton({ label, pendingLabel, variant }: { label: string; pendingLabel?: string; variant?: ButtonVariant }) {
-  const { pending } = useFormStatus();
+export function SubmitButton({ label, pendingLabel, variant, busy }: { label: string; pendingLabel?: string; variant?: ButtonVariant; busy?: boolean }) {
+  const status = useFormStatus();
+  const pending = busy || status.pending;
   return (
     <Button type="submit" variant={variant} disabled={pending} aria-busy={pending}>
       {pending ? (pendingLabel ?? 'Saving…') : label}
@@ -28,7 +29,7 @@ export function SubmitButton({ label, pendingLabel, variant }: { label: string; 
 
 /** A form that runs a server action and shows its result in plain words. */
 export function ActionForm({ action, children, submitLabel = 'Save', pendingLabel, variant, className, resetOnSuccess, confirm, footer }: Props) {
-  const [state, formAction] = useActionState(action, {});
+  const [state, formAction, busy] = useActionState(action, {});
   const ref = useRef<HTMLFormElement>(null);
   useEffect(() => {
     if (state.ok && resetOnSuccess) ref.current?.reset();
@@ -39,7 +40,12 @@ export function ActionForm({ action, children, submitLabel = 'Save', pendingLabe
       action={formAction}
       className={className ?? 'space-y-5'}
       onSubmit={(e) => {
-        if (confirm && !window.confirm(confirm)) e.preventDefault();
+        // Submit ourselves so the browser keeps what was typed if saving fails
+        // (React would otherwise clear the form after every submit).
+        e.preventDefault();
+        if (confirm && !window.confirm(confirm)) return;
+        const data = new FormData(e.currentTarget, (e.nativeEvent as SubmitEvent).submitter);
+        startTransition(() => formAction(data));
       }}
     >
       {children}
@@ -47,7 +53,7 @@ export function ActionForm({ action, children, submitLabel = 'Save', pendingLabe
       {state.ok && state.message && <Notice tone="good">{state.message}</Notice>}
       {state.ok && state.link && <InviteLink link={state.link} email={state.email} />}
       <div className="flex flex-wrap items-center gap-3">
-        <SubmitButton label={submitLabel} pendingLabel={pendingLabel} variant={variant} />
+        <SubmitButton label={submitLabel} pendingLabel={pendingLabel} variant={variant} busy={busy} />
         {footer}
       </div>
     </form>

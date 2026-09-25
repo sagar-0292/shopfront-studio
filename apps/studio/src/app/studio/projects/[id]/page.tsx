@@ -10,6 +10,9 @@ import { withUser } from '@/lib/db';
 import { SITE_STATUSES, formatDate, label, statusOf } from '@/lib/catalog';
 import { CLIENT_AREAS } from '@/lib/invites';
 import { compareVersions, KIT_LABELS, KIT_NAMES, manifest } from '@/lib/kits';
+import { loadReferences, ReferencesCard } from '@/components/site/references-card';
+import { loadPayments, PaymentsCard } from '@/components/site/payments-card';
+import { razorpayConnectConfig } from '@/lib/razorpay-connect';
 import {
   inviteClientUser, removeClientUser, revokeInvitation, setArchived, setAssignees, updateClient, updateProject,
 } from '../actions';
@@ -33,7 +36,7 @@ export default async function ProjectPage({ params, searchParams }: PageProps<'/
   const data = await withUser(ctx.user, async (db) => {
     const site = await db.one<Site>(`select * from sites where id = $1 and organisation_id = $2`, [id, agency.organisation_id]);
     if (!site) return null;
-    const [client, members, invites, team, assigned] = await Promise.all([
+    const [client, members, invites, team, assigned, refs, payments] = await Promise.all([
       db.one<ClientDefaults & { id: string; name: string; city: string }>(`select * from clients where id = $1`, [site.client_id]),
       db.query<{ user_id: string; role: string; permissions: string[]; full_name: string; email: string }>(
         `select m.user_id, m.role, m.permissions, p.full_name, p.email from client_members m join profiles p on p.id = m.user_id
@@ -45,12 +48,16 @@ export default async function ProjectPage({ params, searchParams }: PageProps<'/
         `select m.user_id, coalesce(nullif(p.full_name, ''), p.email) as name from organisation_members m
          join profiles p on p.id = m.user_id where m.organisation_id = $1 order by name`, [agency.organisation_id]),
       db.query<{ user_id: string }>(`select user_id from site_assignees where site_id = $1`, [id]),
+      loadReferences(db, id, ctx.user.id),
+      loadPayments(db, id),
     ]);
     if (!client) return null;
-    return { site, client, members, invites, team, assigned: assigned.map((a) => a.user_id) };
+    return { site, client, members, invites, team, assigned: assigned.map((a) => a.user_id), refs, payments };
   });
   if (!data) notFound();
-  const { site, client, members, invites, team, assigned } = data;
+  const { site, client, members, invites, team, assigned, refs, payments } = data;
+  const paymentsNotice = sp.payments === 'connected' ? { ok: true, text: 'Razorpay connected. The tokens are stored encrypted.' }
+    : typeof sp.payments_error === 'string' ? { ok: false, text: sp.payments_error.slice(0, 200) } : null;
   const st = statusOf(site.status);
   const kits = manifest();
   const areaLabel = (keys: string[]) => keys.map((k) => label(CLIENT_AREAS, k)).join(', ');
@@ -90,6 +97,12 @@ export default async function ProjectPage({ params, searchParams }: PageProps<'/
           </div>
         </ActionForm>
       </Card>
+
+      <ReferencesCard siteId={site.id} refs={refs} canRemoveAll audience="agency" />
+
+      <div id="payments">
+        <PaymentsCard siteId={site.id} data={payments} back={`/studio/projects/${site.id}#payments`} connectAvailable={!!razorpayConnectConfig()} notice={paymentsNotice} />
+      </div>
 
       <Card>
         <CardTitle title="Kits" description="The motion and commerce libraries this website is built on. It stays on these versions until the agency owner upgrades it." />

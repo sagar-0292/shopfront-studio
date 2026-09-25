@@ -15,6 +15,8 @@ function sign(payload) {
 const exp = 2000000000; // 2033
 export const ANON_KEY = sign({ iss: 'supabase-local', role: 'anon', exp });
 
-export const PORTS = { gateway: 54321, gotrue: 9999, smtp: 54325, mail: 54324 };
+export const PORTS = { gateway: 54321, gotrue: 9999, smtp: 54325, mail: 54324, razorpay: 54326 };
+// Local-only encryption key for payment secrets (production uses its own, see SETUP.md).
+export const PAYMENT_SECRETS_KEY = Buffer.alloc(32, 7).toString('base64');
 export const SUPABASE_URL = `http://127.0.0.1:${PORTS.gateway}`;
 export const MAIL_URL = `http://127.0.0.1:${PORTS.mail}`;

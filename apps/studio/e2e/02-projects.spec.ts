@@ -72,6 +72,7 @@ test('mistakes get plain-language messages', async ({ page }) => {
   await page.getByLabel('GSTIN (optional)').fill('12345');
   await page.getByRole('button', { name: 'Save client details' }).click();
   await expect(alertIn(page)).toHaveText(/GSTIN doesn’t look right/);
+  await expect(page.getByLabel('GSTIN (optional)')).toHaveValue('12345'); // not wiped
 
   await page.getByLabel('Phone').fill('12');
   await page.getByRole('button', { name: 'Save client details' }).click();

@@ -10,13 +10,14 @@ const things: Record<string, string> = {
   organisations: 'agency settings', organisation_members: 'team', organisation_billing: 'billing details', clients: 'client',
   client_members: 'client login', sites: 'project', site_assignees: 'project team', sellers: 'seller', seller_members: 'seller login',
   categories: 'category', products: 'product', orders: 'order', leads: 'enquiry', invitations: 'invitation',
+  site_references: 'reference website', site_payment_settings: 'payment options', site_payment_secrets: 'payment gateway keys',
 };
 const verbs: Record<string, string> = { insert: 'added', update: 'changed', delete: 'removed' };
 const hidden = new Set(['id', 'organisation_id', 'site_id', 'client_id', 'created_at', 'updated_at', 'created_by', 'user_id', 'invited_by']);
 
 function describe(r: Row) {
   const data = r.new_data ?? r.old_data ?? {};
-  const name = data.name ?? data.email ?? data.customer_name ?? data.legal_name ?? '';
+  const name = data.name ?? data.email ?? data.customer_name ?? data.legal_name ?? data.url ?? data.provider ?? '';
   let changed = '';
   if (r.action === 'update' && r.old_data && r.new_data) {
     const keys = Object.keys(r.new_data).filter((k) => !hidden.has(k) && JSON.stringify(r.new_data![k]) !== JSON.stringify(r.old_data![k]));

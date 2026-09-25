@@ -446,3 +446,81 @@ describe('kit versions', () => {
     await refused(as(w.people.ownerA, (q) => q(`update sites set motion_kit_version = 'latest' where id = $1`, [w.siteA1])));
   });
 });
+
+describe('reference and competitor websites', () => {
+  it('the agency and the business owner can add links; they stay inside that website', async () => {
+    await as(w.people.teamA, (q) => q(`insert into site_references (site_id, kind, url, notes, added_by) values ($1, 'competitor', 'https://rival-sweets.in', 'Their menu layout', $2)`, [w.siteA1, w.people.teamA.id]), { commit: true });
+    await as(w.people.clientA1Owner, (q) => q(`insert into site_references (site_id, kind, url, added_by) values ($1, 'inspiration', 'https://lovely-bakery.com/menu', $2)`, [w.siteA1, w.people.clientA1Owner.id]), { commit: true });
+    const seen = await as(w.people.clientA1Owner, (q) => q(`select url from site_references order by url`));
+    expect(seen.rows.map((r) => r.url)).toEqual(['https://lovely-bakery.com/menu', 'https://rival-sweets.in']);
+  });
+
+  it('staff, sellers, other clients and other agencies cannot see or add them', async () => {
+    for (const who of [w.people.clientA1Staff, w.people.seller1, w.people.clientA2Owner, w.people.ownerB]) {
+      expect(await count(as(who, (q) => q(`select * from site_references`)))).toBe(0);
+      await refused(as(who, (q) => q(`insert into site_references (site_id, kind, url, added_by) values ($1, 'competitor', 'https://x.in', $2)`, [w.siteA1, who.id])));
+    }
+  });
+
+  it('the business owner can remove only their own links; the agency can remove any', async () => {
+    expect((await as(w.people.clientA1Owner, (q) => q(`delete from site_references where url = 'https://rival-sweets.in'`))).rowCount).toBe(0);
+    expect((await as(w.people.clientA1Owner, (q) => q(`delete from site_references where url = 'https://lovely-bakery.com/menu'`))).rowCount).toBe(1);
+    expect((await as(w.people.teamA, (q) => q(`delete from site_references where url = 'https://lovely-bakery.com/menu'`))).rowCount).toBe(1);
+  });
+
+  it('only accepts real web addresses', async () => {
+    await refused(as(w.people.teamA, (q) => q(`insert into site_references (site_id, kind, url, added_by) values ($1, 'competitor', 'javascript:alert(1)', $2)`, [w.siteA1, w.people.teamA.id])));
+    await refused(as(w.people.teamA, (q) => q(`insert into site_references (site_id, kind, url, added_by) values ($1, 'competitor', 'https://rival-sweets.in', $2)`, [w.siteA1, w.people.teamA.id]), { commit: false }));
+  });
+});
+
+describe('payment settings and secrets', () => {
+  it('the agency and the business owner can set UPI and cash on delivery; staff cannot', async () => {
+    await as(w.people.clientA1Owner, (q) => q(`insert into site_payment_settings (site_id, upi_enabled, upi_vpa, upi_payee_name, cod_enabled, cod_max_paise) values ($1, true, 'mithaimarket@okicici', 'Mithai Market', true, 500000)`, [w.siteA1]), { commit: true });
+    expect((await as(w.people.teamA, (q) => q(`update site_payment_settings set cod_max_paise = 300000 where site_id = $1`, [w.siteA1]))).rowCount).toBe(1);
+    expect((await as(w.people.clientA1Staff, (q) => q(`update site_payment_settings set upi_vpa = 'thief@upi' where site_id = $1`, [w.siteA1]))).rowCount).toBe(0);
+    expect(await count(as(w.people.clientA1Staff, (q) => q(`select * from site_payment_settings`)))).toBe(0);
+    expect(await count(as(w.people.ownerB, (q) => q(`select * from site_payment_settings`)))).toBe(0);
+    await refused(as(w.people.clientA2Owner, (q) => q(`insert into site_payment_settings (site_id) values ($1)`, [w.siteA1])));
+  });
+
+  it('checks UPI IDs and refuses online payments without a connected provider', async () => {
+    await refused(as(w.people.teamA, (q) => q(`update site_payment_settings set upi_vpa = 'not a upi id' where site_id = $1`, [w.siteA1])));
+    await refused(as(w.people.teamA, (q) => q(`update site_payment_settings set online_enabled = true where site_id = $1`, [w.siteA1])));
+  });
+
+  it('stored payment secrets can never be read back, by anyone', async () => {
+    await as(w.people.clientA1Owner, (q) => q(`select save_payment_credentials($1, 'cashfree', 'v1.aaaaaaaaaaaaaaaaaaaaaaaa.bbbbbbbb', '••••4321', 'CF123', 'test')`, [w.siteA1]), { commit: true });
+    for (const who of [w.people.ownerA, w.people.teamA, w.people.clientA1Owner, w.people.clientA1Staff, w.people.ownerB]) {
+      const e = await refused(as(who, (q) => q(`select * from site_payment_secrets`)));
+      expect(e.code).toBe('42501');
+    }
+    const status = await as(w.people.ownerA, (q) => q(`select * from payment_credentials_status($1)`, [w.siteA1]));
+    expect(status.rows[0]).toMatchObject({ provider: 'cashfree', hint: '••••4321' });
+    expect(Object.keys(status.rows[0])).not.toContain('ciphertext');
+    const other = await as(w.people.ownerB, (q) => q(`select * from payment_credentials_status($1)`, [w.siteA1]));
+    expect(other.rows).toEqual([]);
+  });
+
+  it('only the agency or business owner can connect or disconnect a provider', async () => {
+    await refused(as(w.people.clientA1Staff, (q) => q(`select save_payment_credentials($1, 'stripe', 'v1.aaaaaaaaaaaaaaaaaaaaaaaa.bbbbbbbb', 'x', 'y', 'test')`, [w.siteA1])));
+    await refused(as(w.people.ownerB, (q) => q(`select disconnect_payment_provider($1)`, [w.siteA1])));
+    const s = await admin(`select online_provider, provider_public_id from site_payment_settings where site_id = $1`, [w.siteA1]);
+    expect(s.rows[0]).toEqual({ online_provider: 'cashfree', provider_public_id: 'CF123' });
+  });
+
+  it('secrets never appear in the activity log', async () => {
+    const { rows } = await admin(`select count(*)::int as n from audit_log where table_name = 'site_payment_secrets' and (new_data ? 'ciphertext' or old_data ? 'ciphertext' or new_data::text like '%aaaaaaaaaaaa%')`);
+    expect(rows[0].n).toBe(0);
+    const logged = await admin(`select count(*)::int as n from audit_log where table_name = 'site_payment_secrets'`);
+    expect(logged.rows[0].n).toBeGreaterThan(0);
+  });
+
+  it('disconnecting removes the secret and switches online payments off', async () => {
+    await as(w.people.teamA, (q) => q(`update site_payment_settings set online_enabled = true where site_id = $1`, [w.siteA1]), { commit: true });
+    await as(w.people.teamA, (q) => q(`select disconnect_payment_provider($1)`, [w.siteA1]), { commit: true });
+    const s = await admin(`select online_enabled, online_provider from site_payment_settings where site_id = $1`, [w.siteA1]);
+    expect(s.rows[0]).toEqual({ online_enabled: false, online_provider: null });
+    expect((await admin(`select count(*)::int as n from site_payment_secrets where site_id = $1`, [w.siteA1])).rows[0].n).toBe(0);
+  });
+});

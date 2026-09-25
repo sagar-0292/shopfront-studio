@@ -114,6 +114,37 @@ http
   .listen(PORTS.mail, '127.0.0.1');
 console.log(`✓ Mail catcher at ${MAIL_URL}`);
 
+// 2b. A stand-in for Razorpay's "Connect" sign-in, so the flow can be tested
+// without a real Razorpay Partner account. It approves immediately.
+http
+  .createServer((req, res) => {
+    const u = new URL(req.url, `http://127.0.0.1:${PORTS.razorpay}`);
+    if (req.method === 'GET' && u.pathname === '/authorize') {
+      const back = new URL(u.searchParams.get('redirect_uri'));
+      if (u.searchParams.get('client_id') !== 'mock-partner') { res.statusCode = 400; return res.end('unknown client'); }
+      back.searchParams.set('code', 'mock-code');
+      back.searchParams.set('state', u.searchParams.get('state') ?? '');
+      res.writeHead(302, { location: back.toString() });
+      return res.end();
+    }
+    if (req.method === 'POST' && u.pathname === '/token') {
+      let body = '';
+      req.on('data', (c) => (body += c));
+      req.on('end', () => {
+        const b = JSON.parse(body || '{}');
+        const ok = b.client_id === 'mock-partner' && b.client_secret === 'mock-partner-secret' && b.code === 'mock-code';
+        res.writeHead(ok ? 200 : 400, { 'content-type': 'application/json' });
+        res.end(JSON.stringify(ok
+          ? { access_token: 'mock-access', refresh_token: 'mock-refresh', public_token: `rzp_${b.mode}_oauth_Mock1234`, razorpay_account_id: 'acc_Mock5678', expires_in: 7776000, token_type: 'Bearer' }
+          : { error: 'invalid_grant' }));
+      });
+      return;
+    }
+    res.statusCode = 404;
+    res.end();
+  })
+  .listen(PORTS.razorpay, '127.0.0.1');
+
 // 3. Login server
 const gotrue = spawn(gotrueBin, ['serve'], { env: gotrueEnv, stdio: 'inherit' });
 gotrue.on('exit', (code) => {

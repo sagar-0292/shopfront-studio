@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Badge, Card, PageHeader } from '@/components/ui';
+import { Badge, ButtonLink, Card, PageHeader } from '@/components/ui';
 import { getContext } from '@/lib/context';
 import { withUser } from '@/lib/db';
 import { SITE_TYPES, label, statusOf } from '@/lib/catalog';
@@ -41,6 +41,9 @@ export default async function AdminHome() {
                 {areas.map((a) => <li key={a}><Badge>{label(CLIENT_AREAS, a)}</Badge></li>)}
               </ul>
             </div>
+            {membership.role === 'client_owner' && (
+              <div className="mt-6"><ButtonLink href={`/admin/sites/${s.id}`} variant="ghost">Payments & reference websites →</ButtonLink></div>
+            )}
           </Card>
         );
       })}
