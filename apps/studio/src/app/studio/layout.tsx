@@ -7,6 +7,7 @@ export default async function StudioLayout({ children }: LayoutProps<'/studio'>)
   const items = [
     { href: '/studio', label: 'Projects' },
     { href: '/studio/team', label: 'Team' },
+    { href: '/studio/designs', label: 'Designs' },
     { href: '/studio/kits', label: 'Kits' },
     { href: '/studio/activity', label: 'Activity' },
     { href: '/studio/settings', label: 'Agency settings' },

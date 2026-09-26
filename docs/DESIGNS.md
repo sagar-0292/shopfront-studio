@@ -39,3 +39,10 @@ Headlines can mark a highlighted word with `*asterisks*`: `"Bread worth *waking 
 - Fonts: `pnpm --filter @shopfront/design-kit fonts` downloads them and measures the stand-ins.
 - Tests: `pnpm test:kits` (renderer: escaping, links, colours, schema), e2e `10-designs` (each site in a
   real browser, 360px phones, animations off, cart, booking, menu, links) and `08-lighthouse` (90+ on phones).
+
+## In the studio
+- **Designs** (side menu) shows the four looks with live previews of each sample site on a computer and a
+  phone, what each suits, its fonts and colours, and how many of your projects use it.
+- On a project, the **Design** card is where the team picks the look. Anyone in the agency can choose it;
+  business owners can't change it. The website's design-kit version is shown with the other kits and, like
+  them, only the agency owner can change it.

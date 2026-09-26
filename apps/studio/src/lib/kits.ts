@@ -7,7 +7,7 @@ export type KitName = 'motion' | 'commerce';
 export const KIT_NAMES: KitName[] = ['motion', 'commerce'];
 export const KIT_LABELS: Record<KitName, string> = { motion: 'Motion kit', commerce: 'Commerce kit' };
 export type KitVersion = { version: string; released_at: string; notes: string };
-export type Manifest = Record<KitName, { latest: string; versions: KitVersion[] }>;
+export type Manifest = Record<KitName | 'design', { latest: string; versions: KitVersion[] }>;
 export type Hook = { attr: string; on: string; values?: readonly string[]; does: string };
 
 export const VERSION_RE = /^\d+\.\d+\.\d+(-[0-9a-z.]+)?$/i;

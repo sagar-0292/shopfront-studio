@@ -10,6 +10,7 @@ import { LANGUAGES, SITE_STATUSES, SITE_TYPES } from '@/lib/catalog';
 import { normaliseGstin, normaliseIndianPhone } from '@/lib/phone';
 import { cleanEmail, createInvite } from '@/lib/invites';
 import { isReleased, KIT_LABELS, manifest, type KitName } from '@/lib/kits';
+import { DESIGNS, isDirection } from '@/lib/designs';
 
 function siteTypes(form: FormData) {
   const types = form.getAll('site_types').map(String).filter((t) => SITE_TYPES.some((s) => s.key === t));
@@ -70,9 +71,9 @@ export const createProject = safe(async (form) => {
     }
     const slug = await uniqueSlug(db, agency.organisation_id, slugify(name));
     const site = await db.one<{ id: string }>(
-      `insert into sites (client_id, name, slug, site_types, business_kind, languages, created_by, motion_kit_version, commerce_kit_version)
-       values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning id`,
-      [clientId, name, slug, types, businessKind, langs, ctx.user.id, kits.motion.latest, kits.commerce.latest],
+      `insert into sites (client_id, name, slug, site_types, business_kind, languages, created_by, motion_kit_version, commerce_kit_version, design_kit_version)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) returning id`,
+      [clientId, name, slug, types, businessKind, langs, ctx.user.id, kits.motion.latest, kits.commerce.latest, kits.design.latest],
     );
     await db.query(`insert into site_assignees (site_id, user_id) values ($1, $2)`, [site!.id, ctx.user.id]);
     return site!.id;
@@ -101,6 +102,20 @@ export const updateProject = safe(async (form) => {
   });
   revalidatePath(`/studio/projects/${id}`);
   return { ok: true, message: 'Project settings saved.' };
+});
+
+export const setDesign = safe(async (form) => {
+  const { ctx, agency } = await requireAgency();
+  const id = String(form.get('id'));
+  const direction = form.get('design_direction');
+  if (!isDirection(direction)) throw new UserError('Please pick one of the four designs.');
+  await withUser(ctx.user, async (db) => {
+    const r = await db.query(`update sites set design_direction = $2 where id = $1 and organisation_id = $3 returning id`, [id, direction, agency.organisation_id]);
+    if (!r.length) throw new UserError('This project could not be found, or you no longer have access to it.');
+  });
+  revalidatePath(`/studio/projects/${id}`);
+  revalidatePath('/studio/designs');
+  return { ok: true, message: `Design set to ${DESIGNS[direction].name}.` };
 });
 
 export const updateClient = safe(async (form) => {

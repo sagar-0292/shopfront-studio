@@ -447,6 +447,29 @@ describe('kit versions', () => {
   });
 });
 
+describe('design direction', () => {
+  it('new websites have no look chosen yet and start on the design kit', async () => {
+    const { rows } = await admin(`select design_direction, design_kit_version from sites where id = $1`, [w.siteA1]);
+    expect(rows[0]).toEqual({ design_direction: null, design_kit_version: '1.0.0' });
+  });
+
+  it('anyone in the agency can choose the look', async () => {
+    const r = await as(w.people.teamA, (q) => q(`update sites set design_direction = 'bold' where id = $1 returning design_direction`, [w.siteA1]));
+    expect(r.rows).toEqual([{ design_direction: 'bold' }]);
+  });
+
+  it('clients and other agencies cannot change the look', async () => {
+    expect((await as(w.people.clientA1Owner, (q) => q(`update sites set design_direction = 'cinematic' where id = $1`, [w.siteA1]))).rowCount).toBe(0);
+    expect((await as(w.people.ownerB, (q) => q(`update sites set design_direction = 'cinematic' where id = $1`, [w.siteA1]))).rowCount).toBe(0);
+  });
+
+  it('only the four looks are allowed, and only the owner changes the design kit version', async () => {
+    await refused(as(w.people.ownerA, (q) => q(`update sites set design_direction = 'neon' where id = $1`, [w.siteA1])));
+    const err = await refused(as(w.people.teamA, (q) => q(`update sites set design_kit_version = '1.1.0' where id = $1`, [w.siteA1])));
+    expect(err.message).toMatch(/Only the agency owner/);
+  });
+});
+
 describe('reference and competitor websites', () => {
   it('the agency and the business owner can add links; they stay inside that website', async () => {
     await as(w.people.teamA, (q) => q(`insert into site_references (site_id, kind, url, notes, added_by) values ($1, 'competitor', 'https://rival-sweets.in', 'Their menu layout', $2)`, [w.siteA1, w.people.teamA.id]), { commit: true });

@@ -25,7 +25,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: inherit; }
 
 /* type */
 .d-display { font-family: var(--f-display); font-weight: var(--display-weight); letter-spacing: var(--display-tracking); line-height: var(--display-leading); text-transform: var(--display-case); text-wrap: balance; }
-.d-h1 { font-size: clamp(3rem, calc(9vw * var(--hero-scale)), 10.5rem); }
+.d-h1 { font-size: clamp(3rem, calc(9vw * var(--hero-scale)), calc(7.2rem * var(--hero-scale))); }
 .d-h2 { font-size: clamp(2.4rem, 6vw, 6.2rem); }
 .d-h3 { font-size: clamp(1.5rem, 2.4vw, 2.3rem); line-height: 1.05; }
 .d-eyebrow { display: inline-flex; align-items: center; gap: 12px; font: 600 0.75rem/1 var(--f-body); letter-spacing: var(--eyebrow-tracking); text-transform: uppercase; color: var(--c-muted); }
@@ -100,7 +100,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: inherit; }
 .d-hero--fullbleed .d-hero-grid { min-height: 0; padding-block: clamp(120px, 20vh, 220px) clamp(48px, 8vw, 96px); align-items: end; }
 .d-hero--fullbleed .d-lede, .d-hero--fullbleed .d-eyebrow { color: rgba(255,255,255,.85); }
 .d-hero--typographic .d-hero-grid { min-height: auto; padding-block: clamp(64px, 12vw, 180px) clamp(40px, 6vw, 80px); }
-.d-hero--typographic .d-h1 { font-size: clamp(3.6rem, calc(13.5vw * var(--hero-scale)), 15rem); }
+.d-hero--typographic .d-h1 { font-size: clamp(3.6rem, calc(13.5vw * var(--hero-scale)), calc(10.8rem * var(--hero-scale))); }
 .d-hero--typographic .d-hero-foot { display: grid; gap: 24px; align-items: end; }
 @media (min-width: 900px) { .d-hero--typographic .d-hero-foot { grid-template-columns: 1fr auto; } }
 .d-hero--collage .d-hero-grid { position: relative; z-index: 1; text-align: center; justify-items: center; }

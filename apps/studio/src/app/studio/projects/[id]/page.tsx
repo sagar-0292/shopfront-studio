@@ -13,14 +13,16 @@ import { compareVersions, KIT_LABELS, KIT_NAMES, manifest } from '@/lib/kits';
 import { loadReferences, ReferencesCard } from '@/components/site/references-card';
 import { loadPayments, PaymentsCard } from '@/components/site/payments-card';
 import { razorpayConnectConfig } from '@/lib/razorpay-connect';
+import { DESIGNS, DIRECTIONS, sampleSiteUrl, type Direction } from '@/lib/designs';
+import { Swatches } from '@/components/studio/design-preview';
 import {
-  inviteClientUser, removeClientUser, revokeInvitation, setArchived, setAssignees, updateClient, updateProject,
+  inviteClientUser, removeClientUser, revokeInvitation, setArchived, setAssignees, setDesign, updateClient, updateProject,
 } from '../actions';
 
 export const metadata: Metadata = { title: 'Project settings' };
 
 type Site = {
-  motion_kit_version: string; commerce_kit_version: string;
+  motion_kit_version: string; commerce_kit_version: string; design_kit_version: string; design_direction: Direction | null;
   id: string; name: string; slug: string; status: string; site_types: string[]; business_kind: string; languages: string[];
   primary_domain: string | null; archived_at: string | null; created_at: string; client_id: string;
 };
@@ -98,6 +100,38 @@ export default async function ProjectPage({ params, searchParams }: PageProps<'/
         </ActionForm>
       </Card>
 
+      <Card>
+        <CardTitle
+          title="Design"
+          description={<>The look of this website: fonts, colours, layouts and animation style. <Link className="text-primary underline" href="/studio/designs">Compare all four designs</Link>.</>}
+          action={site.design_direction ? <Badge tone="good">{DESIGNS[site.design_direction].name}</Badge> : <Badge tone="warn">Not chosen yet</Badge>}
+        />
+        <ActionForm action={setDesign} submitLabel="Use this design">
+          <input type="hidden" name="id" value={site.id} />
+          <fieldset>
+            <legend className="sr-only">Design direction</legend>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {DIRECTIONS.map((key) => {
+                const d = DESIGNS[key];
+                return (
+                  <label key={key} className="flex cursor-pointer gap-3 rounded-xl border border-line p-4 transition-colors hover:border-primary/50 has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:checked]:ring-2 has-[:checked]:ring-primary/20">
+                    <input type="radio" name="design_direction" value={key} defaultChecked={site.design_direction === key} required className="mt-1 h-4 w-4 accent-[var(--primary)]" />
+                    <span className="min-w-0 flex-1">
+                      <span className="flex flex-wrap items-center justify-between gap-2">
+                        <span className="font-semibold text-brand">{d.name}</span>
+                        <Swatches colours={d.swatches} label={`${d.name} colours`} />
+                      </span>
+                      <span className="mt-1 block text-sm text-muted">{d.bestFor}</span>
+                      <a className="mt-2 inline-block text-sm font-medium text-primary underline" href={sampleSiteUrl(key)} target="_blank" rel="noopener">See {d.sample.name} ↗</a>
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+          </fieldset>
+        </ActionForm>
+      </Card>
+
       <ReferencesCard siteId={site.id} refs={refs} canRemoveAll audience="agency" />
 
       <div id="payments">
@@ -105,7 +139,7 @@ export default async function ProjectPage({ params, searchParams }: PageProps<'/
       </div>
 
       <Card>
-        <CardTitle title="Kits" description="The motion and commerce libraries this website is built on. It stays on these versions until the agency owner upgrades it." />
+        <CardTitle title="Kits" description={`The motion and commerce libraries this website is built on (design kit ${site.design_kit_version}). It stays on these versions until the agency owner upgrades it.`} />
         <ul className="grid gap-3 sm:grid-cols-2" aria-label="Kit versions">
           {KIT_NAMES.map((k) => {
             const current = k === 'motion' ? site.motion_kit_version : site.commerce_kit_version;
