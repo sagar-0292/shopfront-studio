@@ -28,7 +28,7 @@ export function KitCompare({ before, after, beforeLabel, afterLabel }: { before:
     if (box.current) ro.observe(box.current);
     return () => ro.disconnect();
   }, []);
-  const toggle = (active: boolean) => cx('rounded-full px-4 py-2 text-sm font-medium', active ? 'bg-primary text-white' : 'border border-line bg-card');
+  const toggle = (active: boolean) => cx('rounded-full px-4 py-2 text-sm font-medium', active ? 'bg-primary text-on-primary' : 'border border-line bg-card');
   const paneWidth = mode === 'side' && width >= 700 ? (width - 16) / 2 : width;
   const { w, h } = SIZES[device];
   const scale = Math.min(1, paneWidth / w);
@@ -56,8 +56,8 @@ export function KitCompare({ before, after, beforeLabel, afterLabel }: { before:
                 <iframe src={after} title={afterLabel} className="absolute left-0 top-0" style={{ width: w, height: h, transform: `scale(${scale})`, transformOrigin: '0 0', border: 0 }} />
               </div>
               <div aria-hidden className="pointer-events-none absolute inset-y-0 w-0.5 bg-accent" style={{ left: `${pos}%` }} />
-              <span className="absolute left-2 top-2 rounded-full bg-brand/85 px-2 py-1 text-xs text-white">{beforeLabel}</span>
-              <span className="absolute right-2 top-2 rounded-full bg-primary/90 px-2 py-1 text-xs text-white">{afterLabel}</span>
+              <span className="absolute left-2 top-2 rounded-full bg-chrome/85 px-2 py-1 text-xs text-white">{beforeLabel}</span>
+              <span className="absolute right-2 top-2 rounded-full bg-primary/90 px-2 py-1 text-xs text-on-primary">{afterLabel}</span>
             </div>
             <label className="mt-3 flex items-center gap-3 text-sm">
               Before

@@ -6,12 +6,16 @@ import { requireUser } from '@/lib/auth';
 import { getContext, homeFor } from '@/lib/context';
 import { setNewPassword } from '@/app/(auth)/actions';
 import { updateProfile } from './actions';
+import { cookies } from 'next/headers';
+import { ThemeSwitch } from '@/components/theme-switch';
+import { readTheme, THEME_COOKIE } from '@/lib/theme';
 
 export const metadata: Metadata = { title: 'Your account' };
 
 export default async function AccountPage() {
   await requireUser('/account');
   const ctx = (await getContext())!;
+  const theme = readTheme((await cookies()).get(THEME_COOKIE)?.value);
   return (
     <main className="mx-auto w-full max-w-2xl space-y-6 px-4 py-10">
       <p className="text-sm"><Link className="text-muted underline" href={homeFor(ctx)}>← Back</Link></p>
@@ -26,6 +30,10 @@ export default async function AccountPage() {
             <Input id="phone" name="phone" type="tel" defaultValue={ctx.profile.phone ?? ''} maxLength={30} autoComplete="tel" />
           </Field>
         </ActionForm>
+      </Card>
+      <Card>
+        <CardTitle title="Appearance" description="Light or dark screens for the studio. “Auto” follows your phone or computer setting." />
+        <ThemeSwitch initial={theme} />
       </Card>
       <Card>
         <CardTitle title="Change password" />

@@ -1,15 +1,16 @@
 import Link from 'next/link';
 import type { ComponentProps, ReactNode } from 'react';
+import { Illustration, type Art } from '@/components/illustrations';
 
 export function cx(...c: (string | false | null | undefined)[]) {
   return c.filter(Boolean).join(' ');
 }
 
 const buttonStyles = {
-  primary: 'bg-primary text-white shadow-sm shadow-primary/25 hover:bg-primary-hover',
-  accent: 'bg-accent text-brand font-semibold shadow-sm shadow-accent/40 hover:brightness-105',
+  primary: 'bg-primary text-on-primary shadow-sm shadow-primary/25 hover:bg-primary-hover',
+  accent: 'bg-accent text-on-accent font-semibold shadow-sm shadow-accent/40 hover:brightness-105',
   ghost: 'bg-card text-ink border border-line hover:border-primary/40 hover:text-primary',
-  danger: 'bg-bad text-white hover:bg-bad/90',
+  danger: 'bg-bad text-on-bad hover:bg-bad/90',
 };
 export type ButtonVariant = keyof typeof buttonStyles;
 
@@ -121,9 +122,10 @@ export function Notice({ tone = 'neutral', children, role }: { tone?: 'neutral' 
   );
 }
 
-export function EmptyState({ title, children, action }: { title: string; children?: ReactNode; action?: ReactNode }) {
+export function EmptyState({ title, children, action, art }: { title: string; children?: ReactNode; action?: ReactNode; art?: Art }) {
   return (
-    <div className="rounded-2xl border border-dashed border-primary/25 bg-card/60 px-6 py-14 text-center">
+    <div className="rounded-2xl border border-dashed border-primary/25 bg-card/60 px-6 py-12 text-center">
+      {art && <Illustration art={art} className="sf-float mx-auto mb-4 h-28 w-auto" />}
       <p className="font-display text-3xl text-brand">{title}</p>
       {children && <div className="mx-auto mt-2 max-w-md text-sm text-muted">{children}</div>}
       {action && <div className="mt-6">{action}</div>}

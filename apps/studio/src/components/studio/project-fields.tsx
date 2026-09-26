@@ -16,7 +16,7 @@ function Chips({ name, options, selected, legend }: { name: string; options: rea
         {options.map((o) => (
           <label key={o.key} className="cursor-pointer">
             <input type="checkbox" name={name} value={o.key} defaultChecked={selected.includes(o.key)} className="peer sr-only" />
-            <span className="inline-block rounded-full border border-line bg-card px-3 py-2 text-sm transition hover:border-primary/40 peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40">
+            <span className="inline-block rounded-full border border-line bg-card px-3 py-2 text-sm transition hover:border-primary/40 peer-checked:border-primary peer-checked:bg-primary peer-checked:text-on-primary peer-focus-visible:ring-2 peer-focus-visible:ring-primary/40">
               {o.label}
             </span>
           </label>

@@ -45,7 +45,7 @@ export default async function ActivityPage() {
     <div className="max-w-4xl">
       <PageHeader eyebrow={agency.name} title="Activity" description="Every change made by anyone — your team, your clients, or their staff. Entries can’t be edited or deleted." />
       {rows.length === 0 ? (
-        <EmptyState title="Nothing yet" />
+        <EmptyState title="Nothing yet" art="activity">Changes to projects, clients and team members will appear here.</EmptyState>
       ) : (
         <ol className="divide-y divide-line rounded-2xl border border-line bg-card" aria-label="Activity log">
           {rows.map((r) => (

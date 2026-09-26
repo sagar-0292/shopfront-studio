@@ -11,7 +11,7 @@ export default async function BillingPage() {
   const { ctx, agency, isOwner } = await requireAgency();
   if (!isOwner) {
     return (
-      <EmptyState title="Billing is for owners">
+      <EmptyState title="Billing is for owners" art="lock">
         Only an agency owner can see billing. If you need something changed, ask the owner of {agency.name}.
       </EmptyState>
     );

@@ -32,7 +32,7 @@ export default async function DesignsPage() {
           const n = used[key] ?? 0;
           return (
             <li key={key}>
-              <Card className="h-full">
+              <Card className="sf-lift h-full">
                 <DesignPreview url={sampleSiteUrl(key)} name={d.sample.name} className="mb-8" />
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>

@@ -72,7 +72,7 @@ export default async function ProjectsPage({ searchParams }: PageProps<'/studio'
       {total > 0 && (
         <dl className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
-            { k: 'Active projects', v: total, cls: 'bg-brand text-white', sub: 'text-white/70' },
+            { k: 'Active projects', v: total, cls: 'bg-chrome text-white', sub: 'text-white/70' },
             { k: 'Live', v: counts.find((c) => c.status === 'live')?.n ?? 0, cls: 'bg-card border border-line', sub: 'text-muted' },
             { k: 'With clients for review', v: counts.find((c) => c.status === 'in_review')?.n ?? 0, cls: 'bg-accent-soft border border-accent/30', sub: 'text-warn' },
             { k: 'Drafts & building', v: (counts.find((c) => c.status === 'draft')?.n ?? 0) + (counts.find((c) => c.status === 'building')?.n ?? 0), cls: 'bg-card border border-line', sub: 'text-muted' },
@@ -94,14 +94,14 @@ export default async function ProjectsPage({ searchParams }: PageProps<'/studio'
           ))}
           <option value="archived">Archived</option>
         </Select>
-        <button className="min-h-11 rounded-full bg-primary px-6 text-sm font-medium text-white hover:bg-primary-hover">Search</button>
+        <button className="min-h-11 rounded-full bg-primary px-6 text-sm font-medium text-on-primary hover:bg-primary-hover">Search</button>
       </form>
 
       {rows.length === 0 ? (
         q || status ? (
-          <EmptyState title="No matches">Try a different search, or <Link className="underline" href="/studio">clear the filters</Link>.</EmptyState>
+          <EmptyState title="No matches" art="search">Try a different search, or <Link className="underline" href="/studio">clear the filters</Link>.</EmptyState>
         ) : (
-          <EmptyState title="Your first project starts here" action={<ButtonLink href="/studio/projects/new" variant="accent">Create a project</ButtonLink>}>
+          <EmptyState title="Your first project starts here" art="projects" action={<ButtonLink href="/studio/projects/new" variant="accent">Create a project</ButtonLink>}>
             Add a client and their website. You can invite the business owner to their admin panel from the project’s settings.
           </EmptyState>
         )

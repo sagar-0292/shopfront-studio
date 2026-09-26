@@ -28,7 +28,7 @@ export default async function SellerHome() {
             <h2 className="text-lg font-semibold">{s.seller_name}</h2>
             <p className="mb-4 text-sm text-muted">Selling on {s.site_name}</p>
             {mine.length === 0 ? (
-              <EmptyState title="No products yet" />
+              <EmptyState title="No products yet" art="products" />
             ) : (
               <ul className="divide-y divide-line rounded-xl border border-line" aria-label="Products">
                 {mine.map((p) => (
