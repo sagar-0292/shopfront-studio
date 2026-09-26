@@ -1,0 +1,446 @@
+{
+ "products": [
+  {
+   "id": "p1",
+   "slug": "kaju-katli",
+   "name": "Kaju Katli",
+   "description": "Silver-leaf cashew fudge, made with pure ghee.",
+   "price_paise": 89900,
+   "mrp_paise": 99900,
+   "image": {
+    "src": "/kits/sites/mithai-market/img/kaju-katli.svg",
+    "alt": "Kaju Katli",
+    "width": 400,
+    "height": 400
+   },
+   "category": {
+    "slug": "sweets",
+    "name": "Sweets"
+   },
+   "seller": {
+    "slug": "joshi-sweets",
+    "name": "Joshi Sweets",
+    "description": "Third-generation halwais from Dadar, known for kaju katli."
+   },
+   "stock": 40,
+   "status": "active",
+   "created_at": "2026-09-01",
+   "featured": true,
+   "badges": [
+    "Bestseller"
+   ],
+   "variants": [
+    {
+     "id": "kk-250",
+     "label": "250 g",
+     "price_paise": 44900,
+     "stock": 30
+    },
+    {
+     "id": "kk-500",
+     "label": "500 g",
+     "price_paise": 89900,
+     "mrp_paise": 99900,
+     "stock": 10
+    }
+   ]
+  },
+  {
+   "id": "p2",
+   "slug": "motichoor-ladoo",
+   "name": "Motichoor Ladoo",
+   "description": "Tiny boondi pearls, saffron and cardamom.",
+   "price_paise": 45000,
+   "mrp_paise": null,
+   "image": {
+    "src": "/kits/sites/mithai-market/img/motichoor-ladoo.svg",
+    "alt": "Motichoor Ladoo",
+    "width": 400,
+    "height": 400
+   },
+   "category": {
+    "slug": "sweets",
+    "name": "Sweets"
+   },
+   "seller": {
+    "slug": "joshi-sweets",
+    "name": "Joshi Sweets",
+    "description": "Third-generation halwais from Dadar, known for kaju katli."
+   },
+   "stock": 25,
+   "status": "active",
+   "created_at": "2026-09-02",
+   "featured": true
+  },
+  {
+   "id": "p3",
+   "slug": "rasgulla",
+   "name": "Rasgulla (8 pcs)",
+   "description": "Soft chhena balls in light sugar syrup.",
+   "price_paise": 32000,
+   "mrp_paise": 36000,
+   "image": {
+    "src": "/kits/sites/mithai-market/img/rasgulla.svg",
+    "alt": "Rasgulla (8 pcs)",
+    "width": 400,
+    "height": 400
+   },
+   "category": {
+    "slug": "sweets",
+    "name": "Sweets"
+   },
+   "seller": {
+    "slug": "joshi-sweets",
+    "name": "Joshi Sweets",
+    "description": "Third-generation halwais from Dadar, known for kaju katli."
+   },
+   "stock": 4,
+   "status": "active",
+   "created_at": "2026-09-03"
+  },
+  {
+   "id": "p4",
+   "slug": "gulab-jamun",
+   "name": "Gulab Jamun (8 pcs)",
+   "description": "Slow-fried khoya dumplings in rose syrup.",
+   "price_paise": 34000,
+   "mrp_paise": null,
+   "image": {
+    "src": "/kits/sites/mithai-market/img/gulab-jamun.svg",
+    "alt": "Gulab Jamun (8 pcs)",
+    "width": 400,
+    "height": 400
+   },
+   "category": {
+    "slug": "sweets",
+    "name": "Sweets"
+   },
+   "seller": {
+    "slug": "joshi-sweets",
+    "name": "Joshi Sweets",
+    "description": "Third-generation halwais from Dadar, known for kaju katli."
+   },
+   "stock": 18,
+   "status": "active",
+   "created_at": "2026-09-04"
+  },
+  {
+   "id": "p5",
+   "slug": "soan-papdi",
+   "name": "Soan Papdi",
+   "description": "Flaky, melt-in-the-mouth, with pistachio.",
+   "price_paise": 26000,
+   "mrp_paise": 30000,
+   "image": {
+    "src": "/kits/sites/mithai-market/img/soan-papdi.svg",
+    "alt": "Soan Papdi",
+    "width": 400,
+    "height": 400
+   },
+   "category": {
+    "slug": "sweets",
+    "name": "Sweets"
+   },
+   "seller": {
+    "slug": "joshi-sweets",
+    "name": "Joshi Sweets",
+    "description": "Third-generation halwais from Dadar, known for kaju katli."
+   },
+   "stock": 0,
+   "status": "active",
+   "created_at": "2026-09-05"
+  },
+  {
+   "id": "p6",
+   "slug": "barfi",
+   "name": "Malai Barfi",
+   "description": "Milk fudge with a hint of kesar.",
+   "price_paise": 68000,
+   "mrp_paise": null,
+   "image": {
+    "src": "/kits/sites/mithai-market/img/barfi.svg",
+    "alt": "Malai Barfi",
+    "width": 400,
+    "height": 400
+   },
+   "category": {
+    "slug": "sweets",
+    "name": "Sweets"
+   },
+   "seller": {
+    "slug": "joshi-sweets",
+    "name": "Joshi Sweets",
+    "description": "Third-generation halwais from Dadar, known for kaju katli."
+   },
+   "stock": 12,
+   "status": "active",
+   "created_at": "2026-09-06",
+   "badges": [
+    "New"
+   ]
+  },
+  {
+   "id": "p7",
+   "slug": "bhujia",
+   "name": "Bikaneri Bhujia 400 g",
+   "description": "Moth-bean sev, peppery and crisp.",
+   "price_paise": 18000,
+   "mrp_paise": null,
+   "image": {
+    "src": "/kits/sites/mithai-market/img/bhujia.svg",
+    "alt": "Bikaneri Bhujia 400 g",
+    "width": 400,
+    "height": 400
+   },
+   "category": {
+    "slug": "namkeen",
+    "name": "Namkeen"
+   },
+   "seller": {
+    "slug": "kulkarni-namkeen",
+    "name": "Kulkarni Namkeen",
+    "description": "Crisp Maharashtrian snacks, fried fresh every morning."
+   },
+   "stock": 60,
+   "status": "active",
+   "created_at": "2026-09-07",
+   "featured": true
+  },
+  {
+   "id": "p8",
+   "slug": "chakli",
+   "name": "Bhajani Chakli",
+   "description": "Multigrain spirals, a Diwali favourite.",
+   "price_paise": 22000,
+   "mrp_paise": 25000,
+   "image": {
+    "src": "/kits/sites/mithai-market/img/chakli.svg",
+    "alt": "Bhajani Chakli",
+    "width": 400,
+    "height": 400
+   },
+   "category": {
+    "slug": "namkeen",
+    "name": "Namkeen"
+   },
+   "seller": {
+    "slug": "kulkarni-namkeen",
+    "name": "Kulkarni Namkeen",
+    "description": "Crisp Maharashtrian snacks, fried fresh every morning."
+   },
+   "stock": 35,
+   "status": "active",
+   "created_at": "2026-09-08"
+  },
+  {
+   "id": "p9",
+   "slug": "mathri",
+   "name": "Methi Mathri",
+   "description": "Flaky crackers with dried fenugreek.",
+   "price_paise": 16000,
+   "mrp_paise": null,
+   "image": {
+    "src": "/kits/sites/mithai-market/img/mathri.svg",
+    "alt": "Methi Mathri",
+    "width": 400,
+    "height": 400
+   },
+   "category": {
+    "slug": "namkeen",
+    "name": "Namkeen"
+   },
+   "seller": {
+    "slug": "kulkarni-namkeen",
+    "name": "Kulkarni Namkeen",
+    "description": "Crisp Maharashtrian snacks, fried fresh every morning."
+   },
+   "stock": 3,
+   "status": "active",
+   "created_at": "2026-09-09"
+  },
+  {
+   "id": "p10",
+   "slug": "hamper",
+   "name": "Diwali Grand Hamper",
+   "description": "Sweets, namkeen and dry fruits in a keepsake box.",
+   "price_paise": 249900,
+   "mrp_paise": 299900,
+   "image": {
+    "src": "/kits/sites/mithai-market/img/hamper.svg",
+    "alt": "Diwali Grand Hamper",
+    "width": 400,
+    "height": 400
+   },
+   "category": {
+    "slug": "gifts",
+    "name": "Gift boxes"
+   },
+   "seller": {
+    "slug": "rao-dry-fruits",
+    "name": "Rao Dry Fruits",
+    "description": "Premium dry fruits and festive hampers."
+   },
+   "stock": 8,
+   "status": "active",
+   "created_at": "2026-09-10",
+   "featured": true,
+   "badges": [
+    "Festive"
+   ]
+  },
+  {
+   "id": "p11",
+   "slug": "dry-fruit-box",
+   "name": "Royal Dry Fruit Box",
+   "description": "Almonds, cashews, pistachios and figs.",
+   "price_paise": 145000,
+   "mrp_paise": null,
+   "image": {
+    "src": "/kits/sites/mithai-market/img/dry-fruit-box.svg",
+    "alt": "Royal Dry Fruit Box",
+    "width": 400,
+    "height": 400
+   },
+   "category": {
+    "slug": "gifts",
+    "name": "Gift boxes"
+   },
+   "seller": {
+    "slug": "rao-dry-fruits",
+    "name": "Rao Dry Fruits",
+    "description": "Premium dry fruits and festive hampers."
+   },
+   "stock": 15,
+   "status": "active",
+   "created_at": "2026-09-11"
+  },
+  {
+   "id": "p12",
+   "slug": "peda",
+   "name": "Mathura Peda (500 g)",
+   "description": "Caramelised milk sweet from Mathura.",
+   "price_paise": 52000,
+   "mrp_paise": null,
+   "image": {
+    "src": "/kits/sites/mithai-market/img/peda.svg",
+    "alt": "Mathura Peda (500 g)",
+    "width": 400,
+    "height": 400
+   },
+   "category": {
+    "slug": "sweets",
+    "name": "Sweets"
+   },
+   "seller": {
+    "slug": "joshi-sweets",
+    "name": "Joshi Sweets",
+    "description": "Third-generation halwais from Dadar, known for kaju katli."
+   },
+   "stock": null,
+   "status": "active",
+   "created_at": "2026-09-12"
+  }
+ ],
+ "coupons": [
+  {
+   "code": "DIWALI10",
+   "type": "percent",
+   "value": 10,
+   "max_discount_paise": 50000,
+   "label": "DIWALI10 applied: 10% off, up to ₹500."
+  },
+  {
+   "code": "FIRST100",
+   "type": "flat",
+   "value": 10000,
+   "min_subtotal_paise": 80000
+  }
+ ],
+ "bookings": {
+  "services": [
+   {
+    "id": "tasting",
+    "name": "Wedding sweets tasting",
+    "duration_minutes": 30,
+    "price_paise": 0
+   },
+   {
+    "id": "bulk",
+    "name": "Bulk order consultation",
+    "duration_minutes": 20
+   }
+  ],
+  "hours": {
+   "mon": [
+    [
+     "10:00",
+     "13:00"
+    ],
+    [
+     "16:00",
+     "20:00"
+    ]
+   ],
+   "tue": [
+    [
+     "10:00",
+     "13:00"
+    ],
+    [
+     "16:00",
+     "20:00"
+    ]
+   ],
+   "wed": [
+    [
+     "10:00",
+     "13:00"
+    ],
+    [
+     "16:00",
+     "20:00"
+    ]
+   ],
+   "thu": [
+    [
+     "10:00",
+     "13:00"
+    ],
+    [
+     "16:00",
+     "20:00"
+    ]
+   ],
+   "fri": [
+    [
+     "10:00",
+     "13:00"
+    ],
+    [
+     "16:00",
+     "20:00"
+    ]
+   ],
+   "sat": [
+    [
+     "10:00",
+     "13:00"
+    ],
+    [
+     "16:00",
+     "20:00"
+    ]
+   ],
+   "sun": [
+    [
+     "10:00",
+     "14:00"
+    ]
+   ]
+  },
+  "slot_minutes": 30,
+  "capacity": 2,
+  "blocked_dates": [],
+  "booked": {}
+ }
+}

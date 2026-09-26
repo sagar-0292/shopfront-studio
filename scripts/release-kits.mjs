@@ -20,6 +20,7 @@ const check = process.argv.includes('--check');
 const KITS = [
   { short: 'motion', pkg: 'motion-kit' },
   { short: 'commerce', pkg: 'commerce-kit' },
+  { short: 'design', pkg: 'design-kit', build: 'packages/design-kit/tools/build.mjs' },
 ];
 
 function files(dir) {
@@ -49,12 +50,14 @@ const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath
 let problems = 0;
 
 for (const k of KITS) {
-  execFileSync(process.execPath, [join(root, 'packages/build-kit.mjs'), k.pkg], { stdio: 'inherit' });
+  execFileSync(process.execPath, k.build ? [join(root, k.build)] : [join(root, 'packages/build-kit.mjs'), k.pkg], { stdio: 'inherit' });
   const pkgDir = join(root, 'packages', k.pkg);
   const version = JSON.parse(readFileSync(join(pkgDir, 'package.json'), 'utf8')).version;
   const dist = join(pkgDir, 'dist');
-  const hooks = await hooksOf(k.pkg);
-  writeFileSync(join(dist, 'hooks.json'), JSON.stringify({ kit: k.short, version, hooks }, null, 2) + '\n');
+  if (!k.build) {
+    const hooks = await hooksOf(k.pkg);
+    writeFileSync(join(dist, 'hooks.json'), JSON.stringify({ kit: k.short, version, hooks }, null, 2) + '\n');
+  }
   const dest = join(out, k.short, version);
   if (existsSync(dest)) {
     if (hashDir(dest) !== hashDir(dist)) {
@@ -96,7 +99,31 @@ const pages = {};
 for (const f of readdirSync(join(demoSrc, 'pages')).filter((f) => f.endsWith('.html'))) {
   pages[f] = readFileSync(join(demoSrc, 'pages', f), 'utf8').replace(/<!-- @(\w+) -->/g, (_, n) => partial(n));
 }
+
+// Sample websites: one per design direction, rendered by the published design kit.
+const sitesSrc = join(demoSrc, 'sites');
+const sitesOut = join(out, 'sites');
+const siteFiles = {};
+const published = join(out, 'design', manifest.design.latest, 'render.mjs');
+const { renderSite } = await import(pathToFileURL(existsSync(published) ? published : join(root, 'packages/design-kit/dist/render.mjs')).href);
+const versions = { motion: manifest.motion.latest, commerce: manifest.commerce.latest, design: manifest.design.latest };
+for (const id of readdirSync(sitesSrc).sort()) {
+  const base = `/kits/sites/${id}`;
+  const def = JSON.parse(readFileSync(join(sitesSrc, id, 'site.json'), 'utf8'));
+  for (const [path, html] of Object.entries(renderSite(def, { base, versions }))) siteFiles[join(id, path)] = html;
+  for (const f of files(join(sitesSrc, id)).filter((f) => f !== 'site.json')) {
+    let body = readFileSync(join(sitesSrc, id, f));
+    // Catalogue pictures are site paths ("/img/x.svg"); point them at this preview's folder.
+    if (f.endsWith('.json')) body = JSON.stringify(JSON.parse(body), (k, v) => (k === 'src' && typeof v === 'string' && v.startsWith('/') ? base + v : v), 1) + '\n';
+    siteFiles[join(id, f)] = body;
+  }
+}
+
 if (check) {
+  for (const [f, body] of Object.entries(siteFiles)) {
+    const p = join(sitesOut, f);
+    if (!existsSync(p) || !readFileSync(p).equals(Buffer.from(body))) { console.error(`✗ sites/${f} is out of date. Run: node scripts/release-kits.mjs`); problems++; }
+  }
   for (const [f, html] of Object.entries(pages)) {
     const p = join(demoOut, f);
     if (!existsSync(p) || readFileSync(p, 'utf8') !== html) { console.error(`✗ demo/${f} is out of date. Run: node scripts/release-kits.mjs`); problems++; }
@@ -109,6 +136,8 @@ if (check) {
   for (const [f, html] of Object.entries(pages)) writeFileSync(join(demoOut, f), html);
   cpSync(join(demoSrc, 'assets'), join(demoOut, 'assets'), { recursive: true });
   writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
-  console.log(`✓ Demo pages and manifest updated`);
+  rmSync(sitesOut, { recursive: true, force: true });
+  for (const [f, body] of Object.entries(siteFiles)) { mkdirSync(dirname(join(sitesOut, f)), { recursive: true }); writeFileSync(join(sitesOut, f), body); }
+  console.log(`✓ Demo pages, sample sites and manifest updated`);
 }
 if (problems) process.exit(1);

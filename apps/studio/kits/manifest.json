@@ -23,5 +23,15 @@
         "notes": "First release. Product grids from live data with card templates and slots, automatic filters, search and sorting, cart drawer, checkout by WhatsApp (Razorpay ready for Phase 6), coupons, delivery charges with free-delivery threshold, wishlist, stock status and variants, seller and category pages, and a booking form with live free slots."
       }
     ]
+  },
+  "design": {
+    "latest": "1.0.0",
+    "versions": [
+      {
+        "version": "1.0.0",
+        "released_at": "2026-09-26",
+        "notes": "First release. Four design directions — Editorial luxury, Bold & vibrant, Dark & cinematic and Warm & crafted — each with its own fonts, colours, spacing and signature details, and seventeen ready sections (heroes in four layouts, scrolling marquee, statement, product grids, categories, sideways-scrolling story, features, gallery, restaurant menu with veg/non-veg marks, booking, reviews, numbers, questions, call to action, contact with map and opening hours, shop and wishlist). Pages are built from a checked page description; custom colours must pass readability checks."
+      }
+    ]
   }
 }

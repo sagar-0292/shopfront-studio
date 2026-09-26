@@ -1,0 +1,22 @@
+/* WARM & CRAFTED — kraft-paper tones, soft serif with italics, grainy paper texture,
+   hand-drawn underlines, wavy dividers, rounded organic shapes. */
+.d-crafted {
+  --c-bg: #f3e8d6; --c-surface: #fbf5ea; --c-ink: #3b2a1e; --c-muted: #6f5a47; --c-line: #dcc8aa;
+  --c-accent: #a8481f; --c-accent-ink: #fff8ee; --c-invert-bg: #3b2a1e; --c-invert-ink: #f3e8d6; --c-invert-muted: #cdb89c; --c-invert-accent: #e8a06a;
+  --c-pop: #5f6f2f; --c-pop-ink: #fbf5ea;
+  --f-display: 'Fraunces', 'Fraunces Fallback', Georgia, serif; --f-body: 'Work Sans', 'Work Sans Fallback', system-ui, sans-serif;
+  --display-weight: 600; --display-tracking: -0.025em; --display-leading: 0.98; --display-case: none;
+  --eyebrow-tracking: 0.18em; --radius-card: 26px; --radius-btn: 999px; --radius-media: 40% 60% 55% 45% / 45% 40% 60% 55%;
+  --section-pad: clamp(80px, 11vw, 160px); --hero-scale: 1.05;
+}
+.d-crafted body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1000; opacity: 0.09; mix-blend-mode: multiply; background: var(--grain) 0 0 / 240px; }
+.d-crafted .d-sticker { border-radius: 10px 4px 12px 6px; background: var(--c-pop); color: #fbf5ea; rotate: -3deg; font-family: var(--f-display); font-style: italic; font-size: 1.05rem; }
+.d-crafted .d-display em { font-style: italic; font-weight: 500; color: var(--c-accent);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C 40 2, 80 12, 120 6 S 180 4, 198 7' fill='none' stroke='%23a8481f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") bottom / 100% 0.18em no-repeat; padding-bottom: 0.08em; }
+.d-crafted .d-btn { background: var(--c-accent); color: var(--c-accent-ink); font-weight: 600; }
+.d-crafted .d-btn--solid { background: var(--c-ink); color: var(--c-bg); }
+.d-crafted .d-card { background: var(--c-surface); border: 1px solid var(--c-line); }
+.d-crafted .d-card .d-card-media img, .d-crafted .d-card .d-card-media svg { border-radius: 20px; }
+.d-crafted .d-wave { display: block; width: 100%; height: 40px; color: var(--c-surface); }
+.d-crafted .d-section-num { font-family: var(--f-display); font-style: italic; color: var(--c-accent); }
+.d-crafted .d-logo, .d-crafted .d-sticker, .d-crafted .d-card-name, .d-crafted .d-panel h3 { letter-spacing: 0.012em; }

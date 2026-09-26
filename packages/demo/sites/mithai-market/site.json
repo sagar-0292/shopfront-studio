@@ -1,0 +1,66 @@
+{
+  "direction": "bold",
+  "site": {
+    "id": "sample-mithai-market",
+    "name": "Mithai Market",
+    "tagline": "Dadar's sweet shop since 1962. Made fresh every morning.",
+    "description": "Kaju katli, ladoos, namkeen and festive hampers made fresh every morning in Dadar since 1962. Order online or on WhatsApp.",
+    "phone": "+919820012345",
+    "whatsapp": "+919820012345",
+    "email": "hello@mithaimarket.example",
+    "address": { "street": "Ranade Road", "area": "Dadar West", "city": "Mumbai", "state": "Maharashtra", "pincode": "400028" },
+    "hours": [{ "days": "Mon – Sun", "open": "10:00", "close": "20:00" }],
+    "businessType": "Bakery",
+    "sampleNotice": "This is a sample website made by Shopfront Studio to show the Bold & vibrant design. The shop, products and prices are illustrative."
+  },
+  "nav": [
+    { "label": "Shop", "href": "/shop/" },
+    { "label": "Gift boxes", "href": "/shop/?cat=gifts" },
+    { "label": "Tasting", "href": "/#book" },
+    { "label": "Visit", "href": "/#visit" }
+  ],
+  "commerce": {
+    "source": { "type": "json", "url": "/data/catalog.json" },
+    "delivery": { "fee_paise": 4900, "free_above_paise": 99900 },
+    "payments": { "whatsapp": true, "upi": { "vpa": "mithaimarket@okicici", "name": "Mithai Market" }, "cod": { "max_paise": 500000 } }
+  },
+  "pages": [
+    {
+      "path": "/",
+      "title": "Mithai Market — Fresh sweets & namkeen in Dadar, Mumbai",
+      "description": "Kaju katli, ladoos, namkeen and festive hampers made fresh every morning in Dadar since 1962. Order online or on WhatsApp.",
+      "sections": [
+        { "type": "hero", "variant": "collage", "eyebrow": "Dadar · Since 1962", "headline": "Life's *sweeter* in Dadar", "lede": "Kaju katli, motichoor ladoos and crunchy bhujia — made fresh every single morning, delivered across Mumbai the same day.", "ctas": [{ "label": "Order sweets", "href": "/shop/" }, { "label": "Diwali hampers", "href": "/shop/?cat=gifts" }], "sticker": "Fresh today!",
+          "collage": [
+            { "image": { "src": "/img/kaju-katli.svg", "alt": "Kaju katli", "width": 400, "height": 400 } },
+            { "image": { "src": "/img/motichoor-ladoo.svg", "alt": "Motichoor ladoo", "width": 400, "height": 400 } },
+            { "image": { "src": "/img/hamper.svg", "alt": "Festive hamper", "width": 400, "height": 400 } }
+          ] },
+        { "type": "marquee", "items": ["Pure ghee", "Made this morning", "Same-day delivery", "Diwali hampers", "Since 1962"], "speed": 70 },
+        { "type": "products", "eyebrow": "Bestsellers", "title": "Mumbai's *favourites*", "featured": true, "limit": 4, "link": { "label": "Shop everything", "href": "/shop/" } },
+        { "type": "categories", "eyebrow": "Browse", "title": "What are you *craving*?", "items": [
+          { "name": "Sweets", "href": "/shop/?cat=sweets", "media": { "image": { "src": "/img/gulab-jamun.svg", "alt": "Gulab jamun", "width": 400, "height": 400 } } },
+          { "name": "Namkeen", "href": "/shop/?cat=namkeen", "media": { "image": { "src": "/img/bhujia.svg", "alt": "Bhujia", "width": 400, "height": 400 } } },
+          { "name": "Gift boxes", "href": "/shop/?cat=gifts", "media": { "image": { "src": "/img/dry-fruit-box.svg", "alt": "Dry fruit gift box", "width": 400, "height": 400 } } }
+        ] },
+        { "type": "statement", "text": "Three generations. One *kadhai*. Zero shortcuts.", "tone": "pop" },
+        { "type": "features", "eyebrow": "Why Mithai Market", "title": "Sweet, *honestly*", "items": [
+          { "title": "Pure desi ghee", "text": "Never vanaspati. Never palm oil. Our ghee comes from one dairy in Anand." },
+          { "title": "Made this morning", "text": "What doesn't sell by 8 pm goes to the Dadar gurudwara — never back on the shelf." },
+          { "title": "Same-day delivery", "text": "Order by 4 pm and it reaches anywhere in Mumbai the same evening." }
+        ] },
+        { "type": "stats", "items": [{ "value": "1962", "label": "Year we lit the first kadhai" }, { "value": "40+", "label": "Sweets and namkeen" }, { "value": "4 pm", "label": "Order by for same-day delivery" }], "tone": "invert" },
+        { "type": "booking", "eyebrow": "Weddings & big orders", "title": "Book a free *tasting*", "text": "Planning a wedding, a pooja or corporate Diwali gifts? Come taste with us and we'll plan the boxes together.", "service": "tasting", "days": 10 },
+        { "type": "faq", "title": "Questions?", "items": [
+          { "q": "How long do the sweets stay fresh?", "a": "Milk sweets are best within 3 days and should go in the fridge. Kaju katli, soan papdi and namkeen keep for 2 to 3 weeks." },
+          { "q": "Do you deliver outside Mumbai?", "a": "Dry sweets, namkeen and gift boxes ship across India in 2 to 5 days. Milk sweets are Mumbai-only." },
+          { "q": "Can I pay by UPI or cash?", "a": "Yes. Pay by any UPI app, cash on delivery for orders up to ₹5,000, or order on WhatsApp." }
+        ] },
+        { "type": "contact", "eyebrow": "Visit", "title": "Find us on *Ranade Road*" },
+        { "type": "cta", "headline": "Diwali is *coming*", "ctas": [{ "label": "Order hampers", "href": "/shop/?cat=gifts" }], "tone": "pop" }
+      ]
+    },
+    { "path": "/shop/", "title": "Shop", "description": "All our sweets, namkeen and gift boxes, with prices and live stock.", "sections": [{ "type": "shop", "eyebrow": "Shop", "title": "All sweets & *snacks*" }] },
+    { "path": "/wishlist/", "title": "Your wishlist", "description": "Sweets you have saved.", "sections": [{ "type": "wishlist" }] }
+  ]
+}

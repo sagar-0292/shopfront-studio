@@ -1,0 +1,17 @@
+{
+  "name": "@shopfront/design-kit",
+  "version": "1.0.0",
+  "description": "Award-level section designs in four directions, and the renderer that turns a page definition (JSON) into a finished website.",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "fonts": "node tools/fetch-fonts.mjs && node tools/make-fallbacks.mjs",
+    "build": "node tools/build.mjs"
+  },
+  "dependencies": {
+    "zod": "^4.1.0"
+  }
+}

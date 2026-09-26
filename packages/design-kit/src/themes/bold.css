@@ -1,0 +1,22 @@
+/* BOLD & VIBRANT — colour-block sections, huge chunky grotesque type, stickers,
+   pill buttons, playful motion. */
+.d-bold {
+  --c-bg: #fff6e5; --c-surface: #ffffff; --c-ink: #22061f; --c-muted: #6e4c66; --c-line: #f0d9c2;
+  --c-accent: #c8135f; --c-accent-ink: #ffffff; --c-invert-bg: #2b0a3d; --c-invert-ink: #fff6e5; --c-invert-muted: #d9c3e3; --c-invert-accent: #ff9f1c;
+  --c-pop: #ff9f1c; --c-pop-ink: #22061f;
+  --f-display: 'Bricolage Grotesque', 'Bricolage Grotesque Fallback', 'Arial Black', system-ui, sans-serif; --f-body: 'DM Sans', 'DM Sans Fallback', system-ui, sans-serif;
+  --display-weight: 800; --display-tracking: -0.045em; --display-leading: 0.9; --display-case: none;
+  --eyebrow-tracking: 0.14em; --radius-card: 28px; --radius-btn: 999px; --radius-media: 24px;
+  --section-pad: clamp(72px, 10vw, 150px); --hero-scale: 1.25;
+}
+.d-bold .d-display em { font-style: normal; color: var(--c-accent); }
+.d-bold .d-btn { background: var(--c-ink); color: var(--c-bg); font-weight: 700; }
+.d-bold .d-btn--solid { background: var(--c-pop); color: var(--c-pop-ink); box-shadow: 0 6px 0 var(--c-ink); }
+.d-bold .d-btn--solid:hover { transform: translateY(2px); box-shadow: 0 4px 0 var(--c-ink); }
+.d-bold .d-sticker { display: inline-grid; place-items: center; width: 132px; height: 132px; border-radius: 50%; background: var(--c-pop); color: var(--c-pop-ink);
+  font: 800 0.95rem/1.05 var(--f-display); text-align: center; text-transform: uppercase; transform: rotate(-12deg); box-shadow: 0 8px 0 var(--c-ink); padding: 14px; }
+.d-bold .d-card { background: var(--c-surface); border: 2px solid var(--c-ink); box-shadow: 6px 6px 0 var(--c-ink); }
+.d-bold .d-card:hover { transform: translate(-2px, -2px); box-shadow: 10px 10px 0 var(--c-ink); }
+.d-bold .d-block--pop { background: var(--c-pop); color: var(--c-pop-ink); }
+.d-bold .d-block--accent { background: var(--c-accent); color: #fff; }
+.d-bold .d-section-num { font-family: var(--f-display); font-weight: 800; color: var(--c-accent); }

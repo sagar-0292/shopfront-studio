@@ -1,0 +1,264 @@
+{
+ "products": [
+  {
+   "id": "b1",
+   "slug": "country-sourdough",
+   "name": "Country Sourdough",
+   "description": "48-hour ferment, stone-baked, with a crackling crust.",
+   "price_paise": 32000,
+   "image": {
+    "src": "/kits/sites/bandra-bake-house/img/country-sourdough.svg",
+    "alt": "Country Sourdough",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "breads",
+    "name": "Breads"
+   },
+   "stock": 20,
+   "status": "active",
+   "created_at": "2026-09-10",
+   "featured": true,
+   "badges": [
+    "Bestseller"
+   ],
+   "variants": [
+    {
+     "id": "country-sourdough-half",
+     "label": "Half loaf",
+     "price_paise": 18000,
+     "stock": 10
+    },
+    {
+     "id": "country-sourdough-whole",
+     "label": "Whole loaf",
+     "price_paise": 32000,
+     "stock": 10
+    }
+   ]
+  },
+  {
+   "id": "b2",
+   "slug": "butter-croissant",
+   "name": "Butter Croissant",
+   "description": "27 layers of French-style butter, baked every morning at 7.",
+   "price_paise": 14000,
+   "image": {
+    "src": "/kits/sites/bandra-bake-house/img/butter-croissant.svg",
+    "alt": "Butter Croissant",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "viennoiserie",
+    "name": "Viennoiserie"
+   },
+   "stock": 20,
+   "status": "active",
+   "created_at": "2026-09-10",
+   "featured": true
+  },
+  {
+   "id": "b3",
+   "slug": "brown-butter-cookie",
+   "name": "Brown Butter Cookies",
+   "description": "Box of four: dark chocolate, sea salt, brown butter.",
+   "price_paise": 24000,
+   "image": {
+    "src": "/kits/sites/bandra-bake-house/img/brown-butter-cookie.svg",
+    "alt": "Brown Butter Cookies",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "cookies",
+    "name": "Cookies"
+   },
+   "stock": 20,
+   "status": "active",
+   "created_at": "2026-09-10",
+   "featured": true
+  },
+  {
+   "id": "b4",
+   "slug": "chocolate-babka",
+   "name": "Chocolate Babka",
+   "description": "Rich brioche twisted with 70% chocolate and hazelnut.",
+   "price_paise": 58000,
+   "image": {
+    "src": "/kits/sites/bandra-bake-house/img/chocolate-babka.svg",
+    "alt": "Chocolate Babka",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "breads",
+    "name": "Breads"
+   },
+   "stock": 20,
+   "status": "active",
+   "created_at": "2026-09-10",
+   "featured": true
+  },
+  {
+   "id": "b5",
+   "slug": "rosemary-focaccia",
+   "name": "Rosemary Focaccia",
+   "description": "Olive oil, rosemary from our terrace, flaky salt.",
+   "price_paise": 36000,
+   "image": {
+    "src": "/kits/sites/bandra-bake-house/img/rosemary-focaccia.svg",
+    "alt": "Rosemary Focaccia",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "breads",
+    "name": "Breads"
+   },
+   "stock": 20,
+   "status": "active",
+   "created_at": "2026-09-10"
+  },
+  {
+   "id": "b6",
+   "slug": "cinnamon-buns",
+   "name": "Cinnamon Buns",
+   "description": "Box of three, with cardamom and brown sugar.",
+   "price_paise": 42000,
+   "image": {
+    "src": "/kits/sites/bandra-bake-house/img/cinnamon-buns.svg",
+    "alt": "Cinnamon Buns",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "viennoiserie",
+    "name": "Viennoiserie"
+   },
+   "stock": 20,
+   "status": "active",
+   "created_at": "2026-09-10"
+  },
+  {
+   "id": "b7",
+   "slug": "ladi-pav",
+   "name": "Milk Ladi Pav",
+   "description": "Soft, pillowy pav for your weekend bhaji.",
+   "price_paise": 9000,
+   "image": {
+    "src": "/kits/sites/bandra-bake-house/img/ladi-pav.svg",
+    "alt": "Milk Ladi Pav",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "breads",
+    "name": "Breads"
+   },
+   "stock": 20,
+   "status": "active",
+   "created_at": "2026-09-10"
+  },
+  {
+   "id": "b8",
+   "slug": "mango-cheesecake",
+   "name": "Alphonso Cheesecake",
+   "description": "Baked cheesecake with Ratnagiri Alphonso. Serves 8.",
+   "price_paise": 145000,
+   "image": {
+    "src": "/kits/sites/bandra-bake-house/img/mango-cheesecake.svg",
+    "alt": "Alphonso Cheesecake",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "cakes",
+    "name": "Cakes"
+   },
+   "stock": 20,
+   "status": "active",
+   "created_at": "2026-09-10",
+   "badges": [
+    "Seasonal"
+   ]
+  }
+ ],
+ "bookings": {
+  "services": [
+   {
+    "id": "cake",
+    "name": "Custom cake consultation",
+    "duration_minutes": 30,
+    "price_paise": 0
+   }
+  ],
+  "hours": {
+   "mon": [
+    [
+     "10:00",
+     "13:00"
+    ],
+    [
+     "15:00",
+     "18:00"
+    ]
+   ],
+   "tue": [
+    [
+     "10:00",
+     "13:00"
+    ],
+    [
+     "15:00",
+     "18:00"
+    ]
+   ],
+   "wed": [
+    [
+     "10:00",
+     "13:00"
+    ],
+    [
+     "15:00",
+     "18:00"
+    ]
+   ],
+   "thu": [
+    [
+     "10:00",
+     "13:00"
+    ],
+    [
+     "15:00",
+     "18:00"
+    ]
+   ],
+   "fri": [
+    [
+     "10:00",
+     "13:00"
+    ],
+    [
+     "15:00",
+     "18:00"
+    ]
+   ],
+   "sat": [
+    [
+     "10:00",
+     "13:00"
+    ],
+    [
+     "15:00",
+     "18:00"
+    ]
+   ]
+  },
+  "slot_minutes": 30,
+  "capacity": 1,
+  "blocked_dates": [],
+  "booked": {}
+ }
+}

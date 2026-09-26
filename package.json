@@ -10,13 +10,13 @@
     "dev": "pnpm --filter studio dev",
     "build": "pnpm --filter studio build",
     "lint": "pnpm --filter studio lint",
-    "typecheck": "pnpm --filter studio typecheck && tsc --noEmit -p packages/motion-kit && tsc --noEmit -p packages/commerce-kit",
+    "typecheck": "pnpm --filter studio typecheck && tsc --noEmit -p packages/motion-kit && tsc --noEmit -p packages/commerce-kit && tsc --noEmit -p packages/design-kit",
     "test:unit": "pnpm --filter studio test:unit",
     "test:e2e": "pnpm --filter studio test:e2e",
     "test": "pnpm run test:unit && pnpm run test:kits && pnpm run test:db && pnpm run kits:check && pnpm run test:e2e",
     "kits:release": "node scripts/release-kits.mjs",
     "kits:check": "node scripts/release-kits.mjs --check",
-    "test:kits": "pnpm --filter @shopfront/motion-kit test && pnpm --filter @shopfront/commerce-kit test"
+    "test:kits": "pnpm --filter @shopfront/motion-kit test && pnpm --filter @shopfront/commerce-kit test && pnpm --filter @shopfront/design-kit test"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1",

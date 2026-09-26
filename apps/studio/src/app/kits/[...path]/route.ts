@@ -7,7 +7,7 @@ import { kitsDir, manifest, VERSION_RE, type KitName } from '@/lib/kits';
 const TYPES: Record<string, string> = {
   '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8',
   '.html': 'text/html; charset=utf-8', '.svg': 'image/svg+xml', '.webm': 'video/webm', '.mp4': 'video/mp4',
-  '.glb': 'model/gltf-binary', '.avif': 'image/avif', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg',
+  '.glb': 'model/gltf-binary', '.woff2': 'font/woff2', '.avif': 'image/avif', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg',
 };
 
 function pick(kit: KitName, requested: string | null) {
@@ -20,7 +20,8 @@ export async function GET(request: Request, ctx: RouteContext<'/kits/[...path]'>
   const root = kitsDir();
   const rel = normalize(path.join('/'));
   if (path.some((p) => p.startsWith('.')) || rel.startsWith('..')) return new Response('Not found', { status: 404 });
-  const file = join(root, rel);
+  // Sample websites are folders of pages: /kits/sites/ember/menu/ → menu/index.html
+  const file = join(root, rel, rel.startsWith('sites/') && !extname(rel) ? 'index.html' : '');
   if (!file.startsWith(root + sep)) return new Response('Not found', { status: 404 });
   const type = TYPES[extname(file).toLowerCase()];
   if (!type) return new Response('Not found', { status: 404 });
@@ -29,12 +30,16 @@ export async function GET(request: Request, ctx: RouteContext<'/kits/[...path]'>
   } catch {
     return new Response('Not found', { status: 404 });
   }
-  const versioned = /^(motion|commerce)\/\d+\.\d+\.\d+/.test(rel);
+  const versioned = /^(motion|commerce|design)\/\d+\.\d+\.\d+/.test(rel);
   const headers: Record<string, string> = {
     'content-type': type,
     'cache-control': versioned ? 'public, max-age=31536000, immutable' : 'public, max-age=60',
     'x-content-type-options': 'nosniff',
   };
+  if (rel.startsWith('sites/') && extname(file) === '.html') {
+    headers['x-frame-options'] = 'SAMEORIGIN';
+    headers['cache-control'] = 'no-cache';
+  }
   if (rel.startsWith('demo/') && extname(file) === '.html') {
     const q = new URL(request.url).searchParams;
     const html = (await readFile(file, 'utf8'))

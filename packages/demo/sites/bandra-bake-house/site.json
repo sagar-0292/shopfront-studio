@@ -1,0 +1,59 @@
+{
+  "direction": "crafted",
+  "site": {
+    "id": "sample-bandra-bake-house",
+    "name": "Bandra Bake House",
+    "tagline": "Slow bread and small batches, on Chapel Road since 2014.",
+    "description": "A neighbourhood bakery on Chapel Road, Bandra: sourdough, croissants, cookies and celebration cakes, baked in small batches every morning.",
+    "phone": "+919820055443",
+    "whatsapp": "+919820055443",
+    "email": "hello@bandrabakehouse.example",
+    "address": { "street": "22 Chapel Road", "area": "Bandra West", "city": "Mumbai", "state": "Maharashtra", "pincode": "400050" },
+    "hours": [{ "days": "Mon – Sat", "open": "08:00", "close": "20:00" }, { "days": "Sun", "open": "08:00", "close": "14:00" }],
+    "businessType": "Bakery",
+    "sampleNotice": "This is a sample website made by Shopfront Studio to show the Warm & crafted design. The bakery, products and prices are illustrative."
+  },
+  "nav": [
+    { "label": "Order", "href": "/order/" },
+    { "label": "Our bread", "href": "/#s3" },
+    { "label": "Custom cakes", "href": "/#book" },
+    { "label": "Visit", "href": "/#visit" }
+  ],
+  "commerce": {
+    "source": { "type": "json", "url": "/data/catalog.json" },
+    "delivery": { "fee_paise": 6000, "free_above_paise": 150000, "note": "Delivered in Bandra, Khar and Santacruz between 10 am and 1 pm." },
+    "payments": { "whatsapp": true, "upi": { "vpa": "bandrabake@okhdfcbank", "name": "Bandra Bake House" }, "cod": { "max_paise": 300000 } }
+  },
+  "pages": [
+    {
+      "path": "/",
+      "title": "Bandra Bake House — Sourdough, croissants & cakes in Bandra",
+      "description": "Sourdough, croissants, cookies and celebration cakes, baked in small batches every morning on Chapel Road, Bandra. Order for delivery or pick-up.",
+      "sections": [
+        { "type": "hero", "variant": "split", "eyebrow": "Chapel Road, Bandra", "headline": "Bread worth *waking up* for", "lede": "Sourdough fermented for two days, croissants with twenty-seven layers, and cookies still warm at 11. Baked in small batches, every morning.", "ctas": [{ "label": "Order for tomorrow", "href": "/order/" }, { "label": "Custom cakes", "href": "#book" }], "media": { "image": { "src": "/img/country-sourdough.svg", "alt": "A loaf of country sourdough", "width": 600, "height": 750 } }, "sticker": "Out of the oven at 7 am" },
+        { "type": "marquee", "items": ["Sourdough", "Croissants", "Babka", "Focaccia", "Cookies", "Ladi pav"], "speed": 45 },
+        { "type": "products", "eyebrow": "This morning's bake", "title": "Fresh from the *oven*", "featured": true, "limit": 4, "link": { "label": "Order everything", "href": "/order/" } },
+        { "type": "story", "eyebrow": "Our bread", "title": "Two days, *four hands*", "panels": [
+          { "title": "The starter", "text": "Our sourdough starter is ten years old, fed twice a day with stone-ground wheat from Madhya Pradesh.", "media": { "image": { "src": "/img/rosemary-focaccia.svg", "alt": "Rosemary focaccia", "width": 600, "height": 750 } } },
+          { "title": "The long wait", "text": "Dough rests for 48 hours in the cold. That is where the flavour — and the easy digestion — comes from.", "media": { "image": { "src": "/img/chocolate-babka.svg", "alt": "Chocolate babka", "width": 600, "height": 750 } } },
+          { "title": "The bake", "text": "Into the deck oven at 5 am, on the shelves by 7. Whatever's left at closing goes to the Bandra shelter.", "media": { "image": { "src": "/img/butter-croissant.svg", "alt": "Butter croissant", "width": 600, "height": 750 } } }
+        ] },
+        { "type": "features", "eyebrow": "What we promise", "title": "Simple, *honest* baking", "items": [
+          { "title": "No premixes", "text": "Flour, water, salt, butter, time. If we can't pronounce it, it's not in the bread." },
+          { "title": "Eggless on request", "text": "Most cakes and cookies can be made eggless — just tell us when you order." },
+          { "title": "Delivered by 1 pm", "text": "Order by 9 pm and we deliver in Bandra, Khar and Santacruz the next morning." }
+        ], "tone": "surface" },
+        { "type": "booking", "eyebrow": "Birthdays & celebrations", "title": "Let's design your *cake*", "text": "Book a free 30-minute chat at the bakery or on a call. We'll sketch it together and send you a quote the same day.", "service": "cake", "days": 12 },
+        { "type": "faq", "title": "Little *questions*", "items": [
+          { "q": "How long does sourdough keep?", "a": "Three to four days wrapped in a cloth. Slice and freeze it after that — it toasts beautifully from frozen." },
+          { "q": "Do you make eggless or vegan bakes?", "a": "Most cakes and cookies can be made eggless. Our sourdough, focaccia and pav are vegan." },
+          { "q": "How much notice do you need for a cake?", "a": "Three days for most cakes, a week for tiered or sculpted ones." }
+        ] },
+        { "type": "contact", "eyebrow": "Visit", "title": "Come say *hello*", "media": { "art": "shopfront" } },
+        { "type": "cta", "headline": "Tomorrow's bread, *ordered tonight*", "ctas": [{ "label": "Order now", "href": "/order/" }], "tone": "accent" }
+      ]
+    },
+    { "path": "/order/", "title": "Order", "description": "Order sourdough, croissants, cookies and cakes for next-morning delivery in Bandra, Khar and Santacruz.", "sections": [{ "type": "shop", "eyebrow": "Order for tomorrow", "title": "What's *baking*" }] },
+    { "path": "/wishlist/", "title": "Your wishlist", "description": "Bakes you have saved.", "sections": [{ "type": "wishlist", "title": "Saved for *later*" }] }
+  ]
+}

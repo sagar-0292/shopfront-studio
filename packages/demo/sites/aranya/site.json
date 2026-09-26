@@ -1,0 +1,64 @@
+{
+  "direction": "editorial",
+  "site": {
+    "id": "sample-aranya",
+    "name": "Aranya",
+    "tagline": "Fine jewellery, made by hand in Kala Ghoda since 1978.",
+    "description": "Aranya is a family jewellery atelier in Kala Ghoda, Mumbai: hallmarked gold, polki and precious stones, made to order and by appointment.",
+    "phone": "+912222840011",
+    "whatsapp": "+919820011223",
+    "email": "atelier@aranya.example",
+    "address": { "street": "4 Rampart Row", "area": "Kala Ghoda", "city": "Mumbai", "state": "Maharashtra", "pincode": "400001" },
+    "hours": [{ "days": "Tue – Sat", "open": "11:00", "close": "19:00" }],
+    "businessType": "JewelryStore",
+    "sampleNotice": "This is a sample website made by Shopfront Studio to show the Editorial luxury design. Aranya, its pieces and prices are illustrative."
+  },
+  "nav": [
+    { "label": "Collection", "href": "/collection/" },
+    { "label": "The atelier", "href": "/#s5" },
+    { "label": "Book a viewing", "href": "/#book" },
+    { "label": "Visit", "href": "/#visit" }
+  ],
+  "commerce": {
+    "source": { "type": "json", "url": "/data/catalog.json" },
+    "delivery": { "fee_paise": 0, "note": "Insured delivery within India, or collect from the atelier." },
+    "payments": { "whatsapp": true }
+  },
+  "pages": [
+    {
+      "path": "/",
+      "title": "Aranya — Fine jewellery in Kala Ghoda, Mumbai",
+      "description": "Hallmarked gold, polki and precious stones, made by hand in our Kala Ghoda atelier since 1978. View by appointment.",
+      "sections": [
+        { "type": "hero", "variant": "split", "eyebrow": "Kala Ghoda · Since 1978", "headline": "Heirlooms, *made slowly*", "lede": "Every Aranya piece is drawn, set and polished by hand in our atelier above Rampart Row — then hallmarked, and made to be handed down.", "ctas": [{ "label": "See the collection", "href": "/collection/" }, { "label": "Book a private viewing", "href": "#book" }], "media": { "object": "ring", "material": "metal", "color": "#c79a45", "label": "A gold ring turning slowly", "art": "hero" } },
+        { "type": "marquee", "items": ["BIS hallmarked", "Certified stones", "Made to order", "Lifetime polishing", "Insured delivery"], "outline": false, "speed": 40 },
+        { "type": "statement", "eyebrow": "Our belief", "text": "Jewellery should outlive the *occasion* it was made for. So we make fewer pieces, and we make them to last a hundred years.", "meta": ["Three generations", "Twelve karigars", "One workshop"] },
+        { "type": "categories", "eyebrow": "The collection", "title": "Four ways to *begin*", "items": [
+          { "name": "Rings", "href": "/collection/?cat=rings", "media": { "image": { "src": "/img/emerald-solitaire.svg", "alt": "Emerald ring in yellow gold", "width": 600, "height": 750 } } },
+          { "name": "Necklaces", "href": "/collection/?cat=necklaces", "media": { "image": { "src": "/img/polki-choker.svg", "alt": "Polki choker necklace", "width": 600, "height": 750 } } },
+          { "name": "Earrings", "href": "/collection/?cat=earrings", "media": { "image": { "src": "/img/jhumka-pearl.svg", "alt": "Pearl jhumka earrings", "width": 600, "height": 750 } } },
+          { "name": "Bangles", "href": "/collection/?cat=bangles", "media": { "image": { "src": "/img/ruby-kada.svg", "alt": "Ruby kada bangle", "width": 600, "height": 750 } } }
+        ] },
+        { "type": "products", "eyebrow": "Signature pieces", "title": "From the *atelier*", "featured": true, "limit": 4, "link": { "label": "All pieces", "href": "/collection/" }, "tone": "surface" },
+        { "type": "story", "eyebrow": "How a piece is made", "title": "Six weeks, *by hand*", "panels": [
+          { "title": "The drawing", "text": "Every piece begins as a pencil drawing at the bench, made with you if it is a commission." },
+          { "title": "The stones", "text": "We choose each stone in person and certify it independently. You see the certificate before we set it." },
+          { "title": "The setting", "text": "Our karigars set polki the traditional way, with pure gold foil — no glue, no shortcuts." },
+          { "title": "The hallmark", "text": "Every gold piece is BIS hallmarked and comes with a lifetime of free polishing." }
+        ] },
+        { "type": "stats", "items": [{ "value": "1978", "label": "Year we opened" }, { "value": "12", "label": "Karigars at the bench" }, { "value": "100%", "label": "BIS hallmarked gold" }], "tone": "invert" },
+        { "type": "booking", "eyebrow": "By appointment", "title": "A private *viewing*", "text": "Sit with us at the atelier, try pieces on in natural light, and talk through a commission. There is no charge and no obligation.", "service": "viewing", "days": 14 },
+        { "type": "faq", "eyebrow": "Good to know", "title": "Questions, *answered*", "items": [
+          { "q": "Is your gold hallmarked?", "a": "Yes. Every gold piece carries the BIS hallmark and a unique HUID number you can verify on the BIS Care app." },
+          { "q": "Can you remake my grandmother's jewellery?", "a": "Often, yes. Bring it to a viewing; we will tell you honestly what can be kept, reset or melted, and give you a written estimate." },
+          { "q": "How long does a commission take?", "a": "Usually five to eight weeks, depending on the stones. We send photographs at each stage." },
+          { "q": "Do you deliver outside Mumbai?", "a": "Yes, fully insured, anywhere in India. Or collect from the atelier." }
+        ] },
+        { "type": "contact", "eyebrow": "Visit", "title": "Above *Rampart Row*" },
+        { "type": "cta", "eyebrow": "Begin a commission", "headline": "Something that is *only yours*", "ctas": [{ "label": "Book a viewing", "href": "#book" }], "tone": "invert" }
+      ]
+    },
+    { "path": "/collection/", "title": "The collection", "description": "Rings, necklaces, earrings and bangles from the Aranya atelier, with prices.", "sections": [{ "type": "shop", "eyebrow": "The collection", "title": "Every *piece*" }] },
+    { "path": "/wishlist/", "title": "Your wishlist", "description": "Pieces you have saved.", "sections": [{ "type": "wishlist", "title": "Saved *pieces*" }] }
+  ]
+}

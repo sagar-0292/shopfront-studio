@@ -1,0 +1,19 @@
+/* EDITORIAL LUXURY — magazine layouts, whisper-thin serif display, ivory and ink,
+   dark-gold details, sharp corners, lots of air. */
+.d-editorial {
+  --c-bg: #f7f3ec; --c-surface: #fffdf8; --c-ink: #1c1917; --c-muted: #6b635a; --c-line: #e2d9cc;
+  --c-accent: #7a5a1e; --c-accent-ink: #fffdf8; --c-invert-bg: #1c1917; --c-invert-ink: #f7f3ec; --c-invert-muted: #b9ae9f; --c-invert-accent: #d4b26a;
+  --c-pop: #0f3d2e; --c-pop-ink: #f7f3ec;
+  --f-display: 'Cormorant Garamond', 'Cormorant Garamond Fallback', 'Times New Roman', serif; --f-body: 'Jost', 'Jost Fallback', system-ui, sans-serif;
+  --display-weight: 300; --display-tracking: -0.02em; --display-leading: 0.92; --display-case: none;
+  --eyebrow-tracking: 0.32em; --radius-card: 0px; --radius-btn: 0px; --radius-media: 0px;
+  --section-pad: clamp(88px, 12vw, 180px); --hero-scale: 1.1;
+}
+.d-editorial .d-display em { font-style: italic; font-weight: 300; color: var(--c-accent); }
+.d-editorial .d-btn { border: 1px solid currentColor; background: transparent; color: var(--c-ink); letter-spacing: 0.18em; text-transform: uppercase; font-size: 0.78rem; padding: 0 30px; }
+.d-editorial .d-btn--solid { background: var(--c-ink); color: var(--c-bg); border-color: var(--c-ink); }
+.d-editorial .d-rule { height: 1px; background: var(--c-line); }
+.d-editorial .d-section-num { font-family: var(--f-display); font-style: italic; font-size: 1.2rem; color: var(--c-accent); }
+.d-editorial .d-card { border: 0; background: transparent; }
+.d-editorial .d-card .d-card-media { background: #efe8dc; }
+.d-editorial .d-header { background: color-mix(in srgb, var(--c-bg) 88%, transparent); }

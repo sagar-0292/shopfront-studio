@@ -1,0 +1,223 @@
+{
+ "products": [
+  {
+   "id": "p1",
+   "slug": "emerald-solitaire",
+   "name": "The Emerald Solitaire",
+   "description": "A single Colombian emerald in 18k yellow gold, set by hand.",
+   "price_paise": 18650000,
+   "image": {
+    "src": "/kits/sites/aranya/img/emerald-solitaire.svg",
+    "alt": "The Emerald Solitaire",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "rings",
+    "name": "Rings"
+   },
+   "stock": 2,
+   "status": "active",
+   "created_at": "2026-09-01",
+   "featured": true,
+   "badges": [
+    "New"
+   ]
+  },
+  {
+   "id": "p2",
+   "slug": "polki-choker",
+   "name": "Polki Choker",
+   "description": "Uncut diamonds in a 22k gold choker, finished with meenakari on the reverse.",
+   "price_paise": 42500000,
+   "image": {
+    "src": "/kits/sites/aranya/img/polki-choker.svg",
+    "alt": "Polki Choker",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "necklaces",
+    "name": "Necklaces"
+   },
+   "stock": 2,
+   "status": "active",
+   "created_at": "2026-09-01",
+   "featured": true
+  },
+  {
+   "id": "p3",
+   "slug": "jhumka-pearl",
+   "name": "Pearl Jhumkas",
+   "description": "Temple-style jhumkas with Basra pearl drops.",
+   "price_paise": 8900000,
+   "image": {
+    "src": "/kits/sites/aranya/img/jhumka-pearl.svg",
+    "alt": "Pearl Jhumkas",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "earrings",
+    "name": "Earrings"
+   },
+   "stock": 2,
+   "status": "active",
+   "created_at": "2026-09-01",
+   "featured": true
+  },
+  {
+   "id": "p4",
+   "slug": "ruby-kada",
+   "name": "Ruby Kada",
+   "description": "A hinged 22k kada set with Burmese rubies.",
+   "price_paise": 26400000,
+   "image": {
+    "src": "/kits/sites/aranya/img/ruby-kada.svg",
+    "alt": "Ruby Kada",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "bangles",
+    "name": "Bangles"
+   },
+   "stock": 2,
+   "status": "active",
+   "created_at": "2026-09-01",
+   "featured": true
+  },
+  {
+   "id": "p5",
+   "slug": "diamond-band",
+   "name": "Eternity Band",
+   "description": "Brilliant-cut diamonds all the way round, in platinum.",
+   "price_paise": 12400000,
+   "image": {
+    "src": "/kits/sites/aranya/img/diamond-band.svg",
+    "alt": "Eternity Band",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "rings",
+    "name": "Rings"
+   },
+   "stock": 2,
+   "status": "active",
+   "created_at": "2026-09-01"
+  },
+  {
+   "id": "p6",
+   "slug": "sapphire-drop",
+   "name": "Sapphire Drop Pendant",
+   "description": "A Ceylon sapphire on a fine gold chain.",
+   "price_paise": 15800000,
+   "image": {
+    "src": "/kits/sites/aranya/img/sapphire-drop.svg",
+    "alt": "Sapphire Drop Pendant",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "necklaces",
+    "name": "Necklaces"
+   },
+   "stock": 2,
+   "status": "active",
+   "created_at": "2026-09-01"
+  },
+  {
+   "id": "p7",
+   "slug": "emerald-studs",
+   "name": "Emerald Chandbalis",
+   "description": "Crescent chandbalis with emerald beads.",
+   "price_paise": 11200000,
+   "image": {
+    "src": "/kits/sites/aranya/img/emerald-studs.svg",
+    "alt": "Emerald Chandbalis",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "earrings",
+    "name": "Earrings"
+   },
+   "stock": 2,
+   "status": "active",
+   "created_at": "2026-09-01"
+  },
+  {
+   "id": "p8",
+   "slug": "pearl-bangle",
+   "name": "Pearl Bangles, pair",
+   "description": "A pair of slim bangles lined with seed pearls.",
+   "price_paise": 6400000,
+   "image": {
+    "src": "/kits/sites/aranya/img/pearl-bangle.svg",
+    "alt": "Pearl Bangles, pair",
+    "width": 600,
+    "height": 750
+   },
+   "category": {
+    "slug": "bangles",
+    "name": "Bangles"
+   },
+   "stock": 2,
+   "status": "active",
+   "created_at": "2026-09-01"
+  }
+ ],
+ "bookings": {
+  "services": [
+   {
+    "id": "viewing",
+    "name": "Private viewing at the atelier",
+    "duration_minutes": 60,
+    "price_paise": 0
+   },
+   {
+    "id": "bridal",
+    "name": "Bridal consultation",
+    "duration_minutes": 90,
+    "price_paise": 0
+   }
+  ],
+  "hours": {
+   "tue": [
+    [
+     "11:00",
+     "19:00"
+    ]
+   ],
+   "wed": [
+    [
+     "11:00",
+     "19:00"
+    ]
+   ],
+   "thu": [
+    [
+     "11:00",
+     "19:00"
+    ]
+   ],
+   "fri": [
+    [
+     "11:00",
+     "19:00"
+    ]
+   ],
+   "sat": [
+    [
+     "11:00",
+     "19:00"
+    ]
+   ]
+  },
+  "slot_minutes": 60,
+  "capacity": 1,
+  "blocked_dates": [],
+  "booked": {}
+ }
+}

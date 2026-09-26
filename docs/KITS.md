@@ -1,6 +1,6 @@
 # Working on the kits (for developers)
 
-- Source: `packages/motion-kit`, `packages/commerce-kit`. Demo pages: `packages/demo`.
+- Source: `packages/motion-kit`, `packages/commerce-kit`, `packages/design-kit` (see DESIGNS.md). Demo pages and sample sites: `packages/demo`.
 - Hooks: `src/hooks.ts` in each kit is the contract with the AI Builder. Adding a hook means adding it there.
 - Tests: `pnpm test:kits` (logic), `pnpm test:e2e` (real browser: 05-motion-kit, 06-commerce-kit, 07-kit-upgrade,
   08-lighthouse).

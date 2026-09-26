@@ -17,7 +17,7 @@ export async function score(url) {
   }
 }
 
-if (process.argv[1].endsWith('scripts-lighthouse.mjs')) {
+if (process.argv[1]?.endsWith('scripts-lighthouse.mjs')) {
   const url = process.argv[2];
   const min = Number(process.argv[3] ?? 90);
   const r = await score(url);

@@ -1,0 +1,19 @@
+/* DARK & CINEMATIC — near-black stage, spotlight glows, wide uppercase display,
+   ember accent, film grain, slow blur reveals. */
+.d-cinematic {
+  --c-bg: #0b0b0c; --c-surface: #151517; --c-ink: #f4f1ea; --c-muted: #a39f97; --c-line: #2a2a2e;
+  --c-accent: #ff5a1f; --c-accent-ink: #0b0b0c; --c-invert-bg: #f4f1ea; --c-invert-ink: #0b0b0c; --c-invert-muted: #5a5750; --c-invert-accent: #c2410c;
+  --c-pop: #ffb347; --c-pop-ink: #0b0b0c;
+  --f-display: 'Syne', 'Syne Fallback', 'Arial', system-ui, sans-serif; --f-body: 'Manrope', 'Manrope Fallback', system-ui, sans-serif;
+  --display-weight: 700; --display-tracking: -0.01em; --display-leading: 0.95; --display-case: uppercase;
+  --eyebrow-tracking: 0.4em; --radius-card: 14px; --radius-btn: 999px; --radius-media: 14px;
+  --section-pad: clamp(88px, 12vw, 170px); --hero-scale: 1;
+  color-scheme: dark;
+}
+.d-cinematic body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1000; opacity: 0.07; mix-blend-mode: overlay; background-image: var(--grain); }
+.d-cinematic .d-display em { font-style: normal; color: var(--c-accent); }
+.d-cinematic .d-btn { background: transparent; color: var(--c-ink); border: 1px solid color-mix(in srgb, var(--c-ink) 35%, transparent); letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.75rem; }
+.d-cinematic .d-btn--solid { background: var(--c-accent); color: var(--c-accent-ink); border-color: var(--c-accent); }
+.d-cinematic .d-glow { position: absolute; inset: auto; width: 60vmax; height: 60vmax; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--c-accent) 38%, transparent), transparent 62%); filter: blur(20px); pointer-events: none; z-index: 0; }
+.d-cinematic .d-card { background: var(--c-surface); border: 1px solid var(--c-line); }
+.d-cinematic .d-section-num { color: var(--c-accent); font-family: var(--f-display); letter-spacing: 0.2em; }

@@ -1,0 +1,59 @@
+{
+ "products": [],
+ "bookings": {
+  "services": [
+   {
+    "id": "table",
+    "name": "Table for dinner",
+    "duration_minutes": 120
+   },
+   {
+    "id": "chef",
+    "name": "Chef's counter (8 seats)",
+    "duration_minutes": 150
+   }
+  ],
+  "hours": {
+   "tue": [
+    [
+     "19:00",
+     "23:00"
+    ]
+   ],
+   "wed": [
+    [
+     "19:00",
+     "23:00"
+    ]
+   ],
+   "thu": [
+    [
+     "19:00",
+     "23:00"
+    ]
+   ],
+   "fri": [
+    [
+     "19:00",
+     "23:00"
+    ]
+   ],
+   "sat": [
+    [
+     "19:00",
+     "23:00"
+    ]
+   ],
+   "sun": [
+    [
+     "19:00",
+     "23:00"
+    ]
+   ]
+  },
+  "slot_minutes": 30,
+  "capacity": 6,
+  "blocked_dates": [],
+  "booked": {}
+ }
+}
