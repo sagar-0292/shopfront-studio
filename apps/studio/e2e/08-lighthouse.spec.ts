@@ -7,7 +7,7 @@ test.describe.configure({ mode: 'serial', timeout: 180_000 });
 const PAGES = [
   ...['sample', 'shop', 'showcase'].map((p) => `/kits/demo/${p}.html`),
   // One sample website per design direction.
-  '/kits/sites/aranya', '/kits/sites/mithai-market', '/kits/sites/ember', '/kits/sites/bandra-bake-house', '/kits/sites/bandra-bake-house/order', '/kits/sites/tapri', '/kits/sites/saltwater',
+  '/kits/sites/aranya', '/kits/sites/mithai-market', '/kits/sites/ember', '/kits/sites/bandra-bake-house', '/kits/sites/bandra-bake-house/order', '/kits/sites/tapri', '/kits/sites/saltwater', '/kits/sites/kulfi-club',
 ];
 for (const page of PAGES) {
   test(`${page} scores 90+ on a phone`, async ({ baseURL }) => {

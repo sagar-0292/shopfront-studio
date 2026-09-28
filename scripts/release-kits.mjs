@@ -129,6 +129,12 @@ const siteFiles = {};
 const published = join(out, 'design', manifest.design.latest, 'render.mjs');
 const { renderSite } = await import(pathToFileURL(existsSync(published) ? published : join(root, 'packages/design-kit/dist/render.mjs')).href);
 const versions = { motion: manifest.motion.latest, commerce: manifest.commerce.latest, design: manifest.design.latest };
+// Each page carries its styles inside it (no extra download before the first paint on a phone).
+const styles = {};
+for (const [kit, v, names] of [['motion', versions.motion, ['sf-motion.css']], ['commerce', versions.commerce, ['sf-commerce.css']], ['design', versions.design, null]]) {
+  const dir = join(out, kit, v);
+  for (const f of names ?? readdirSync(dir).filter((f) => f.endsWith('.css'))) styles[`/kits/${kit}/${v}/${f}`] = readFileSync(join(dir, f), 'utf8');
+}
 for (const id of readdirSync(sitesSrc).sort()) {
   const base = `/kits/sites/${id}`;
   const used = new Map();
@@ -141,7 +147,7 @@ for (const id of readdirSync(sitesSrc).sort()) {
   }
   const def = withPhotos(JSON.parse(readFileSync(join(sitesSrc, id, 'site.json'), 'utf8')), used);
   def.credits = [...used.values()];
-  for (const [path, html] of Object.entries(renderSite(def, { base, versions }))) siteFiles[join(id, path)] = html;
+  for (const [path, html] of Object.entries(renderSite(def, { base, versions, styles }))) siteFiles[join(id, path)] = html;
 }
 
 if (check) {

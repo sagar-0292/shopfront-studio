@@ -1,6 +1,6 @@
 // The design directions, as the studio describes them to people.
 // The looks themselves live in the design kit (packages/design-kit).
-export const DIRECTIONS = ['editorial', 'bold', 'cinematic', 'crafted', 'poster', 'quiet'] as const;
+export const DIRECTIONS = ['editorial', 'bold', 'cinematic', 'crafted', 'poster', 'quiet', 'block'] as const;
 export type Direction = (typeof DIRECTIONS)[number];
 
 export type DirectionInfo = {
@@ -43,6 +43,11 @@ export const DESIGNS: Record<Direction, DirectionInfo> = {
     key: 'quiet', name: 'Quiet luxury', feel: 'Like a gallery: stone and bone white, a fine serif with italics, sage details and very large photographs.',
     bestFor: 'Villas and boutique stays, spas, skincare, interiors, architects, wellness', fonts: 'Instrument Serif & Inter Tight',
     swatches: ['#f1eee8', '#161513', '#34422f', '#d6e3d0'], sample: { id: 'saltwater', name: 'Saltwater', kind: 'Villa stay, Alibaug' },
+  },
+  block: {
+    key: 'block', name: 'Colour block', feel: 'Like a sticker sheet: every section its own flat colour, stretchy extra-wide type, photos cut into ovals and arches, badges that turn.',
+    bestFor: 'Ice cream and desserts, juice bars, kids and toys, D2C snacks, fashion drops, creative studios', fonts: 'Mona Sans',
+    swatches: ['#e8412c', '#c6f24e', '#7b4dff', '#ffc93c'], sample: { id: 'kulfi-club', name: 'Kulfi Club', kind: 'Kulfi parlour, Bandra' },
   },
 };
 

@@ -1,0 +1,116 @@
+{
+ "products": [
+  {
+   "id": "k1",
+   "slug": "kesar-pista-box",
+   "name": "Kesar Pista Kulfi, box of 6",
+   "description": "Our first recipe: milk reduced for six hours with saffron and Iranian pistachios, set in clay pots.",
+   "price_paise": 42000,
+   "image": {
+    "$photo": "kulfi-club/kesar-kulfi"
+   },
+   "category": {
+    "slug": "kulfi",
+    "name": "Kulfi"
+   },
+   "stock": 30,
+   "status": "active",
+   "created_at": "2026-09-25",
+   "featured": true,
+   "badges": [
+    "Bestseller"
+   ]
+  },
+  {
+   "id": "k2",
+   "slug": "mango-kulfi-box",
+   "name": "Mango Kulfi Sticks, box of 6",
+   "description": "Ratnagiri Alphonso folded into malai kulfi, on sticks. Summer only.",
+   "price_paise": 48000,
+   "image": {
+    "$photo": "kulfi-club/mango-kulfi"
+   },
+   "category": {
+    "slug": "kulfi",
+    "name": "Kulfi"
+   },
+   "stock": 30,
+   "status": "active",
+   "created_at": "2026-09-25",
+   "featured": true,
+   "badges": [
+    "Seasonal"
+   ]
+  },
+  {
+   "id": "k3",
+   "slug": "falooda-kit",
+   "name": "Falooda Kit for 4",
+   "description": "Rose syrup, sabja seeds, vermicelli and four kulfi pots. Build it at home in two minutes.",
+   "price_paise": 56000,
+   "image": {
+    "$photo": "kulfi-club/falooda-top"
+   },
+   "category": {
+    "slug": "falooda",
+    "name": "Falooda"
+   },
+   "stock": 30,
+   "status": "active",
+   "created_at": "2026-09-25",
+   "featured": true
+  },
+  {
+   "id": "k4",
+   "slug": "fruit-lollies",
+   "name": "Fruit Lollies, box of 8",
+   "description": "Real fruit, no colours: orange, kiwi, watermelon and kala khatta.",
+   "price_paise": 38000,
+   "image": {
+    "$photo": "kulfi-club/fruit-pops"
+   },
+   "category": {
+    "slug": "lollies",
+    "name": "Lollies"
+   },
+   "stock": 30,
+   "status": "active",
+   "created_at": "2026-09-25",
+   "featured": true
+  },
+  {
+   "id": "k5",
+   "slug": "rose-lollies",
+   "name": "Rose Malai Lollies, box of 6",
+   "description": "Gulkand and malai with a white chocolate drizzle.",
+   "price_paise": 40000,
+   "image": {
+    "$photo": "kulfi-club/rose-bars"
+   },
+   "category": {
+    "slug": "lollies",
+    "name": "Lollies"
+   },
+   "stock": 30,
+   "status": "active",
+   "created_at": "2026-09-25"
+  },
+  {
+   "id": "k6",
+   "slug": "pista-tub",
+   "name": "Pista Scoop Tub, 500 ml",
+   "description": "Churned pista ice cream with roasted almonds for scooping at home.",
+   "price_paise": 36000,
+   "image": {
+    "$photo": "kulfi-club/pista"
+   },
+   "category": {
+    "slug": "scoops",
+    "name": "Scoops"
+   },
+   "stock": 30,
+   "status": "active",
+   "created_at": "2026-09-25"
+  }
+ ]
+}

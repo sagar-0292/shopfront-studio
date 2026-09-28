@@ -24,7 +24,7 @@ export default async function DesignsPage() {
       <PageHeader
         eyebrow="Design kit"
         title="Designs"
-        description="Six complete looks for client websites. Each one sets the fonts, colours, spacing, animation style and every section’s layout — tested to score 90+ on phones. Pick one on a project; the AI Builder then writes the content in that look."
+        description="Seven complete looks for client websites. Each one sets the fonts, colours, spacing, animation style and every section’s layout — tested to score 90+ on phones. Pick one on a project; the AI Builder then writes the content in that look."
       />
       <ul className="grid gap-6 lg:grid-cols-2" aria-label="Design directions">
         {DIRECTIONS.map((key) => {

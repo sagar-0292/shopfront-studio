@@ -83,4 +83,19 @@ json('saltwater', {
   bookings: { services: [{ id: 'stay', name: 'Stay at Saltwater (pick your arrival)', duration_minutes: 60, price_paise: 0 }],
     hours: Object.fromEntries(['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map((d) => [d, [['14:00', '17:00']]])), slot_minutes: 60, capacity: 4, blocked_dates: [], booked: {} },
 });
+// ---------------------------------------------------------------- Kulfi Club (colour block parlour)
+const kulfi = [
+  ['k1', 'kesar-pista-box', 'Kesar Pista Kulfi, box of 6', 'kulfi', 'Kulfi', 42000, 'Our first recipe: milk reduced for six hours with saffron and Iranian pistachios, set in clay pots.', 'kesar-kulfi', true, ['Bestseller']],
+  ['k2', 'mango-kulfi-box', 'Mango Kulfi Sticks, box of 6', 'kulfi', 'Kulfi', 48000, 'Ratnagiri Alphonso folded into malai kulfi, on sticks. Summer only.', 'mango-kulfi', true, ['Seasonal']],
+  ['k3', 'falooda-kit', 'Falooda Kit for 4', 'falooda', 'Falooda', 56000, 'Rose syrup, sabja seeds, vermicelli and four kulfi pots. Build it at home in two minutes.', 'falooda-top', true],
+  ['k4', 'fruit-lollies', 'Fruit Lollies, box of 8', 'lollies', 'Lollies', 38000, 'Real fruit, no colours: orange, kiwi, watermelon and kala khatta.', 'fruit-pops', true],
+  ['k5', 'rose-lollies', 'Rose Malai Lollies, box of 6', 'lollies', 'Lollies', 40000, 'Gulkand and malai with a white chocolate drizzle.', 'rose-bars'],
+  ['k6', 'pista-tub', 'Pista Scoop Tub, 500 ml', 'scoops', 'Scoops', 36000, 'Churned pista ice cream with roasted almonds for scooping at home.', 'pista'],
+];
+json('kulfi-club', {
+  products: kulfi.map(([id, slug, name, cat, catName, price, description, img, featured, badges]) => ({
+    id, slug, name, description, price_paise: price, image: photo(`kulfi-club/${img}`),
+    category: { slug: cat, name: catName }, stock: 30, status: 'active', created_at: '2026-09-25', ...(featured ? { featured: true } : {}), ...(badges ? { badges } : {}),
+  })),
+});
 console.log('Sample site catalogues written.');

@@ -1032,7 +1032,8 @@
       1000
      ],
      "alt": "Morning coffee on a linen bedcover",
-     "focus": "attention"
+     "focus": "attention",
+     "quality": 60
     },
     "beach": {
      "provider": "pexels",
@@ -1044,7 +1045,8 @@
       1000
      ],
      "alt": "Palm trees along a quiet beach",
-     "focus": "attention"
+     "focus": "attention",
+     "quality": 60
     },
     "coast": {
      "provider": "pexels",
@@ -1080,7 +1082,8 @@
       1200
      ],
      "alt": "Breakfast laid out on a shaded terrace",
-     "focus": "attention"
+     "focus": "attention",
+     "quality": 60
     },
     "dinner": {
      "provider": "pexels",
@@ -1116,7 +1119,8 @@
       1000
      ],
      "alt": "A white wall, wooden shutters and a palm against a blue sky",
-     "focus": "attention"
+     "focus": "attention",
+     "quality": 60
     },
     "yoga": {
      "provider": "pexels",
@@ -1128,7 +1132,8 @@
       1000
      ],
      "alt": "Yoga mats laid out on a wooden deck by the sea",
-     "focus": "attention"
+     "focus": "attention",
+     "quality": 60
     },
     "patio": {
      "provider": "pexels",
@@ -1140,6 +1145,175 @@
       1200
      ],
      "alt": "A shaded patio with wicker chairs and plants",
+     "focus": "attention",
+     "quality": 60
+    }
+   }
+  },
+  "kulfi-club": {
+   "dir": "sites/kulfi-club/img",
+   "web": "/img",
+   "slots": {
+    "hero": {
+     "provider": "pexels",
+     "id": "8093182",
+     "aspect": 1.6,
+     "widths": [
+      640,
+      1000,
+      1400,
+      2000
+     ],
+     "alt": "Four hands holding ice cream cones against a bright yellow wall",
+     "focus": "attention"
+    },
+    "cone-yellow": {
+     "provider": "pexels",
+     "id": "8093197",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A blue ice cream cone held up against a yellow wall",
+     "focus": "attention"
+    },
+    "cone-blue": {
+     "provider": "pexels",
+     "id": "9227955",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A hand holding an ice cream cone against a blue wall",
+     "focus": "attention"
+    },
+    "cones-pink": {
+     "provider": "pexels",
+     "id": "5061027",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Two hands holding strawberry ice cream cones",
+     "focus": "attention"
+    },
+    "mango-kulfi": {
+     "provider": "pexels",
+     "id": "32676071",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Mango kulfi on sticks with pistachios and fresh mango",
+     "focus": "attention"
+    },
+    "kesar-kulfi": {
+     "provider": "pexels",
+     "id": "12295184",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Hands holding kesar kulfi in clay pots",
+     "focus": "attention"
+    },
+    "cart": {
+     "provider": "pexels",
+     "id": "38678811",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A kulfi seller serving from a painted cart",
+     "focus": "attention"
+    },
+    "falooda": {
+     "provider": "pexels",
+     "id": "18646641",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A glass of falooda with rose syrup and pistachios",
+     "focus": "attention"
+    },
+    "falooda-top": {
+     "provider": "pexels",
+     "id": "18646637",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Falooda from above, topped with pistachios and jelly",
+     "focus": "attention"
+    },
+    "fruit-pops": {
+     "provider": "pexels",
+     "id": "8678930",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Fruit ice lollies with slices of orange, kiwi and watermelon",
+     "focus": "attention"
+    },
+    "rose-bars": {
+     "provider": "pexels",
+     "id": "38453274",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Two pink ice lollies with icing on a bed of ice",
+     "focus": "attention"
+    },
+    "orange-bars": {
+     "provider": "pexels",
+     "id": "39798735",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Four orange ice lollies on a dark plate",
+     "focus": "attention"
+    },
+    "berry-bars": {
+     "provider": "pexels",
+     "id": "39705761",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Berry ice lollies on a plate with ice cubes",
+     "focus": "attention"
+    },
+    "pista": {
+     "provider": "pexels",
+     "id": "36576781",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Scoops of pista ice cream with almonds and pistachios",
      "focus": "attention"
     }
    }

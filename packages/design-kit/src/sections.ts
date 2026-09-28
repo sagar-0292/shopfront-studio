@@ -22,6 +22,7 @@ const MOTION: Record<Direction, { reveal: string; head: string; bg: { hero: stri
   crafted: { reveal: 'up', head: 'up', bg: { hero: 'none', colors: '#f3e8d6,#e7cfa8,#d9a877,#f6eadb' } },
   poster: { reveal: 'up', head: 'up', bg: { hero: 'none', colors: '#c8321a,#1e3bd6,#ffd23f' } },
   quiet: { reveal: 'fade', head: 'mask', bg: { hero: 'none', colors: '#f1eee8,#e4e0d6,#d6e3d0' } },
+  block: { reveal: 'up', head: 'up', bg: { hero: 'none', colors: '#e8412c,#c6f24e,#ffc93c,#7b4dff' } },
 };
 export const motionFor = (d: Direction) => MOTION[d];
 /** How wide the split hero's photo is shown; the page also preloads it with these sizes. */
@@ -44,6 +45,13 @@ export function media(m: MediaT | undefined, ctx: Ctx, _seed: string, opts: { w?
   }
   return html`<div data-sf-video data-src="${asset(ctx, m.video.src)}" ${raw(m.video.poster ? `data-poster="${esc(asset(ctx, m.video.poster))}"` : '')} ${raw(m.label ? `role="img" aria-label="${esc(m.label)}"` : '')} style="position:absolute;inset:0">${m.video.poster ? '' : blank}</div>`;
 }
+
+// A sticker: a flat label, or (in looks that want it) its words running round a turning circle.
+// The circle is made of ordinary letters, each turned into place; it is decoration, so screen readers skip it.
+const sticker = (text: string) => {
+  const ring = [...`${text} · ${text} · `];
+  return html`<span class="d-sticker" aria-hidden="true"><span class="d-sticker-text">${text}</span><span class="d-ring" style="${`--n:${ring.length}`}">${ring.map((c, i) => html`<i style="${`--i:${i}`}">${c}</i>`)}</span></span>`;
+};
 
 const btn = (ctx: Ctx, c: { label: string; href: string; style?: 'solid' | 'plain' }, magnetic = true) =>
   html`<a class="${cls('d-btn', c.style !== 'plain' && 'd-btn--solid')}" href="${link(ctx, c.href)}" ${raw(magnetic ? 'data-sf-magnetic="0.3"' : '')}>${c.label} <span class="d-arrow">${icon('arrowRight')}</span></a>`;
@@ -114,7 +122,7 @@ export function section(s: SectionT, ctx: Ctx): Raw {
         const name = ctx.site.name;
         return html`<section class="d-hero d-hero--wordmark" id="${id}">
           <p class="d-wordmark" aria-hidden="true" style="${`--chars:${Math.max(3, [...name].length)}`}">${name}</p>
-          <div class="d-wordmark-media">${media(s.media, ctx, `${id}-media`, { eager, sizes: '100vw' })}${s.sticker ? html`<span class="d-sticker" aria-hidden="true">${s.sticker}</span>` : ''}</div>
+          <div class="d-wordmark-media">${media(s.media, ctx, `${id}-media`, { eager, sizes: '100vw' })}${s.sticker ? sticker(s.sticker) : ''}</div>
           <div class="d-wrap d-wordmark-copy">
             <div>${s.eyebrow ? html`<p class="d-eyebrow" data-sf-reveal="fade">${s.eyebrow}</p>` : ''}${H}</div>
             <div>
@@ -136,7 +144,7 @@ export function section(s: SectionT, ctx: Ctx): Raw {
           ${copy}
           <div class="d-hero-media">
             ${media(s.media, ctx, `${id}-media`, { w: 900, h: 900, eager, sizes: HERO_SPLIT_SIZES })}
-            ${s.sticker ? html`<span class="d-sticker" aria-hidden="true">${s.sticker}</span>` : ''}
+            ${s.sticker ? sticker(s.sticker) : ''}
           </div>
         </div>
       </section>`;

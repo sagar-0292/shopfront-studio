@@ -286,6 +286,9 @@ h1, h2, h3, h4 { margin: 0; font-weight: inherit; }
 .d-tile--stat b { font-size: clamp(2.4rem, 5vw, 4.6rem); line-height: .9; font-weight: var(--display-weight); }
 .d-tile--photo figcaption { position: absolute; left: 12px; bottom: 12px; padding: 6px 12px; border-radius: 999px; background: color-mix(in srgb, var(--c-bg) 88%, transparent); color: var(--c-ink); font-size: .82rem; }
 
+/* sticker words round a circle: only looks that want it show the ring */
+.d-ring { display: none; }
+
 /* announcement bar */
 .d-announce { background: var(--c-pop); color: var(--c-pop-ink); font-size: .85rem; line-height: 1.4; text-align: center; padding-block: 10px; }
 .d-announce a { display: inline-flex; align-items: center; gap: 6px; min-height: 24px; text-decoration: underline; text-underline-offset: .25em; }

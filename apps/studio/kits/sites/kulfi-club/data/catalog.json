@@ -1,0 +1,140 @@
+{
+ "products": [
+  {
+   "id": "k1",
+   "slug": "kesar-pista-box",
+   "name": "Kesar Pista Kulfi, box of 6",
+   "description": "Our first recipe: milk reduced for six hours with saffron and Iranian pistachios, set in clay pots.",
+   "price_paise": 42000,
+   "image": {
+    "src": "/kits/sites/kulfi-club/img/kesar-kulfi-1000.webp",
+    "srcset": "/kits/sites/kulfi-club/img/kesar-kulfi-400.webp 400w, /kits/sites/kulfi-club/img/kesar-kulfi-700.webp 700w, /kits/sites/kulfi-club/img/kesar-kulfi-1000.webp 1000w",
+    "width": 1000,
+    "height": 1250,
+    "alt": "Hands holding kesar kulfi in clay pots"
+   },
+   "category": {
+    "slug": "kulfi",
+    "name": "Kulfi"
+   },
+   "stock": 30,
+   "status": "active",
+   "created_at": "2026-09-25",
+   "featured": true,
+   "badges": [
+    "Bestseller"
+   ]
+  },
+  {
+   "id": "k2",
+   "slug": "mango-kulfi-box",
+   "name": "Mango Kulfi Sticks, box of 6",
+   "description": "Ratnagiri Alphonso folded into malai kulfi, on sticks. Summer only.",
+   "price_paise": 48000,
+   "image": {
+    "src": "/kits/sites/kulfi-club/img/mango-kulfi-800.webp",
+    "srcset": "/kits/sites/kulfi-club/img/mango-kulfi-400.webp 400w, /kits/sites/kulfi-club/img/mango-kulfi-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Mango kulfi on sticks with pistachios and fresh mango"
+   },
+   "category": {
+    "slug": "kulfi",
+    "name": "Kulfi"
+   },
+   "stock": 30,
+   "status": "active",
+   "created_at": "2026-09-25",
+   "featured": true,
+   "badges": [
+    "Seasonal"
+   ]
+  },
+  {
+   "id": "k3",
+   "slug": "falooda-kit",
+   "name": "Falooda Kit for 4",
+   "description": "Rose syrup, sabja seeds, vermicelli and four kulfi pots. Build it at home in two minutes.",
+   "price_paise": 56000,
+   "image": {
+    "src": "/kits/sites/kulfi-club/img/falooda-top-800.webp",
+    "srcset": "/kits/sites/kulfi-club/img/falooda-top-400.webp 400w, /kits/sites/kulfi-club/img/falooda-top-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Falooda from above, topped with pistachios and jelly"
+   },
+   "category": {
+    "slug": "falooda",
+    "name": "Falooda"
+   },
+   "stock": 30,
+   "status": "active",
+   "created_at": "2026-09-25",
+   "featured": true
+  },
+  {
+   "id": "k4",
+   "slug": "fruit-lollies",
+   "name": "Fruit Lollies, box of 8",
+   "description": "Real fruit, no colours: orange, kiwi, watermelon and kala khatta.",
+   "price_paise": 38000,
+   "image": {
+    "src": "/kits/sites/kulfi-club/img/fruit-pops-800.webp",
+    "srcset": "/kits/sites/kulfi-club/img/fruit-pops-400.webp 400w, /kits/sites/kulfi-club/img/fruit-pops-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Fruit ice lollies with slices of orange, kiwi and watermelon"
+   },
+   "category": {
+    "slug": "lollies",
+    "name": "Lollies"
+   },
+   "stock": 30,
+   "status": "active",
+   "created_at": "2026-09-25",
+   "featured": true
+  },
+  {
+   "id": "k5",
+   "slug": "rose-lollies",
+   "name": "Rose Malai Lollies, box of 6",
+   "description": "Gulkand and malai with a white chocolate drizzle.",
+   "price_paise": 40000,
+   "image": {
+    "src": "/kits/sites/kulfi-club/img/rose-bars-800.webp",
+    "srcset": "/kits/sites/kulfi-club/img/rose-bars-400.webp 400w, /kits/sites/kulfi-club/img/rose-bars-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Two pink ice lollies with icing on a bed of ice"
+   },
+   "category": {
+    "slug": "lollies",
+    "name": "Lollies"
+   },
+   "stock": 30,
+   "status": "active",
+   "created_at": "2026-09-25"
+  },
+  {
+   "id": "k6",
+   "slug": "pista-tub",
+   "name": "Pista Scoop Tub, 500 ml",
+   "description": "Churned pista ice cream with roasted almonds for scooping at home.",
+   "price_paise": 36000,
+   "image": {
+    "src": "/kits/sites/kulfi-club/img/pista-800.webp",
+    "srcset": "/kits/sites/kulfi-club/img/pista-400.webp 400w, /kits/sites/kulfi-club/img/pista-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Scoops of pista ice cream with almonds and pistachios"
+   },
+   "category": {
+    "slug": "scoops",
+    "name": "Scoops"
+   },
+   "stock": 30,
+   "status": "active",
+   "created_at": "2026-09-25"
+  }
+ ]
+}

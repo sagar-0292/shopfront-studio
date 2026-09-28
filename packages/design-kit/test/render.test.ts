@@ -205,6 +205,11 @@ describe('renderSite', () => {
     expect(wm.querySelector('.d-wordmark')!.getAttribute('aria-hidden')).toBe('true');
     expect(wm.querySelector('.d-wordmark')!.getAttribute('style')).toBe('--chars:9');
     expect(wm.querySelector('h1')!.textContent).toBe('Chai, loud');
+    // A sticker carries its words once as text and once as letters for the turning circle (hidden from screen readers).
+    const st = wm.querySelector('.d-sticker')!;
+    expect(st.getAttribute('aria-hidden')).toBe('true');
+    expect(st.querySelector('.d-sticker-text')!.textContent).toBe('Open late');
+    expect([...st.querySelectorAll('.d-ring i')].map((i) => i.textContent).join('')).toBe('Open late · Open late · ');
     // Scrolly: every step names its timeline, the pinned copy is hidden from screen readers,
     // and each step also carries its own photo for phones and animations-off.
     const sc = d.querySelector('.d-scrolly')!;
@@ -230,6 +235,16 @@ describe('renderSite', () => {
     expect(pin.querySelector('h2')!.textContent).toBe('Why us');
     expect(pin.querySelectorAll('.d-pinned-card')).toHaveLength(2);
     expect(pin.querySelector('.d-btn')!.getAttribute('href')).toBe('/shop/');
+  });
+
+  it('can write the styles into the page, with font addresses still pointing at the kit', () => {
+    const css = "@font-face{src:url(./fonts/a.woff2)}body{color:red}</style><script>";
+    const out = renderSite(everything('quiet'), { ...V, styles: { '/kits/design/1.0.0/quiet.css': css } })['/index.html'];
+    expect(out).not.toContain('href="/kits/design/1.0.0/quiet.css"');
+    expect(out).toContain('url(/kits/design/1.0.0/fonts/a.woff2)');
+    expect(out).not.toContain('</style><script>');
+    // Stylesheets that were not given stay linked.
+    expect(out).toContain('<link rel="stylesheet" href="/kits/motion/1.0.0/sf-motion.css">');
   });
 
   it('refuses custom colours that are hard to read', () => {

@@ -9,6 +9,7 @@ const SITES = [
   { id: 'bandra-bake-house', direction: 'crafted', h1: 'Bread worth waking up for', shop: '/order/' },
   { id: 'tapri', direction: 'poster', h1: 'Cutting chai, loud and proud', shop: '/shop/' },
   { id: 'saltwater', direction: 'quiet', h1: 'Slow days by the Arabian Sea', shop: null, city: 'Alibaug' },
+  { id: 'kulfi-club', direction: 'block', h1: 'Cold, sweet and very Bombay', shop: '/shop/' },
 ] as const;
 const url = (id: string, path = '/') => `/kits/sites/${id}${path}`;
 
@@ -197,4 +198,22 @@ test('moving sections: pinned story photo, hover list, swipe reel and photo stri
   await expect(p.locator('.d-index-thumb img').first()).toBeVisible();
   expect(await p.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
   await phone.close();
+});
+
+test('colour block: every section is its own readable colour panel, photos are cut into shapes, the badge turns', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(url('kulfi-club'));
+  const panels = await page.locator('main > *').evaluateAll((els) => els.map((e) => getComputedStyle(e).backgroundColor));
+  expect(new Set(panels.slice(0, 7)).size).toBe(7);
+  // Photos in shapes: an oval and an arch among the rows.
+  const radii = await page.locator('.d-row-media').evaluateAll((els) => els.map((e) => getComputedStyle(e).borderTopLeftRadius));
+  expect(radii[0]).toBe('50%');
+  expect(radii[1]).toMatch(/^999px/);
+  // The sticker's words run round a turning circle; "Pause animations" stops it.
+  const ring = page.locator('.d-ring');
+  await expect(ring).toBeVisible();
+  expect(await ring.locator('i').count()).toBe('Since 1978 · Since 1978 · '.length);
+  expect(await ring.evaluate((e) => getComputedStyle(e).animationPlayState)).toBe('running');
+  await page.getByRole('button', { name: 'Pause animations' }).click();
+  expect(await ring.evaluate((e) => getComputedStyle(e).animationPlayState)).toBe('paused');
 });

@@ -14,6 +14,9 @@ export type RenderOptions = {
   base?: string;
   /** Hide from search engines (previews, samples). */
   noindex?: boolean;
+  /** Stylesheet text by address. Stylesheets given here are written into the page instead of
+   *  linked, so phones can draw the page without waiting for another download first. */
+  styles?: Record<string, string>;
 };
 
 /** The headline font each direction loads first, so the big type never jumps.
@@ -25,8 +28,9 @@ export const PRELOAD: Record<Direction, string[]> = {
   crafted: ['fraunces-normal.woff2'],
   poster: ['anton-normal.woff2'],
   quiet: ['instrument-serif-normal.woff2'],
+  block: ['mona-sans-normal.woff2'],
 };
-const THEME_COLOR: Record<Direction, string> = { editorial: '#f7f3ec', bold: '#fff6e5', cinematic: '#0b0b0c', crafted: '#f3e8d6', poster: '#c8321a', quiet: '#f1eee8' };
+const THEME_COLOR: Record<Direction, string> = { editorial: '#f7f3ec', bold: '#fff6e5', cinematic: '#0b0b0c', crafted: '#f3e8d6', poster: '#c8321a', quiet: '#f1eee8', block: '#151313' };
 const COMMERCE_SECTIONS = new Set<SectionT['type']>(['products', 'shop', 'booking', 'wishlist']);
 
 export class DesignError extends Error {}
@@ -86,9 +90,9 @@ ${canonical ? html`<meta property="og:url" content="${canonical}">` : ''}
 <script>document.documentElement.classList.add('sf-js')</script>
 ${PRELOAD[dir].map((f) => html`<link rel="preload" href="${`${designUrl}/fonts/${f}`}" as="font" type="font/woff2" crossorigin>`)}
 ${heroPreload(page, base)}
-<link rel="stylesheet" href="${`${kits}/motion/${v.motion}/sf-motion.css`}">
-${hasCommerce ? html`<link rel="stylesheet" href="${`${kits}/commerce/${v.commerce}/sf-commerce.css`}">` : ''}
-<link rel="stylesheet" href="${`${designUrl}/${dir}.css`}">
+${stylesheet(`${kits}/motion/${v.motion}/sf-motion.css`, opts)}
+${hasCommerce ? stylesheet(`${kits}/commerce/${v.commerce}/sf-commerce.css`, opts) : ''}
+${stylesheet(`${designUrl}/${dir}.css`, opts)}
 ${paletteStyle(def)}
 <script type="module" src="${`${kits}/motion/${v.motion}/sf-motion.js`}"></script>
 ${hasCommerce ? html`<script type="module" src="${`${kits}/commerce/${v.commerce}/sf-commerce.js`}"></script>
@@ -107,6 +111,15 @@ ${footer(def, ctxBase)}
 </body>
 </html>
 `.value;
+}
+
+/** A stylesheet, written into the page when its text was given (addresses inside it, like fonts,
+ *  are made to point next to where the file lives), otherwise linked. */
+function stylesheet(href: string, opts: RenderOptions): Raw {
+  const css = opts.styles?.[href];
+  if (css === undefined) return html`<link rel="stylesheet" href="${href}">`;
+  const dir = href.slice(0, href.lastIndexOf('/') + 1);
+  return raw(`<style>${css.replace(/url\((['"]?)\.\//g, `url($1${dir}`).replace(/<\/style/gi, '<\\/style')}</style>`);
 }
 
 function header(def: SiteDefT, page: Page, ctx: { base: string }): Raw {

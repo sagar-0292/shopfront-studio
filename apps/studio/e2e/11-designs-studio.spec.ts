@@ -7,12 +7,12 @@ test.beforeAll(async () => {
   await sql(`update sites set design_direction = null where name = 'Mithai Market'`);
 });
 
-test('the Designs page shows all six looks with live previews', async ({ page }) => {
+test('the Designs page shows all seven looks with live previews', async ({ page }) => {
   await logIn(page, 'tanvi@mumbai-studio.test');
   await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Designs' }).click();
   await expect(page.getByRole('heading', { name: 'Designs', level: 1 })).toBeVisible();
   const list = page.getByRole('list', { name: 'Design directions' });
-  for (const name of ['Editorial luxury', 'Bold & vibrant', 'Dark & cinematic', 'Warm & crafted', 'Street poster', 'Quiet luxury']) {
+  for (const name of ['Editorial luxury', 'Bold & vibrant', 'Dark & cinematic', 'Warm & crafted', 'Street poster', 'Quiet luxury', 'Colour block']) {
     await expect(list.getByRole('heading', { name, level: 2 })).toBeVisible();
   }
   // Each preview really shows its sample website, on a computer and on a phone.

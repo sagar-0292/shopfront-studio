@@ -779,6 +779,216 @@
   },
   "from": "pexels:34013239:1.3333:400,700,1000:\"attention\":72"
  },
+ "kulfi-club/berry-bars": {
+  "src": "/img/berry-bars-800.webp",
+  "srcset": "/img/berry-bars-400.webp 400w, /img/berry-bars-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Berry ice lollies on a plate with ice cubes",
+  "credit": {
+   "provider": "pexels",
+   "id": "39705761",
+   "photographer": "Jahra Tasfia Reza",
+   "photographerUrl": "https://www.pexels.com/@jahratreza",
+   "pageUrl": "https://www.pexels.com/photo/close-up-of-berry-popsicles-with-ice-cubes-39705761/"
+  },
+  "from": "pexels:39705761:1.0000:400,800:\"attention\":72"
+ },
+ "kulfi-club/cart": {
+  "src": "/img/cart-1000.webp",
+  "srcset": "/img/cart-400.webp 400w, /img/cart-700.webp 700w, /img/cart-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "A kulfi seller serving from a painted cart",
+  "credit": {
+   "provider": "pexels",
+   "id": "38678811",
+   "photographer": "Amjad ali",
+   "photographerUrl": "https://www.pexels.com/@sahaab",
+   "pageUrl": "https://www.pexels.com/photo/traditional-kulfi-vendor-in-mingora-street-38678811/"
+  },
+  "from": "pexels:38678811:0.8000:400,700,1000:\"attention\":72"
+ },
+ "kulfi-club/cone-blue": {
+  "src": "/img/cone-blue-1000.webp",
+  "srcset": "/img/cone-blue-400.webp 400w, /img/cone-blue-700.webp 700w, /img/cone-blue-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "A hand holding an ice cream cone against a blue wall",
+  "credit": {
+   "provider": "pexels",
+   "id": "9227955",
+   "photographer": "DS stories",
+   "photographerUrl": "https://www.pexels.com/@ds-stories",
+   "pageUrl": "https://www.pexels.com/photo/woman-hand-holding-ice-cream-9227955/"
+  },
+  "from": "pexels:9227955:0.8000:400,700,1000:\"attention\":72"
+ },
+ "kulfi-club/cone-yellow": {
+  "src": "/img/cone-yellow-1000.webp",
+  "srcset": "/img/cone-yellow-400.webp 400w, /img/cone-yellow-700.webp 700w, /img/cone-yellow-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "A blue ice cream cone held up against a yellow wall",
+  "credit": {
+   "provider": "pexels",
+   "id": "8093197",
+   "photographer": "Kindel Media",
+   "photographerUrl": "https://www.pexels.com/@kindelmedia",
+   "pageUrl": "https://www.pexels.com/photo/a-hand-holding-an-ice-cream-8093197/"
+  },
+  "from": "pexels:8093197:0.8000:400,700,1000:\"attention\":72"
+ },
+ "kulfi-club/cones-pink": {
+  "src": "/img/cones-pink-1000.webp",
+  "srcset": "/img/cones-pink-400.webp 400w, /img/cones-pink-700.webp 700w, /img/cones-pink-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Two hands holding strawberry ice cream cones",
+  "credit": {
+   "provider": "pexels",
+   "id": "5061027",
+   "photographer": "ROMAN ODINTSOV",
+   "photographerUrl": "https://www.pexels.com/@roman-odintsov",
+   "pageUrl": "https://www.pexels.com/photo/people-holding-strawberry-ice-cream-in-cone-5061027/"
+  },
+  "from": "pexels:5061027:0.8000:400,700,1000:\"attention\":72"
+ },
+ "kulfi-club/falooda": {
+  "src": "/img/falooda-1000.webp",
+  "srcset": "/img/falooda-400.webp 400w, /img/falooda-700.webp 700w, /img/falooda-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "A glass of falooda with rose syrup and pistachios",
+  "credit": {
+   "provider": "pexels",
+   "id": "18646641",
+   "photographer": "Dreamer Dude",
+   "photographerUrl": "https://www.pexels.com/@dreamer-dude-724231353",
+   "pageUrl": "https://www.pexels.com/photo/persian-cold-dessert-falooda-18646641/"
+  },
+  "from": "pexels:18646641:0.8000:400,700,1000:\"attention\":72"
+ },
+ "kulfi-club/falooda-top": {
+  "src": "/img/falooda-top-800.webp",
+  "srcset": "/img/falooda-top-400.webp 400w, /img/falooda-top-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Falooda from above, topped with pistachios and jelly",
+  "credit": {
+   "provider": "pexels",
+   "id": "18646637",
+   "photographer": "Dreamer Dude",
+   "photographerUrl": "https://www.pexels.com/@dreamer-dude-724231353",
+   "pageUrl": "https://www.pexels.com/photo/top-view-of-a-dessert-with-ice-cream-jelly-and-pistachios-18646637/"
+  },
+  "from": "pexels:18646637:1.0000:400,800:\"attention\":72"
+ },
+ "kulfi-club/fruit-pops": {
+  "src": "/img/fruit-pops-800.webp",
+  "srcset": "/img/fruit-pops-400.webp 400w, /img/fruit-pops-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Fruit ice lollies with slices of orange, kiwi and watermelon",
+  "credit": {
+   "provider": "pexels",
+   "id": "8678930",
+   "photographer": "sha ima",
+   "photographerUrl": "https://www.pexels.com/@shaimacapture",
+   "pageUrl": "https://www.pexels.com/photo/slices-of-fruits-and-colorful-popsicles-on-white-surface-8678930/"
+  },
+  "from": "pexels:8678930:1.0000:400,800:\"attention\":72"
+ },
+ "kulfi-club/hero": {
+  "src": "/img/hero-2000.webp",
+  "srcset": "/img/hero-640.webp 640w, /img/hero-1000.webp 1000w, /img/hero-1400.webp 1400w, /img/hero-2000.webp 2000w",
+  "width": 2000,
+  "height": 1250,
+  "alt": "Four hands holding ice cream cones against a bright yellow wall",
+  "credit": {
+   "provider": "pexels",
+   "id": "8093182",
+   "photographer": "Kindel Media",
+   "photographerUrl": "https://www.pexels.com/@kindelmedia",
+   "pageUrl": "https://www.pexels.com/photo/ice-creams-on-cones-8093182/"
+  },
+  "from": "pexels:8093182:1.6000:640,1000,1400,2000:\"attention\":72"
+ },
+ "kulfi-club/kesar-kulfi": {
+  "src": "/img/kesar-kulfi-1000.webp",
+  "srcset": "/img/kesar-kulfi-400.webp 400w, /img/kesar-kulfi-700.webp 700w, /img/kesar-kulfi-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Hands holding kesar kulfi in clay pots",
+  "credit": {
+   "provider": "pexels",
+   "id": "12295184",
+   "photographer": "Tejas",
+   "photographerUrl": "https://www.pexels.com/@tejas-145996133",
+   "pageUrl": "https://www.pexels.com/photo/people-holding-desserts-in-cups-12295184/"
+  },
+  "from": "pexels:12295184:0.8000:400,700,1000:\"attention\":72"
+ },
+ "kulfi-club/mango-kulfi": {
+  "src": "/img/mango-kulfi-800.webp",
+  "srcset": "/img/mango-kulfi-400.webp 400w, /img/mango-kulfi-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Mango kulfi on sticks with pistachios and fresh mango",
+  "credit": {
+   "provider": "pexels",
+   "id": "32676071",
+   "photographer": "Pexels User",
+   "photographerUrl": "https://www.pexels.com/@pexels-user-2153346719",
+   "pageUrl": "https://www.pexels.com/photo/delicious-mango-kulfi-popsicles-with-pistachio-32676071/"
+  },
+  "from": "pexels:32676071:1.0000:400,800:\"attention\":72"
+ },
+ "kulfi-club/orange-bars": {
+  "src": "/img/orange-bars-800.webp",
+  "srcset": "/img/orange-bars-400.webp 400w, /img/orange-bars-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Four orange ice lollies on a dark plate",
+  "credit": {
+   "provider": "pexels",
+   "id": "39798735",
+   "photographer": "Jahra Tasfia Reza",
+   "photographerUrl": "https://www.pexels.com/@jahratreza",
+   "pageUrl": "https://www.pexels.com/photo/orange-popsicles-arranged-on-a-dark-plate-39798735/"
+  },
+  "from": "pexels:39798735:1.0000:400,800:\"attention\":72"
+ },
+ "kulfi-club/pista": {
+  "src": "/img/pista-800.webp",
+  "srcset": "/img/pista-400.webp 400w, /img/pista-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Scoops of pista ice cream with almonds and pistachios",
+  "credit": {
+   "provider": "pexels",
+   "id": "36576781",
+   "photographer": "Kunal Lakhotia",
+   "photographerUrl": "https://www.pexels.com/@kunal-lakhotia-781256899",
+   "pageUrl": "https://www.pexels.com/photo/delicious-ice-cream-with-mixed-nuts-on-wooden-board-36576781/"
+  },
+  "from": "pexels:36576781:1.0000:400,800:\"attention\":72"
+ },
+ "kulfi-club/rose-bars": {
+  "src": "/img/rose-bars-800.webp",
+  "srcset": "/img/rose-bars-400.webp 400w, /img/rose-bars-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Two pink ice lollies with icing on a bed of ice",
+  "credit": {
+   "provider": "pexels",
+   "id": "38453274",
+   "photographer": "Jahra Tasfia Reza",
+   "photographerUrl": "https://www.pexels.com/@jahratreza",
+   "pageUrl": "https://www.pexels.com/photo/close-up-of-pink-popsicles-on-ice-background-38453274/"
+  },
+  "from": "pexels:38453274:1.0000:400,800:\"attention\":72"
+ },
  "mithai-market/assorted": {
   "src": "/img/assorted-1000.webp",
   "srcset": "/img/assorted-400.webp 400w, /img/assorted-700.webp 700w, /img/assorted-1000.webp 1000w",
@@ -1032,7 +1242,7 @@
    "photographerUrl": "https://www.pexels.com/@bliss",
    "pageUrl": "https://www.pexels.com/photo/serene-tropical-beach-with-palm-trees-36698095/"
   },
-  "from": "pexels:36698095:0.8000:400,700,1000:\"attention\":72"
+  "from": "pexels:36698095:0.8000:400,700,1000:\"attention\":60"
  },
  "saltwater/bed": {
   "src": "/img/bed-1000.webp",
@@ -1062,7 +1272,7 @@
    "photographerUrl": "https://www.pexels.com/@souranshi-fashion-and-lifestyle-magazine-2959920",
    "pageUrl": "https://www.pexels.com/photo/outdoor-patio-with-brown-wicker-furniture-sofa-set-4497545/"
   },
-  "from": "pexels:4497545:1.2500:480,800,1200:\"attention\":72"
+  "from": "pexels:4497545:1.2500:480,800,1200:\"attention\":60"
  },
  "saltwater/coast": {
   "src": "/img/coast-1200.webp",
@@ -1092,7 +1302,7 @@
    "photographerUrl": "https://www.pexels.com/@justyna-grochowska-105199216",
    "pageUrl": "https://www.pexels.com/photo/a-cup-of-coffee-on-linen-9502859/"
   },
-  "from": "pexels:9502859:0.8000:400,700,1000:\"attention\":72"
+  "from": "pexels:9502859:0.8000:400,700,1000:\"attention\":60"
  },
  "saltwater/dinner": {
   "src": "/img/dinner-1000.webp",
@@ -1137,7 +1347,7 @@
    "photographerUrl": "https://www.pexels.com/@casa-lalla-takerkoust-2150099384",
    "pageUrl": "https://www.pexels.com/photo/charming-outdoor-patio-in-moroccan-villa-31111359/"
   },
-  "from": "pexels:31111359:1.2500:480,800,1200:\"attention\":72"
+  "from": "pexels:31111359:1.2500:480,800,1200:\"attention\":60"
  },
  "saltwater/pool": {
   "src": "/img/pool-1000.webp",
@@ -1197,7 +1407,7 @@
    "photographerUrl": "https://www.pexels.com/@burkaycanatar",
    "pageUrl": "https://www.pexels.com/photo/canon-palma-de-mallorca-28243788/"
   },
-  "from": "pexels:28243788:0.8000:400,700,1000:\"attention\":72"
+  "from": "pexels:28243788:0.8000:400,700,1000:\"attention\":60"
  },
  "saltwater/yoga": {
   "src": "/img/yoga-1000.webp",
@@ -1212,7 +1422,7 @@
    "photographerUrl": "https://www.pexels.com/@rachid-bendhiba-2151490392",
    "pageUrl": "https://www.pexels.com/photo/serene-yoga-deck-overlooking-moroccan-coast-36895637/"
   },
-  "from": "pexels:36895637:0.8000:400,700,1000:\"attention\":72"
+  "from": "pexels:36895637:0.8000:400,700,1000:\"attention\":60"
  },
  "tapri/break": {
   "src": "/img/break-1000.webp",

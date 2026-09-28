@@ -8,6 +8,7 @@ export const DEFAULTS: Record<Direction, Colours> = {
   cinematic: { bg: '#0b0b0c', surface: '#151517', ink: '#f4f1ea', muted: '#a39f97', accent: '#ff5a1f', accentInk: '#0b0b0c', invertBg: '#f4f1ea', invertAccent: '#c2410c', pop: '#ffb347', popInk: '#0b0b0c' },
   crafted: { bg: '#f3e8d6', surface: '#fbf5ea', ink: '#3b2a1e', muted: '#6f5a47', accent: '#a8481f', accentInk: '#fff8ee', invertBg: '#3b2a1e', invertAccent: '#e8a06a', pop: '#5f6f2f', popInk: '#fbf5ea' },
   poster: { bg: '#f4efe6', surface: '#ffffff', ink: '#141210', muted: '#57524b', accent: '#c8321a', accentInk: '#ffffff', invertBg: '#1e3bd6', invertAccent: '#ffd23f', pop: '#ffd23f', popInk: '#141210' },
+  block: { bg: '#fff4e0', surface: '#ffffff', ink: '#151313', muted: '#3d3834', accent: '#151313', accentInk: '#fff4e0', invertBg: '#151313', invertAccent: '#c6f24e', pop: '#c6f24e', popInk: '#151313' },
   quiet: { bg: '#f1eee8', surface: '#faf8f4', ink: '#161513', muted: '#625e57', accent: '#34422f', accentInk: '#f1eee8', invertBg: '#161513', invertAccent: '#cfd8c4', pop: '#d6e3d0', popInk: '#161513' },
 };
 

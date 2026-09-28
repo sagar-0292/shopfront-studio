@@ -1,10 +1,10 @@
-# Designs: six looks, one page builder
+# Designs: seven looks, one page builder
 
 Every client website is built from a **page description** (a small, checked JSON file) by the
 **design kit** (`packages/design-kit`). The AI Builder (Phase 3) will write these descriptions; a person can
 edit them too. The kit turns a description into finished pages that already meet our quality bar.
 
-## The six design directions
+## The seven design directions
 
 | Direction | Feels like | Type | Colours | Sample |
 |---|---|---|---|---|
@@ -14,13 +14,16 @@ edit them too. The kit turns a description into finished pages that already meet
 | Warm & crafted | A handmade label | Fraunces + Karla | Kraft paper, terracotta, olive | Bandra Bake House (bakery) — `/kits/sites/bandra-bake-house` |
 | Street poster | A gig poster | Anton + Archivo | Tomato red, cobalt, yellow, black | Tapri (chai bar) — `/kits/sites/tapri` |
 | Quiet luxury | A gallery | Instrument Serif + Inter Tight | Stone, bone white, sage | Saltwater (villa stay) — `/kits/sites/saltwater` |
+| Colour block | A sticker sheet | Mona Sans (stretches narrow to extra-wide) | A new flat colour per section on a dark frame | Kulfi Club (kulfi parlour) — `/kits/sites/kulfi-club` |
 
 All fonts are open-source and hosted with the site (no Google requests from visitors' phones). Each font has
 a size-matched stand-in, so text doesn't jump when the real font arrives.
 
-The last two (design kit 1.2.0) came from studying award-winning sites: DIKO and Flying Papers (the name as a
+The last three (design kit 1.2.0) came from studying award-winning sites: DIKO and Flying Papers (the name as a
 poster), MORAL and Pebble (giant type over photography, announcement bar), Fabric and agency sites (big
-typographic lists), Lusion and Teenage Engineering (sideways motion), and this month's luxury Awwwards winners.
+typographic lists), Lusion and Teenage Engineering (sideways motion), this month's luxury Awwwards winners, and
+for Colour block: DIKO and Mode (flat colour panels, photos cut into ovals, arches and notches, text round a
+turning badge) and GitHub's Mona Sans (type that stretches wider as the name scrolls away).
 
 ## Sections
 Hero (split, full-bleed, typographic, collage, wordmark — the name edge to edge over a big photo), marquee, statement, products, categories, sideways-scrolling
@@ -52,12 +55,14 @@ Headlines can mark a highlighted word with `*asterisks*`: `"Bread worth *waking 
   art and catalogues come from `packages/demo/tools/make-sites.mjs`.
 - `pnpm kits:release` builds the design kit (one CSS file per direction, fonts, frozen `render.mjs`) into
   `apps/studio/kits/design/<version>/` and renders the sample sites into `apps/studio/kits/sites/`.
+- Styles are written into each page (`renderSite(def, { styles })`), so a phone can draw the first screen without
+  waiting for a stylesheet; fonts still load from the kit, which browsers cache.
 - Fonts: `pnpm --filter @shopfront/design-kit fonts` downloads them and measures the stand-ins.
 - Tests: `pnpm test:kits` (renderer: escaping, links, colours, schema), e2e `10-designs` (each site in a
   real browser, 360px phones, animations off, cart, booking, menu, links) and `08-lighthouse` (90+ on phones).
 
 ## In the studio
-- **Designs** (side menu) shows all six looks with live previews of each sample site on a computer and a
+- **Designs** (side menu) shows all seven looks with live previews of each sample site on a computer and a
   phone, what each suits, its fonts and colours, and how many of your projects use it.
 - On a project, the **Design** card is where the team picks the look. Anyone in the agency can choose it;
   business owners can't change it. The website's design-kit version is shown with the other kits and, like

@@ -1,0 +1,422 @@
+{
+  "direction": "block",
+  "site": {
+    "id": "sample-kulfi-club",
+    "name": "Kulfi Club",
+    "tagline": "Kulfi, falooda and fruit lollies. Chapel Road, Bandra, since 1978.",
+    "description": "Kulfi Club is a kulfi and falooda parlour on Chapel Road, Bandra West, Mumbai: slow-reduced kulfi, rose falooda, real-fruit lollies and boxes delivered across the city.",
+    "phone": "+912226401978",
+    "whatsapp": "+919820011978",
+    "email": "hello@kulficlub.example",
+    "address": {
+      "street": "22 Chapel Road",
+      "area": "Bandra West",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400050"
+    },
+    "hours": [
+      {
+        "days": "Mon – Sun",
+        "open": "12:00",
+        "close": "00:00"
+      }
+    ],
+    "businessType": "IceCreamShop",
+    "sampleNotice": "This is a sample website made by Shopfront Studio to show the Colour block design. Kulfi Club, its flavours and prices are illustrative."
+  },
+  "announcement": {
+    "text": "Kulfi boxes delivered frozen across Mumbai, free over ₹799",
+    "href": "/shop/"
+  },
+  "nav": [
+    {
+      "label": "Shop",
+      "href": "/shop/"
+    },
+    {
+      "label": "The counter",
+      "href": "/#menu"
+    },
+    {
+      "label": "Parties",
+      "href": "/#parties"
+    },
+    {
+      "label": "Visit",
+      "href": "/#visit"
+    }
+  ],
+  "commerce": {
+    "source": {
+      "type": "json",
+      "url": "/data/catalog.json"
+    },
+    "delivery": {
+      "fee_paise": 7900,
+      "free_above_paise": 79900
+    },
+    "payments": {
+      "whatsapp": true,
+      "upi": {
+        "vpa": "kulficlub@okhdfcbank",
+        "name": "Kulfi Club"
+      },
+      "cod": {
+        "max_paise": 300000
+      }
+    }
+  },
+  "pages": [
+    {
+      "path": "/",
+      "title": "Kulfi Club — Kulfi & falooda parlour in Bandra, Mumbai",
+      "description": "Slow-reduced kulfi, rose falooda and real-fruit lollies on Chapel Road, Bandra, since 1978. Order kulfi boxes delivered frozen across Mumbai.",
+      "sections": [
+        {
+          "type": "hero",
+          "variant": "wordmark",
+          "eyebrow": "Kulfi & falooda · Bandra West",
+          "headline": "Cold, sweet and *very* Bombay",
+          "lede": "Milk reduced for six hours, set in clay pots, served on Chapel Road since 1978. Now in boxes, delivered frozen.",
+          "ctas": [
+            {
+              "label": "Order a kulfi box",
+              "href": "/shop/"
+            },
+            {
+              "label": "Find the parlour",
+              "href": "#visit"
+            }
+          ],
+          "media": {
+            "image": {
+              "$photo": "kulfi-club/hero"
+            }
+          },
+          "sticker": "Since 1978"
+        },
+        {
+          "type": "marquee",
+          "items": [
+            "Kesar pista",
+            "Mango",
+            "Rose falooda",
+            "Sitaphal",
+            "Malai",
+            "Kala khatta"
+          ],
+          "speed": 60
+        },
+        {
+          "type": "products",
+          "eyebrow": "Delivered frozen",
+          "title": "Kulfi *boxes*",
+          "featured": true,
+          "limit": 4,
+          "link": {
+            "label": "See everything",
+            "href": "/shop/"
+          }
+        },
+        {
+          "type": "rows",
+          "eyebrow": "How it's made",
+          "title": "Slow milk, *fast* spoons",
+          "items": [
+            {
+              "eyebrow": "Six hours",
+              "title": "Milk, *reduced*",
+              "text": "Full-cream milk simmers in a wide kadhai until only a third is left, thick, sweet and faintly caramel.",
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/kesar-kulfi"
+                }
+              }
+            },
+            {
+              "eyebrow": "Every Sunday",
+              "title": "Out on the *cart*",
+              "text": "Our painted cart parks on Carter Road from 5 pm, the way Dadaji sold it in 1978.",
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/cart"
+                }
+              }
+            },
+            {
+              "eyebrow": "Rose, sabja, kulfi",
+              "title": "Falooda, *properly*",
+              "text": "Rose syrup, soaked sabja seeds, thin vermicelli, cold milk and a whole kulfi on top.",
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/falooda"
+                }
+              },
+              "link": {
+                "label": "Get the falooda kit",
+                "href": "/shop/"
+              }
+            }
+          ]
+        },
+        {
+          "type": "photostrip",
+          "items": [
+            {
+              "image": {
+                "$photo": "kulfi-club/fruit-pops"
+              }
+            },
+            {
+              "image": {
+                "$photo": "kulfi-club/rose-bars"
+              }
+            },
+            {
+              "image": {
+                "$photo": "kulfi-club/orange-bars"
+              }
+            },
+            {
+              "image": {
+                "$photo": "kulfi-club/berry-bars"
+              }
+            },
+            {
+              "image": {
+                "$photo": "kulfi-club/cone-yellow"
+              }
+            },
+            {
+              "image": {
+                "$photo": "kulfi-club/cone-blue"
+              }
+            },
+            {
+              "image": {
+                "$photo": "kulfi-club/cones-pink"
+              }
+            },
+            {
+              "image": {
+                "$photo": "kulfi-club/pista"
+              }
+            }
+          ],
+          "speed": 45
+        },
+        {
+          "type": "index",
+          "anchor": "menu",
+          "eyebrow": "At the parlour",
+          "title": "The *counter*",
+          "items": [
+            {
+              "title": "Kesar pista kulfi",
+              "meta": "₹80",
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/kesar-kulfi"
+                }
+              }
+            },
+            {
+              "title": "Mango kulfi",
+              "meta": "₹90 · summer",
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/mango-kulfi"
+                }
+              }
+            },
+            {
+              "title": "Rose falooda",
+              "meta": "₹160",
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/falooda"
+                }
+              }
+            },
+            {
+              "title": "Pista scoop",
+              "meta": "₹120",
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/pista"
+                }
+              }
+            },
+            {
+              "title": "Fruit lollies",
+              "meta": "₹60 · order online",
+              "href": "/shop/",
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/fruit-pops"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "reel",
+          "eyebrow": "Scoops and lollies",
+          "title": "Pick a *colour*",
+          "items": [
+            {
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/cone-yellow"
+                }
+              },
+              "title": "Blue malai scoop",
+              "text": "In a waffle cone made that morning."
+            },
+            {
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/cones-pink"
+                }
+              },
+              "title": "Strawberry, twice",
+              "text": "Two scoops, two cones, one Sunday."
+            },
+            {
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/orange-bars"
+                }
+              },
+              "title": "Orange lollies",
+              "text": "Squeezed Nagpur oranges, nothing else."
+            },
+            {
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/berry-bars"
+                }
+              },
+              "title": "Berry lollies",
+              "text": "Tart, deep red and very cold."
+            },
+            {
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/cone-blue"
+                }
+              },
+              "title": "Vanilla malai",
+              "text": "The one grandparents order."
+            }
+          ]
+        },
+        {
+          "type": "stats",
+          "items": [
+            {
+              "value": "1978",
+              "label": "Chapel Road, since"
+            },
+            {
+              "value": "14",
+              "label": "flavours in season"
+            },
+            {
+              "value": "6 hrs",
+              "label": "to reduce the milk"
+            }
+          ]
+        },
+        {
+          "type": "pinned",
+          "anchor": "parties",
+          "eyebrow": "Parties & weddings",
+          "title": "Bring the *cart*",
+          "text": "A kulfi cart and two of our team at your mehendi, office party or birthday, anywhere in Mumbai.",
+          "cta": {
+            "label": "Ask on WhatsApp",
+            "href": "https://wa.me/919820011978"
+          },
+          "items": [
+            {
+              "title": "The kulfi *cart*",
+              "text": "Painted, lit and stocked with six flavours for 100 to 500 guests.",
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/cart"
+                }
+              }
+            },
+            {
+              "title": "Boxes of *fifty*",
+              "text": "Kulfi sticks packed in dry ice, delivered to your door the same day.",
+              "media": {
+                "image": {
+                  "$photo": "kulfi-club/mango-kulfi"
+                }
+              }
+            },
+            {
+              "title": "Falooda *bar*",
+              "text": "A counter where guests build their own falooda. Very popular at sangeets."
+            }
+          ]
+        },
+        {
+          "type": "faq",
+          "title": "Good *questions*",
+          "items": [
+            {
+              "q": "How do the boxes stay frozen?",
+              "a": "We pack them in insulated bags with dry ice. They stay frozen for four hours, so put them straight in the freezer when they arrive."
+            },
+            {
+              "q": "Is your kulfi eggless?",
+              "a": "Yes. Everything we make is vegetarian and eggless. The rose lollies contain white chocolate."
+            },
+            {
+              "q": "Do you deliver outside Mumbai?",
+              "a": "Not yet. We deliver across Mumbai and Thane, free on orders over ₹799."
+            }
+          ]
+        },
+        {
+          "type": "contact",
+          "eyebrow": "Visit",
+          "title": "22 *Chapel Road*",
+          "media": {
+            "image": {
+              "$photo": "kulfi-club/falooda-top"
+            }
+          }
+        },
+        {
+          "type": "cta",
+          "eyebrow": "Hot day?",
+          "headline": "Kulfi's *on us*... almost",
+          "ctas": [
+            {
+              "label": "Order a box",
+              "href": "/shop/"
+            }
+          ],
+          "tone": "pop"
+        }
+      ]
+    },
+    {
+      "path": "/shop/",
+      "title": "Shop kulfi boxes",
+      "description": "Kulfi boxes, falooda kits and fruit lollies from Kulfi Club, Bandra, delivered frozen across Mumbai. Free delivery over ₹799.",
+      "sections": [
+        {
+          "type": "shop",
+          "eyebrow": "Delivered frozen",
+          "title": "Kulfi to your *door*"
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 // edit. Everything is validated before a page is built.
 import { z } from 'zod';
 
-export const DIRECTIONS = ['editorial', 'bold', 'cinematic', 'crafted', 'poster', 'quiet'] as const;
+export const DIRECTIONS = ['editorial', 'bold', 'cinematic', 'crafted', 'poster', 'quiet', 'block'] as const;
 export type Direction = (typeof DIRECTIONS)[number];
 export const OBJECTS = ['ring', 'gem', 'knot', 'blob', 'cup', 'orbit', 'stack'] as const;
 
