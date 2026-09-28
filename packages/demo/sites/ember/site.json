@@ -100,7 +100,7 @@
             "Two tandoors",
             "Wood oven"
           ],
-          "tone": "surface"
+          "backdrop": "glow"
         },
         {
           "type": "bento",
@@ -160,7 +160,8 @@
               "size": "wide",
               "tone": "surface"
             }
-          ]
+          ],
+          "backdrop": "grid"
         },
         {
           "type": "menu",
@@ -202,7 +203,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "backdrop": "dark"
         },
         {
           "type": "rows",
@@ -268,7 +270,8 @@
               "q": "Is there a dress code?",
               "a": "Smart casual. We'd just like you to be comfortable."
             }
-          ]
+          ],
+          "backdrop": "grid"
         },
         {
           "type": "contact",
@@ -278,7 +281,8 @@
             "image": {
               "$photo": "ember/interior"
             }
-          }
+          },
+          "backdrop": "dusk"
         },
         {
           "type": "cta",
@@ -403,7 +407,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "backdrop": "dark"
         },
         {
           "type": "cta",

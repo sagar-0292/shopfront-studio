@@ -26,7 +26,7 @@
 
 /* Every block on the page is a panel with its own colour. Text on each colour is checked for contrast. */
 .d-block main > *, .d-block .d-footer { margin: var(--gap); border-radius: var(--panel-radius); overflow: clip; }
-.d-block main > * { background: var(--c-bg); color: var(--c-ink);
+.d-block main > * { background-color: var(--c-bg); color: var(--c-ink);
   --c-muted: var(--c-ink); --c-accent: #151313; --c-accent-ink: var(--c-bg); --c-line: color-mix(in srgb, var(--c-ink) 22%, transparent);
   --c-surface: color-mix(in srgb, #ffffff 55%, var(--c-bg)); }
 .d-block main > :nth-child(7n+1) { --c-bg: #e8412c; }

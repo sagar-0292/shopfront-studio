@@ -8,7 +8,7 @@
   --display-weight: 700; --display-tracking: -0.01em; --display-leading: 0.95; --display-case: uppercase;
   --eyebrow-tracking: 0.4em; --radius-card: 14px; --radius-btn: 999px; --radius-media: 14px;
   --section-pad: clamp(88px, 12vw, 170px); --hero-scale: 1;
-  color-scheme: dark;
+  color-scheme: dark; --bd-mix: 18%;
 }
 .d-cinematic body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1000; opacity: 0.07; mix-blend-mode: overlay; background-image: var(--grain); }
 .d-cinematic .d-display em { font-style: normal; color: var(--c-accent); }

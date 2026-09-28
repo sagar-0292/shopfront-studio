@@ -200,7 +200,8 @@
                 }
               }
             }
-          ]
+          ],
+          "backdrop": "grid"
         },
         {
           "type": "index",
@@ -254,7 +255,8 @@
                 }
               }
             }
-          ]
+          ],
+          "backdrop": "pop"
         },
         {
           "type": "products",
@@ -265,7 +267,8 @@
           "link": {
             "label": "See the shop",
             "href": "/shop/"
-          }
+          },
+          "backdrop": "dots"
         },
         {
           "type": "pinned",
@@ -276,7 +279,6 @@
             "label": "Order a blend",
             "href": "/shop/"
           },
-          "tone": "invert",
           "items": [
             {
               "title": "Brewed to *order*",
@@ -305,7 +307,8 @@
                 }
               }
             }
-          ]
+          ],
+          "backdrop": "accent"
         },
         {
           "type": "reel",
@@ -348,7 +351,8 @@
               "title": "Bandra",
               "text": "Near the station, till 1 am."
             }
-          ]
+          ],
+          "backdrop": "glow"
         },
         {
           "type": "faq",
@@ -366,7 +370,8 @@
               "q": "Is there sugar-free chai?",
               "a": "Ask at the counter. We brew it without sugar and you add jaggery or nothing at all."
             }
-          ]
+          ],
+          "backdrop": "dots"
         },
         {
           "type": "contact",
@@ -399,5 +404,14 @@
         }
       ]
     }
-  ]
+  ],
+  "palette": {
+    "bg": "#1e3bd6",
+    "surface": "#2743d9",
+    "ink": "#f4efe6",
+    "muted": "#dde2fa",
+    "line": "#4a63e3",
+    "accent": "#ffd23f",
+    "accentInk": "#141210"
+  }
 }

@@ -82,7 +82,8 @@
             "image": {
               "$photo": "aranya/hero"
             }
-          }
+          },
+          "backdrop": "glow"
         },
         {
           "type": "marquee",
@@ -103,7 +104,8 @@
             "Three generations",
             "Twelve karigars",
             "One workshop"
-          ]
+          ],
+          "backdrop": "dots"
         },
         {
           "type": "categories",
@@ -210,7 +212,8 @@
                 "href": "#book"
               }
             }
-          ]
+          ],
+          "backdrop": "sky"
         },
         {
           "type": "stats",
@@ -236,7 +239,8 @@
           "title": "A private *viewing*",
           "text": "Sit with us at the atelier, try pieces on in natural light, and talk through a commission. There is no charge and no obligation.",
           "service": "viewing",
-          "days": 14
+          "days": 14,
+          "backdrop": "grid"
         },
         {
           "type": "faq",
@@ -269,7 +273,8 @@
             "image": {
               "$photo": "aranya/bride"
             }
-          }
+          },
+          "backdrop": "dusk"
         },
         {
           "type": "cta",
@@ -281,7 +286,7 @@
               "href": "#book"
             }
           ],
-          "tone": "invert"
+          "backdrop": "accent"
         }
       ]
     },
@@ -308,5 +313,14 @@
         }
       ]
     }
-  ]
+  ],
+  "palette": {
+    "bg": "#0f2f25",
+    "surface": "#143a2e",
+    "ink": "#f3ead9",
+    "muted": "#c8bda6",
+    "line": "#2b4b3f",
+    "accent": "#d4b26a",
+    "accentInk": "#0f2f25"
+  }
 }

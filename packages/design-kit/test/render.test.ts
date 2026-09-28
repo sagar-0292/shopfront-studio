@@ -247,6 +247,27 @@ describe('renderSite', () => {
     expect(out).toContain('<link rel="stylesheet" href="/kits/motion/1.0.0/sf-motion.css">');
   });
 
+  it('gives any section a backdrop drawn in CSS, and refuses made-up ones', () => {
+    const def = everything('editorial');
+    (def.pages as { sections: Record<string, unknown>[] }[])[0].sections = [
+      { type: 'statement', text: 'Glow', backdrop: 'glow' },
+      { type: 'marquee', items: ['A', 'B'], backdrop: 'grid' },
+      { type: 'faq', title: 'Q', items: [{ q: 'a', a: 'b' }], backdrop: 'pop' },
+      { type: 'cta', headline: 'Go', ctas: [{ label: 'Go', href: '#' }], tone: 'invert', backdrop: 'sky' },
+    ];
+    def.palette = { bg: '#0f2f25', surface: '#143a2e', ink: '#f3ead9', muted: '#c8bda6', accent: '#d4b26a', accentInk: '#0f2f25' };
+    const out = renderSite(def, V)['/index.html'];
+    const d = doc(out);
+    expect(d.querySelector('.d-statement')!.className).toMatch(/^d-bd d-bd--glow d-section/);
+    expect(d.querySelector('.d-marquee')!.classList.contains('d-bd--grid')).toBe(true);
+    expect(d.querySelector('#s2')!.classList.contains('d-block--pop')).toBe(true);
+    expect(d.querySelector('.d-cta')!.classList.contains('d-bd--sky')).toBe(true);
+    // A dark page tints its gradients more gently.
+    expect(out).toContain('--bd-mix:18%');
+    (def.pages as { sections: Record<string, unknown>[] }[])[0].sections = [{ type: 'statement', text: 'x', backdrop: 'neon' }];
+    expect(() => renderSite(def, V)).toThrow(/backdrop/);
+  });
+
   it('refuses custom colours that are hard to read', () => {
     expect(checkPalette('editorial', { ink: '#cccccc' })[0]).toMatch(/Main text on the page background is too faint/);
     expect(checkPalette('editorial', { accent: '#123456' })).toEqual([]);

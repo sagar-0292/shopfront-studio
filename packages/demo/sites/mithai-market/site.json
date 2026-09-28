@@ -102,7 +102,8 @@
                 "$photo": "mithai-market/gulab-jamun"
               }
             }
-          ]
+          ],
+          "backdrop": "glow"
         },
         {
           "type": "marquee",
@@ -124,7 +125,8 @@
           "link": {
             "label": "Shop everything",
             "href": "/shop/"
-          }
+          },
+          "backdrop": "dots"
         },
         {
           "type": "bento",
@@ -180,7 +182,8 @@
               "tone": "accent",
               "size": "wide"
             }
-          ]
+          ],
+          "backdrop": "grid"
         },
         {
           "type": "categories",
@@ -214,7 +217,8 @@
                 }
               }
             }
-          ]
+          ],
+          "backdrop": "pop"
         },
         {
           "type": "rows",
@@ -243,7 +247,8 @@
                 }
               }
             }
-          ]
+          ],
+          "backdrop": "dark"
         },
         {
           "type": "booking",
@@ -251,7 +256,8 @@
           "title": "Book a free *tasting*",
           "text": "Planning a wedding, a pooja or corporate Diwali gifts? Come taste with us and we'll plan the boxes together.",
           "service": "tasting",
-          "days": 10
+          "days": 10,
+          "backdrop": "sky"
         },
         {
           "type": "faq",
@@ -279,7 +285,8 @@
             "image": {
               "$photo": "mithai-market/soan-papdi"
             }
-          }
+          },
+          "backdrop": "grid"
         },
         {
           "type": "cta",
@@ -316,5 +323,14 @@
         }
       ]
     }
-  ]
+  ],
+  "palette": {
+    "bg": "#5d58a0",
+    "surface": "#4c4790",
+    "ink": "#fff6e5",
+    "muted": "#e6e0fa",
+    "line": "#7a75b8",
+    "accent": "#ffd166",
+    "accentInk": "#22061f"
+  }
 }

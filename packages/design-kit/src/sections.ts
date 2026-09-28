@@ -83,7 +83,16 @@ export const CARD_TEMPLATE = `<template data-sf-card>
   </article>
 </template>`;
 
+const BACKDROP_CLASS: Record<string, string> = { accent: 'd-block--accent', pop: 'd-block--pop', dark: 'd-section--invert' };
+/** A section with its backdrop: the class goes on the section's own outer element. */
 export function section(s: SectionT, ctx: Ctx): Raw {
+  const out = sectionInner(s, ctx);
+  if (!s.backdrop) return out;
+  const c = `d-bd d-bd--${s.backdrop}${BACKDROP_CLASS[s.backdrop] ? ` ${BACKDROP_CLASS[s.backdrop]}` : ''}`;
+  return raw(out.value.replace('class="', `class="${c} `));
+}
+
+function sectionInner(s: SectionT, ctx: Ctx): Raw {
   const mv = MOTION[ctx.dir];
   const id = s.anchor ?? `s${ctx.index}`;
   switch (s.type) {

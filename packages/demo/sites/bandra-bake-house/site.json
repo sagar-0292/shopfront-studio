@@ -96,7 +96,8 @@
               "$photo": "bandra-bake-house/hero"
             }
           },
-          "sticker": "Out of the oven at 7 am"
+          "sticker": "Out of the oven at 7 am",
+          "backdrop": "glow"
         },
         {
           "type": "marquee",
@@ -119,7 +120,8 @@
           "link": {
             "label": "Order everything",
             "href": "/order/"
-          }
+          },
+          "backdrop": "dots"
         },
         {
           "type": "rows",
@@ -161,7 +163,8 @@
                 "href": "/order/"
               }
             }
-          ]
+          ],
+          "backdrop": "dark"
         },
         {
           "type": "bento",
@@ -238,7 +241,7 @@
               "text": "Order by 9 pm and we deliver in Bandra, Khar and Santacruz the next morning."
             }
           ],
-          "tone": "surface"
+          "backdrop": "pop"
         },
         {
           "type": "booking",
@@ -246,7 +249,8 @@
           "title": "Let's design your *cake*",
           "text": "Book a free 30-minute chat at the bakery or on a call. We'll sketch it together and send you a quote the same day.",
           "service": "cake",
-          "days": 12
+          "days": 12,
+          "backdrop": "grid"
         },
         {
           "type": "faq",
@@ -274,7 +278,8 @@
             "image": {
               "$photo": "bandra-bake-house/country-sourdough"
             }
-          }
+          },
+          "backdrop": "dusk"
         },
         {
           "type": "cta",
@@ -312,5 +317,14 @@
         }
       ]
     }
-  ]
+  ],
+  "palette": {
+    "bg": "#f6d77a",
+    "surface": "#fbe9ad",
+    "ink": "#3b2a1e",
+    "muted": "#5f4a38",
+    "line": "#e0bd5a",
+    "accent": "#a8481f",
+    "accentInk": "#fff8ee"
+  }
 }

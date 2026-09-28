@@ -125,7 +125,7 @@ test('the jeweller: book a private viewing on a free slot', async ({ page }) => 
   await expect(booking.getByLabel(/name/i).first()).toBeFocused();
   // The booking widget uses the site's gold, not the studio's colours.
   const accent = await page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--sf-accent').trim());
-  expect(await page.evaluate((v) => { const d = document.createElement('i'); d.style.color = v; document.body.append(d); const c = getComputedStyle(d).color; d.remove(); return c; }, accent)).toBe('rgb(122, 90, 30)');
+  expect(await page.evaluate((v) => { const d = document.createElement('i'); d.style.color = v; document.body.append(d); const c = getComputedStyle(d).color; d.remove(); return c; }, accent)).toBe('rgb(212, 178, 106)'); // Aranya's own gold (#d4b26a)
 });
 
 test('the restaurant: full menu with veg marks and rupee prices', async ({ page }) => {

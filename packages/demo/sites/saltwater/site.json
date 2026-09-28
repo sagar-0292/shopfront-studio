@@ -88,7 +88,8 @@
             "Kihim beach, 3 minutes' walk",
             "2 hours from Mumbai",
             "Sleeps ten"
-          ]
+          ],
+          "backdrop": "sky"
         },
         {
           "type": "reel",
@@ -188,7 +189,8 @@
                 }
               }
             }
-          ]
+          ],
+          "backdrop": "dusk"
         },
         {
           "type": "photostrip",
@@ -302,7 +304,8 @@
               "title": "Bicycles and *towels*",
               "text": "Six bicycles, beach towels, umbrellas and a picnic basket, whenever you want them."
             }
-          ]
+          ],
+          "backdrop": "dark"
         },
         {
           "type": "booking",
@@ -310,7 +313,8 @@
           "title": "Plan your *stay*",
           "text": "Choose the day you'll arrive and we'll confirm your room and dates on WhatsApp within the hour. Two-night minimum at weekends.",
           "service": "stay",
-          "days": 21
+          "days": 21,
+          "backdrop": "sky"
         },
         {
           "type": "faq",
@@ -407,7 +411,8 @@
                 }
               }
             }
-          ]
+          ],
+          "backdrop": "dusk"
         },
         {
           "type": "cta",
@@ -422,5 +427,14 @@
         }
       ]
     }
-  ]
+  ],
+  "palette": {
+    "bg": "#e3ecef",
+    "surface": "#f1f6f7",
+    "ink": "#14202a",
+    "muted": "#4b5963",
+    "line": "#c6d4d9",
+    "accent": "#1f4e5f",
+    "accentInk": "#f1f6f7"
+  }
 }

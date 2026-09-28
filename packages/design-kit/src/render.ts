@@ -4,7 +4,7 @@ import { html, raw, esc, emph, cls, type Raw } from './html';
 import { section, link, HERO_SPLIT_SIZES, type Ctx } from './sections';
 import { icon } from './icons';
 import { SiteDef, type Direction, type SiteDefT, type SectionT } from './schema';
-import { checkPalette } from './contrast';
+import { checkPalette, isDark } from './contrast';
 
 export type RenderOptions = {
   /** Where kits are served, e.g. "/kits" or "https://kits.shopfront.in". */
@@ -203,7 +203,9 @@ function paletteStyle(def: SiteDefT): Raw | '' {
   const p = def.palette;
   if (!p || !Object.keys(p).length) return '';
   const map: Record<string, string> = { bg: '--c-bg', surface: '--c-surface', ink: '--c-ink', muted: '--c-muted', line: '--c-line', accent: '--c-accent', accentInk: '--c-accent-ink' };
-  const decls = Object.entries(p).filter(([, v]) => v).map(([k, v]) => `${map[k]}:${v}`).join(';');
+  const decls = [...Object.entries(p).filter(([, v]) => v).map(([k, v]) => `${map[k]}:${v}`),
+    // Gradient and glow backdrops are tinted more gently on a dark page, so light text stays readable.
+    ...(p.bg && isDark(p.bg) ? ['--bd-mix:18%', 'color-scheme:dark'] : [])].join(';');
   // Values are validated as #rrggbb by the schema, so this is safe to inline.
   return raw(`<style>.d-${def.direction}{${decls}}</style>`);
 }

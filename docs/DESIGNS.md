@@ -40,6 +40,13 @@ Moving sections (1.2.0), each fully readable on phones and with animations off:
 
 A site can also show a slim **announcement bar** above the header (`announcement`).
 
+**Backdrops** (`backdrop` on any section), learned from the reference sites and drawn in CSS from the site's own
+colours: `sky` and `dusk` gradients (Obys, Lusion), `glow` (Apple), a hairline `grid` (DIKO, Overrrides),
+halftone `dots` (Obys), and flat fields of the look's `accent`, `pop` or `dark` colour (DIKO, Mode). On a dark
+page the gradients are tinted more gently so text keeps its contrast. With a custom `palette`, each client's site
+can sit on its own colour: the samples use emerald (Aranya), violet (Mithai Market), butter yellow (Bandra Bake
+House), cobalt (Tapri) and pale sea blue (Saltwater).
+
 Headlines can mark a highlighted word with `*asterisks*`: `"Bread worth *waking up* for"`.
 
 ## Built-in safeguards
