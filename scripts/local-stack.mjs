@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { SMTPServer } from 'smtp-server';
 import { simpleParser } from 'mailparser';
 import { reset } from './db.mjs';
-import { JWT_SECRET, ANON_KEY, PORTS, SUPABASE_URL, MAIL_URL } from './local-keys.mjs';
+import { JWT_SECRET, ANON_KEY, PORTS, SUPABASE_URL, MAIL_URL, PEXELS_TEST_KEY } from './local-keys.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -144,6 +144,23 @@ http
     res.end();
   })
   .listen(PORTS.razorpay, '127.0.0.1');
+
+// 2c. A stand-in for the Pexels photo search, so websites can be built without a real key.
+// Every search finds four photos; their addresses look like Pexels' (tests serve the images).
+let pexelsCount = 0;
+http
+  .createServer((req, res) => {
+    const u = new URL(req.url, `http://127.0.0.1:${PORTS.pexels}`);
+    if (req.headers.authorization !== PEXELS_TEST_KEY) { res.statusCode = 401; return res.end('{}'); }
+    if (u.pathname !== '/v1/search') { res.statusCode = 404; return res.end('{}'); }
+    const photos = [0, 1, 2, 3].map(() => {
+      const id = 1000 + ++pexelsCount;
+      return { id, photographer: `Test Photographer ${id}`, photographer_url: `https://www.pexels.com/@test-${id}`, src: { original: `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg` } };
+    });
+    res.writeHead(200, { 'content-type': 'application/json' });
+    res.end(JSON.stringify({ photos }));
+  })
+  .listen(PORTS.pexels, '127.0.0.1');
 
 // 3. Login server
 const gotrue = spawn(gotrueBin, ['serve'], { env: gotrueEnv, stdio: 'inherit' });

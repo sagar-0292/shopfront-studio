@@ -103,6 +103,8 @@ export const SiteDef = z.object({
     social: z.object({ instagram: z.string().url().optional(), facebook: z.string().url().optional(), youtube: z.string().url().optional() }).optional(),
     businessType: z.string().regex(/^[A-Za-z]{3,40}$/).default('LocalBusiness'),
     sampleNotice: z.string().max(300).optional(),
+    /** The business's own logo, shown in the header instead of the name. */
+    logo: Image.optional(),
   }),
   /** Photographers whose photos the site uses (shown in the footer). */
   credits: z.array(z.object({ name: text(80), url: z.string().regex(/^https:\/\/[^\s"'<>]+$/).max(300), source: z.enum(['Pexels', 'Unsplash']) })).max(80).default([]),

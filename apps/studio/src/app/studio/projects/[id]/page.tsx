@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ActionForm } from '@/components/action-form';
-import { Badge, Card, CardTitle, Field, Input, Notice, PageHeader, Select } from '@/components/ui';
+import { Badge, ButtonLink, Card, CardTitle, Field, Input, Notice, PageHeader, Select } from '@/components/ui';
 import { ClientFields, ProjectFields, type ClientDefaults } from '@/components/studio/project-fields';
 import { InviteClientForm } from '@/components/studio/invite-client-form';
 import { requireAgency } from '@/lib/context';
@@ -25,6 +25,7 @@ type Site = {
   motion_kit_version: string; commerce_kit_version: string; design_kit_version: string; design_direction: Direction | null;
   id: string; name: string; slug: string; status: string; site_types: string[]; business_kind: string; languages: string[];
   primary_domain: string | null; archived_at: string | null; created_at: string; client_id: string;
+  site_type_other: string; website_built_at: string | null;
 };
 
 export default async function ProjectPage({ params, searchParams }: PageProps<'/studio/projects/[id]'>) {
@@ -77,6 +78,17 @@ export default async function ProjectPage({ params, searchParams }: PageProps<'/
       {kitUpdated && <Notice tone="good">Kit version updated. The website uses it from its next publish.</Notice>}
       {site.archived_at && <Notice>This project is archived. Restore it at the bottom of this page.</Notice>}
 
+      <Card className="border-primary/30 bg-primary/[0.03]">
+        <CardTitle
+          title="Website"
+          description={site.website_built_at
+            ? `Built ${formatDate(site.website_built_at)}. Preview it, rebuild it, or download it for Netlify.`
+            : 'Create the website: tell us about the business, let Claude write it in the chosen look, then download it for Netlify.'}
+          action={site.website_built_at ? <Badge tone="good">Built</Badge> : <Badge tone="warn">Not built yet</Badge>}
+        />
+        <ButtonLink href={`/studio/projects/${site.id}/website`}>{site.website_built_at ? 'Open the website builder' : 'Create website'}</ButtonLink>
+      </Card>
+
       <Card>
         <CardTitle title="Website settings" />
         <ActionForm action={updateProject} submitLabel="Save settings">
@@ -100,7 +112,7 @@ export default async function ProjectPage({ params, searchParams }: PageProps<'/
         </ActionForm>
       </Card>
 
-      <Card>
+      <Card id="design">
         <CardTitle
           title="Design"
           description={<>The look of this website: fonts, colours, layouts and animation style. <Link className="text-primary underline" href="/studio/designs">Compare all the designs</Link>.</>}

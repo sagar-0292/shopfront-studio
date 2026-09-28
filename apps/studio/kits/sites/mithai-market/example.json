@@ -1,0 +1,528 @@
+{
+ "tagline": "Dadar's sweet shop since 1962. Made fresh every morning.",
+ "description": "Kaju katli, ladoos, namkeen and festive hampers made fresh every morning in Dadar since 1962. Order online or on WhatsApp.",
+ "businessType": "Bakery",
+ "palette": {
+  "bg": "#5d58a0",
+  "surface": "#4c4790",
+  "ink": "#fff6e5",
+  "muted": "#e6e0fa",
+  "line": "#7a75b8",
+  "accent": "#ffd166",
+  "accentInk": "#22061f"
+ },
+ "nav": [
+  {
+   "label": "Shop",
+   "href": "/shop/"
+  },
+  {
+   "label": "Gift boxes",
+   "href": "/shop/?cat=gifts"
+  },
+  {
+   "label": "Tasting",
+   "href": "/#book"
+  },
+  {
+   "label": "Visit",
+   "href": "/#visit"
+  }
+ ],
+ "pages": [
+  {
+   "path": "/",
+   "title": "Mithai Market — Fresh sweets & namkeen in Dadar, Mumbai",
+   "description": "Kaju katli, ladoos, namkeen and festive hampers made fresh every morning in Dadar since 1962. Order online or on WhatsApp.",
+   "sections": [
+    {
+     "type": "hero",
+     "variant": "collage",
+     "eyebrow": "Dadar · Since 1962",
+     "headline": "Life's *sweeter* in Dadar",
+     "lede": "Kaju katli, motichoor ladoos and crunchy namkeen — made fresh every single morning, delivered across Mumbai the same day.",
+     "ctas": [
+      {
+       "label": "Order sweets",
+       "href": "/shop/"
+      },
+      {
+       "label": "Diwali hampers",
+       "href": "/shop/?cat=gifts"
+      }
+     ],
+     "sticker": "Fresh today!",
+     "collage": [
+      {
+       "$photo": {
+        "q": "Kaju katli diamonds on a festive plate",
+        "alt": "Kaju katli diamonds on a festive plate",
+        "shape": "square"
+       }
+      },
+      {
+       "$photo": {
+        "q": "Motichoor ladoos arranged in a gift box",
+        "alt": "Motichoor ladoos arranged in a gift box",
+        "shape": "square"
+       }
+      },
+      {
+       "$photo": {
+        "q": "Gulab jamun in a white bowl with cashews",
+        "alt": "Gulab jamun in a white bowl with cashews",
+        "shape": "square"
+       }
+      }
+     ],
+     "backdrop": "glow"
+    },
+    {
+     "type": "marquee",
+     "items": [
+      "Pure ghee",
+      "Made this morning",
+      "Same-day delivery",
+      "Diwali hampers",
+      "Since 1962"
+     ],
+     "speed": 70
+    },
+    {
+     "type": "products",
+     "eyebrow": "Bestsellers",
+     "title": "Mumbai's *favourites*",
+     "featured": true,
+     "limit": 4,
+     "link": {
+      "label": "Shop everything",
+      "href": "/shop/"
+     },
+     "backdrop": "dots"
+    },
+    {
+     "type": "bento",
+     "eyebrow": "Inside the shop",
+     "title": "Three generations, *one kadhai*",
+     "tiles": [
+      {
+       "kind": "photo",
+       "media": {
+        "$photo": {
+         "q": "An assortment of Indian sweets on a plate",
+         "alt": "An assortment of Indian sweets on a plate",
+         "shape": "square"
+        }
+       },
+       "caption": "This morning's thali of sweets",
+       "size": "big"
+      },
+      {
+       "kind": "stat",
+       "value": "1962",
+       "label": "The year we lit the first kadhai",
+       "tone": "pop"
+      },
+      {
+       "kind": "photo",
+       "media": {
+        "$photo": {
+         "q": "Rasgullas soaking in sugar syrup",
+         "alt": "Rasgullas soaking in sugar syrup",
+         "shape": "square"
+        }
+       },
+       "caption": "Rasgulla, soaking",
+       "size": "normal"
+      },
+      {
+       "kind": "text",
+       "title": "Pure *desi ghee*",
+       "text": "Never vanaspati, never palm oil. One dairy in Anand, for sixty years.",
+       "size": "wide",
+       "tone": "surface"
+      },
+      {
+       "kind": "photo",
+       "media": {
+        "$photo": {
+         "q": "Pedas topped with almonds on a white plate",
+         "alt": "Pedas topped with almonds on a white plate",
+         "shape": "square"
+        }
+       },
+       "size": "wide"
+      },
+      {
+       "kind": "stat",
+       "value": "4 pm",
+       "label": "Order by for same-day delivery",
+       "tone": "accent",
+       "size": "wide"
+      }
+     ],
+     "backdrop": "grid"
+    },
+    {
+     "type": "categories",
+     "eyebrow": "Browse",
+     "title": "What are you *craving*?",
+     "items": [
+      {
+       "name": "Sweets",
+       "href": "/shop/?cat=sweets",
+       "media": {
+        "$photo": {
+         "q": "Besan barfi topped with almonds and pistachios",
+         "alt": "Besan barfi topped with almonds and pistachios",
+         "shape": "square"
+        }
+       }
+      },
+      {
+       "name": "Namkeen",
+       "href": "/shop/?cat=namkeen",
+       "media": {
+        "$photo": {
+         "q": "A platter of chakli spirals and festive snacks",
+         "alt": "A platter of chakli spirals and festive snacks",
+         "shape": "square"
+        }
+       }
+      },
+      {
+       "name": "Gift boxes",
+       "href": "/shop/?cat=gifts",
+       "media": {
+        "$photo": {
+         "q": "Diwali gift boxes stacked with marigolds and fairy lights",
+         "alt": "Diwali gift boxes stacked with marigolds and fairy lights",
+         "shape": "square"
+        }
+       }
+      }
+     ],
+     "backdrop": "pop"
+    },
+    {
+     "type": "rows",
+     "items": [
+      {
+       "eyebrow": "Diwali & weddings",
+       "title": "Boxes that *arrive smiling*",
+       "text": "Pick the sweets, we pack them in our festive boxes with your message — for one family or five hundred employees.",
+       "media": {
+        "$photo": {
+         "q": "A woman holding a plate of sweets at a Diwali celebration",
+         "alt": "A woman holding a plate of sweets at a Diwali celebration",
+         "shape": "landscape"
+        }
+       },
+       "link": {
+        "label": "See gift boxes",
+        "href": "/shop/?cat=gifts"
+       }
+      },
+      {
+       "eyebrow": "Made this morning",
+       "title": "What doesn't sell, *doesn't stay*",
+       "text": "Whatever is left at 8 pm goes to the Dadar gurudwara. Everything on the counter tomorrow is made tomorrow.",
+       "media": {
+        "$photo": {
+         "q": "A customer in gold bangles choosing sweets at the counter",
+         "alt": "A customer in gold bangles choosing sweets at the counter",
+         "shape": "landscape"
+        }
+       }
+      }
+     ],
+     "backdrop": "dark"
+    },
+    {
+     "type": "booking",
+     "eyebrow": "Weddings & big orders",
+     "title": "Book a free *tasting*",
+     "text": "Planning a wedding, a pooja or corporate Diwali gifts? Come taste with us and we'll plan the boxes together.",
+     "service": "tasting",
+     "days": 10,
+     "backdrop": "sky"
+    },
+    {
+     "type": "faq",
+     "title": "Questions?",
+     "items": [
+      {
+       "q": "How long do the sweets stay fresh?",
+       "a": "Milk sweets are best within 3 days and should go in the fridge. Kaju katli, soan papdi and namkeen keep for 2 to 3 weeks."
+      },
+      {
+       "q": "Do you deliver outside Mumbai?",
+       "a": "Dry sweets, namkeen and gift boxes ship across India in 2 to 5 days. Milk sweets are Mumbai-only."
+      },
+      {
+       "q": "Can I pay by UPI or cash?",
+       "a": "Yes. Pay by any UPI app, cash on delivery for orders up to ₹5,000, or order on WhatsApp."
+      }
+     ]
+    },
+    {
+     "type": "contact",
+     "eyebrow": "Visit",
+     "title": "Find us on *Ranade Road*",
+     "media": {
+      "$photo": {
+       "q": "Squares of flaky soan papdi on a rustic dish",
+       "alt": "Squares of flaky soan papdi on a rustic dish",
+       "shape": "square"
+      }
+     },
+     "backdrop": "grid"
+    },
+    {
+     "type": "cta",
+     "headline": "Diwali is *coming*",
+     "ctas": [
+      {
+       "label": "Order hampers",
+       "href": "/shop/?cat=gifts"
+      }
+     ],
+     "tone": "pop"
+    }
+   ]
+  },
+  {
+   "path": "/shop/",
+   "title": "Shop",
+   "description": "All our sweets, namkeen and gift boxes, with prices and live stock.",
+   "sections": [
+    {
+     "type": "shop",
+     "eyebrow": "Shop",
+     "title": "All sweets & *snacks*"
+    }
+   ]
+  },
+  {
+   "path": "/wishlist/",
+   "title": "Your wishlist",
+   "description": "Sweets you have saved.",
+   "sections": [
+    {
+     "type": "wishlist"
+    }
+   ]
+  }
+ ],
+ "products": [
+  {
+   "name": "Kaju Katli",
+   "description": "Silver-leaf cashew fudge, made with pure ghee.",
+   "price": 899,
+   "mrp": 999,
+   "category": "Sweets",
+   "featured": true,
+   "badges": [
+    "Bestseller"
+   ],
+   "variants": [
+    {
+     "label": "250 g",
+     "price": 449
+    },
+    {
+     "label": "500 g",
+     "price": 899
+    }
+   ],
+   "photo": {
+    "$photo": {
+     "q": "Kaju katli diamonds on a festive plate",
+     "alt": "Kaju katli diamonds on a festive plate",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Motichoor Ladoo",
+   "description": "Tiny boondi pearls, saffron and cardamom.",
+   "price": 450,
+   "category": "Sweets",
+   "featured": true,
+   "photo": {
+    "$photo": {
+     "q": "Motichoor ladoos arranged in a gift box",
+     "alt": "Motichoor ladoos arranged in a gift box",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Rasgulla (8 pcs)",
+   "description": "Soft chhena balls in light sugar syrup.",
+   "price": 320,
+   "mrp": 360,
+   "category": "Sweets",
+   "photo": {
+    "$photo": {
+     "q": "Rasgullas soaking in sugar syrup",
+     "alt": "Rasgullas soaking in sugar syrup",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Gulab Jamun (8 pcs)",
+   "description": "Slow-fried khoya dumplings in rose syrup.",
+   "price": 340,
+   "category": "Sweets",
+   "photo": {
+    "$photo": {
+     "q": "Gulab jamun in a white bowl with cashews",
+     "alt": "Gulab jamun in a white bowl with cashews",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Soan Papdi",
+   "description": "Flaky, melt-in-the-mouth, with pistachio.",
+   "price": 260,
+   "mrp": 300,
+   "category": "Sweets",
+   "photo": {
+    "$photo": {
+     "q": "Squares of flaky soan papdi on a rustic dish",
+     "alt": "Squares of flaky soan papdi on a rustic dish",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Malai Barfi",
+   "description": "Milk fudge with a hint of kesar.",
+   "price": 680,
+   "category": "Sweets",
+   "badges": [
+    "New"
+   ],
+   "photo": {
+    "$photo": {
+     "q": "Besan barfi topped with almonds and pistachios",
+     "alt": "Besan barfi topped with almonds and pistachios",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Bikaneri Bhujia 400 g",
+   "description": "Moth-bean sev, peppery and crisp.",
+   "price": 180,
+   "category": "Namkeen",
+   "featured": true,
+   "photo": {
+    "$photo": {
+     "q": "Crunchy golden namkeen sticks",
+     "alt": "Crunchy golden namkeen sticks",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Bhajani Chakli",
+   "description": "Multigrain spirals, a Diwali favourite.",
+   "price": 220,
+   "mrp": 250,
+   "category": "Namkeen",
+   "photo": {
+    "$photo": {
+     "q": "A platter of chakli spirals and festive snacks",
+     "alt": "A platter of chakli spirals and festive snacks",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Methi Mathri",
+   "description": "Flaky crackers with dried fenugreek.",
+   "price": 160,
+   "category": "Namkeen",
+   "photo": {
+    "$photo": {
+     "q": "A stack of crisp mathri on a steel plate",
+     "alt": "A stack of crisp mathri on a steel plate",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Diwali Grand Hamper",
+   "description": "Sweets, namkeen and dry fruits in a keepsake box.",
+   "price": 2499,
+   "mrp": 2999,
+   "category": "Gift boxes",
+   "featured": true,
+   "badges": [
+    "Festive"
+   ],
+   "photo": {
+    "$photo": {
+     "q": "Diwali gift boxes stacked with marigolds and fairy lights",
+     "alt": "Diwali gift boxes stacked with marigolds and fairy lights",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Royal Dry Fruit Box",
+   "description": "Almonds, cashews, pistachios and figs.",
+   "price": 1450,
+   "category": "Gift boxes",
+   "photo": {
+    "$photo": {
+     "q": "A dry fruit gift box tied with a silver ribbon",
+     "alt": "A dry fruit gift box tied with a silver ribbon",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Mathura Peda (500 g)",
+   "description": "Caramelised milk sweet from Mathura.",
+   "price": 520,
+   "category": "Sweets",
+   "photo": {
+    "$photo": {
+     "q": "Pedas topped with almonds on a white plate",
+     "alt": "Pedas topped with almonds on a white plate",
+     "shape": "square"
+    }
+   }
+  }
+ ],
+ "bookings": {
+  "services": [
+   {
+    "name": "Wedding sweets tasting",
+    "minutes": 30
+   },
+   {
+    "name": "Bulk order consultation",
+    "minutes": 20
+   }
+  ],
+  "days": [
+   "mon",
+   "tue",
+   "wed",
+   "thu",
+   "fri",
+   "sat",
+   "sun"
+  ],
+  "open": "10:00",
+  "close": "20:00",
+  "slotMinutes": 30,
+  "capacity": 2
+ }
+}

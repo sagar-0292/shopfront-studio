@@ -1,0 +1,191 @@
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { unzipSync, strFromU8 } from 'fflate';
+import { Answer, SECTION_REFERENCE } from '@/lib/website/format';
+import { buildWebsite, parseAnswer, parseHours, type BuildInput } from '@/lib/website/build';
+import { buildBrief, type BriefFacts, type BriefInput } from '@/lib/website/brief';
+import { renderPages, websiteZip } from '@/lib/website/render';
+import { DESIGNS, DIRECTIONS } from '@/lib/designs';
+import { manifest } from '@/lib/kits';
+
+const kits = join(__dirname, '../../../kits');
+const latest = () => manifest();
+const versions = () => ({ motion: latest().motion.latest, commerce: latest().commerce.latest, design: latest().design.latest });
+const example = (d: (typeof DIRECTIONS)[number]) => JSON.parse(readFileSync(join(kits, 'sites', DESIGNS[d].sample.id, 'example.json'), 'utf8'));
+
+// A stand-in for the Pexels search API: every search finds three photos.
+let searches: string[] = [];
+const fakePexels: typeof fetch = async (url) => {
+  const q = new URL(String(url)).searchParams.get('query') ?? '';
+  searches.push(q);
+  const n = searches.length * 10;
+  return new Response(JSON.stringify({ photos: [0, 1, 2].map((i) => ({ id: n + i, photographer: `Photographer ${n + i}`, photographer_url: `https://www.pexels.com/@p${n + i}`, src: { original: `https://images.pexels.com/photos/${n + i}/pexels-photo-${n + i}.jpeg` } })) }), { headers: { 'content-type': 'application/json' } });
+};
+
+const facts: BriefFacts = { name: 'Test Shop', businessKind: 'Sweet shop', siteTypeOther: '', city: 'Mumbai', state: 'Maharashtra', phone: '+919820012345', whatsapp: '+919820012345', email: 'hi@test.example', siteTypes: ['online_store', 'bookings'], languages: ['en'] };
+const input: BriefInput = { about: 'A family sweet shop in Dadar.', offer: 'Kaju katli ₹1,100/kg', audience: '', street: '12 Ranade Road', area: 'Dadar West', city: '', state: '', pincode: '400028', hours: 'Mon – Sat 10am – 8:30pm\nSun 11:00-14:00', instagram: '@testshop', reviews: '', notes: '' };
+const base = (answer: unknown, extra: Partial<BuildInput> = {}): BuildInput => ({
+  answer: Answer.parse(answer), direction: 'bold', site: { id: '11111111-1111-1111-1111-111111111111', name: 'Test Shop' },
+  facts, input, own: [], payments: null, fetch: fakePexels, ...extra,
+});
+
+beforeEach(() => { searches = []; process.env.PEXELS_API_KEY = 'test-key'; delete process.env.PEXELS_API_URL; });
+afterEach(() => { delete process.env.PEXELS_API_KEY; });
+
+describe('the brief and the answer format match the design kit', () => {
+  it('describes every section the design kit offers', async () => {
+    const kit = await import(pathToFileURL(join(kits, 'design', versions().design, 'render.mjs')).href) as { SECTION_TYPES: string[] };
+    for (const t of kit.SECTION_TYPES) expect(SECTION_REFERENCE, t).toMatch(new RegExp(`^${t}\\s`, 'm'));
+  });
+
+  for (const d of DIRECTIONS) {
+    it(`the ${d} sample, written in Claude's format, builds into a working website`, async () => {
+      const w = await buildWebsite(base(example(d), { direction: d }));
+      const pages = await renderPages(w, versions(), { base: '', noindex: false });
+      expect(Object.keys(pages)).toContain('/index.html');
+      expect(pages['/index.html']).toContain(`class="d-${d}"`);
+      // Every photo became a real, cropped Pexels photo, with its photographer credited.
+      expect(pages['/index.html']).toMatch(/images\.pexels\.com\/photos\/\d+\/[^"]+fm=webp&amp;fit=crop/);
+      expect(pages['/index.html']).toContain('on <a class="d-link" href="https://www.pexels.com"');
+      // Facts come from the project, not from Claude.
+      expect(pages['/index.html']).toContain('tel:+919820012345');
+    });
+  }
+});
+
+describe('reading Claude’s answer', () => {
+  const minimal = { description: 'A family sweet shop in Dadar, Mumbai.', pages: [{ path: '/', title: 'Test', description: 'Home', sections: [{ type: 'statement', text: 'Hello' }] }] };
+
+  it('finds the JSON inside fences or a sentence', () => {
+    expect(parseAnswer('Here you go:\n```json\n' + JSON.stringify(minimal) + '\n```\nEnjoy!').description).toBe(minimal.description);
+    expect(parseAnswer('Sure! ' + JSON.stringify(minimal) + ' Hope this helps.').pages).toHaveLength(1);
+  });
+
+  it('explains a cut-off answer and a wrong field in plain words', () => {
+    expect(() => parseAnswer(JSON.stringify(minimal).slice(0, 60))).toThrow(/stopped part-way.*continue/);
+    expect(() => parseAnswer(JSON.stringify({ ...minimal, description: 'short' }))).toThrow(/description.*Ask Claude/);
+    expect(() => parseAnswer('')).toThrow(/Paste Claude/);
+  });
+
+  it('reads opening hours written the way people write them', () => {
+    expect(parseHours('Mon – Sat 10am – 8:30pm\nSun: 11:00-14:00\nclosed on Diwali')).toEqual({
+      hours: [{ days: 'Mon – Sat', open: '10:00', close: '20:30' }, { days: 'Sun', open: '11:00', close: '14:00' }],
+      bad: ['closed on Diwali'],
+    });
+    expect(parseHours('Every day 12 pm to 12 am').hours).toEqual([{ days: 'Every day', open: '12:00', close: '00:00' }]);
+  });
+});
+
+describe('building the website', () => {
+  const answer = {
+    description: 'A family sweet shop in Dadar, Mumbai, making mithai fresh every morning.',
+    nav: [{ label: 'Shop', href: '/shop/' }],
+    pages: [
+      { path: '/', title: 'Test Shop — Dadar', description: 'Sweets', sections: [
+        { type: 'hero', variant: 'split', headline: 'Fresh *every* morning', media: { $photo: { q: 'kaju katli on a plate', alt: 'Kaju katli', shape: 'square' } } },
+        { type: 'rows', items: [{ title: 'Our shop', text: 'Since 1962.', media: { $own: 'shop-front' } }, { title: 'Missing', text: 'x', media: { image: { $own: 'nope' } } }] },
+        { type: 'menu', title: 'Menu', categories: [{ name: 'Snacks', items: [{ name: 'Samosa', price: 25.5, diet: 'veg' }] }] },
+        { type: 'products', title: 'Bestsellers' },
+        { type: 'booking', title: 'Book a tasting', anchor: 'book' },
+      ] },
+      { path: '/shop/', title: 'Shop', description: 'All sweets', sections: [{ type: 'shop', title: 'All sweets' }] },
+    ],
+    products: [
+      { name: 'Kaju Katli', price: 1100, mrp: 1200, category: 'Sweets', featured: true, variants: [{ label: '500 g', price: 560 }], photo: { $photo: { q: 'kaju katli diamonds', alt: 'Kaju katli', shape: 'square' } } },
+      { name: 'Kaju Katli', price: 900, category: 'Sweets', photo: { $own: 'shop-front' } },
+    ],
+    bookings: { services: [{ name: 'Tasting', minutes: 30 }], days: ['sat', 'sun'], open: '11:00', close: '17:00' },
+    phone: '+910000000000',
+  };
+  const own = [{ name: 'shop-front', label: 'Our shop front', kind: 'photo' as const, width: 1600, height: 1200, hasSmall: true }, { name: 'logo', label: '', kind: 'logo' as const, width: 400, height: 160, hasSmall: false }];
+
+  it('uses the project’s facts, the business’s own photos and logo, and the commerce kit’s formats', async () => {
+    const w = await buildWebsite(base(answer, { own, payments: { whatsapp: true, upi: { vpa: 'shop@okicici' }, online: { provider: 'razorpay' } } }));
+    const site = w.def.site as Record<string, unknown>;
+    expect(site.phone).toBe('+919820012345');
+    expect(site.address).toEqual({ street: '12 Ranade Road', area: 'Dadar West', city: 'Mumbai', state: 'Maharashtra', pincode: '400028' });
+    expect(site.hours).toEqual([{ days: 'Mon – Sat', open: '10:00', close: '20:30' }, { days: 'Sun', open: '11:00', close: '14:00' }]);
+    expect(site.social).toEqual({ instagram: 'https://www.instagram.com/testshop' });
+    expect(site.logo).toEqual({ src: '/img/own/logo.webp', alt: 'Test Shop logo', width: 400, height: 160 });
+    // Own photo, with a phone-sized copy.
+    const rows = (w.def.pages as { sections: Record<string, unknown>[] }[])[0].sections[1] as { items: { media: { image: Record<string, unknown> } }[] };
+    expect(rows.items[0].media.image).toMatchObject({ src: '/img/own/shop-front.webp', alt: 'Our shop front', srcset: '/img/own/shop-front-800.webp 800w, /img/own/shop-front.webp 1600w' });
+    expect(rows.items[1].media.image.src).toMatch(/pexels/); // unknown own photo borrows a found one
+    expect(w.notes.join(' ')).toMatch(/“nope”/);
+    // Menu prices in paise; products and bookings in the commerce kit's format.
+    const menu = (w.def.pages as { sections: Record<string, unknown>[] }[])[0].sections[2] as { categories: { items: { price_paise: number }[] }[] };
+    expect(menu.categories[0].items[0].price_paise).toBe(2550);
+    const cat = w.catalog as { products: Record<string, unknown>[]; bookings: Record<string, unknown> };
+    expect(cat.products[0]).toMatchObject({ id: 'p1', slug: 'kaju-katli', price_paise: 110000, mrp_paise: 120000, featured: true, category: { slug: 'sweets', name: 'Sweets' } });
+    expect(cat.products[1].slug).toBe('kaju-katli-2');
+    expect(cat.bookings).toMatchObject({ services: [{ id: 'tasting', name: 'Tasting', duration_minutes: 30 }], hours: { sat: [['11:00', '17:00']], sun: [['11:00', '17:00']] }, slot_minutes: 30, capacity: 1 });
+    // A static site can't take card payments: WhatsApp and UPI stay, online is left out (and explained).
+    expect((w.def.commerce as { payments: Record<string, unknown> }).payments).toEqual({ whatsapp: true, upi: { vpa: 'shop@okicici' } });
+    expect(w.notes.join(' ')).toMatch(/Card and net-banking/);
+    // Each different request gets a different photo; the same search is only made once.
+    expect(new Set(searches).size).toBe(searches.length);
+  });
+
+  it('explains when the photo library isn’t connected', async () => {
+    delete process.env.PEXELS_API_KEY;
+    await expect(buildWebsite(base(answer))).rejects.toThrow(/PEXELS_API_KEY/);
+  });
+
+  it('packs a complete website for Netlify: every file a page asks for is in the zip', async () => {
+    const own2 = [{ name: 'shop-front', data: new Uint8Array([1, 2, 3]), small: new Uint8Array([4]) }, { name: 'logo', data: new Uint8Array([5]), small: null }];
+    const w = await buildWebsite(base(answer, { own, direction: 'block' }));
+    const zip = unzipSync(await websiteZip(w, versions(), 'Test Shop', own2));
+    const names = Object.keys(zip);
+    expect(names).toEqual(expect.arrayContaining(['index.html', 'shop/index.html', 'data/catalog.json', '_headers', 'README.txt', 'img/own/shop-front.webp', 'img/own/shop-front-800.webp', 'img/own/logo.webp']));
+    for (const page of names.filter((n) => n.endsWith('.html'))) {
+      const html = strFromU8(zip[page]);
+      expect(html, page).not.toContain('<link rel="stylesheet"'); // styles are inside the page
+      const wanted = [...html.matchAll(/(?:src|href)="(\/(?:kits|img|data)\/[^"?#]+)"|url\((\/kits\/[^)]+)\)/g)].map((m) => (m[1] ?? m[2]).slice(1));
+      expect(wanted.length, page).toBeGreaterThan(3);
+      for (const f of wanted) expect(names, `${page} needs ${f}`).toContain(f);
+    }
+    // The catalogue lists the products with their photos.
+    expect(JSON.parse(strFromU8(zip['data/catalog.json'])).products).toHaveLength(2);
+    // Scripts load their shared chunks: all of them are packed.
+    for (const js of names.filter((n) => /kits\/.*\.js$/.test(n))) {
+      for (const m of strFromU8(zip[js]).matchAll(/from\s*"\.\/(chunks\/[^"]+)"|import\("\.\/(chunks\/[^"]+)"\)/g)) {
+        expect(names).toContain(js.replace(/[^/]+$/, '') + (m[1] ?? m[2]));
+      }
+    }
+  });
+});
+
+describe('the brief', () => {
+  it('carries the business, the look, the rules, the material and a finished example', () => {
+    const text = buildBrief('poster', facts, input, example('poster'), {
+      logoColours: ['#c8321a', '#1e3bd6'], photos: [{ name: 'shop-front', label: 'Our shop front' }], documents: [{ filename: 'menu.pdf', label: '2026 menu' }],
+    });
+    expect(text).toContain('- Name: Test Shop');
+    expect(text).toContain('- Kind of business: Sweet shop');
+    expect(text).toContain('12 Ranade Road, Dadar West, Mumbai, 400028');
+    expect(text).toContain('## The look: Street poster');
+    expect(text).toContain('Never invent facts');
+    expect(text).toContain('Logo colours: #c8321a, #1e3bd6');
+    expect(text).toContain('"shop-front": Our shop front');
+    expect(text).toContain('menu.pdf: 2026 menu');
+    expect(text).toContain('set "palette" from the logo colours');
+    expect(text).toContain('This site sells online');
+    expect(text).toContain('This site takes bookings');
+    expect(text).toContain('Cutting chai'); // the Street poster sample, as the standard to match
+    const plain = buildBrief('quiet', { ...facts, siteTypes: ['other'], siteTypeOther: 'Temple trust with donations' }, input, {}, { logoColours: [], photos: [], documents: [] });
+    expect(plain).toContain('Kind of website: Temple trust with donations');
+    expect(plain).toContain('Don\'t add colours');
+    expect(plain).not.toContain('own material');
+  });
+
+  it('every sample example is valid in Claude’s format', () => {
+    for (const d of DIRECTIONS) {
+      const p = join(kits, 'sites', DESIGNS[d].sample.id, 'example.json');
+      expect(existsSync(p), p).toBe(true);
+      expect(Answer.safeParse(JSON.parse(readFileSync(p, 'utf8'))).success, d).toBe(true);
+    }
+    expect(readdirSync(join(kits, 'design')).length).toBeGreaterThan(0);
+  });
+});

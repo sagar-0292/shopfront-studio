@@ -497,6 +497,44 @@ describe('reference and competitor websites', () => {
   });
 });
 
+describe('the business’s own material and the built website', () => {
+  const insertFile = (who: typeof w.people.teamA, name: string) => as(who, (q) => q(
+    `insert into site_files (site_id, kind, name, label, filename, mime, data, width, height) values ($1, 'photo', $2, 'Shop front', 'shop.webp', 'image/webp', '\\x52494646'::bytea, 10, 10)`,
+    [w.siteA1, name]), { commit: true });
+
+  it('the agency adds files; the business owner can see them', async () => {
+    await insertFile(w.people.teamA, 'shop-front');
+    const seen = await as(w.people.clientA1Owner, (q) => q(`select name, organisation_id from site_files`));
+    expect(seen.rows.map((r) => r.name)).toEqual(['shop-front']);
+    expect(seen.rows[0].organisation_id).toBe(w.orgA);
+  });
+
+  it('clients, staff, sellers, other clients and other agencies cannot add, see, change or remove them', async () => {
+    for (const who of [w.people.clientA1Owner, w.people.clientA1Staff, w.people.seller1, w.people.clientA2Owner, w.people.ownerB]) {
+      await refused(insertFile(who, `by-${who.id.slice(0, 8)}`));
+      expect((await as(who, (q) => q(`update site_files set label = 'x'`))).rowCount).toBe(0);
+      expect((await as(who, (q) => q(`delete from site_files`))).rowCount).toBe(0);
+    }
+    for (const who of [w.people.clientA1Staff, w.people.seller1, w.people.clientA2Owner, w.people.ownerB]) {
+      expect(await count(as(who, (q) => q(`select * from site_files`)))).toBe(0);
+    }
+    await refused(as('anon', (q) => q(`select * from site_files`)));
+  });
+
+  it('only accepts safe file types and sensible names', async () => {
+    await refused(as(w.people.teamA, (q) => q(`insert into site_files (site_id, kind, name, mime, data) values ($1, 'photo', 'x', 'image/svg+xml', '\\x00'::bytea)`, [w.siteA1])));
+    await refused(as(w.people.teamA, (q) => q(`insert into site_files (site_id, kind, name, mime, data) values ($1, 'document', 'x', 'text/html', '\\x00'::bytea)`, [w.siteA1])));
+    await refused(as(w.people.teamA, (q) => q(`insert into site_files (site_id, kind, name, mime, data) values ($1, 'photo', '../etc', 'image/webp', '\\x00'::bytea)`, [w.siteA1])));
+  });
+
+  it('only the agency can save the website on a project; other agencies cannot touch it', async () => {
+    const ok = await as(w.people.teamA, (q) => q(`update sites set website = '{"def":{}}'::jsonb where id = $1`, [w.siteA1]));
+    expect(ok.rowCount).toBe(1);
+    expect((await as(w.people.clientA1Owner, (q) => q(`update sites set website = '{}'::jsonb where id = $1`, [w.siteA1]))).rowCount).toBe(0);
+    expect((await as(w.people.ownerB, (q) => q(`update sites set website = '{}'::jsonb where id = $1`, [w.siteA1]))).rowCount).toBe(0);
+  });
+});
+
 describe('payment settings and secrets', () => {
   it('the agency and the business owner can set UPI and cash on delivery; staff cannot', async () => {
     await as(w.people.clientA1Owner, (q) => q(`insert into site_payment_settings (site_id, upi_enabled, upi_vpa, upi_payee_name, cod_enabled, cod_max_paise) values ($1, true, 'mithaimarket@okicici', 'Mithai Market', true, 500000)`, [w.siteA1]), { commit: true });

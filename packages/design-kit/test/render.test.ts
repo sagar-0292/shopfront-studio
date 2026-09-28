@@ -268,6 +268,16 @@ describe('renderSite', () => {
     expect(() => renderSite(def, V)).toThrow(/backdrop/);
   });
 
+  it('shows the business logo in the header when there is one', () => {
+    const def = everything();
+    (def.site as Record<string, unknown>).logo = { src: '/img/own/logo.webp', alt: 'x', width: 300, height: 120 };
+    const d = doc(renderSite(def, { ...V, base: '/p' })['/index.html']);
+    const img = d.querySelector('.d-header .d-logo img')!;
+    expect(img.getAttribute('src')).toBe('/p/img/own/logo.webp');
+    expect(img.getAttribute('alt')).toBe('Test Shop');
+    expect(d.querySelector('.d-logo')!.classList.contains('d-logo--image')).toBe(true);
+  });
+
   it('refuses custom colours that are hard to read', () => {
     expect(checkPalette('editorial', { ink: '#cccccc' })[0]).toMatch(/Main text on the page background is too faint/);
     expect(checkPalette('editorial', { accent: '#123456' })).toEqual([]);

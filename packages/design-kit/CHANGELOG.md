@@ -1,5 +1,8 @@
 # Design kit releases
 
+## 1.3.0 — 2026-09-29
+A business's own logo can replace its name in the header (`site.logo`), sized to sit neatly on phones and computers.
+
 ## 1.2.0 — 2026-09-28
 Three new design directions learned from award-winning studio sites: **Street poster** (towering condensed capitals, flat tomato red, cobalt and yellow, a black ticker; Anton and Archivo), **Quiet luxury** (stone and bone white, a fine serif with italics, sage details and very large photographs; Instrument Serif and Inter Tight) and **Colour block** (every section its own flat colour panel on a dark frame, photos cut into ovals, arches, circles and notched corners, stickers whose words turn round a circle; Mona Sans, which stretches from narrow to extra-wide). A new hero sets the business name edge to edge over a big photo. Five new moving sections: a photo that stays pinned while the story scrolls past, a big typographic list that shows each line's photo, a row of photos you swipe sideways, photos gliding slowly across the page, and a split screen whose heading stays put while cards scroll. Sites can show a slim announcement bar above the header. Any section can have a backdrop: sky or dusk gradients, a soft glow, a hairline grid, halftone dots, or a flat field of the look's accent, pop or dark colour. Every new section still reads fully on phones and with animations turned off. Pages can have up to 30 sections. The page builder can write each look's styles into the page itself, so phones draw the first screen without waiting for another download (published sites now do this; phone speed scores rose by 1 to 5 points).
 

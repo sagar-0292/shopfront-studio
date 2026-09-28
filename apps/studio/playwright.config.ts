@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import { cpSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { ANON_KEY, PAYMENT_SECRETS_KEY } from '../../scripts/local-keys.mjs';
+import { ANON_KEY, PAYMENT_SECRETS_KEY, PEXELS_TEST_KEY, PORTS } from '../../scripts/local-keys.mjs';
 
 // Test copy of the published kits, plus a pretend motion kit 1.1.0 so the
 // compare-and-upgrade flow can be tested. (Real releases are never touched.)
@@ -71,6 +71,9 @@ export default defineConfig({
         RAZORPAY_PARTNER_CLIENT_ID: 'mock-partner',
         RAZORPAY_PARTNER_CLIENT_SECRET: 'mock-partner-secret',
         RAZORPAY_OAUTH_URL: 'http://127.0.0.1:54326',
+        // Local stand-in for the Pexels photo search.
+        PEXELS_API_KEY: PEXELS_TEST_KEY,
+        PEXELS_API_URL: `http://127.0.0.1:${PORTS.pexels}`,
       },
     },
   ],

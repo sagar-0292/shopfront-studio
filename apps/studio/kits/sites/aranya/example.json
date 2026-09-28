@@ -1,0 +1,446 @@
+{
+ "tagline": "Fine jewellery, made by hand in Kala Ghoda since 1978.",
+ "description": "Aranya is a family jewellery atelier in Kala Ghoda, Mumbai: hallmarked gold, polki and precious stones, made to order and by appointment.",
+ "businessType": "JewelryStore",
+ "palette": {
+  "bg": "#0f2f25",
+  "surface": "#143a2e",
+  "ink": "#f3ead9",
+  "muted": "#c8bda6",
+  "line": "#2b4b3f",
+  "accent": "#d4b26a",
+  "accentInk": "#0f2f25"
+ },
+ "nav": [
+  {
+   "label": "Collection",
+   "href": "/collection/"
+  },
+  {
+   "label": "The atelier",
+   "href": "/#atelier"
+  },
+  {
+   "label": "Book a viewing",
+   "href": "/#book"
+  },
+  {
+   "label": "Visit",
+   "href": "/#visit"
+  }
+ ],
+ "pages": [
+  {
+   "path": "/",
+   "title": "Aranya — Fine jewellery in Kala Ghoda, Mumbai",
+   "description": "Hallmarked gold, polki and precious stones, made by hand in our Kala Ghoda atelier since 1978. View by appointment.",
+   "sections": [
+    {
+     "type": "hero",
+     "variant": "split",
+     "eyebrow": "Kala Ghoda · Since 1978",
+     "headline": "Heirlooms, *made slowly*",
+     "lede": "Every Aranya piece is drawn, set and polished by hand in our atelier above Rampart Row — then hallmarked, and made to be handed down.",
+     "ctas": [
+      {
+       "label": "See the collection",
+       "href": "/collection/"
+      },
+      {
+       "label": "Book a private viewing",
+       "href": "#book"
+      }
+     ],
+     "media": {
+      "$photo": {
+       "q": "A bride wearing a gold choker and traditional jewellery",
+       "alt": "A bride wearing a gold choker and traditional jewellery",
+       "shape": "portrait"
+      }
+     },
+     "backdrop": "glow"
+    },
+    {
+     "type": "marquee",
+     "items": [
+      "BIS hallmarked",
+      "Certified stones",
+      "Made to order",
+      "Lifetime polishing",
+      "Insured delivery"
+     ],
+     "speed": 40
+    },
+    {
+     "type": "statement",
+     "eyebrow": "Our belief",
+     "text": "Jewellery should outlive the *occasion* it was made for. So we make fewer pieces, and we make them to last a hundred years.",
+     "meta": [
+      "Three generations",
+      "Twelve karigars",
+      "One workshop"
+     ],
+     "backdrop": "dots"
+    },
+    {
+     "type": "categories",
+     "eyebrow": "The collection",
+     "title": "Four ways to *begin*",
+     "items": [
+      {
+       "name": "Rings",
+       "href": "/collection/?cat=rings",
+       "media": {
+        "$photo": {
+         "q": "An emerald and diamond cocktail ring on a hand",
+         "alt": "An emerald and diamond cocktail ring on a hand",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "name": "Necklaces",
+       "href": "/collection/?cat=necklaces",
+       "media": {
+        "$photo": {
+         "q": "A kundan choker and earrings set with blue stones",
+         "alt": "A kundan choker and earrings set with blue stones",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "name": "Earrings",
+       "href": "/collection/?cat=earrings",
+       "media": {
+        "$photo": {
+         "q": "Diamond chandbali earrings on red silk",
+         "alt": "Diamond chandbali earrings on red silk",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "name": "Bangles",
+       "href": "/collection/?cat=bangles",
+       "media": {
+        "$photo": {
+         "q": "Bridal bangles on a hand with henna",
+         "alt": "Bridal bangles on a hand with henna",
+         "shape": "portrait"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "type": "products",
+     "eyebrow": "Signature pieces",
+     "title": "From the *atelier*",
+     "featured": true,
+     "limit": 4,
+     "link": {
+      "label": "All pieces",
+      "href": "/collection/"
+     },
+     "tone": "surface"
+    },
+    {
+     "type": "rows",
+     "anchor": "atelier",
+     "eyebrow": "How a piece is made",
+     "title": "Six weeks, *by hand*",
+     "items": [
+      {
+       "eyebrow": "The drawing",
+       "title": "It begins at the *bench*",
+       "text": "Every piece starts as a pencil drawing, made with you if it is a commission. We draw until it feels inevitable.",
+       "media": {
+        "$photo": {
+         "q": "Hands sketching jewellery designs at a desk",
+         "alt": "Hands sketching jewellery designs at a desk",
+         "shape": "landscape"
+        }
+       }
+      },
+      {
+       "eyebrow": "The stones",
+       "title": "Chosen *in person*",
+       "text": "We choose each stone ourselves and certify it independently. You see the certificate before we set it.",
+       "media": {
+        "$photo": {
+         "q": "A round diamond beside a blue gemstone",
+         "alt": "A round diamond beside a blue gemstone",
+         "shape": "landscape"
+        }
+       }
+      },
+      {
+       "eyebrow": "The setting",
+       "title": "The old way, *no shortcuts*",
+       "text": "Our karigars solder, set and finish by hand — polki in pure gold foil, never glue.",
+       "media": {
+        "$photo": {
+         "q": "An artisan soldering a piece of jewellery with a torch",
+         "alt": "An artisan soldering a piece of jewellery with a torch",
+         "shape": "landscape"
+        }
+       }
+      },
+      {
+       "eyebrow": "The finish",
+       "title": "Hallmarked, and *polished for life*",
+       "text": "Every gold piece carries the BIS hallmark, and comes back to us for free polishing whenever you like.",
+       "media": {
+        "$photo": {
+         "q": "A jeweller polishing a gold ring",
+         "alt": "A jeweller polishing a gold ring",
+         "shape": "landscape"
+        }
+       },
+       "link": {
+        "label": "Book a viewing",
+        "href": "#book"
+       }
+      }
+     ],
+     "backdrop": "sky"
+    },
+    {
+     "type": "stats",
+     "items": [
+      {
+       "value": "1978",
+       "label": "Year we opened"
+      },
+      {
+       "value": "12",
+       "label": "Karigars at the bench"
+      },
+      {
+       "value": "100%",
+       "label": "BIS hallmarked gold"
+      }
+     ],
+     "tone": "invert"
+    },
+    {
+     "type": "booking",
+     "eyebrow": "By appointment",
+     "title": "A private *viewing*",
+     "text": "Sit with us at the atelier, try pieces on in natural light, and talk through a commission. There is no charge and no obligation.",
+     "service": "viewing",
+     "days": 14,
+     "backdrop": "grid"
+    },
+    {
+     "type": "faq",
+     "eyebrow": "Good to know",
+     "title": "Questions, *answered*",
+     "items": [
+      {
+       "q": "Is your gold hallmarked?",
+       "a": "Yes. Every gold piece carries the BIS hallmark and a unique HUID number you can verify on the BIS Care app."
+      },
+      {
+       "q": "Can you remake my grandmother's jewellery?",
+       "a": "Often, yes. Bring it to a viewing; we will tell you honestly what can be kept, reset or melted, and give you a written estimate."
+      },
+      {
+       "q": "How long does a commission take?",
+       "a": "Usually five to eight weeks, depending on the stones. We send photographs at each stage."
+      },
+      {
+       "q": "Do you deliver outside Mumbai?",
+       "a": "Yes, fully insured, anywhere in India. Or collect from the atelier."
+      }
+     ]
+    },
+    {
+     "type": "contact",
+     "eyebrow": "Visit",
+     "title": "Above *Rampart Row*",
+     "media": {
+      "$photo": {
+       "q": "Close-up of a bride in a silk saree and gold jewellery",
+       "alt": "Close-up of a bride in a silk saree and gold jewellery",
+       "shape": "landscape"
+      }
+     },
+     "backdrop": "dusk"
+    },
+    {
+     "type": "cta",
+     "eyebrow": "Begin a commission",
+     "headline": "Something that is *only yours*",
+     "ctas": [
+      {
+       "label": "Book a viewing",
+       "href": "#book"
+      }
+     ],
+     "backdrop": "accent"
+    }
+   ]
+  },
+  {
+   "path": "/collection/",
+   "title": "The collection",
+   "description": "Rings, necklaces, earrings and bangles from the Aranya atelier, with prices.",
+   "sections": [
+    {
+     "type": "shop",
+     "eyebrow": "The collection",
+     "title": "Every *piece*"
+    }
+   ]
+  },
+  {
+   "path": "/wishlist/",
+   "title": "Your wishlist",
+   "description": "Pieces you have saved.",
+   "sections": [
+    {
+     "type": "wishlist",
+     "title": "Saved *pieces*"
+    }
+   ]
+  }
+ ],
+ "products": [
+  {
+   "name": "The Emerald Solitaire",
+   "description": "A Colombian emerald framed in diamonds, set by hand in 18k yellow gold.",
+   "price": 186500,
+   "category": "Rings",
+   "featured": true,
+   "badges": [
+    "New"
+   ],
+   "photo": {
+    "$photo": {
+     "q": "An emerald and diamond cocktail ring on a hand",
+     "alt": "An emerald and diamond cocktail ring on a hand",
+     "shape": "portrait"
+    }
+   }
+  },
+  {
+   "name": "Kundan Choker Set",
+   "description": "Kundan choker with matching earrings, finished with blue stone drops and meenakari on the reverse.",
+   "price": 425000,
+   "category": "Necklaces",
+   "featured": true,
+   "photo": {
+    "$photo": {
+     "q": "A kundan choker and earrings set with blue stones",
+     "alt": "A kundan choker and earrings set with blue stones",
+     "shape": "portrait"
+    }
+   }
+  },
+  {
+   "name": "Temple Jhumkas",
+   "description": "Temple-style gold jhumkas with fine granulation work.",
+   "price": 89000,
+   "category": "Earrings",
+   "featured": true,
+   "photo": {
+    "$photo": {
+     "q": "An ornate gold jhumka earring",
+     "alt": "An ornate gold jhumka earring",
+     "shape": "portrait"
+    }
+   }
+  },
+  {
+   "name": "Bridal Bangle Set",
+   "description": "A stacked set of 22k bangles made for the wedding day, sized to order.",
+   "price": 264000,
+   "category": "Bangles",
+   "featured": true,
+   "photo": {
+    "$photo": {
+     "q": "Bridal bangles on a hand with henna",
+     "alt": "Bridal bangles on a hand with henna",
+     "shape": "portrait"
+    }
+   }
+  },
+  {
+   "name": "Eternity Band",
+   "description": "Brilliant-cut diamonds set all the way round a gold band.",
+   "price": 124000,
+   "category": "Rings",
+   "photo": {
+    "$photo": {
+     "q": "A diamond and gold band",
+     "alt": "A diamond and gold band",
+     "shape": "portrait"
+    }
+   }
+  },
+  {
+   "name": "Sapphire Drop Pendant",
+   "description": "An oval sapphire cabochon on a fine gold chain.",
+   "price": 158000,
+   "category": "Necklaces",
+   "photo": {
+    "$photo": {
+     "q": "An oval blue stone pendant on a fine chain",
+     "alt": "An oval blue stone pendant on a fine chain",
+     "shape": "portrait"
+    }
+   }
+  },
+  {
+   "name": "Diamond Chandbalis",
+   "description": "Crescent chandbalis set with diamonds, light enough to wear all evening.",
+   "price": 112000,
+   "category": "Earrings",
+   "photo": {
+    "$photo": {
+     "q": "Diamond chandbali earrings on red silk",
+     "alt": "Diamond chandbali earrings on red silk",
+     "shape": "portrait"
+    }
+   }
+  },
+  {
+   "name": "Pearl & Gold Bangles",
+   "description": "Slim gold bangles worn with a strand of Basra pearls.",
+   "price": 64000,
+   "category": "Bangles",
+   "photo": {
+    "$photo": {
+     "q": "Pearls and gold bangles",
+     "alt": "Pearls and gold bangles",
+     "shape": "portrait"
+    }
+   }
+  }
+ ],
+ "bookings": {
+  "services": [
+   {
+    "name": "Private viewing at the atelier",
+    "minutes": 60
+   },
+   {
+    "name": "Bridal consultation",
+    "minutes": 90
+   }
+  ],
+  "days": [
+   "tue",
+   "wed",
+   "thu",
+   "fri",
+   "sat"
+  ],
+  "open": "11:00",
+  "close": "19:00",
+  "slotMinutes": 60,
+  "capacity": 1
+ }
+}

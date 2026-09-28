@@ -1,0 +1,519 @@
+{
+ "tagline": "Kulfi, falooda and fruit lollies. Chapel Road, Bandra, since 1978.",
+ "description": "Kulfi Club is a kulfi and falooda parlour on Chapel Road, Bandra West, Mumbai: slow-reduced kulfi, rose falooda, real-fruit lollies and boxes delivered across the city.",
+ "businessType": "IceCreamShop",
+ "announcement": {
+  "text": "Kulfi boxes delivered frozen across Mumbai, free over ₹799",
+  "href": "/shop/"
+ },
+ "nav": [
+  {
+   "label": "Shop",
+   "href": "/shop/"
+  },
+  {
+   "label": "The counter",
+   "href": "/#menu"
+  },
+  {
+   "label": "Parties",
+   "href": "/#parties"
+  },
+  {
+   "label": "Visit",
+   "href": "/#visit"
+  }
+ ],
+ "pages": [
+  {
+   "path": "/",
+   "title": "Kulfi Club — Kulfi & falooda parlour in Bandra, Mumbai",
+   "description": "Slow-reduced kulfi, rose falooda and real-fruit lollies on Chapel Road, Bandra, since 1978. Order kulfi boxes delivered frozen across Mumbai.",
+   "sections": [
+    {
+     "type": "hero",
+     "variant": "wordmark",
+     "eyebrow": "Kulfi & falooda · Bandra West",
+     "headline": "Cold, sweet and *very* Bombay",
+     "lede": "Milk reduced for six hours, set in clay pots, served on Chapel Road since 1978. Now in boxes, delivered frozen.",
+     "ctas": [
+      {
+       "label": "Order a kulfi box",
+       "href": "/shop/"
+      },
+      {
+       "label": "Find the parlour",
+       "href": "#visit"
+      }
+     ],
+     "media": {
+      "$photo": {
+       "q": "Four hands holding ice cream cones against a bright yellow wall",
+       "alt": "Four hands holding ice cream cones against a bright yellow wall",
+       "shape": "wide"
+      }
+     },
+     "sticker": "Since 1978"
+    },
+    {
+     "type": "marquee",
+     "items": [
+      "Kesar pista",
+      "Mango",
+      "Rose falooda",
+      "Sitaphal",
+      "Malai",
+      "Kala khatta"
+     ],
+     "speed": 60
+    },
+    {
+     "type": "products",
+     "eyebrow": "Delivered frozen",
+     "title": "Kulfi *boxes*",
+     "featured": true,
+     "limit": 4,
+     "link": {
+      "label": "See everything",
+      "href": "/shop/"
+     }
+    },
+    {
+     "type": "rows",
+     "eyebrow": "How it's made",
+     "title": "Slow milk, *fast* spoons",
+     "items": [
+      {
+       "eyebrow": "Six hours",
+       "title": "Milk, *reduced*",
+       "text": "Full-cream milk simmers in a wide kadhai until only a third is left, thick, sweet and faintly caramel.",
+       "media": {
+        "$photo": {
+         "q": "Hands holding kesar kulfi in clay pots",
+         "alt": "Hands holding kesar kulfi in clay pots",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "eyebrow": "Every Sunday",
+       "title": "Out on the *cart*",
+       "text": "Our painted cart parks on Carter Road from 5 pm, the way Dadaji sold it in 1978.",
+       "media": {
+        "$photo": {
+         "q": "A kulfi seller serving from a painted cart",
+         "alt": "A kulfi seller serving from a painted cart",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "eyebrow": "Rose, sabja, kulfi",
+       "title": "Falooda, *properly*",
+       "text": "Rose syrup, soaked sabja seeds, thin vermicelli, cold milk and a whole kulfi on top.",
+       "media": {
+        "$photo": {
+         "q": "A glass of falooda with rose syrup and pistachios",
+         "alt": "A glass of falooda with rose syrup and pistachios",
+         "shape": "portrait"
+        }
+       },
+       "link": {
+        "label": "Get the falooda kit",
+        "href": "/shop/"
+       }
+      }
+     ]
+    },
+    {
+     "type": "photostrip",
+     "items": [
+      {
+       "$photo": {
+        "q": "Fruit ice lollies with slices of orange, kiwi and watermelon",
+        "alt": "Fruit ice lollies with slices of orange, kiwi and watermelon",
+        "shape": "square"
+       }
+      },
+      {
+       "$photo": {
+        "q": "Two pink ice lollies with icing on a bed of ice",
+        "alt": "Two pink ice lollies with icing on a bed of ice",
+        "shape": "square"
+       }
+      },
+      {
+       "$photo": {
+        "q": "Four orange ice lollies on a dark plate",
+        "alt": "Four orange ice lollies on a dark plate",
+        "shape": "square"
+       }
+      },
+      {
+       "$photo": {
+        "q": "Berry ice lollies on a plate with ice cubes",
+        "alt": "Berry ice lollies on a plate with ice cubes",
+        "shape": "square"
+       }
+      },
+      {
+       "$photo": {
+        "q": "A blue ice cream cone held up against a yellow wall",
+        "alt": "A blue ice cream cone held up against a yellow wall",
+        "shape": "portrait"
+       }
+      },
+      {
+       "$photo": {
+        "q": "A hand holding an ice cream cone against a blue wall",
+        "alt": "A hand holding an ice cream cone against a blue wall",
+        "shape": "portrait"
+       }
+      },
+      {
+       "$photo": {
+        "q": "Two hands holding strawberry ice cream cones",
+        "alt": "Two hands holding strawberry ice cream cones",
+        "shape": "portrait"
+       }
+      },
+      {
+       "$photo": {
+        "q": "Scoops of pista ice cream with almonds and pistachios",
+        "alt": "Scoops of pista ice cream with almonds and pistachios",
+        "shape": "square"
+       }
+      }
+     ],
+     "speed": 45
+    },
+    {
+     "type": "index",
+     "anchor": "menu",
+     "eyebrow": "At the parlour",
+     "title": "The *counter*",
+     "items": [
+      {
+       "title": "Kesar pista kulfi",
+       "meta": "₹80",
+       "media": {
+        "$photo": {
+         "q": "Hands holding kesar kulfi in clay pots",
+         "alt": "Hands holding kesar kulfi in clay pots",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "title": "Mango kulfi",
+       "meta": "₹90 · summer",
+       "media": {
+        "$photo": {
+         "q": "Mango kulfi on sticks with pistachios and fresh mango",
+         "alt": "Mango kulfi on sticks with pistachios and fresh mango",
+         "shape": "square"
+        }
+       }
+      },
+      {
+       "title": "Rose falooda",
+       "meta": "₹160",
+       "media": {
+        "$photo": {
+         "q": "A glass of falooda with rose syrup and pistachios",
+         "alt": "A glass of falooda with rose syrup and pistachios",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "title": "Pista scoop",
+       "meta": "₹120",
+       "media": {
+        "$photo": {
+         "q": "Scoops of pista ice cream with almonds and pistachios",
+         "alt": "Scoops of pista ice cream with almonds and pistachios",
+         "shape": "square"
+        }
+       }
+      },
+      {
+       "title": "Fruit lollies",
+       "meta": "₹60 · order online",
+       "href": "/shop/",
+       "media": {
+        "$photo": {
+         "q": "Fruit ice lollies with slices of orange, kiwi and watermelon",
+         "alt": "Fruit ice lollies with slices of orange, kiwi and watermelon",
+         "shape": "square"
+        }
+       }
+      }
+     ]
+    },
+    {
+     "type": "reel",
+     "eyebrow": "Scoops and lollies",
+     "title": "Pick a *colour*",
+     "items": [
+      {
+       "media": {
+        "$photo": {
+         "q": "A blue ice cream cone held up against a yellow wall",
+         "alt": "A blue ice cream cone held up against a yellow wall",
+         "shape": "portrait"
+        }
+       },
+       "title": "Blue malai scoop",
+       "text": "In a waffle cone made that morning."
+      },
+      {
+       "media": {
+        "$photo": {
+         "q": "Two hands holding strawberry ice cream cones",
+         "alt": "Two hands holding strawberry ice cream cones",
+         "shape": "portrait"
+        }
+       },
+       "title": "Strawberry, twice",
+       "text": "Two scoops, two cones, one Sunday."
+      },
+      {
+       "media": {
+        "$photo": {
+         "q": "Four orange ice lollies on a dark plate",
+         "alt": "Four orange ice lollies on a dark plate",
+         "shape": "square"
+        }
+       },
+       "title": "Orange lollies",
+       "text": "Squeezed Nagpur oranges, nothing else."
+      },
+      {
+       "media": {
+        "$photo": {
+         "q": "Berry ice lollies on a plate with ice cubes",
+         "alt": "Berry ice lollies on a plate with ice cubes",
+         "shape": "square"
+        }
+       },
+       "title": "Berry lollies",
+       "text": "Tart, deep red and very cold."
+      },
+      {
+       "media": {
+        "$photo": {
+         "q": "A hand holding an ice cream cone against a blue wall",
+         "alt": "A hand holding an ice cream cone against a blue wall",
+         "shape": "portrait"
+        }
+       },
+       "title": "Vanilla malai",
+       "text": "The one grandparents order."
+      }
+     ]
+    },
+    {
+     "type": "stats",
+     "items": [
+      {
+       "value": "1978",
+       "label": "Chapel Road, since"
+      },
+      {
+       "value": "14",
+       "label": "flavours in season"
+      },
+      {
+       "value": "6 hrs",
+       "label": "to reduce the milk"
+      }
+     ]
+    },
+    {
+     "type": "pinned",
+     "anchor": "parties",
+     "eyebrow": "Parties & weddings",
+     "title": "Bring the *cart*",
+     "text": "A kulfi cart and two of our team at your mehendi, office party or birthday, anywhere in Mumbai.",
+     "cta": {
+      "label": "Ask on WhatsApp",
+      "href": "https://wa.me/919820011978"
+     },
+     "items": [
+      {
+       "title": "The kulfi *cart*",
+       "text": "Painted, lit and stocked with six flavours for 100 to 500 guests.",
+       "media": {
+        "$photo": {
+         "q": "A kulfi seller serving from a painted cart",
+         "alt": "A kulfi seller serving from a painted cart",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "title": "Boxes of *fifty*",
+       "text": "Kulfi sticks packed in dry ice, delivered to your door the same day.",
+       "media": {
+        "$photo": {
+         "q": "Mango kulfi on sticks with pistachios and fresh mango",
+         "alt": "Mango kulfi on sticks with pistachios and fresh mango",
+         "shape": "square"
+        }
+       }
+      },
+      {
+       "title": "Falooda *bar*",
+       "text": "A counter where guests build their own falooda. Very popular at sangeets."
+      }
+     ]
+    },
+    {
+     "type": "faq",
+     "title": "Good *questions*",
+     "items": [
+      {
+       "q": "How do the boxes stay frozen?",
+       "a": "We pack them in insulated bags with dry ice. They stay frozen for four hours, so put them straight in the freezer when they arrive."
+      },
+      {
+       "q": "Is your kulfi eggless?",
+       "a": "Yes. Everything we make is vegetarian and eggless. The rose lollies contain white chocolate."
+      },
+      {
+       "q": "Do you deliver outside Mumbai?",
+       "a": "Not yet. We deliver across Mumbai and Thane, free on orders over ₹799."
+      }
+     ]
+    },
+    {
+     "type": "contact",
+     "eyebrow": "Visit",
+     "title": "22 *Chapel Road*",
+     "media": {
+      "$photo": {
+       "q": "Falooda from above, topped with pistachios and jelly",
+       "alt": "Falooda from above, topped with pistachios and jelly",
+       "shape": "square"
+      }
+     }
+    },
+    {
+     "type": "cta",
+     "eyebrow": "Hot day?",
+     "headline": "Kulfi's *on us*... almost",
+     "ctas": [
+      {
+       "label": "Order a box",
+       "href": "/shop/"
+      }
+     ],
+     "tone": "pop"
+    }
+   ]
+  },
+  {
+   "path": "/shop/",
+   "title": "Shop kulfi boxes",
+   "description": "Kulfi boxes, falooda kits and fruit lollies from Kulfi Club, Bandra, delivered frozen across Mumbai. Free delivery over ₹799.",
+   "sections": [
+    {
+     "type": "shop",
+     "eyebrow": "Delivered frozen",
+     "title": "Kulfi to your *door*"
+    }
+   ]
+  }
+ ],
+ "products": [
+  {
+   "name": "Kesar Pista Kulfi, box of 6",
+   "description": "Our first recipe: milk reduced for six hours with saffron and Iranian pistachios, set in clay pots.",
+   "price": 420,
+   "category": "Kulfi",
+   "featured": true,
+   "badges": [
+    "Bestseller"
+   ],
+   "photo": {
+    "$photo": {
+     "q": "Hands holding kesar kulfi in clay pots",
+     "alt": "Hands holding kesar kulfi in clay pots",
+     "shape": "portrait"
+    }
+   }
+  },
+  {
+   "name": "Mango Kulfi Sticks, box of 6",
+   "description": "Ratnagiri Alphonso folded into malai kulfi, on sticks. Summer only.",
+   "price": 480,
+   "category": "Kulfi",
+   "featured": true,
+   "badges": [
+    "Seasonal"
+   ],
+   "photo": {
+    "$photo": {
+     "q": "Mango kulfi on sticks with pistachios and fresh mango",
+     "alt": "Mango kulfi on sticks with pistachios and fresh mango",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Falooda Kit for 4",
+   "description": "Rose syrup, sabja seeds, vermicelli and four kulfi pots. Build it at home in two minutes.",
+   "price": 560,
+   "category": "Falooda",
+   "featured": true,
+   "photo": {
+    "$photo": {
+     "q": "Falooda from above, topped with pistachios and jelly",
+     "alt": "Falooda from above, topped with pistachios and jelly",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Fruit Lollies, box of 8",
+   "description": "Real fruit, no colours: orange, kiwi, watermelon and kala khatta.",
+   "price": 380,
+   "category": "Lollies",
+   "featured": true,
+   "photo": {
+    "$photo": {
+     "q": "Fruit ice lollies with slices of orange, kiwi and watermelon",
+     "alt": "Fruit ice lollies with slices of orange, kiwi and watermelon",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Rose Malai Lollies, box of 6",
+   "description": "Gulkand and malai with a white chocolate drizzle.",
+   "price": 400,
+   "category": "Lollies",
+   "photo": {
+    "$photo": {
+     "q": "Two pink ice lollies with icing on a bed of ice",
+     "alt": "Two pink ice lollies with icing on a bed of ice",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Pista Scoop Tub, 500 ml",
+   "description": "Churned pista ice cream with roasted almonds for scooping at home.",
+   "price": 360,
+   "category": "Scoops",
+   "photo": {
+    "$photo": {
+     "q": "Scoops of pista ice cream with almonds and pistachios",
+     "alt": "Scoops of pista ice cream with almonds and pistachios",
+     "shape": "square"
+    }
+   }
+  }
+ ]
+}

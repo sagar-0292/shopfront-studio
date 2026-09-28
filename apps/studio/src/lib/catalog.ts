@@ -12,6 +12,7 @@ export const SITE_TYPES = [
   { key: 'events', label: 'Events & tickets' },
   { key: 'portfolio', label: 'Portfolio' },
   { key: 'ngo', label: 'NGO & donations' },
+  { key: 'other', label: 'Other' },
 ] as const;
 export type SiteType = (typeof SITE_TYPES)[number]['key'];
 

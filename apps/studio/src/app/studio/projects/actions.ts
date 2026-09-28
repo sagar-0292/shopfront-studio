@@ -17,6 +17,12 @@ function siteTypes(form: FormData) {
   if (!types.length) throw new UserError('Please pick at least one website type.');
   return types;
 }
+/** What "Other" means for this website, in the team's own words. */
+function siteTypeOther(form: FormData, types: string[]) {
+  const v = text(form, 'site_type_other', { label: 'the other kind of website', max: 160 });
+  if (types.includes('other') && !v) throw new UserError('You picked “Other”: please describe the kind of website.');
+  return types.includes('other') ? v : '';
+}
 function languages(form: FormData) {
   const langs = form.getAll('languages').map(String).filter((l) => LANGUAGES.some((x) => x.key === l));
   return langs.length ? langs : ['en'];
@@ -53,6 +59,7 @@ export const createProject = safe(async (form) => {
   const { ctx, agency } = await requireAgency();
   const name = text(form, 'name', { required: true, label: 'the project name', max: 160 });
   const types = siteTypes(form);
+  const other = siteTypeOther(form, types);
   const langs = languages(form);
   const businessKind = text(form, 'business_kind', { label: 'the kind of business', max: 160 });
   const existingClient = String(form.get('client_id') ?? '');
@@ -71,9 +78,9 @@ export const createProject = safe(async (form) => {
     }
     const slug = await uniqueSlug(db, agency.organisation_id, slugify(name));
     const site = await db.one<{ id: string }>(
-      `insert into sites (client_id, name, slug, site_types, business_kind, languages, created_by, motion_kit_version, commerce_kit_version, design_kit_version)
-       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) returning id`,
-      [clientId, name, slug, types, businessKind, langs, ctx.user.id, kits.motion.latest, kits.commerce.latest, kits.design.latest],
+      `insert into sites (client_id, name, slug, site_types, site_type_other, business_kind, languages, created_by, motion_kit_version, commerce_kit_version, design_kit_version)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning id`,
+      [clientId, name, slug, types, other, businessKind, langs, ctx.user.id, kits.motion.latest, kits.commerce.latest, kits.design.latest],
     );
     await db.query(`insert into site_assignees (site_id, user_id) values ($1, $2)`, [site!.id, ctx.user.id]);
     return site!.id;
@@ -90,13 +97,15 @@ export const updateProject = safe(async (form) => {
   const domainRaw = text(form, 'primary_domain', { label: 'domain', max: 200 }).toLowerCase().replace(/^https?:\/\//, '').replace(/\/.*$/, '');
   if (domainRaw && !/^([a-z0-9-]+\.)+[a-z]{2,}$/.test(domainRaw)) throw new UserError('The domain should look like mithaimarket.in (no https:// or slashes).');
   const slugInput = slugify(text(form, 'slug', { label: 'web address', max: 60 }) || name);
+  const types = siteTypes(form);
+  const other = siteTypeOther(form, types);
 
   await withUser(ctx.user, async (db) => {
     const slug = await uniqueSlug(db, agency.organisation_id, slugInput, id);
     const updated = await db.query(
-      `update sites set name = $2, slug = $3, status = $4, site_types = $5, business_kind = $6, languages = $7, primary_domain = $8
+      `update sites set name = $2, slug = $3, status = $4, site_types = $5, business_kind = $6, languages = $7, primary_domain = $8, site_type_other = $9
        where id = $1 returning id`,
-      [id, name, slug, status, siteTypes(form), text(form, 'business_kind', { label: 'kind of business', max: 160 }), languages(form), domainRaw || null],
+      [id, name, slug, status, types, text(form, 'business_kind', { label: 'kind of business', max: 160 }), languages(form), domainRaw || null, other],
     );
     if (!updated.length) throw new UserError('This project could not be found, or you no longer have access to it.');
   });

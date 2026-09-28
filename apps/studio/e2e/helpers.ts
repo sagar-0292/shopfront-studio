@@ -3,7 +3,9 @@ import { test as base, expect, type Page } from '@playwright/test';
 /** Like Playwright's `test`, but every page load waits until the page is interactive. */
 export const test = base.extend({
   page: async ({ page }, provide) => {
-    const wait = () => page.waitForFunction(() => document.documentElement.dataset.hydrated === '1');
+    // Client websites (kits and website previews) aren't the studio app, so they don't signal it.
+    const wait = () => page.waitForFunction(() => document.documentElement.dataset.hydrated === '1'
+      || location.pathname.startsWith('/kits/') || location.pathname.includes('/website/preview'));
     const goto = page.goto.bind(page);
     const reload = page.reload.bind(page);
     page.goto = async (...a) => { const r = await goto(...a); await wait(); return r; };

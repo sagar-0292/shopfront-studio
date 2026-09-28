@@ -1,0 +1,488 @@
+{
+ "tagline": "Cutting chai, bun maska and vada pav. Dadar West, till 1 am.",
+ "description": "Tapri is a chai bar in Dadar West, Mumbai: cutting chai brewed to order, kulhad chai, vada pav and samosas, and our masala blends to take home.",
+ "businessType": "CafeOrCoffeeShop",
+ "palette": {
+  "bg": "#1e3bd6",
+  "surface": "#2743d9",
+  "ink": "#f4efe6",
+  "muted": "#dde2fa",
+  "line": "#4a63e3",
+  "accent": "#ffd23f",
+  "accentInk": "#141210"
+ },
+ "announcement": {
+  "text": "Free delivery on chai blends over ₹499 across Mumbai",
+  "href": "/shop/"
+ },
+ "nav": [
+  {
+   "label": "Shop blends",
+   "href": "/shop/"
+  },
+  {
+   "label": "How we brew",
+   "href": "/#how-we-brew"
+  },
+  {
+   "label": "Menu",
+   "href": "/#menu"
+  },
+  {
+   "label": "Find us",
+   "href": "/#visit"
+  }
+ ],
+ "pages": [
+  {
+   "path": "/",
+   "title": "Tapri — Cutting chai bar in Dadar West, Mumbai",
+   "description": "Cutting chai brewed to order, kulhad chai, vada pav and samosas in Dadar West, open till 1 am. Order our masala chai blends online.",
+   "sections": [
+    {
+     "type": "hero",
+     "variant": "wordmark",
+     "eyebrow": "Chai bar · Dadar West",
+     "headline": "Cutting chai, *loud and proud*",
+     "lede": "Brewed hard, pulled high, poured half a glass at a time. Open from 7 am until the last train and a bit after.",
+     "ctas": [
+      {
+       "label": "Shop our blends",
+       "href": "/shop/"
+      },
+      {
+       "label": "Find the counter",
+       "href": "#visit"
+      }
+     ],
+     "media": {
+      "$photo": {
+       "q": "Chai poured from a height at a tea stall, steam rising",
+       "alt": "Chai poured from a height at a tea stall, steam rising",
+       "shape": "wide"
+      }
+     },
+     "sticker": "Open till 1 am"
+    },
+    {
+     "type": "marquee",
+     "items": [
+      "Cutting chai",
+      "Kulhad",
+      "Bun maska",
+      "Vada pav",
+      "Adrak",
+      "Elaichi"
+     ],
+     "speed": 70
+    },
+    {
+     "type": "photostrip",
+     "items": [
+      {
+       "$photo": {
+        "q": "Chai poured from a brass kettle",
+        "alt": "Chai poured from a brass kettle",
+        "shape": "portrait"
+       }
+      },
+      {
+       "$photo": {
+        "q": "Chai poured into a row of small glasses",
+        "alt": "Chai poured into a row of small glasses",
+        "shape": "portrait"
+       }
+      },
+      {
+       "$photo": {
+        "q": "Tea poured into a clay cup, steam rising",
+        "alt": "Tea poured into a clay cup, steam rising",
+        "shape": "portrait"
+       }
+      },
+      {
+       "$photo": {
+        "q": "A colourful roadside tea stall",
+        "alt": "A colourful roadside tea stall",
+        "shape": "portrait"
+       }
+      },
+      {
+       "$photo": {
+        "q": "Vada pav with fried green chillies and chutney",
+        "alt": "Vada pav with fried green chillies and chutney",
+        "shape": "square"
+       }
+      },
+      {
+       "$photo": {
+        "q": "Samosas with green and tamarind chutney",
+        "alt": "Samosas with green and tamarind chutney",
+        "shape": "square"
+       }
+      },
+      {
+       "$photo": {
+        "q": "A glass of creamy masala chai",
+        "alt": "A glass of creamy masala chai",
+        "shape": "portrait"
+       }
+      },
+      {
+       "$photo": {
+        "q": "Workers on a tea break, holding glasses of chai",
+        "alt": "Workers on a tea break, holding glasses of chai",
+        "shape": "portrait"
+       }
+      }
+     ],
+     "speed": 40
+    },
+    {
+     "type": "scrolly",
+     "anchor": "how-we-brew",
+     "eyebrow": "How we brew",
+     "title": "How a *cutting* is made",
+     "steps": [
+      {
+       "eyebrow": "Four minutes",
+       "title": "Boil it *hard*",
+       "text": "Assam CTC, water and crushed ginger go on a high flame. Four minutes, no shortcuts, no tea bags.",
+       "media": {
+        "$photo": {
+         "q": "Chai poured from a brass kettle",
+         "alt": "Chai poured from a brass kettle",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "eyebrow": "Twice",
+       "title": "Pull it *high*",
+       "text": "Milk goes in and we pour from a height, twice, until the chai froths and the spices open up.",
+       "media": {
+        "$photo": {
+         "q": "Tea poured from a height into a steel pot",
+         "alt": "Tea poured from a height into a steel pot",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "eyebrow": "Half a glass",
+       "title": "Cut it in *half*",
+       "text": "That's a cutting: strong enough to wake you, small enough to have two. ₹20 a glass.",
+       "media": {
+        "$photo": {
+         "q": "Chai poured into a row of small glasses",
+         "alt": "Chai poured into a row of small glasses",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "eyebrow": "Or in clay",
+       "title": "Take it in a *kulhad*",
+       "text": "Ask for kulhad chai and it comes in a hand-thrown clay cup that adds its own earthy smell.",
+       "media": {
+        "$photo": {
+         "q": "Tea poured into a clay cup, steam rising",
+         "alt": "Tea poured into a clay cup, steam rising",
+         "shape": "portrait"
+        }
+       }
+      }
+     ],
+     "backdrop": "grid"
+    },
+    {
+     "type": "index",
+     "anchor": "menu",
+     "eyebrow": "On the counter",
+     "title": "The *menu*",
+     "items": [
+      {
+       "title": "Cutting chai",
+       "meta": "₹20",
+       "media": {
+        "$photo": {
+         "q": "A glass of creamy masala chai",
+         "alt": "A glass of creamy masala chai",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "title": "Kulhad chai",
+       "meta": "₹35",
+       "media": {
+        "$photo": {
+         "q": "Masala chai in clay kulhads",
+         "alt": "Masala chai in clay kulhads",
+         "shape": "square"
+        }
+       }
+      },
+      {
+       "title": "Vada pav",
+       "meta": "₹30",
+       "media": {
+        "$photo": {
+         "q": "Vada pav with fried green chillies and chutney",
+         "alt": "Vada pav with fried green chillies and chutney",
+         "shape": "square"
+        }
+       }
+      },
+      {
+       "title": "Samosa, two",
+       "meta": "₹40",
+       "media": {
+        "$photo": {
+         "q": "Samosas with green and tamarind chutney",
+         "alt": "Samosas with green and tamarind chutney",
+         "shape": "square"
+        }
+       }
+      },
+      {
+       "title": "Masala blend",
+       "meta": "₹280 · take home",
+       "href": "/shop/",
+       "media": {
+        "$photo": {
+         "q": "Cinnamon sticks and whole spices on a wooden plate",
+         "alt": "Cinnamon sticks and whole spices on a wooden plate",
+         "shape": "square"
+        }
+       }
+      }
+     ],
+     "backdrop": "pop"
+    },
+    {
+     "type": "products",
+     "eyebrow": "Take Tapri home",
+     "title": "Our *blends*",
+     "featured": true,
+     "limit": 4,
+     "link": {
+      "label": "See the shop",
+      "href": "/shop/"
+     },
+     "backdrop": "dots"
+    },
+    {
+     "type": "pinned",
+     "eyebrow": "Why Tapri",
+     "title": "The corner stall, *cleaned up*",
+     "text": "Everything you love about roadside chai, with filtered water, fresh milk twice a day and a counter you can lean on.",
+     "cta": {
+      "label": "Order a blend",
+      "href": "/shop/"
+     },
+     "items": [
+      {
+       "title": "Brewed to *order*",
+       "text": "Every glass is boiled fresh. Nothing sits in a flask.",
+       "media": {
+        "$photo": {
+         "q": "A glass of masala chai with fresh ginger",
+         "alt": "A glass of masala chai with fresh ginger",
+         "shape": "square"
+        }
+       }
+      },
+      {
+       "title": "Real *kulhads*",
+       "text": "Clay cups from Khurja, used once and returned to the earth.",
+       "media": {
+        "$photo": {
+         "q": "Masala chai in clay kulhads",
+         "alt": "Masala chai in clay kulhads",
+         "shape": "square"
+        }
+       }
+      },
+      {
+       "title": "Open *late*",
+       "text": "From 7 am to 1 am, every day, rain or IPL final.",
+       "media": {
+        "$photo": {
+         "q": "A colourful roadside tea stall",
+         "alt": "A colourful roadside tea stall",
+         "shape": "portrait"
+        }
+       }
+      }
+     ],
+     "backdrop": "accent"
+    },
+    {
+     "type": "reel",
+     "eyebrow": "Four counters",
+     "title": "Our *tapris*",
+     "items": [
+      {
+       "media": {
+        "$photo": {
+         "q": "A colourful roadside tea stall",
+         "alt": "A colourful roadside tea stall",
+         "shape": "portrait"
+        }
+       },
+       "title": "Dadar West",
+       "text": "Gokhale Road, opposite the flower market."
+      },
+      {
+       "media": {
+        "$photo": {
+         "q": "Workers on a tea break, holding glasses of chai",
+         "alt": "Workers on a tea break, holding glasses of chai",
+         "shape": "portrait"
+        }
+       },
+       "title": "Lower Parel",
+       "text": "Outside the mill gates, from 7 am."
+      },
+      {
+       "media": {
+        "$photo": {
+         "q": "Chai poured into a row of small glasses",
+         "alt": "Chai poured into a row of small glasses",
+         "shape": "portrait"
+        }
+       },
+       "title": "Fort",
+       "text": "Behind Flora Fountain."
+      },
+      {
+       "media": {
+        "$photo": {
+         "q": "Tea poured from a height into a steel pot",
+         "alt": "Tea poured from a height into a steel pot",
+         "shape": "portrait"
+        }
+       },
+       "title": "Bandra",
+       "text": "Near the station, till 1 am."
+      }
+     ],
+     "backdrop": "glow"
+    },
+    {
+     "type": "faq",
+     "title": "Good *questions*",
+     "items": [
+      {
+       "q": "Do you deliver chai?",
+       "a": "Hot chai doesn't travel well, so we only deliver our blends and kulhad sets. Delivery is free across Mumbai on orders over ₹499."
+      },
+      {
+       "q": "Can you do chai for an office or a wedding?",
+       "a": "Yes. We bring a counter, a brewer and kulhads for 50 to 500 people. Message us on WhatsApp with the date."
+      },
+      {
+       "q": "Is there sugar-free chai?",
+       "a": "Ask at the counter. We brew it without sugar and you add jaggery or nothing at all."
+      }
+     ],
+     "backdrop": "dots"
+    },
+    {
+     "type": "contact",
+     "eyebrow": "Find us",
+     "title": "Look for the *red counter*"
+    },
+    {
+     "type": "cta",
+     "eyebrow": "Two cuttings",
+     "headline": "Chai's *on*",
+     "ctas": [
+      {
+       "label": "Shop our blends",
+       "href": "/shop/"
+      }
+     ],
+     "tone": "pop"
+    }
+   ]
+  },
+  {
+   "path": "/shop/",
+   "title": "Shop chai blends",
+   "description": "Tapri's masala and adrak chai blends, kulhad sets and gift boxes, delivered across India. Free delivery over ₹499 in Mumbai.",
+   "sections": [
+    {
+     "type": "shop",
+     "eyebrow": "Shop",
+     "title": "Chai to *take home*"
+    }
+   ]
+  }
+ ],
+ "products": [
+  {
+   "name": "Tapri Masala Blend, 250 g",
+   "description": "Assam CTC with cardamom, cinnamon, clove and black pepper, the way we brew it at the counter.",
+   "price": 280,
+   "category": "Chai blends",
+   "featured": true,
+   "badges": [
+    "Bestseller"
+   ],
+   "photo": {
+    "$photo": {
+     "q": "Cinnamon sticks and whole spices on a wooden plate",
+     "alt": "Cinnamon sticks and whole spices on a wooden plate",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Adrak Chai Blend, 250 g",
+   "description": "Strong CTC with dried ginger. Add fresh ginger too if you like it loud.",
+   "price": 260,
+   "category": "Chai blends",
+   "featured": true,
+   "photo": {
+    "$photo": {
+     "q": "A glass of masala chai with fresh ginger",
+     "alt": "A glass of masala chai with fresh ginger",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Kulhad Set of 6",
+   "description": "Hand-thrown clay cups from Khurja, the same ones on our counter.",
+   "price": 450,
+   "category": "Serveware",
+   "featured": true,
+   "photo": {
+    "$photo": {
+     "q": "Masala chai in clay kulhads",
+     "alt": "Masala chai in clay kulhads",
+     "shape": "square"
+    }
+   }
+  },
+  {
+   "name": "Chai & Rusk Box",
+   "description": "A masala blend and a tin of toast rusks for dipping. Makes a good gift.",
+   "price": 520,
+   "category": "Boxes",
+   "featured": true,
+   "badges": [
+    "Gift"
+   ],
+   "photo": {
+    "$photo": {
+     "q": "A glass of chai with toast rusks",
+     "alt": "A glass of chai with toast rusks",
+     "shape": "square"
+    }
+   }
+  }
+ ]
+}

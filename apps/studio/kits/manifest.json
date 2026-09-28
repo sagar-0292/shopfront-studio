@@ -30,8 +30,13 @@
     ]
   },
   "design": {
-    "latest": "1.2.0",
+    "latest": "1.3.0",
     "versions": [
+      {
+        "version": "1.3.0",
+        "released_at": "2026-09-29",
+        "notes": "A business's own logo can replace its name in the header (`site.logo`), sized to sit neatly on phones and computers."
+      },
       {
         "version": "1.2.0",
         "released_at": "2026-09-28",

@@ -129,7 +129,9 @@ function header(def: SiteDefT, page: Page, ctx: { base: string }): Raw {
   const wishlistPath = def.pages.find((p) => p.sections.some((s) => s.type === 'wishlist'))?.path;
   return html`<header class="d-header" data-sf-header="autohide">
   <div class="d-wrap d-header-in">
-    <a class="d-logo" href="${link(ctx, '/')}">${def.site.name}</a>
+    <a class="${cls('d-logo', def.site.logo && 'd-logo--image')}" href="${link(ctx, '/')}">${def.site.logo
+      ? html`<img src="${def.site.logo.src.startsWith('/') ? ctx.base + def.site.logo.src : def.site.logo.src}" alt="${def.site.name}" width="${def.site.logo.width}" height="${def.site.logo.height}">`
+      : def.site.name}</a>
     ${def.nav.length ? html`<nav class="d-nav" aria-label="Main">${nav}</nav>` : ''}
     <div class="d-header-actions">
       ${hasWishlist && wishlistPath ? html`<a class="d-icon-btn d-header-wish" href="${link(ctx, wishlistPath)}">${icon('heart')}<span class="d-sr">Wishlist</span> <b data-sf-wishlist-count>0</b></a>` : ''}

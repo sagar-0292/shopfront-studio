@@ -26,17 +26,20 @@ function Chips({ name, options, selected, legend }: { name: string; options: rea
   );
 }
 
-export function ProjectFields({ defaults }: { defaults?: { name?: string; site_types?: string[]; business_kind?: string; languages?: string[] } }) {
+export function ProjectFields({ defaults }: { defaults?: { name?: string; site_types?: string[]; business_kind?: string; languages?: string[]; site_type_other?: string } }) {
   return (
     <div className="space-y-5">
       <Field label="Project name" htmlFor="name" hint="Usually the business or brand name, e.g. “Mithai Market”.">
         <Input id="name" name="name" required maxLength={160} defaultValue={defaults?.name} />
       </Field>
-      <Field label="Kind of business" htmlFor="business_kind" hint="Type anything. The full picker of 150+ business kinds arrives with the AI pipeline.">
+      <Field label="Kind of business" htmlFor="business_kind" hint="Pick a suggestion or type any kind of business in your own words.">
         <Input id="business_kind" name="business_kind" list="business-kinds" maxLength={160} defaultValue={defaults?.business_kind} />
         <datalist id="business-kinds">{BUSINESS_EXAMPLES.map((b) => <option key={b} value={b} />)}</datalist>
       </Field>
       <Chips name="site_types" legend="Website type (pick one or more)" options={SITE_TYPES} selected={defaults?.site_types ?? ['informative']} />
+      <Field label="If “Other”, what kind of website?" htmlFor="site_type_other" hint="In your own words, e.g. “Temple trust with donations and event calendar”.">
+        <Input id="site_type_other" name="site_type_other" maxLength={160} defaultValue={defaults?.site_type_other} />
+      </Field>
       <Chips name="languages" legend="Languages" options={LANGUAGES} selected={defaults?.languages ?? ['en']} />
     </div>
   );

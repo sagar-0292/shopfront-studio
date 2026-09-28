@@ -104,6 +104,36 @@ function withPhotos(value, used) {
     return { src: p.src, srcset: p.srcset, width: p.width, height: p.height, alt: p.alt };
   });
 }
+// A sample site in the same shape Claude answers in (see apps/studio/src/lib/website): the studio puts the
+// sample for the chosen look into each brief, so Claude sees the standard it has to match.
+function toExample(def, catalog) {
+  const shape = (p) => { const a = Number(p.from.split(':')[2]); return a >= 1.5 ? 'wide' : a > 1.1 ? 'landscape' : a >= 0.95 ? 'square' : 'portrait'; };
+  const photo = (key) => { const p = photoLock[key]; return { $photo: { q: p.alt, alt: p.alt, shape: shape(p) } }; };
+  const conv = (x) => JSON.parse(JSON.stringify(x), (_k, v) => {
+    if (!v || typeof v !== 'object' || Array.isArray(v)) return v;
+    if (typeof v.$photo === 'string') return photo(v.$photo);
+    if (v.image && v.image.$photo && Object.keys(v).length === 1) return v.image; // media is written as the photo itself
+    return v;
+  });
+  const rupees = (p) => (p == null ? undefined : p / 100);
+  const products = (catalog.products ?? []).map((p) => ({
+    name: p.name, description: p.description, price: rupees(p.price_paise), ...(p.mrp_paise ? { mrp: rupees(p.mrp_paise) } : {}),
+    category: p.category?.name, ...(p.featured ? { featured: true } : {}), ...(p.badges ? { badges: p.badges } : {}),
+    ...(p.variants ? { variants: p.variants.map((v) => ({ label: v.label, price: rupees(v.price_paise) })) } : {}),
+    photo: conv(p.image),
+  }));
+  const b = catalog.bookings;
+  const bookings = b ? {
+    services: b.services.map((sv) => ({ name: sv.name, minutes: sv.duration_minutes, ...(sv.price_paise ? { price: rupees(sv.price_paise) } : {}) })),
+    days: Object.keys(b.hours), open: Object.values(b.hours)[0][0][0], close: Object.values(b.hours)[0].at(-1)[1], slotMinutes: b.slot_minutes, capacity: b.capacity,
+  } : undefined;
+  return {
+    tagline: def.site.tagline, description: def.site.description, businessType: def.site.businessType,
+    ...(def.palette ? { palette: def.palette } : {}), ...(def.announcement ? { announcement: def.announcement } : {}),
+    nav: def.nav ?? [], pages: conv(def.pages), ...(products.length ? { products } : {}), ...(bookings ? { bookings } : {}),
+  };
+}
+
 const creditsHtml = (used) => {
   const people = [...used.values()];
   if (!people.length) return '';
@@ -145,7 +175,10 @@ for (const id of readdirSync(sitesSrc).sort()) {
     if (f.endsWith('.json')) body = JSON.stringify(withPhotos(JSON.parse(body), used), (k, v) => (k === 'src' && typeof v === 'string' ? at(v) : k === 'srcset' && typeof v === 'string' ? v.split(', ').map((p) => { const [u, w] = p.split(' '); return `${at(u)} ${w}`; }).join(', ') : v), 1) + '\n';
     siteFiles[join(id, f)] = body;
   }
-  const def = withPhotos(JSON.parse(readFileSync(join(sitesSrc, id, 'site.json'), 'utf8')), used);
+  const raw = JSON.parse(readFileSync(join(sitesSrc, id, 'site.json'), 'utf8'));
+  const rawCatalog = existsSync(join(sitesSrc, id, 'data/catalog.json')) ? JSON.parse(readFileSync(join(sitesSrc, id, 'data/catalog.json'), 'utf8')) : {};
+  siteFiles[join(id, 'example.json')] = JSON.stringify(toExample(raw, rawCatalog), null, 1) + '\n';
+  const def = withPhotos(raw, used);
   def.credits = [...used.values()];
   for (const [path, html] of Object.entries(renderSite(def, { base, versions, styles }))) siteFiles[join(id, path)] = html;
 }

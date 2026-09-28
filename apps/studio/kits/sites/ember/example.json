@@ -1,0 +1,440 @@
+{
+ "tagline": "Kitchen & bar. Cooked over fire in Lower Parel.",
+ "description": "Ember is a wood-fire kitchen and cocktail bar in Lower Parel, Mumbai, cooking coastal and North-West Frontier food over charcoal and mango wood.",
+ "businessType": "Restaurant",
+ "nav": [
+  {
+   "label": "Menu",
+   "href": "/menu/"
+  },
+  {
+   "label": "The fire",
+   "href": "/#the-fire"
+  },
+  {
+   "label": "Book a table",
+   "href": "/#book"
+  },
+  {
+   "label": "Find us",
+   "href": "/#visit"
+  }
+ ],
+ "pages": [
+  {
+   "path": "/",
+   "title": "Ember — Wood-fire kitchen & bar in Lower Parel, Mumbai",
+   "description": "Coastal and Frontier food cooked over charcoal and mango wood, with a cocktail bar. Kamala Mills, Lower Parel. Book a table online.",
+   "sections": [
+    {
+     "type": "hero",
+     "variant": "fullbleed",
+     "eyebrow": "Kamala Mills · Lower Parel",
+     "headline": "Cooked over *fire*",
+     "lede": "Charcoal, mango wood and a kitchen with no gas line. Coastal and Frontier food, a long bar, and a room that stays warm until 1 am.",
+     "ctas": [
+      {
+       "label": "Book a table",
+       "href": "#book"
+      },
+      {
+       "label": "See the menu",
+       "href": "/menu/"
+      }
+     ],
+     "media": {
+      "$photo": {
+       "q": "Glowing charcoal in a grill",
+       "alt": "Glowing charcoal in a grill",
+       "shape": "wide"
+      }
+     }
+    },
+    {
+     "type": "marquee",
+     "items": [
+      "Charcoal",
+      "Mango wood",
+      "Tandoor",
+      "Sigri",
+      "Smoke",
+      "Cocktails"
+     ],
+     "outline": true,
+     "speed": 50
+    },
+    {
+     "type": "statement",
+     "anchor": "the-fire",
+     "eyebrow": "The fire",
+     "text": "There is no gas in our kitchen. Everything — the bread, the fish, the *dal* — touches flame.",
+     "meta": [
+      "Sigri grill",
+      "Two tandoors",
+      "Wood oven"
+     ],
+     "backdrop": "glow"
+    },
+    {
+     "type": "bento",
+     "eyebrow": "From the fire",
+     "title": "Tonight, *on the coals*",
+     "tiles": [
+      {
+       "kind": "photo",
+       "media": {
+        "$photo": {
+         "q": "Flames rising over a grill",
+         "alt": "Flames rising over a grill",
+         "shape": "landscape"
+        }
+       },
+       "caption": "The sigri, lit at five",
+       "size": "big"
+      },
+      {
+       "kind": "photo",
+       "media": {
+        "$photo": {
+         "q": "Grilled lamb chops with a red chilli sauce",
+         "alt": "Grilled lamb chops with a red chilli sauce",
+         "shape": "portrait"
+        }
+       },
+       "caption": "Mango-wood lamb chops",
+       "size": "tall"
+      },
+      {
+       "kind": "stat",
+       "value": "900°",
+       "label": "Inside our tandoor",
+       "tone": "accent"
+      },
+      {
+       "kind": "photo",
+       "media": {
+        "$photo": {
+         "q": "Skewers cooking over open flames",
+         "alt": "Skewers cooking over open flames",
+         "shape": "landscape"
+        }
+       },
+       "caption": "Skewers over open flame",
+       "size": "normal"
+      },
+      {
+       "kind": "photo",
+       "media": {
+        "$photo": {
+         "q": "A bowl of spicy curry on a dark wooden table",
+         "alt": "A bowl of spicy curry on a dark wooden table",
+         "shape": "landscape"
+        }
+       },
+       "caption": "Dal Ember, cooked overnight",
+       "size": "wide"
+      },
+      {
+       "kind": "text",
+       "title": "Zero *gas burners*",
+       "text": "Just charcoal, mango wood and two clay tandoors.",
+       "size": "wide",
+       "tone": "surface"
+      }
+     ],
+     "backdrop": "grid"
+    },
+    {
+     "type": "menu",
+     "eyebrow": "Tonight",
+     "title": "From the *fire*",
+     "note": "A small selection — see the full menu. Prices include GST. Please tell us about any allergies.",
+     "categories": [
+      {
+       "name": "Small plates",
+       "items": [
+        {
+         "name": "Charred corn bhel",
+         "description": "Sigri corn, raw mango, peanut, sev",
+         "price_paise": 42000,
+         "diet": "veg"
+        },
+        {
+         "name": "Bombay duck, crisp",
+         "description": "Rice flour, kokum salt, green chilli",
+         "price_paise": 56000,
+         "diet": "nonveg"
+        }
+       ]
+      },
+      {
+       "name": "From the tandoor",
+       "items": [
+        {
+         "name": "Smoked paneer tikka",
+         "description": "Hung curd, kasuri methi, charcoal",
+         "price_paise": 58000,
+         "diet": "veg"
+        },
+        {
+         "name": "Mango-wood lamb chops",
+         "description": "Kashmiri chilli, papaya, burnt onion",
+         "price_paise": 124000,
+         "diet": "nonveg"
+        }
+       ]
+      }
+     ],
+     "backdrop": "dark"
+    },
+    {
+     "type": "rows",
+     "items": [
+      {
+       "eyebrow": "The tandoor",
+       "title": "Bread that *blisters*",
+       "text": "Our kulchas slap onto 900° clay and come out charred at the edges, soft in the middle — two minutes, start to plate.",
+       "media": {
+        "$photo": {
+         "q": "Bread baking on the wall of a clay tandoor",
+         "alt": "Bread baking on the wall of a clay tandoor",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "eyebrow": "The kitchen",
+       "title": "An open *flame*, all night",
+       "text": "Sit at the eight-seat chef's counter and watch the fire work: sigri, tandoor and wood oven, ten feet away.",
+       "media": {
+        "$photo": {
+         "q": "A chef working a tall flame in the kitchen",
+         "alt": "A chef working a tall flame in the kitchen",
+         "shape": "portrait"
+        }
+       }
+      },
+      {
+       "eyebrow": "The bar",
+       "title": "Smoke in the *glass* too",
+       "text": "Cocktails built on Indian spirits, finished with charred citrus and mango-wood smoke.",
+       "media": {
+        "$photo": {
+         "q": "Whiskey poured over ice at a dimly lit bar",
+         "alt": "Whiskey poured over ice at a dimly lit bar",
+         "shape": "portrait"
+        }
+       },
+       "link": {
+        "label": "Book the counter",
+        "href": "#book"
+       }
+      }
+     ]
+    },
+    {
+     "type": "booking",
+     "eyebrow": "Reservations",
+     "title": "Take a *seat*",
+     "text": "Book a table for up to six, or the eight-seat chef's counter. For larger groups, message us on WhatsApp.",
+     "service": "table",
+     "days": 14,
+     "tone": "surface"
+    },
+    {
+     "type": "faq",
+     "title": "Before you *come*",
+     "items": [
+      {
+       "q": "Is there parking?",
+       "a": "Yes, paid parking inside Kamala Mills, and valet from 8 pm on weekends."
+      },
+      {
+       "q": "Do you have vegetarian dishes?",
+       "a": "About half the menu is vegetarian, marked with a green dot. Our kitchen cooks vegetarian food on separate grills."
+      },
+      {
+       "q": "Is there a dress code?",
+       "a": "Smart casual. We'd just like you to be comfortable."
+      }
+     ],
+     "backdrop": "grid"
+    },
+    {
+     "type": "contact",
+     "eyebrow": "Find us",
+     "title": "Kamala *Mills*",
+     "media": {
+      "$photo": {
+       "q": "A bar counter with backlit shelves of bottles",
+       "alt": "A bar counter with backlit shelves of bottles",
+       "shape": "landscape"
+      }
+     },
+     "backdrop": "dusk"
+    },
+    {
+     "type": "cta",
+     "headline": "The fire is *lit*",
+     "ctas": [
+      {
+       "label": "Book tonight",
+       "href": "#book"
+      }
+     ],
+     "tone": "accent",
+     "background": "particles"
+    }
+   ]
+  },
+  {
+   "path": "/menu/",
+   "title": "Menu",
+   "description": "Ember's full menu: small plates, tandoor, sigri, breads and desserts, all cooked over fire. Prices include GST.",
+   "sections": [
+    {
+     "type": "menu",
+     "eyebrow": "The menu",
+     "title": "Everything *touches flame*",
+     "note": "Prices include GST. A 10% service charge is optional. Please tell us about any allergies.",
+     "categories": [
+      {
+       "name": "Small plates",
+       "items": [
+        {
+         "name": "Charred corn bhel",
+         "description": "Sigri corn, raw mango, peanut, sev",
+         "price_paise": 42000,
+         "diet": "veg"
+        },
+        {
+         "name": "Ember-roast sweet potato chaat",
+         "description": "Tamarind, yoghurt, pomegranate",
+         "price_paise": 38000,
+         "diet": "veg"
+        },
+        {
+         "name": "Bombay duck, crisp",
+         "description": "Rice flour, kokum salt, green chilli",
+         "price_paise": 56000,
+         "diet": "nonveg"
+        },
+        {
+         "name": "Smoked egg bhurji pav",
+         "description": "Brown butter, chilli oil, ladi pav",
+         "price_paise": 36000,
+         "diet": "egg"
+        }
+       ]
+      },
+      {
+       "name": "From the tandoor",
+       "items": [
+        {
+         "name": "Smoked paneer tikka",
+         "description": "Hung curd, kasuri methi, charcoal",
+         "price_paise": 58000,
+         "diet": "veg"
+        },
+        {
+         "name": "Tandoori broccoli",
+         "description": "Cheddar, cashew, green chilli",
+         "price_paise": 52000,
+         "diet": "veg"
+        },
+        {
+         "name": "Mango-wood lamb chops",
+         "description": "Kashmiri chilli, papaya, burnt onion",
+         "price_paise": 124000,
+         "diet": "nonveg"
+        },
+        {
+         "name": "Tandoori pomfret",
+         "description": "Whole fish, green masala, lime",
+         "price_paise": 98000,
+         "diet": "nonveg"
+        }
+       ]
+      },
+      {
+       "name": "Sigri & sides",
+       "items": [
+        {
+         "name": "Dal Ember",
+         "description": "Black dal, cooked overnight on the embers",
+         "price_paise": 44000,
+         "diet": "veg"
+        },
+        {
+         "name": "Charcoal chicken",
+         "description": "Frontier-style, onion salad, mint",
+         "price_paise": 72000,
+         "diet": "nonveg"
+        },
+        {
+         "name": "Wood-oven kulcha",
+         "description": "Butter, nigella seeds",
+         "price_paise": 16000,
+         "diet": "veg"
+        }
+       ]
+      },
+      {
+       "name": "Desserts",
+       "items": [
+        {
+         "name": "Smoked kulfi",
+         "description": "Charred milk, pistachio, rose",
+         "price_paise": 34000,
+         "diet": "veg"
+        },
+        {
+         "name": "Burnt jaggery crème",
+         "description": "Coconut, sesame brittle",
+         "price_paise": 38000,
+         "diet": "egg"
+        }
+       ]
+      }
+     ],
+     "backdrop": "dark"
+    },
+    {
+     "type": "cta",
+     "headline": "Hungry *yet*?",
+     "ctas": [
+      {
+       "label": "Book a table",
+       "href": "/#book"
+      }
+     ],
+     "tone": "accent"
+    }
+   ]
+  }
+ ],
+ "bookings": {
+  "services": [
+   {
+    "name": "Table for dinner",
+    "minutes": 120
+   },
+   {
+    "name": "Chef's counter (8 seats)",
+    "minutes": 150
+   }
+  ],
+  "days": [
+   "tue",
+   "wed",
+   "thu",
+   "fri",
+   "sat",
+   "sun"
+  ],
+  "open": "19:00",
+  "close": "23:00",
+  "slotMinutes": 30,
+  "capacity": 6
+ }
+}

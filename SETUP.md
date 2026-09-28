@@ -12,7 +12,7 @@ Allow about an hour. Do the steps in order.
      backups and stops the project pausing after a week of no use.
 3. **Create the database tables and security rules:** open **SQL Editor → New query**, paste the whole of
    `supabase/migrations/20260925000001_foundation.sql`, click **Run**. It should say "Success. No rows returned".
-   Then do the same with `20260925000002_kit_versions.sql`, `20260925000003_references_payments.sql`, `20260926000004_design_direction.sql`, `20260928000005_more_design_directions.sql` and `20260928000006_colour_block_direction.sql`. (Later phases add more files to that folder;
+   Then do the same with `20260925000002_kit_versions.sql`, `20260925000003_references_payments.sql`, `20260926000004_design_direction.sql`, `20260928000005_more_design_directions.sql`, `20260928000006_colour_block_direction.sql` and `20260929000007_websites.sql`. (Later phases add more files to that folder;
    run each new one once, in name order.)
 4. **Create the app's limited database login.** In a new SQL Editor query, run this, replacing the password with a
    long random one (save it):
@@ -62,6 +62,7 @@ Allow about an hour. Do the steps in order.
    | `EMAIL_FROM` | `Your Agency <studio@youragency.in>` |
    | `PAYMENT_SECRETS_KEY` | encrypts shops' payment keys. Make one with `openssl rand -base64 32` (secret; keep a backup — without it saved keys can't be used) |
    | `RAZORPAY_PARTNER_CLIENT_ID` / `RAZORPAY_PARTNER_CLIENT_SECRET` | optional, from step 4 — turns on one-click "Connect Razorpay" |
+   | `PEXELS_API_KEY` | needed to build websites: the real stock photos. Free at [pexels.com/api](https://www.pexels.com/api/) (secret) |
 4. **Deploy.** The app runs in Vercel's Mumbai region (`bom1`), next to the database.
 5. **Settings → Domains:** add `studio.youragency.in` and create the DNS record Vercel shows you.
 
