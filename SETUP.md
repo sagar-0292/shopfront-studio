@@ -48,8 +48,8 @@ Allow about an hour. Do the steps in order.
 
 ## 3. Vercel (hosting the studio app)
 
-1. At [vercel.com](https://vercel.com) → **Add New → Project** → import the `sashah` GitHub repository.
-2. **Root Directory:** `shopfront/apps/studio`. Framework: Next.js (detected automatically).
+1. At [vercel.com](https://vercel.com) → **Add New → Project** → import the `shopfront-studio` GitHub repository.
+2. **Root Directory:** `apps/studio`. Framework: Next.js (detected automatically).
 3. **Environment Variables** (Production and Preview):
    | Name | Value |
    | --- | --- |

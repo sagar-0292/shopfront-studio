@@ -1,0 +1,56 @@
+name: Shopfront Studio checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache: false
+      - run: pnpm install --frozen-lockfile
+      - name: Build the login server (GoTrue)
+        run: bash scripts/build-gotrue.sh
+      - name: Code style and types
+        run: pnpm lint && pnpm typecheck
+      - name: Unit tests
+        run: pnpm test:unit
+      - name: Kit tests
+        run: pnpm test:kits
+      - name: Published kits match their source
+        run: pnpm kits:check
+      - name: Database security tests
+        run: pnpm test:db
+      - name: Install browser
+        run: pnpm --filter studio exec playwright install --with-deps chromium
+      - name: End-to-end tests
+        run: pnpm test:e2e
+        env:
+          CI: 'true'
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: apps/studio/playwright-report
