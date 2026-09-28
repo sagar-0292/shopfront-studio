@@ -63,6 +63,8 @@ Allow about an hour. Do the steps in order.
    | `PAYMENT_SECRETS_KEY` | encrypts shops' payment keys. Make one with `openssl rand -base64 32` (secret; keep a backup — without it saved keys can't be used) |
    | `RAZORPAY_PARTNER_CLIENT_ID` / `RAZORPAY_PARTNER_CLIENT_SECRET` | optional, from step 4 — turns on one-click "Connect Razorpay" |
    | `PEXELS_API_KEY` | needed to build websites: the real stock photos. Free at [pexels.com/api](https://www.pexels.com/api/) (secret) |
+   | `ANTHROPIC_API_KEY` | optional — turns on "Create website automatically". From [console.anthropic.com](https://console.anthropic.com) → API keys (pay per use; set a monthly limit under Billing). Without it, websites are made by copy-and-paste with your Claude subscription (secret) |
+   | `ANTHROPIC_MODEL` | optional — which Claude writes websites (default `claude-sonnet-5`, fast enough for the 5-minute hosting limit) |
 4. **Deploy.** The app runs in Vercel's Mumbai region (`bom1`), next to the database.
 5. **Settings → Domains:** add `studio.youragency.in` and create the DNS record Vercel shows you.
 

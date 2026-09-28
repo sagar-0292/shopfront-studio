@@ -189,3 +189,37 @@ describe('the brief', () => {
     expect(readdirSync(join(kits, 'design')).length).toBeGreaterThan(0);
   });
 });
+
+describe('asking Claude automatically', () => {
+  const stream = (events: object[]) => new Response(events.map((e) => `event: x\ndata: ${JSON.stringify(e)}\n\n`).join(''), { headers: { 'content-type': 'text/event-stream' } });
+  beforeEach(() => { process.env.ANTHROPIC_API_KEY = 'k'; });
+  afterEach(() => { delete process.env.ANTHROPIC_API_KEY; delete process.env.ANTHROPIC_MODEL; });
+
+  it('streams the reply, counts tokens, and sends the material with the brief', async () => {
+    const { askClaude } = await import('@/lib/website/claude');
+    let sent: { model: string; stream: boolean; max_tokens: number; messages: { content: { type: string; title?: string; source?: { media_type: string } }[] }[] } | null = null;
+    const f = (async (_u: unknown, init?: RequestInit) => {
+      sent = JSON.parse(String(init!.body));
+      expect((init!.headers as Record<string, string>)['x-api-key']).toBe('k');
+      return stream([{ type: 'message_start', message: { usage: { input_tokens: 100 } } }, { type: 'content_block_delta', delta: { type: 'text_delta', text: '{"a":' } },
+        { type: 'content_block_delta', delta: { type: 'text_delta', text: '1}' } }, { type: 'message_delta', delta: { stop_reason: 'end_turn' }, usage: { output_tokens: 7 } }]);
+    }) as typeof fetch;
+    const r = await askClaude('THE BRIEF', [{ kind: 'pdf', filename: 'menu.pdf', data: new Uint8Array([37, 80]) }, { kind: 'image', caption: 'Logo:', data: new Uint8Array([1]) }], f);
+    expect(r).toMatchObject({ text: '{"a":1}', model: 'claude-sonnet-5', inputTokens: 100, outputTokens: 7 });
+    expect(sent!.stream).toBe(true);
+    expect(sent!.messages[0].content.map((c) => c.type)).toEqual(['document', 'text', 'image', 'text']);
+    expect(sent!.messages[0].content[0]).toMatchObject({ title: 'menu.pdf', source: { media_type: 'application/pdf' } });
+  });
+
+  it('explains every problem in plain words', async () => {
+    const { askClaude } = await import('@/lib/website/claude');
+    const reply = (status: number, message: string) => (async () => new Response(JSON.stringify({ error: { message } }), { status })) as unknown as typeof fetch;
+    await expect(askClaude('b', [], reply(401, 'invalid x-api-key'))).rejects.toThrow(/refused the key/);
+    await expect(askClaude('b', [], reply(400, 'Your credit balance is too low to access the Anthropic API.'))).rejects.toThrow(/out of credit/);
+    await expect(askClaude('b', [], reply(529, 'Overloaded'))).rejects.toThrow(/busy/);
+    const cut = (async () => stream([{ type: 'content_block_delta', delta: { type: 'text_delta', text: '{' } }, { type: 'message_delta', delta: { stop_reason: 'max_tokens' } }])) as unknown as typeof fetch;
+    await expect(askClaude('b', [], cut)).rejects.toThrow(/longer than one answer allows/);
+    delete process.env.ANTHROPIC_API_KEY;
+    await expect(askClaude('b', [], cut)).rejects.toThrow(/ANTHROPIC_API_KEY/);
+  });
+});

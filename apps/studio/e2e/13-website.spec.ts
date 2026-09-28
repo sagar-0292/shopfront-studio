@@ -69,6 +69,7 @@ test('the team describes the business and uploads the logo; the brief for Claude
   await expect(page.getByRole('group', { name: 'Upload material' }).getByRole('status')).toContainText('Documents can be PDF, Word, PowerPoint or plain text');
 
   // The brief: business, look, logo colours, the document, and the example.
+  await page.getByText('Or do it yourself in claude.ai').click();
   await page.getByText(/See the brief/).click();
   const brief = await page.getByLabel('The brief for Claude').inputValue();
   expect(brief).toContain('- Name: Kapoor Dental');
@@ -92,6 +93,7 @@ test('pasting Claude’s answer builds the website, with plain-language help whe
   await page.getByRole('link', { name: 'Create website' }).click();
 
   // A cut-off answer.
+  await page.getByText('Or do it yourself in claude.ai').click();
   await page.getByLabel('Claude’s answer').fill(answer.slice(0, 500));
   await page.getByRole('button', { name: 'Build the website' }).click();
   await expect(alertIn(page)).toContainText('If Claude stopped part-way, type “continue”');
@@ -119,6 +121,28 @@ test('pasting Claude’s answer builds the website, with plain-language help whe
   await expect(frame.locator('.d-header .d-logo img')).toHaveAttribute('src', /\/website\/preview\/img\/own\/logo\.webp$/);
   await expect(page.locator('iframe[title="Website on a phone"]')).toHaveCount(1);
   await expect(page.getByRole('link', { name: 'Create website' })).toHaveCount(0);
+});
+
+test('“Create website automatically” sends the brief and the material to Claude, and builds its answer', async ({ page }) => {
+  test.setTimeout(120_000);
+  await logIn(page, FOUNDER);
+  await openProject(page, 'Kapoor Dental');
+  await page.getByRole('link', { name: 'Open the website builder' }).click();
+  await page.getByRole('button', { name: 'Create it again automatically' }).click();
+  await expect(page.getByText('Website created. Check the preview below')).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByText(/Written by Claude \(claude-sonnet-5\) in \d+ seconds, using 21,000 tokens\./)).toBeVisible();
+  // Claude received the brief, the logo (with a caption) and the price list.
+  const sent = await (await fetch('http://127.0.0.1:54328/last')).json() as { model: string; stream: boolean; blocks: { type: string; title?: string; media?: string; text?: string }[]; brief: string };
+  expect(sent.stream).toBe(true);
+  expect(sent.blocks).toEqual(expect.arrayContaining([
+    expect.objectContaining({ type: 'image', media: 'image/webp' }),
+    expect.objectContaining({ type: 'text', text: 'The business’s logo:' }),
+    expect.objectContaining({ type: 'document', title: 'price-list.txt', media: 'text/plain' }),
+  ]));
+  expect(sent.brief).toContain('- Name: Kapoor Dental');
+  expect(sent.brief).toContain('## The look: Quiet luxury');
+  const frame = page.frameLocator('iframe[title="Website on a computer"]');
+  await expect(frame.getByRole('heading', { level: 1, name: 'Slow days by the Arabian Sea' })).toBeAttached();
 });
 
 test('the full preview works page by page, and only the agency can see it', async ({ page, browser }) => {

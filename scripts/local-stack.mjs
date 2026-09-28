@@ -9,13 +9,13 @@
 // Usage: node scripts/local-stack.mjs [--db shopfront] [--site http://localhost:3000] [--keep-db]
 import http from 'node:http';
 import { spawn, spawnSync } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SMTPServer } from 'smtp-server';
 import { simpleParser } from 'mailparser';
 import { reset } from './db.mjs';
-import { JWT_SECRET, ANON_KEY, PORTS, SUPABASE_URL, MAIL_URL, PEXELS_TEST_KEY } from './local-keys.mjs';
+import { JWT_SECRET, ANON_KEY, PORTS, SUPABASE_URL, MAIL_URL, PEXELS_TEST_KEY, ANTHROPIC_TEST_KEY } from './local-keys.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -161,6 +161,32 @@ http
     res.end(JSON.stringify({ photos }));
   })
   .listen(PORTS.pexels, '127.0.0.1');
+
+// 2d. A stand-in for Claude (the Anthropic API): replies, streamed, with the Quiet luxury sample
+// written in Claude's format, and remembers what it was sent (GET /last) so tests can check it.
+let lastClaudeRequest = null;
+http
+  .createServer((req, res) => {
+    if (req.method === 'GET' && req.url === '/last') { res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify(lastClaudeRequest)); }
+    if (req.method !== 'POST' || req.url !== '/v1/messages') { res.statusCode = 404; return res.end('{}'); }
+    if (req.headers['x-api-key'] !== ANTHROPIC_TEST_KEY) { res.writeHead(401, { 'content-type': 'application/json' }); return res.end(JSON.stringify({ error: { message: 'invalid x-api-key' } })); }
+    let body = '';
+    req.on('data', (c) => (body += c));
+    req.on('end', () => {
+      const b = JSON.parse(body);
+      const blocks = b.messages[0].content;
+      lastClaudeRequest = { model: b.model, stream: b.stream, blocks: blocks.map((c) => ({ type: c.type, title: c.title, media: c.source?.media_type, text: c.type === 'text' ? c.text.slice(0, 200) : undefined })), brief: blocks.at(-1).text };
+      const answer = 'Here is the website.\n```json\n' + readFileSync(join(root, 'apps/studio/kits/sites/saltwater/example.json'), 'utf8') + '\n```';
+      res.writeHead(200, { 'content-type': 'text/event-stream' });
+      const send = (type, data) => res.write(`event: ${type}\ndata: ${JSON.stringify({ type, ...data })}\n\n`);
+      send('message_start', { message: { usage: { input_tokens: 12000 } } });
+      for (let i = 0; i < answer.length; i += 700) send('content_block_delta', { index: 0, delta: { type: 'text_delta', text: answer.slice(i, i + 700) } });
+      send('message_delta', { delta: { stop_reason: 'end_turn' }, usage: { output_tokens: 9000 } });
+      send('message_stop', {});
+      res.end();
+    });
+  })
+  .listen(PORTS.anthropic, '127.0.0.1');
 
 // 3. Login server
 const gotrue = spawn(gotrueBin, ['serve'], { env: gotrueEnv, stdio: 'inherit' });

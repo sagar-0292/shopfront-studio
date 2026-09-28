@@ -2,13 +2,16 @@
 
 import { revalidatePath } from 'next/cache';
 import { requireAgency } from '@/lib/context';
-import { withUser } from '@/lib/db';
+import { withUser, type Db } from '@/lib/db';
 import { safe, text, UserError } from '@/lib/action';
 import { slugify } from '@/lib/slug';
 import { manifest } from '@/lib/kits';
 import { buildWebsite, parseAnswer } from '@/lib/website/build';
+import { buildBrief } from '@/lib/website/brief';
+import { askClaude, type Attachment } from '@/lib/website/claude';
+import type { AnswerT } from '@/lib/website/format';
 import { renderPages } from '@/lib/website/render';
-import { loadProjectWebsite } from '@/lib/website/load';
+import { exampleFor, loadProjectWebsite } from '@/lib/website/load';
 
 const idOf = (form: FormData) => {
   const id = String(form.get('id') ?? '');
@@ -45,26 +48,79 @@ export const saveBrief = safe(async (form) => {
   return { ok: true, message: 'Saved. The brief for Claude below now includes these details.' };
 });
 
-/** Step 3: Claude's answer becomes the website. */
+type Loaded = NonNullable<Awaited<ReturnType<typeof loadProjectWebsite>>>;
+
+/** Claude's answer becomes the website: checked, photos found, every page built, then saved. */
+async function buildAndSave(db: Db, p: Loaded, answer: AnswerT, extraNotes: string[] = []) {
+  if (!p.site.design_direction) throw new UserError('Choose a design for this project first (on the project page).');
+  const website = await buildWebsite({
+    answer, direction: p.site.design_direction, site: { id: p.site.id, name: p.site.name },
+    facts: p.facts, input: p.brief, own: p.own, payments: p.payments,
+  });
+  website.notes.push(...extraNotes);
+  // The design kit checks every page; anything it can't build is explained in plain words.
+  await renderPages(website, { motion: p.site.motion_kit_version, commerce: p.site.commerce_kit_version, design: p.site.design_kit_version }, { base: '', noindex: true });
+  await db.query(`update sites set website = $2, website_built_at = now(), status = case when status = 'draft' then 'building'::site_status else status end where id = $1`, [p.site.id, JSON.stringify(website)]);
+}
+
+async function loadOrFail(db: Db, id: string, orgId: string) {
+  const p = await loadProjectWebsite(db, id, orgId);
+  if (!p) throw new UserError('This project could not be found, or you no longer have access to it.');
+  return p;
+}
+
+/** Copy-and-paste route: the answer from claude.ai becomes the website. */
 export const buildSite = safe(async (form) => {
   const { ctx, agency } = await requireAgency();
   const id = idOf(form);
   const answer = parseAnswer(String(form.get('answer') ?? ''));
-  await withUser(ctx.user, async (db) => {
-    const p = await loadProjectWebsite(db, id, agency.organisation_id);
-    if (!p) throw new UserError('This project could not be found, or you no longer have access to it.');
-    if (!p.site.design_direction) throw new UserError('Choose a design for this project first (on the project page).');
-    const website = await buildWebsite({
-      answer, direction: p.site.design_direction, site: { id: p.site.id, name: p.site.name },
-      facts: p.facts, input: p.brief, own: p.own, payments: p.payments,
-    });
-    // The design kit checks every page; anything it can't build is explained in plain words.
-    await renderPages(website, { motion: p.site.motion_kit_version, commerce: p.site.commerce_kit_version, design: p.site.design_kit_version }, { base: '', noindex: true });
-    await db.query(`update sites set website = $2, website_built_at = now(), status = case when status = 'draft' then 'building'::site_status else status end where id = $1`, [id, JSON.stringify(website)]);
-  });
+  await withUser(ctx.user, async (db) => buildAndSave(db, await loadOrFail(db, id, agency.organisation_id), answer));
   back(id);
   revalidatePath(`/studio/projects/${id}`);
   return { ok: true, message: 'Website built. Check the preview below, then download it for Netlify.' };
+});
+
+/** Automatic route: the brief and the business's own material go to Claude, and its answer becomes the website. */
+export const generateWebsite = safe(async (form) => {
+  const { ctx, agency } = await requireAgency();
+  const id = idOf(form);
+  // Read everything first, then talk to Claude without holding a database connection open.
+  const { p, attachments, skipped } = await withUser(ctx.user, async (db) => {
+    const p = await loadOrFail(db, id, agency.organisation_id);
+    if (!p.site.design_direction) throw new UserError('Choose a design for this project first (on the project page).');
+    if (!p.brief.about) throw new UserError('Fill in step 1 (what the business does) first.');
+    const files = await db.query<{ kind: string; name: string; label: string; filename: string; mime: string; data: Buffer }>(
+      `select kind, name, label, filename, mime, data from site_files where site_id = $1 order by kind, created_at`, [id]);
+    const attachments: Attachment[] = [];
+    const skipped: string[] = [];
+    let images = 0;
+    for (const f of files) {
+      if (f.kind === 'document') {
+        if (f.mime === 'application/pdf') attachments.push({ kind: 'pdf', filename: f.filename, data: new Uint8Array(f.data) });
+        else if (f.mime === 'text/plain') attachments.push({ kind: 'text', filename: f.filename, text: f.data.toString('utf8') });
+        else skipped.push(f.filename);
+      } else if (images < 8) {
+        images++;
+        attachments.push({ kind: 'image', caption: f.kind === 'logo' ? 'The business’s logo:' : `The business’s own photo “${f.name}”${f.label ? ` (${f.label})` : ''}:`, data: new Uint8Array(f.data) });
+      }
+    }
+    return { p, attachments, skipped };
+  });
+  const brief = buildBrief(p.site.design_direction!, p.facts, p.brief, exampleFor(p.site.design_direction!), {
+    logoColours: p.files.find((f) => f.kind === 'logo')?.colours ?? [],
+    photos: p.files.filter((f) => f.kind === 'photo').map((f) => ({ name: f.name, label: f.label })),
+    documents: p.files.filter((f) => f.kind === 'document' && !skipped.includes(f.filename)).map((f) => ({ filename: f.filename, label: f.label })),
+  });
+  const reply = await askClaude(brief, attachments);
+  const answer = parseAnswer(reply.text);
+  const notes = [
+    `Written by Claude (${reply.model}) in ${reply.seconds} seconds, using ${(reply.inputTokens + reply.outputTokens).toLocaleString('en-IN')} tokens.`,
+    ...(skipped.length ? [`Claude can’t open Word or PowerPoint files directly, so these were left out: ${skipped.join(', ')}. Save them as PDF and upload again to include them.`] : []),
+  ];
+  await withUser(ctx.user, async (db) => buildAndSave(db, await loadOrFail(db, id, agency.organisation_id), answer, notes));
+  back(id);
+  revalidatePath(`/studio/projects/${id}`);
+  return { ok: true, message: 'Website created. Check the preview below, then download it for Netlify.' };
 });
 
 /** Uploads one file of the business's own material (images arrive already resized to WebP by the browser). */

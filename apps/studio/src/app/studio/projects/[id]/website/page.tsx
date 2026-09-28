@@ -11,9 +11,12 @@ import { compareVersions, manifest } from '@/lib/kits';
 import { DESIGNS } from '@/lib/designs';
 import { buildBrief } from '@/lib/website/brief';
 import { exampleFor, loadProjectWebsite } from '@/lib/website/load';
-import { buildSite, removeFile, saveBrief, uploadFile, useLatestDesignKit } from './actions';
+import { buildSite, generateWebsite, removeFile, saveBrief, uploadFile, useLatestDesignKit } from './actions';
+import { claudeConnected } from '@/lib/website/claude';
 
 export const metadata: Metadata = { title: 'Website' };
+// Claude takes 1–3 minutes to write a whole website (Vercel allows up to 5).
+export const maxDuration = 300;
 
 const kb = (n: number) => (n > 1024 * 1024 ? `${(n / 1024 / 1024).toFixed(1)} MB` : `${Math.max(1, Math.round(n / 1024))} KB`);
 
@@ -51,6 +54,7 @@ export default async function WebsitePage({ params }: PageProps<'/studio/project
     : null;
   const preview = `/studio/projects/${id}/website/preview/`;
   const website = site.website;
+  const connected = claudeConnected();
 
   return (
     <div className="max-w-4xl space-y-6">
@@ -58,7 +62,7 @@ export default async function WebsitePage({ params }: PageProps<'/studio/project
       <PageHeader
         eyebrow={site.name}
         title="Website"
-        description="Tell us about the business, let Claude write the site in the chosen look, check the preview, then download it for Netlify."
+        description="Tell us about the business, add their logo and material, and Claude creates the website in the chosen look. Check the preview, then download it for Netlify."
         action={website ? <Badge tone="good">Built {formatDate(site.website_built_at!)}</Badge> : <Badge tone="warn">Not built yet</Badge>}
       />
 
@@ -145,37 +149,52 @@ export default async function WebsitePage({ params }: PageProps<'/studio/project
         )}
       </Step>
 
-      <Step n={3} title="Ask Claude" done={!!website} description="Uses your own Claude subscription: nothing extra to pay.">
+      <Step n={3} title="Create the website" done={!!website}
+        description="Claude writes every page in the chosen look from the details above, the uploaded material and a finished example of the look. The studio then checks it, finds real photos and builds it.">
         {!briefText ? (
-          <p className="text-sm text-muted">{direction ? 'Fill in step 1 first. The brief appears here.' : 'Choose a design and fill in step 1 first.'}</p>
+          <p className="text-sm text-muted">{direction ? 'Fill in step 1 first.' : 'Choose a design and fill in step 1 first.'}</p>
         ) : (
-          <div className="space-y-4">
-            <ol className="list-decimal space-y-1 pl-5 text-sm">
-              <li>Click <strong>Copy the brief</strong>, then <strong>Open Claude</strong> (start a new chat).</li>
-              {documents.length + photos.length + (logo ? 1 : 0) > 0 && <li>Click <strong>Download material</strong> and attach those files to the chat (the paperclip button).</li>}
-              <li>Paste the brief and send it. Claude replies with a long block of text in about a minute.</li>
-              <li>Copy Claude’s whole reply (the copy button under it) and paste it into step 4.</li>
-            </ol>
-            <div className="flex flex-wrap gap-3">
-              <CopyButton text={briefText} label="Copy the brief" />
-              <a className="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-semibold hover:border-primary/40" href="https://claude.ai/new" target="_blank" rel="noopener">Open Claude ↗</a>
-              {files.length > 0 && <a className="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-semibold hover:border-primary/40" href={`/studio/projects/${id}/website/material`}>Download material (.zip)</a>}
-            </div>
-            <details className="rounded-xl border border-line p-3 text-sm">
-              <summary className="cursor-pointer font-medium">See the brief ({Math.round(briefText.length / 1000)}k characters)</summary>
-              <Textarea readOnly rows={12} className="mt-3 font-mono text-xs" value={briefText} aria-label="The brief for Claude" />
+          <div className="space-y-5">
+            {connected ? (
+              <ActionForm action={generateWebsite} submitLabel={website ? 'Create it again automatically' : 'Create website automatically'}
+                pendingLabel="Claude is writing the website… about 1–3 minutes, keep this page open">
+                <input type="hidden" name="id" value={id} />
+                <p className="text-sm text-muted">Uses your Anthropic API account (pay per use; the cost of each build is shown after it). Each click makes a fresh version.</p>
+              </ActionForm>
+            ) : (
+              <Notice>
+                <strong>Automatic creation isn’t connected yet.</strong> It needs an Anthropic API key (console.anthropic.com, pay per use),
+                added as <code>ANTHROPIC_API_KEY</code> in the server settings. Until then, use the free copy-and-paste route below with your Claude subscription.
+              </Notice>
+            )}
+            <details open={!connected} className="rounded-xl border border-line p-4">
+              <summary className="cursor-pointer font-semibold">{connected ? 'Or do it yourself in claude.ai (free with your Claude subscription)' : 'Create it with your Claude subscription (copy and paste)'}</summary>
+              <div className="mt-4 space-y-4">
+                <ol className="list-decimal space-y-1 pl-5 text-sm">
+                  <li>Click <strong>Copy the brief</strong>, then <strong>Open Claude</strong> (start a new chat).</li>
+                  {documents.length + photos.length + (logo ? 1 : 0) > 0 && <li>Click <strong>Download material</strong> and attach those files to the chat (the paperclip button).</li>}
+                  <li>Paste the brief and send it. Claude replies with a long block of text in about a minute.</li>
+                  <li>Copy Claude’s whole reply (the copy button under it) and paste it below.</li>
+                </ol>
+                <div className="flex flex-wrap gap-3">
+                  <CopyButton text={briefText} label="Copy the brief" />
+                  <a className="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-semibold hover:border-primary/40" href="https://claude.ai/new" target="_blank" rel="noopener">Open Claude ↗</a>
+                  {files.length > 0 && <a className="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-semibold hover:border-primary/40" href={`/studio/projects/${id}/website/material`}>Download material (.zip)</a>}
+                </div>
+                <details className="rounded-xl border border-line p-3 text-sm">
+                  <summary className="cursor-pointer font-medium">See the brief ({Math.round(briefText.length / 1000)}k characters)</summary>
+                  <Textarea readOnly rows={12} className="mt-3 font-mono text-xs" value={briefText} aria-label="The brief for Claude" />
+                </details>
+                <ActionForm action={buildSite} submitLabel={website ? 'Rebuild the website' : 'Build the website'} pendingLabel="Building… finding photos">
+                  <input type="hidden" name="id" value={id} />
+                  <Field label="Claude’s answer" htmlFor="answer">
+                    <Textarea id="answer" name="answer" required rows={8} className="font-mono text-xs" placeholder='{"tagline": "…", "pages": [ … ] }' />
+                  </Field>
+                </ActionForm>
+              </div>
             </details>
           </div>
         )}
-      </Step>
-
-      <Step n={4} title="Paste Claude’s answer" done={!!website} description="The studio checks it, finds the photos and builds every page. Anything that needs fixing is explained here.">
-        <ActionForm action={buildSite} submitLabel={website ? 'Rebuild the website' : 'Build the website'} pendingLabel="Building… finding photos">
-          <input type="hidden" name="id" value={id} />
-          <Field label="Claude’s answer" htmlFor="answer">
-            <Textarea id="answer" name="answer" required rows={8} className="font-mono text-xs" placeholder='{"tagline": "…", "pages": [ … ] }' />
-          </Field>
-        </ActionForm>
       </Step>
 
       {website && (

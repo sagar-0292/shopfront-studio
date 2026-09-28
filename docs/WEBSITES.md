@@ -11,12 +11,16 @@ Every project has a **Website** page (project page → **Create website**). It t
      fit best, alongside stock photos.
    - **Documents** (brochure, menu, price list: PDF, Word, PowerPoint or text): attached to the Claude chat so Claude
      can read facts, prices and the way the business speaks.
-3. **Ask Claude**, using your own Claude subscription (no extra cost): **Copy the brief**, **Open Claude**, attach
-   the material zip if there is one, paste, send.
+3. **Create the website.**
+   - **Automatically** (needs `ANTHROPIC_API_KEY`, pay per use): one button sends the brief, the logo, the photos
+     and PDF/text documents to Claude and builds its answer; the time and tokens used are shown after. Word and
+     PowerPoint files can't be read directly: save them as PDF.
+   - **Or by copy and paste** with your own Claude subscription (no extra cost): **Copy the brief**, **Open
+     Claude**, attach the material zip if there is one, paste, send, then paste Claude's reply back.
    - The brief contains the business, the chosen look, rules that keep the site high-end (specific copy, no
      invented facts or reviews, section rhythm, photo search phrases), the section reference, and a finished
      sample site in the same look as the standard to match.
-4. **Paste Claude's answer** and press **Build the website**.
+4. **Building** (both routes):
    - The studio pulls the JSON out of Claude's reply, finds a real Pexels photo for every photo request (cropped to
      the shape that spot needs, photographers credited), fills in the business facts from the project (never from
      Claude), and checks every page with the design kit.
@@ -30,10 +34,11 @@ Every project has a **Website** page (project page → **Create website**). It t
 
 ## For developers
 - Answer format and section reference: `apps/studio/src/lib/website/format.ts`. The brief: `brief.ts`.
+  Claude through the API: `claude.ts` (streamed; `ANTHROPIC_API_KEY`, optional `ANTHROPIC_MODEL`, server only).
   Building: `build.ts`. Photos: `photos.ts` (`PEXELS_API_KEY`, server only). Rendering and the zip: `render.ts`,
   which loads the frozen `render.mjs` of the project's design-kit version.
 - Stored on `sites.website_brief` / `sites.website`; the business's files in `site_files` (migration
   `20260929000007_websites.sql`), with the same agency-only rules as the project.
 - `scripts/release-kits.mjs` writes `kits/sites/<sample>/example.json`: each sample site in Claude's format, used
   in briefs as the quality bar. A unit test builds all seven into complete zips; e2e `13-website` covers the flow
-  (a local Pexels stand-in runs in `scripts/local-stack.mjs`).
+  (local stand-ins for Pexels and Claude run in `scripts/local-stack.mjs`).
