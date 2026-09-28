@@ -1,3 +1,4 @@
+import { icon } from './icons';
 import type { Kit } from './kit';
 import { h, announce, trapFocus } from './dom';
 import { inr } from './money';
@@ -66,7 +67,7 @@ export function mountCart(kit: Kit) {
     const t = current();
     const head = h('div', { class: 'sf-drawer-head' },
       h('h2', { id: 'sf-cart-title' }, step === 'details' ? 'Your details' : step === 'upi' ? 'Pay by UPI' : step === 'done' ? 'Thank you' : 'Your cart'),
-      h('button', { type: 'button', class: 'sf-icon-btn', 'aria-label': 'Close cart', onclick: () => close() }, '✕'));
+      h('button', { type: 'button', class: 'sf-icon-btn', 'aria-label': 'Close cart', onclick: () => close() }, icon('close')));
     if (step === 'done') {
       panel.replaceChildren(head, h('div', { class: 'sf-drawer-body' }, h('p', { class: 'sf-done' }, doneMsg)), h('div', { class: 'sf-drawer-foot' }, h('button', { type: 'button', class: 'sf-btn', onclick: () => close() }, 'Continue shopping')));
       return;

@@ -26,6 +26,8 @@
 [data-slot="discount"] { color: var(--sf-good); font-weight: 600; }
 .sf-badge { display: inline-block; padding: 2px 8px; margin-right: 4px; border-radius: 999px; background: var(--sf-ink); color: #fff; font-size: 0.7rem; font-weight: 600; }
 [data-sf-wish][aria-pressed="true"] { color: var(--sf-bad); }
+.sf-icon { display: inline-block; vertical-align: middle; flex: none; }
+[data-sf-wish][aria-pressed="true"] .sf-icon-heart path { fill: currentColor; }
 .sf-added { animation: sf-pop 0.5s ease; }
 @keyframes sf-pop { 50% { transform: scale(1.08); } }
 

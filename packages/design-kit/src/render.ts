@@ -1,7 +1,8 @@
 // Turns a page definition into finished HTML pages. Pure function: no files,
 // no network — the studio, the publisher and the tests all call this.
 import { html, raw, esc, emph, cls, type Raw } from './html';
-import { section, link, type Ctx } from './sections';
+import { section, link, HERO_SPLIT_SIZES, type Ctx } from './sections';
+import { icon } from './icons';
 import { SiteDef, type Direction, type SiteDefT, type SectionT } from './schema';
 import { checkPalette } from './contrast';
 
@@ -82,6 +83,7 @@ ${canonical ? html`<link rel="canonical" href="${canonical}">` : ''}
 ${canonical ? html`<meta property="og:url" content="${canonical}">` : ''}
 <script>document.documentElement.classList.add('sf-js')</script>
 ${PRELOAD[dir].map((f) => html`<link rel="preload" href="${`${designUrl}/fonts/${f}`}" as="font" type="font/woff2" crossorigin>`)}
+${heroPreload(page, base)}
 <link rel="stylesheet" href="${`${kits}/motion/${v.motion}/sf-motion.css`}">
 ${hasCommerce ? html`<link rel="stylesheet" href="${`${kits}/commerce/${v.commerce}/sf-commerce.css`}">` : ''}
 <link rel="stylesheet" href="${`${designUrl}/${dir}.css`}">
@@ -114,10 +116,10 @@ function header(def: SiteDefT, page: Page, ctx: { base: string }): Raw {
     <a class="d-logo" href="${link(ctx, '/')}">${def.site.name}</a>
     ${def.nav.length ? html`<nav class="d-nav" aria-label="Main">${nav}</nav>` : ''}
     <div class="d-header-actions">
-      ${hasWishlist && wishlistPath ? html`<a class="d-icon-btn d-header-wish" href="${link(ctx, wishlistPath)}"><span aria-hidden="true">♡</span><span class="d-sr">Wishlist</span> <b data-sf-wishlist-count>0</b></a>` : ''}
-      ${def.commerce && def.pages.some((p) => p.sections.some((s) => s.type === 'products' || s.type === 'shop')) ? raw('<button class="d-icon-btn" type="button" data-sf-cart-open aria-label="Cart 0 items">Cart <b data-sf-cart-count>0</b></button>') : ''}
+      ${hasWishlist && wishlistPath ? html`<a class="d-icon-btn d-header-wish" href="${link(ctx, wishlistPath)}">${icon('heart')}<span class="d-sr">Wishlist</span> <b data-sf-wishlist-count>0</b></a>` : ''}
+      ${def.commerce && def.pages.some((p) => p.sections.some((s) => s.type === 'products' || s.type === 'shop')) ? html`<button class="d-icon-btn" type="button" data-sf-cart-open aria-label="Cart 0 items">${icon('bag')}<span class="d-cart-word">Cart</span> <b data-sf-cart-count>0</b></button>` : ''}
       ${def.nav.length ? html`<details class="d-menu">
-        <summary class="d-icon-btn">Menu</summary>
+        <summary class="d-icon-btn">${icon('menu')}<span>Menu</span></summary>
         <nav class="d-menu-panel" aria-label="Menu">${def.nav.map((n) => html`<a href="${link(ctx, n.href)}" ${current(n.href)}>${n.label}</a>`)}${hasWishlist && wishlistPath ? html`<a class="d-menu-wish" href="${link(ctx, wishlistPath)}">Wishlist</a>` : ''}</nav>
       </details>` : ''}
     </div>
@@ -150,9 +152,35 @@ function footer(def: SiteDefT, ctx: { base: string }): Raw {
       <p>© ${s.name}. Your details are only used to reply to you or deliver your order.</p>
       <button type="button" data-sf-motion-toggle>Pause animations</button>
     </div>
-    ${s.sampleNotice ? html`<p class="d-muted" style="margin-top:20px;font-size:.8rem">${s.sampleNotice}</p>` : ''}
+    ${creditLine(def)}
+    ${s.sampleNotice ? html`<p class="d-muted" style="margin-top:12px;font-size:.8rem">${s.sampleNotice}</p>` : ''}
   </div>
 </footer>`;
+}
+
+/** "Photos by A, B and C on Pexels · D on Unsplash", each name linked to the photographer. */
+function creditLine(def: SiteDefT): Raw | '' {
+  if (!def.credits.length) return '';
+  const groups = (['Pexels', 'Unsplash'] as const).map((src) => {
+    const people = [...new Map(def.credits.filter((c) => c.source === src).map((c) => [c.url, c])).values()];
+    if (!people.length) return null;
+    const names = people.map((c, i) => html`${i ? (i === people.length - 1 ? ' and ' : ', ') : ''}<a class="d-link" href="${c.url}" target="_blank" rel="noopener">${c.name}</a>`);
+    return html`${names} on <a class="d-link" href="${src === 'Pexels' ? 'https://www.pexels.com' : 'https://unsplash.com/?utm_source=shopfront&utm_medium=referral'}" target="_blank" rel="noopener">${src}</a>`;
+  }).filter(Boolean) as Raw[];
+  return html`<p class="d-muted d-credits" style="margin-top:20px;font-size:.8rem">Photos by ${groups.map((g, i) => html`${i ? ' · ' : ''}${g}`)}.</p>`;
+}
+
+/** The first photo people see is requested straight away, before styles and scripts. */
+function heroPreload(page: Page, base: string): Raw | '' {
+  const hero = page.sections[0];
+  if (!hero || hero.type !== 'hero' || !hero.media || !('image' in hero.media) || hero.variant === 'collage' || hero.variant === 'typographic') return '';
+  const i = hero.media.image;
+  const at = (u: string) => (u.startsWith('/') ? base + u : u);
+  const set = i.srcset ? i.srcset.split(',').map((p) => { const [u, ...d] = p.trim().split(/\s+/); return [at(u), ...d].join(' '); }).join(', ') : '';
+  const sizes = hero.variant === 'fullbleed' ? '100vw' : HERO_SPLIT_SIZES;
+  return set
+    ? html`<link rel="preload" as="image" href="${at(i.src)}" imagesrcset="${set}" imagesizes="${sizes}" fetchpriority="high">`
+    : html`<link rel="preload" as="image" href="${at(i.src)}" fetchpriority="high">`;
 }
 
 function paletteStyle(def: SiteDefT): Raw | '' {

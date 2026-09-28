@@ -7,10 +7,7 @@
    "description": "48-hour ferment, stone-baked, with a crackling crust.",
    "price_paise": 32000,
    "image": {
-    "src": "/img/country-sourdough.svg",
-    "alt": "Country Sourdough",
-    "width": 600,
-    "height": 750
+    "$photo": "bandra-bake-house/country-sourdough"
    },
    "category": {
     "slug": "breads",
@@ -45,10 +42,7 @@
    "description": "27 layers of French-style butter, baked every morning at 7.",
    "price_paise": 14000,
    "image": {
-    "src": "/img/butter-croissant.svg",
-    "alt": "Butter Croissant",
-    "width": 600,
-    "height": 750
+    "$photo": "bandra-bake-house/butter-croissant"
    },
    "category": {
     "slug": "viennoiserie",
@@ -66,10 +60,7 @@
    "description": "Box of four: dark chocolate, sea salt, brown butter.",
    "price_paise": 24000,
    "image": {
-    "src": "/img/brown-butter-cookie.svg",
-    "alt": "Brown Butter Cookies",
-    "width": 600,
-    "height": 750
+    "$photo": "bandra-bake-house/brown-butter-cookie"
    },
    "category": {
     "slug": "cookies",
@@ -87,10 +78,7 @@
    "description": "Rich brioche twisted with 70% chocolate and hazelnut.",
    "price_paise": 58000,
    "image": {
-    "src": "/img/chocolate-babka.svg",
-    "alt": "Chocolate Babka",
-    "width": 600,
-    "height": 750
+    "$photo": "bandra-bake-house/chocolate-babka"
    },
    "category": {
     "slug": "breads",
@@ -108,10 +96,7 @@
    "description": "Olive oil, rosemary from our terrace, flaky salt.",
    "price_paise": 36000,
    "image": {
-    "src": "/img/rosemary-focaccia.svg",
-    "alt": "Rosemary Focaccia",
-    "width": 600,
-    "height": 750
+    "$photo": "bandra-bake-house/rosemary-focaccia"
    },
    "category": {
     "slug": "breads",
@@ -128,10 +113,7 @@
    "description": "Box of three, with cardamom and brown sugar.",
    "price_paise": 42000,
    "image": {
-    "src": "/img/cinnamon-buns.svg",
-    "alt": "Cinnamon Buns",
-    "width": 600,
-    "height": 750
+    "$photo": "bandra-bake-house/cinnamon-buns"
    },
    "category": {
     "slug": "viennoiserie",
@@ -148,10 +130,7 @@
    "description": "Soft, pillowy pav for your weekend bhaji.",
    "price_paise": 9000,
    "image": {
-    "src": "/img/ladi-pav.svg",
-    "alt": "Milk Ladi Pav",
-    "width": 600,
-    "height": 750
+    "$photo": "bandra-bake-house/ladi-pav"
    },
    "category": {
     "slug": "breads",
@@ -168,10 +147,7 @@
    "description": "Baked cheesecake with Ratnagiri Alphonso. Serves 8.",
    "price_paise": 145000,
    "image": {
-    "src": "/img/mango-cheesecake.svg",
-    "alt": "Alphonso Cheesecake",
-    "width": 600,
-    "height": 750
+    "$photo": "bandra-bake-house/mango-cheesecake"
    },
    "category": {
     "slug": "cakes",

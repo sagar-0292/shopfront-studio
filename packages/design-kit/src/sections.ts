@@ -1,7 +1,8 @@
 import { html, raw, emph, safeHref, cls, esc, type Raw } from './html';
-import { artSvg } from './art';
 import { backgroundColours } from './contrast';
-import type { Direction, MediaT, SectionT, SiteDefT } from './schema';
+import { icon } from './icons';
+import type { z } from 'zod';
+import type { Direction, MediaT, SectionT, SiteDefT, Image } from './schema';
 
 export type Ctx = { dir: Direction; site: SiteDefT['site']; palette?: SiteDefT['palette']; hasCommerce: boolean; index: number; base: string };
 
@@ -21,29 +22,29 @@ const MOTION: Record<Direction, { reveal: string; head: string; bg: { hero: stri
   crafted: { reveal: 'up', head: 'up', bg: { hero: 'none', colors: '#f3e8d6,#e7cfa8,#d9a877,#f6eadb' } },
 };
 export const motionFor = (d: Direction) => MOTION[d];
+/** How wide the split hero's photo is shown; the page also preloads it with these sizes. */
+export const HERO_SPLIT_SIZES = '(min-width: 960px) 42vw, 92vw';
 
 const inr = (paise: number) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: paise % 100 ? 2 : 0 }).format(paise / 100);
 const num = (i: number) => String(i + 1).padStart(2, '0');
 
-export function media(m: MediaT | undefined, ctx: Ctx, seed: string, opts: { w?: number; h?: number; eager?: boolean; sizes?: string } = {}): Raw {
-  const w = opts.w ?? 800, h = opts.h ?? 1000;
-  if (!m) return raw(artSvg(ctx.dir, seed, w, h));
-  if ('image' in m) {
-    const i = m.image;
-    return html`<img src="${asset(ctx, i.src)}" alt="${i.alt}" width="${i.width}" height="${i.height}" ${raw(i.srcset ? `srcset="${esc(srcsetOf(ctx, i.srcset))}" sizes="${esc(opts.sizes ?? '(min-width: 900px) 50vw, 100vw')}"` : '')} ${raw(opts.eager ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"')}>`;
-  }
-  if ('art' in m && !('object' in m) && !('model' in m) && !('video' in m)) return raw(artSvg(ctx.dir, m.art || seed, w, h));
+export function media(m: MediaT | undefined, ctx: Ctx, _seed: string, opts: { w?: number; h?: number; eager?: boolean; sizes?: string } = {}): Raw {
+  // Without a photo, a calm block in the site's own colours (never a drawing).
+  const blank = raw('<div class="d-blank"></div>');
+  const img = (i: z.infer<typeof Image>) => html`<img src="${asset(ctx, i.src)}" alt="${i.alt}" width="${i.width}" height="${i.height}" ${raw(i.srcset ? `srcset="${esc(srcsetOf(ctx, i.srcset))}" sizes="${esc(opts.sizes ?? '(min-width: 900px) 50vw, 100vw')}"` : '')} ${raw(opts.eager ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"')}>`;
+  if (!m) return blank;
+  if ('image' in m) return img(m.image);
   if ('object' in m) {
-    return html`<div class="d-3d" data-sf-3d="${m.object}" ${raw(m.color ? `data-sf-3d-color="${m.color}"` : '')} ${raw(m.material ? `data-sf-3d-material="${m.material}"` : '')} role="img" aria-label="${m.label}" style="position:absolute;inset:0">${raw(artSvg(ctx.dir, m.art ?? seed, w, h))}</div>`;
+    return html`<div class="d-3d" data-sf-3d="${m.object}" ${raw(m.color ? `data-sf-3d-color="${m.color}"` : '')} ${raw(m.material ? `data-sf-3d-material="${m.material}"` : '')} role="img" aria-label="${m.label}" style="position:absolute;inset:0">${m.poster ? img(m.poster) : blank}</div>`;
   }
   if ('model' in m) {
-    return html`<div class="d-3d" data-sf-3d="model" data-src="${asset(ctx, m.model)}" role="img" aria-label="${m.label}" style="position:absolute;inset:0">${raw(artSvg(ctx.dir, m.art ?? seed, w, h))}</div>`;
+    return html`<div class="d-3d" data-sf-3d="model" data-src="${asset(ctx, m.model)}" role="img" aria-label="${m.label}" style="position:absolute;inset:0">${m.poster ? img(m.poster) : blank}</div>`;
   }
-  return html`<div data-sf-video data-src="${asset(ctx, m.video.src)}" ${raw(m.video.poster ? `data-poster="${esc(asset(ctx, m.video.poster))}"` : '')} style="position:absolute;inset:0">${m.video.poster ? '' : raw(artSvg(ctx.dir, m.art ?? seed, w, h))}</div>`;
+  return html`<div data-sf-video data-src="${asset(ctx, m.video.src)}" ${raw(m.video.poster ? `data-poster="${esc(asset(ctx, m.video.poster))}"` : '')} ${raw(m.label ? `role="img" aria-label="${esc(m.label)}"` : '')} style="position:absolute;inset:0">${m.video.poster ? '' : blank}</div>`;
 }
 
 const btn = (ctx: Ctx, c: { label: string; href: string; style?: 'solid' | 'plain' }, magnetic = true) =>
-  html`<a class="${cls('d-btn', c.style !== 'plain' && 'd-btn--solid')}" href="${link(ctx, c.href)}" ${raw(magnetic ? 'data-sf-magnetic="0.3"' : '')}>${c.label} <span class="d-arrow" aria-hidden="true">→</span></a>`;
+  html`<a class="${cls('d-btn', c.style !== 'plain' && 'd-btn--solid')}" href="${link(ctx, c.href)}" ${raw(magnetic ? 'data-sf-magnetic="0.3"' : '')}>${c.label} <span class="d-arrow">${icon('arrowRight')}</span></a>`;
 
 const head = (ctx: Ctx, s: { eyebrow?: string; title?: string }, extra?: Raw, level: 'h2' = 'h2') => {
   if (!s.title && !s.eyebrow) return '';
@@ -67,14 +68,14 @@ export const CARD_TEMPLATE = `<template data-sf-card>
       <h3 class="d-card-name" data-slot="name"></h3>
       <p class="d-card-price"><span data-slot="price"></span><s data-slot="mrp"></s><i data-slot="discount"></i></p>
       <p class="d-card-stock" data-slot="stock"></p>
-      <div class="d-card-actions"><select data-slot="variant"></select><button data-slot="add">Add to cart</button><button data-slot="wishlist">♡</button></div>
+      <div class="d-card-actions"><select data-slot="variant"></select><button data-slot="add">Add to cart</button><button data-slot="wishlist"></button></div>
     </div>
   </article>
 </template>`;
 
 export function section(s: SectionT, ctx: Ctx): Raw {
   const mv = MOTION[ctx.dir];
-  const id = `s${ctx.index}`;
+  const id = s.anchor ?? `s${ctx.index}`;
   switch (s.type) {
     case 'hero': {
       const eager = ctx.index === 0;
@@ -89,8 +90,8 @@ export function section(s: SectionT, ctx: Ctx): Raw {
       </div>`;
       if (s.variant === 'fullbleed') {
         return html`<section class="d-hero d-hero--fullbleed" id="${id}">
-          <div class="d-hero-bg" data-sf-parallax="-0.15">${media(s.media, ctx, `${id}-bg`, { w: 1600, h: 1000, eager })}</div>
-          <div class="d-wrap d-hero-grid">${copy}<p class="d-scroll-hint" aria-hidden="true">Scroll ↓</p></div>
+          <div class="d-hero-bg" data-sf-parallax="-0.15">${media(s.media, ctx, `${id}-bg`, { w: 1600, h: 1000, eager, sizes: '100vw' })}</div>
+          <div class="d-wrap d-hero-grid">${copy}<p class="d-scroll-hint" aria-hidden="true">Scroll ${icon('arrowDown', 16)}</p></div>
         </section>`;
       }
       if (s.variant === 'typographic') {
@@ -108,7 +109,7 @@ export function section(s: SectionT, ctx: Ctx): Raw {
       }
       if (s.variant === 'collage') {
         return html`<section class="d-hero d-hero--collage" id="${id}" ${bgAttr}>
-          <div aria-hidden="true">${(s.collage ?? [undefined, undefined, undefined]).map((m, i) => html`<div class="d-collage-item" data-sf-parallax="${[0.25, -0.2, 0.35][i]}">${media(m, ctx, `${id}-c${i}`, { w: 400, h: 500 })}</div>`)}</div>
+          <div aria-hidden="true">${(s.collage ?? [undefined, undefined, undefined]).map((m, i) => html`<div class="d-collage-item" data-sf-parallax="${[0.25, -0.2, 0.35][i]}">${media(m, ctx, `${id}-c${i}`, { w: 400, h: 500, eager: i === 0 && eager, sizes: '(min-width: 760px) 16vw, 30vw' })}</div>`)}</div>
           <div class="d-wrap d-hero-grid">${copy}</div>
         </section>`;
       }
@@ -116,8 +117,8 @@ export function section(s: SectionT, ctx: Ctx): Raw {
         ${ctx.dir === 'cinematic' ? raw('<div class="d-glow" aria-hidden="true" style="right:-25vmax;top:-10vmax"></div>') : ''}
         <div class="d-wrap d-hero-grid">
           ${copy}
-          <div class="d-hero-media" data-sf-reveal="scale" data-sf-delay="200">
-            ${media(s.media, ctx, `${id}-media`, { w: 900, h: 900, eager })}
+          <div class="d-hero-media">
+            ${media(s.media, ctx, `${id}-media`, { w: 900, h: 900, eager, sizes: HERO_SPLIT_SIZES })}
             ${s.sticker ? html`<span class="d-sticker" aria-hidden="true">${s.sticker}</span>` : ''}
           </div>
         </div>
@@ -136,7 +137,7 @@ export function section(s: SectionT, ctx: Ctx): Raw {
     case 'products':
       return html`<section class="${cls('d-section d-products', tone(s.tone))}" id="${id}">
         <div class="d-wrap">
-          ${head(ctx, s, s.link ? html`<a class="d-btn" href="${link(ctx, s.link.href)}">${s.link.label} <span class="d-arrow" aria-hidden="true">→</span></a>` : undefined)}
+          ${head(ctx, s, s.link ? html`<a class="d-btn" href="${link(ctx, s.link.href)}">${s.link.label} <span class="d-arrow">${icon('arrowRight')}</span></a>` : undefined)}
           <div data-sf-products id="${id}-grid" data-limit="${s.limit}" data-sort="${s.sort}" ${raw(s.featured ? 'data-featured' : '')} ${raw(s.category ? `data-category="${esc(s.category)}"` : '')} data-sf-stagger="80">${raw(CARD_TEMPLATE)}</div>
         </div>
       </section>`;
@@ -144,7 +145,7 @@ export function section(s: SectionT, ctx: Ctx): Raw {
       return html`<section class="d-section" id="${id}">
         <div class="d-wrap">
           ${head(ctx, s)}
-          <div class="d-cat-grid" data-sf-stagger="90">${s.items.map((c, i) => html`<a class="d-cat" href="${link(ctx, c.href)}" data-sf-reveal="${mv.reveal}" data-sf-cursor-label="Shop">${media(c.media, ctx, `${id}-cat${i}`, { w: 600, h: 800 })}<span class="d-cat-label">${c.name}<span aria-hidden="true">↗</span></span></a>`)}</div>
+          <div class="d-cat-grid" data-sf-stagger="90">${s.items.map((c, i) => html`<a class="d-cat" href="${link(ctx, c.href)}" data-sf-reveal="${mv.reveal}" data-sf-cursor-label="Shop">${media(c.media, ctx, `${id}-cat${i}`, { w: 600, h: 800, sizes: '(min-width: 900px) 25vw, 50vw' })}<span class="d-cat-label">${c.name}${icon('arrowUpRight', 22)}</span></a>`)}</div>
         </div>
       </section>`;
     case 'story':
@@ -193,7 +194,7 @@ export function section(s: SectionT, ctx: Ctx): Raw {
         </div>
       </section>`;
     case 'booking':
-      return html`<section class="${cls('d-section', tone(s.tone))}" id="${id === 's0' ? id : 'book'}">
+      return html`<section class="${cls('d-section', tone(s.tone))}" id="${s.anchor ?? 'book'}">
         <div class="d-wrap d-split">
           <div>
             ${s.eyebrow ? html`<p class="d-eyebrow" data-sf-reveal="fade">${s.eyebrow}</p>` : ''}
@@ -237,7 +238,7 @@ export function section(s: SectionT, ctx: Ctx): Raw {
       const map = a ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${ctx.site.name}, ${addr}`)}` : '';
       const wa = ctx.site.whatsapp ? `https://wa.me/${ctx.site.whatsapp.replace(/\D/g, '')}` : '';
       const t12 = (t: string) => { const [h, m] = t.split(':').map(Number); return `${((h + 11) % 12) + 1}${m ? `:${String(m).padStart(2, '0')}` : ''} ${h >= 12 ? 'pm' : 'am'}`; };
-      return html`<section class="d-section" id="visit">
+      return html`<section class="d-section" id="${s.anchor ?? 'visit'}">
         <div class="d-wrap d-split">
           <div>
             ${head(ctx, s)}
@@ -250,11 +251,39 @@ export function section(s: SectionT, ctx: Ctx): Raw {
           </div>
           <div>
             ${ctx.site.hours?.length ? html`<table class="d-hours" data-sf-reveal="up"><caption class="d-eyebrow" style="text-align:left;margin-bottom:12px">Opening hours</caption><tbody>${ctx.site.hours.map((h) => html`<tr><th scope="row">${h.days}</th><td>${t12(h.open)} – ${t12(h.close)}</td></tr>`)}</tbody></table>` : ''}
-            ${s.media ? html`<div class="d-media-frame" style="aspect-ratio:4/3;margin-top:32px" data-sf-reveal="${mv.reveal}">${media(s.media, ctx, `${id}-m`, { w: 800, h: 600 })}</div>` : ''}
+            ${s.media ? html`<div class="d-media-frame" style="aspect-ratio:4/3;margin-top:32px" data-sf-reveal="${mv.reveal}">${media(s.media, ctx, `${id}-m`, { w: 800, h: 600, sizes: '(min-width: 900px) 45vw, 92vw' })}</div>` : ''}
           </div>
         </div>
       </section>`;
     }
+    case 'rows':
+      return html`<section class="${cls('d-section d-rows', tone(s.tone))}" id="${id}">
+        <div class="d-wrap">
+          ${head(ctx, s)}
+          <div class="d-rows-list">${s.items.map((r, i) => html`<article class="${cls('d-row', i % 2 === 1 && 'd-row--flip')}">
+            <div class="d-row-media d-media-frame" data-sf-reveal="${mv.reveal}">${media(r.media, ctx, `${id}-r${i}`, { sizes: '(min-width: 900px) 55vw, 92vw' })}</div>
+            <div class="d-row-copy" data-sf-reveal="up">
+              ${r.eyebrow ? html`<p class="d-eyebrow">${r.eyebrow}</p>` : ''}
+              <h3 class="d-display d-h3">${emph(r.title)}</h3>
+              <p class="d-lede">${r.text}</p>
+              ${r.link ? html`<a class="d-btn" href="${link(ctx, r.link.href)}">${r.link.label} <span class="d-arrow">${icon('arrowRight')}</span></a>` : ''}
+            </div>
+          </article>`)}</div>
+        </div>
+      </section>`;
+    case 'bento':
+      return html`<section class="d-section" id="${id}">
+        <div class="d-wrap">
+          ${head(ctx, s)}
+          <div class="d-bento" data-sf-stagger="70">${s.tiles.map((t, i) => {
+            const size = `d-tile--${t.size}`;
+            if (t.kind === 'photo') return html`<figure class="${cls('d-tile d-tile--photo', size)}" data-sf-reveal="${mv.reveal}">${media(t.media, ctx, `${id}-t${i}`, { sizes: t.size === 'big' || t.size === 'wide' ? '(min-width: 900px) 50vw, 100vw' : '(min-width: 900px) 25vw, 50vw' })}${t.caption ? html`<figcaption>${t.caption}</figcaption>` : ''}</figure>`;
+            const toneCls = t.tone === 'accent' ? 'd-block--accent' : t.tone === 'invert' ? 'd-section--invert' : t.tone === 'pop' ? 'd-block--pop' : 'd-tile--surface';
+            if (t.kind === 'stat') return html`<div class="${cls('d-tile d-tile--stat', size, toneCls)}" data-sf-reveal="up"><b class="d-display">${t.value}</b><span>${t.label}</span></div>`;
+            return html`<div class="${cls('d-tile d-tile--text', size, toneCls)}" data-sf-reveal="up"><h3 class="d-display d-h3">${emph(t.title)}</h3>${t.text ? html`<p>${t.text}</p>` : ''}</div>`;
+          })}</div>
+        </div>
+      </section>`;
     case 'wishlist':
       return html`<section class="d-section" id="${id}" style="padding-top:clamp(40px,6vw,80px)">
         <div class="d-wrap">

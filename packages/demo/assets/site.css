@@ -43,7 +43,7 @@ h1, h2, h3, .display { font-family: ui-serif, Georgia, "Times New Roman", serif;
 
 .strip { background: var(--maroon); color: #fbe7c6; padding: 18px 0; font-family: ui-serif, Georgia, serif; font-size: clamp(1.2rem, 3vw, 2rem); }
 .strip span { padding: 0 28px; }
-.strip span::after { content: '✦'; margin-left: 56px; color: var(--saffron); }
+.strip span::after { content: ''; display: inline-block; width: .3em; height: .3em; border-radius: 50%; vertical-align: middle; margin-left: 56px; background: var(--saffron); }
 
 section.block { padding: 88px 0; }
 .block h2 { font-size: clamp(2rem, 5vw, 3.6rem); margin: 8px 0 24px; }

@@ -1,5 +1,8 @@
 # Commerce kit releases
 
+## 1.2.0 — 2026-09-28
+Cleaner icons: the wishlist heart and the cart's close button are now drawn line icons (the heart fills in when a product is saved) instead of symbol characters, so they look the same on every phone and never appear as emoji. Product photos with several sizes now tell the browser how wide a card is, so phones download a small photo instead of the largest one.
+
 ## 1.1.0 — 2026-09-25
 New ways to pay at checkout, switched on per shop from the studio's Payments settings: UPI (a QR code on computers and a "Pay with a UPI app" button on phones, pre-filled with the exact amount and an order reference; the shopper then sends the 12-digit UPI transaction ID to the shop on WhatsApp), and cash on delivery with an optional order limit. WhatsApp ordering can now be switched off when other ways to pay are on. Shops without these settings behave exactly as in 1.0.0.
 

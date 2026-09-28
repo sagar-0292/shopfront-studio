@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { renderSite, DesignError, DIRECTIONS, SECTION_TYPES, DEFAULTS, checkPalette, contrast as checkContrast, safeHref, emph, type SiteDefT } from '../src';
 
 const V = { versions: { motion: '1.0.0', commerce: '1.1.0', design: '1.0.0' } };
-const art = { art: 'x' };
+const photo = { image: { src: '/img/p-800.webp', srcset: '/img/p-400.webp 400w, /img/p-800.webp 800w', alt: 'Kaju katli on a plate', width: 800, height: 1000 } };
 
 function everything(direction: SiteDefT['direction'] = 'editorial'): Record<string, unknown> {
   return {
@@ -17,19 +17,20 @@ function everything(direction: SiteDefT['direction'] = 'editorial'): Record<stri
     },
     nav: [{ label: 'Shop', href: '/shop/' }, { label: 'Visit', href: '/#visit' }],
     commerce: { source: { type: 'json', url: '/data/catalog.json' } },
+    credits: [{ name: 'Neeta', url: 'https://www.pexels.com/@neeta', source: 'Pexels' }, { name: 'Rajan Gaur', url: 'https://www.pexels.com/@rajan-gaur', source: 'Pexels' }],
     pages: [
       { path: '/', title: 'Test Shop', description: 'Home page.', sections: [
-        { type: 'hero', variant: 'split', headline: 'Fresh *every* morning', ctas: [{ label: 'Shop', href: '/shop/' }, { label: 'Call', href: 'tel:+919820012345' }], media: art, sticker: 'Since 1962' },
+        { type: 'hero', variant: 'split', headline: 'Fresh *every* morning', ctas: [{ label: 'Shop', href: '/shop/' }, { label: 'Call', href: 'tel:+919820012345' }], media: photo, sticker: 'Since 1962' },
         { type: 'hero', variant: 'fullbleed', headline: 'Full', media: { image: { src: '/img/a.jpg', alt: 'A shop front', width: 1600, height: 1000, srcset: '/img/a-800.jpg 800w, /img/a.jpg 1600w' } } },
         { type: 'hero', variant: 'typographic', headline: 'Words' },
-        { type: 'hero', variant: 'collage', headline: 'Collage', collage: [art, art, art] },
+        { type: 'hero', variant: 'collage', headline: 'Collage', collage: [photo, photo, photo] },
         { type: 'marquee', items: ['One', 'Two'] },
         { type: 'statement', text: 'We *care*.', meta: ['Est. 1962'] },
         { type: 'products', title: 'Bestsellers', featured: true, link: { label: 'All', href: '/shop/' } },
-        { type: 'categories', title: 'Browse', items: [{ name: 'Sweets', href: '/shop/?cat=sweets', media: art }, { name: 'Namkeen', href: '/shop/?cat=namkeen', media: { object: 'ring', label: 'A gold ring' } }] },
+        { type: 'categories', title: 'Browse', items: [{ name: 'Sweets', href: '/shop/?cat=sweets', media: photo }, { name: 'Namkeen', href: '/shop/?cat=namkeen', media: { object: 'ring', label: 'A gold ring' } }] },
         { type: 'story', title: 'Our story', panels: [{ title: 'One', text: 'First.' }, { title: 'Two', text: 'Second.', media: { video: { src: '/v.webm', poster: '/v.jpg' } } }] },
         { type: 'features', title: 'Why us', items: [{ title: 'A', text: 'a' }, { title: 'B', text: 'b' }] },
-        { type: 'gallery', title: 'Gallery', items: [{ media: art }, { media: art, ratio: 'square' }, { media: { model: '/m/diya.glb', label: 'A clay lamp' } }] },
+        { type: 'gallery', title: 'Gallery', items: [{ media: photo }, { media: photo, ratio: 'square' }, { media: { model: '/m/diya.glb', label: 'A clay lamp' } }] },
         { type: 'menu', title: 'Menu', categories: [{ name: 'Small plates', items: [{ name: 'Paneer tikka', price_paise: 42000, diet: 'veg' }, { name: 'Prawn koliwada', price_paise: 56050, diet: 'nonveg', description: 'Crisp' }] }] },
         { type: 'booking', title: 'Book a table' },
         { type: 'quotes', title: 'Kind words', items: [{ quote: 'Lovely.', name: 'Asha', source: 'Google review' }] },
@@ -37,6 +38,8 @@ function everything(direction: SiteDefT['direction'] = 'editorial'): Record<stri
         { type: 'faq', title: 'Questions', items: [{ q: 'Do you deliver?', a: 'Yes, across Mumbai.' }] },
         { type: 'cta', headline: 'Come *hungry*', ctas: [{ label: 'Book', href: '#book' }] },
         { type: 'contact', title: 'Visit us' },
+        { type: 'rows', anchor: 'our-story', items: [{ title: 'The *starter*', text: 'Ten years old.', media: photo, link: { label: 'Order', href: '/shop/' } }, { title: 'The bake', text: 'At 5 am.', media: photo }] },
+        { type: 'bento', tiles: [{ kind: 'photo', media: photo, size: 'big', caption: 'The counter' }, { kind: 'stat', value: '1962', label: 'Since' }, { kind: 'text', title: 'Pure *ghee*', text: 'Always.' }] },
       ] },
       { path: '/shop/', title: 'Shop', description: 'Everything we make.', sections: [{ type: 'shop', title: 'All sweets' }] },
       { path: '/wishlist/', title: 'Wishlist', description: 'Saved.', sections: [{ type: 'wishlist' }] },
@@ -152,6 +155,36 @@ describe('renderSite', () => {
     const badImage = everything();
     (badImage.pages as { sections: unknown[] }[])[0].sections = [{ type: 'hero', variant: 'split', headline: 'x', media: { image: { src: 'javascript:x', alt: '', width: 1, height: 1 } } }];
     expect(() => renderSite(badImage, V)).toThrow(/Image address/);
+  });
+
+  it('uses real photos and drawn line icons only: no artwork, no symbol characters', () => {
+    for (const d of DIRECTIONS) {
+      for (const html of Object.values(renderSite(everything(d), V))) {
+        expect(html).not.toMatch(/[♡♥→↗↓✦✕★]/u);
+        expect(html).not.toMatch(/(?![©®™])\p{Extended_Pictographic}/u); // emoji; © ® ™ are ordinary text
+      }
+    }
+    const def = everything();
+    (def.pages as { sections: unknown[] }[])[0].sections = [{ type: 'hero', variant: 'split', headline: 'x', media: { art: 'rings' } }];
+    expect(() => renderSite(def, V)).toThrow(DesignError);
+    // A missing photo leaves a calm block, not a drawing.
+    const noPhoto = everything();
+    (noPhoto.pages as { sections: unknown[] }[])[0].sections = [{ type: 'hero', variant: 'split', headline: 'x' }];
+    const out = renderSite(noPhoto, V)['/index.html'];
+    expect(out).toContain('class="d-blank"');
+    expect(out).not.toContain('<svg viewBox="0 0 800');
+  });
+
+  it('credits the photographers and links anchors from the menu', () => {
+    const d = doc(renderSite(everything(), V)['/index.html']);
+    const credit = d.querySelector('.d-credits')!;
+    expect(credit.textContent!.replace(/\s+/g, ' ')).toBe('Photos by Neeta and Rajan Gaur on Pexels.');
+    expect(credit.querySelector('a[href="https://www.pexels.com/@neeta"]')).not.toBeNull();
+    expect(d.getElementById('our-story')).not.toBeNull();
+    expect(d.querySelectorAll('.d-row')).toHaveLength(2);
+    expect(d.querySelector('.d-row--flip')).not.toBeNull();
+    expect(d.querySelectorAll('.d-bento .d-tile')).toHaveLength(3);
+    expect(d.querySelector('.d-row img')!.getAttribute('srcset')).toContain('400w');
   });
 
   it('refuses custom colours that are hard to read', () => {

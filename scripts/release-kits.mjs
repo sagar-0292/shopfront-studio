@@ -91,13 +91,35 @@ function cmp(a, b) {
   return 0;
 }
 
-// Demo pages: fill in the shared header/footer/card parts.
+// Real stock photos: {"$photo": "<group>/<slot>"} in page descriptions and catalogues
+// becomes the saved photo (see packages/demo/photos.json and tools/fetch-photos.ts).
 const demoSrc = join(root, 'packages/demo');
+const photoLock = JSON.parse(readFileSync(join(demoSrc, 'photos.lock.json'), 'utf8'));
+function withPhotos(value, used) {
+  return JSON.parse(JSON.stringify(value), (_k, v) => {
+    if (!v || typeof v !== 'object' || Array.isArray(v) || !('$photo' in v)) return v;
+    const p = photoLock[v.$photo];
+    if (!p) throw new Error(`Photo "${v.$photo}" is not in photos.lock.json. Add it to packages/demo/photos.json and run: node packages/demo/tools/fetch-photos.ts`);
+    used.set(p.credit.photographerUrl, { name: p.credit.photographer, url: p.credit.photographerUrl, source: p.credit.provider === 'pexels' ? 'Pexels' : 'Unsplash' });
+    return { src: p.src, srcset: p.srcset, width: p.width, height: p.height, alt: p.alt };
+  });
+}
+const creditsHtml = (used) => {
+  const people = [...used.values()];
+  if (!people.length) return '';
+  const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  return `<p class="note">Photos by ${people.map((c) => `<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)}</a>`).join(', ')} on <a href="https://www.pexels.com" target="_blank" rel="noopener">Pexels</a>.</p>`;
+};
+
+// Demo pages: fill in the shared header/footer/card parts, and the catalogue's photos.
 const demoOut = join(out, 'demo');
-const partial = (n) => readFileSync(join(demoSrc, 'pages/partials', `${n}.html`), 'utf8').trim();
+const demoUsed = new Map();
+const demoData = JSON.stringify(withPhotos(JSON.parse(readFileSync(join(demoSrc, 'assets/data/mithai.json'), 'utf8')), demoUsed), null, 1) + '\n';
+for (const k of ['demo/diya']) withPhotos({ $photo: k }, demoUsed);
+const partial = (n) => (n === 'credits' ? creditsHtml(demoUsed) : readFileSync(join(demoSrc, 'pages/partials', `${n}.html`), 'utf8').trim());
 const pages = {};
 for (const f of readdirSync(join(demoSrc, 'pages')).filter((f) => f.endsWith('.html'))) {
-  pages[f] = readFileSync(join(demoSrc, 'pages', f), 'utf8').replace(/<!-- @(\w+) -->/g, (_, n) => partial(n));
+  pages[f] = readFileSync(join(demoSrc, 'pages', f), 'utf8').replace(/<!-- @(\w+) -->/g, (_, n) => partial(n)).replace(/<!-- @(\w+) -->/g, (_, n) => partial(n));
 }
 
 // Sample websites: one per design direction, rendered by the published design kit.
@@ -109,14 +131,17 @@ const { renderSite } = await import(pathToFileURL(existsSync(published) ? publis
 const versions = { motion: manifest.motion.latest, commerce: manifest.commerce.latest, design: manifest.design.latest };
 for (const id of readdirSync(sitesSrc).sort()) {
   const base = `/kits/sites/${id}`;
-  const def = JSON.parse(readFileSync(join(sitesSrc, id, 'site.json'), 'utf8'));
-  for (const [path, html] of Object.entries(renderSite(def, { base, versions }))) siteFiles[join(id, path)] = html;
+  const used = new Map();
   for (const f of files(join(sitesSrc, id)).filter((f) => f !== 'site.json')) {
     let body = readFileSync(join(sitesSrc, id, f));
-    // Catalogue pictures are site paths ("/img/x.svg"); point them at this preview's folder.
-    if (f.endsWith('.json')) body = JSON.stringify(JSON.parse(body), (k, v) => (k === 'src' && typeof v === 'string' && v.startsWith('/') ? base + v : v), 1) + '\n';
+    // Catalogue photos are site paths ("/img/x.webp"); point them (and each size) at this preview's folder.
+    const at = (u) => (u.startsWith('/') ? base + u : u);
+    if (f.endsWith('.json')) body = JSON.stringify(withPhotos(JSON.parse(body), used), (k, v) => (k === 'src' && typeof v === 'string' ? at(v) : k === 'srcset' && typeof v === 'string' ? v.split(', ').map((p) => { const [u, w] = p.split(' '); return `${at(u)} ${w}`; }).join(', ') : v), 1) + '\n';
     siteFiles[join(id, f)] = body;
   }
+  const def = withPhotos(JSON.parse(readFileSync(join(sitesSrc, id, 'site.json'), 'utf8')), used);
+  def.credits = [...used.values()];
+  for (const [path, html] of Object.entries(renderSite(def, { base, versions }))) siteFiles[join(id, path)] = html;
 }
 
 if (check) {
@@ -128,6 +153,8 @@ if (check) {
     const p = join(demoOut, f);
     if (!existsSync(p) || readFileSync(p, 'utf8') !== html) { console.error(`✗ demo/${f} is out of date. Run: node scripts/release-kits.mjs`); problems++; }
   }
+  const dataPath = join(demoOut, 'assets/data/mithai.json');
+  if (!existsSync(dataPath) || readFileSync(dataPath, 'utf8') !== demoData) { console.error('✗ demo/assets/data/mithai.json is out of date. Run: node scripts/release-kits.mjs'); problems++; }
   const old = JSON.stringify(JSON.parse(readFileSync(manifestPath, 'utf8')));
   if (old !== JSON.stringify(manifest)) { console.error('✗ kits/manifest.json is out of date.'); problems++; }
 } else {
@@ -135,6 +162,7 @@ if (check) {
   mkdirSync(demoOut, { recursive: true });
   for (const [f, html] of Object.entries(pages)) writeFileSync(join(demoOut, f), html);
   cpSync(join(demoSrc, 'assets'), join(demoOut, 'assets'), { recursive: true });
+  writeFileSync(join(demoOut, 'assets/data/mithai.json'), demoData);
   writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   rmSync(sitesOut, { recursive: true, force: true });
   for (const [f, body] of Object.entries(siteFiles)) { mkdirSync(dirname(join(sitesOut, f)), { recursive: true }); writeFileSync(join(sitesOut, f), body); }

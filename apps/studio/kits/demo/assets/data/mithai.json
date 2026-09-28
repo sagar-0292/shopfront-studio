@@ -8,10 +8,11 @@
    "price_paise": 89900,
    "mrp_paise": 99900,
    "image": {
-    "src": "/kits/demo/assets/img/kaju-katli.svg",
-    "alt": "Kaju Katli",
-    "width": 400,
-    "height": 400
+    "src": "/kits/demo/assets/img/photos/kaju-katli-800.webp",
+    "srcset": "/kits/demo/assets/img/photos/kaju-katli-400.webp 400w, /kits/demo/assets/img/photos/kaju-katli-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Kaju katli diamonds on a festive plate"
    },
    "category": {
     "slug": "sweets",
@@ -53,10 +54,11 @@
    "price_paise": 45000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/motichoor-ladoo.svg",
-    "alt": "Motichoor Ladoo",
-    "width": 400,
-    "height": 400
+    "src": "/kits/demo/assets/img/photos/motichoor-ladoo-800.webp",
+    "srcset": "/kits/demo/assets/img/photos/motichoor-ladoo-400.webp 400w, /kits/demo/assets/img/photos/motichoor-ladoo-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Motichoor ladoos arranged in a gift box"
    },
    "category": {
     "slug": "sweets",
@@ -80,10 +82,11 @@
    "price_paise": 32000,
    "mrp_paise": 36000,
    "image": {
-    "src": "/kits/demo/assets/img/rasgulla.svg",
-    "alt": "Rasgulla (8 pcs)",
-    "width": 400,
-    "height": 400
+    "src": "/kits/demo/assets/img/photos/rasgulla-800.webp",
+    "srcset": "/kits/demo/assets/img/photos/rasgulla-400.webp 400w, /kits/demo/assets/img/photos/rasgulla-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Rasgullas soaking in sugar syrup"
    },
    "category": {
     "slug": "sweets",
@@ -106,10 +109,11 @@
    "price_paise": 34000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/gulab-jamun.svg",
-    "alt": "Gulab Jamun (8 pcs)",
-    "width": 400,
-    "height": 400
+    "src": "/kits/demo/assets/img/photos/gulab-jamun-800.webp",
+    "srcset": "/kits/demo/assets/img/photos/gulab-jamun-400.webp 400w, /kits/demo/assets/img/photos/gulab-jamun-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Gulab jamun in a white bowl with cashews"
    },
    "category": {
     "slug": "sweets",
@@ -132,10 +136,11 @@
    "price_paise": 26000,
    "mrp_paise": 30000,
    "image": {
-    "src": "/kits/demo/assets/img/soan-papdi.svg",
-    "alt": "Soan Papdi",
-    "width": 400,
-    "height": 400
+    "src": "/kits/demo/assets/img/photos/soan-papdi-800.webp",
+    "srcset": "/kits/demo/assets/img/photos/soan-papdi-400.webp 400w, /kits/demo/assets/img/photos/soan-papdi-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Squares of flaky soan papdi on a rustic dish"
    },
    "category": {
     "slug": "sweets",
@@ -158,10 +163,11 @@
    "price_paise": 68000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/barfi.svg",
-    "alt": "Malai Barfi",
-    "width": 400,
-    "height": 400
+    "src": "/kits/demo/assets/img/photos/barfi-800.webp",
+    "srcset": "/kits/demo/assets/img/photos/barfi-400.webp 400w, /kits/demo/assets/img/photos/barfi-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Besan barfi topped with almonds and pistachios"
    },
    "category": {
     "slug": "sweets",
@@ -187,10 +193,11 @@
    "price_paise": 18000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/bhujia.svg",
-    "alt": "Bikaneri Bhujia 400 g",
-    "width": 400,
-    "height": 400
+    "src": "/kits/demo/assets/img/photos/bhujia-800.webp",
+    "srcset": "/kits/demo/assets/img/photos/bhujia-400.webp 400w, /kits/demo/assets/img/photos/bhujia-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Crunchy golden namkeen sticks"
    },
    "category": {
     "slug": "namkeen",
@@ -214,10 +221,11 @@
    "price_paise": 22000,
    "mrp_paise": 25000,
    "image": {
-    "src": "/kits/demo/assets/img/chakli.svg",
-    "alt": "Bhajani Chakli",
-    "width": 400,
-    "height": 400
+    "src": "/kits/demo/assets/img/photos/chakli-800.webp",
+    "srcset": "/kits/demo/assets/img/photos/chakli-400.webp 400w, /kits/demo/assets/img/photos/chakli-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "A platter of chakli spirals and festive snacks"
    },
    "category": {
     "slug": "namkeen",
@@ -240,10 +248,11 @@
    "price_paise": 16000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/mathri.svg",
-    "alt": "Methi Mathri",
-    "width": 400,
-    "height": 400
+    "src": "/kits/demo/assets/img/photos/mathri-800.webp",
+    "srcset": "/kits/demo/assets/img/photos/mathri-400.webp 400w, /kits/demo/assets/img/photos/mathri-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "A stack of crisp mathri on a steel plate"
    },
    "category": {
     "slug": "namkeen",
@@ -266,10 +275,11 @@
    "price_paise": 249900,
    "mrp_paise": 299900,
    "image": {
-    "src": "/kits/demo/assets/img/hamper.svg",
-    "alt": "Diwali Grand Hamper",
-    "width": 400,
-    "height": 400
+    "src": "/kits/demo/assets/img/photos/hamper-800.webp",
+    "srcset": "/kits/demo/assets/img/photos/hamper-400.webp 400w, /kits/demo/assets/img/photos/hamper-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Diwali gift boxes stacked with marigolds and fairy lights"
    },
    "category": {
     "slug": "gifts",
@@ -296,10 +306,11 @@
    "price_paise": 145000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/dry-fruit-box.svg",
-    "alt": "Royal Dry Fruit Box",
-    "width": 400,
-    "height": 400
+    "src": "/kits/demo/assets/img/photos/dry-fruit-box-800.webp",
+    "srcset": "/kits/demo/assets/img/photos/dry-fruit-box-400.webp 400w, /kits/demo/assets/img/photos/dry-fruit-box-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "A dry fruit gift box tied with a silver ribbon"
    },
    "category": {
     "slug": "gifts",
@@ -322,10 +333,11 @@
    "price_paise": 52000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/peda.svg",
-    "alt": "Mathura Peda (500 g)",
-    "width": 400,
-    "height": 400
+    "src": "/kits/demo/assets/img/photos/peda-800.webp",
+    "srcset": "/kits/demo/assets/img/photos/peda-400.webp 400w, /kits/demo/assets/img/photos/peda-800.webp 800w",
+    "width": 800,
+    "height": 800,
+    "alt": "Pedas topped with almonds on a white plate"
    },
    "category": {
     "slug": "sweets",

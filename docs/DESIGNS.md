@@ -11,7 +11,7 @@ edit them too. The kit turns a description into finished pages that already meet
 | Editorial luxury | A fashion magazine | Cormorant Garamond + Jost | Ivory, ink, dark gold | Aranya (jeweller) — `/kits/sites/aranya` |
 | Bold & vibrant | A festival poster | Bricolage Grotesque + DM Sans | Cream, magenta, saffron | Mithai Market (sweet shop) — `/kits/sites/mithai-market` |
 | Dark & cinematic | A film title sequence | Syne + Manrope | Near-black, ember orange | Ember (restaurant) — `/kits/sites/ember` |
-| Warm & crafted | A handmade label | Fraunces + Work Sans | Kraft paper, terracotta, olive | Bandra Bake House (bakery) — `/kits/sites/bandra-bake-house` |
+| Warm & crafted | A handmade label | Fraunces + Karla | Kraft paper, terracotta, olive | Bandra Bake House (bakery) — `/kits/sites/bandra-bake-house` |
 
 All fonts are open-source and hosted with the site (no Google requests from visitors' phones). Each font has
 a size-matched stand-in, so text doesn't jump when the real font arrives.
@@ -46,3 +46,15 @@ Headlines can mark a highlighted word with `*asterisks*`: `"Bread worth *waking 
 - On a project, the **Design** card is where the team picks the look. Anyone in the agency can choose it;
   business owners can't change it. The website's design-kit version is shown with the other kits and, like
   them, only the agency owner can change it.
+
+## Photos
+- Every picture on the sample sites is a real stock photo. Drawn artwork is not allowed: the page format has
+  no way to ask for it, and tests fail if a page contains a drawn picture or an emoji-style symbol.
+- `packages/photos` searches **Pexels** and **Unsplash** (keys `PEXELS_API_KEY` and `UNSPLASH_ACCESS_KEY`, on the
+  server only), crops each photo to the shape a section needs and saves fast WebP sizes. Unsplash photos stay
+  on Unsplash's image servers, as its terms require. Phase 3's AI builder uses the same package.
+- Sample-site photos are listed in `packages/demo/photos.json` (photo id, crop shape, sizes, description);
+  `node packages/demo/tools/fetch-photos.ts` downloads any that are missing and records them, with the
+  photographer, in `photos.lock.json`. Pages refer to a photo as `{"$photo": "aranya/hero"}`.
+- Photographers are credited in each site's footer, linked to their profiles.
+- To browse candidates: `node packages/photos/cli.ts search "kaju katli" --orientation=square --sheet=out.png`.

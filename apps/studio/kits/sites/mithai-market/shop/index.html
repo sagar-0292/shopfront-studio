@@ -15,13 +15,14 @@
 <meta property="og:locale" content="en_IN">
 
 <script>document.documentElement.classList.add('sf-js')</script>
-<link rel="preload" href="/kits/design/1.0.0/fonts/bricolage-grotesque-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/kits/design/1.1.0/fonts/bricolage-grotesque-normal.woff2" as="font" type="font/woff2" crossorigin>
+
 <link rel="stylesheet" href="/kits/motion/1.0.0/sf-motion.css">
-<link rel="stylesheet" href="/kits/commerce/1.1.0/sf-commerce.css">
-<link rel="stylesheet" href="/kits/design/1.0.0/bold.css">
+<link rel="stylesheet" href="/kits/commerce/1.2.0/sf-commerce.css">
+<link rel="stylesheet" href="/kits/design/1.1.0/bold.css">
 
 <script type="module" src="/kits/motion/1.0.0/sf-motion.js"></script>
-<script type="module" src="/kits/commerce/1.1.0/sf-commerce.js"></script>
+<script type="module" src="/kits/commerce/1.2.0/sf-commerce.js"></script>
 <script type="application/json" id="sf-config">{"site":{"id":"sample-mithai-market","name":"Mithai Market","privacyUrl":"#privacy"},"whatsapp":"+919820012345","delivery":{"fee_paise":4900,"free_above_paise":99900},"payments":{"whatsapp":true,"upi":{"vpa":"mithaimarket@okicici","name":"Mithai Market"},"cod":{"max_paise":500000}},"source":{"type":"json","url":"/kits/sites/mithai-market/data/catalog.json"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Bakery","name":"Mithai Market","description":"Kaju katli, ladoos, namkeen and festive hampers made fresh every morning in Dadar since 1962. Order online or on WhatsApp.","telephone":"+919820012345","email":"hello@mithaimarket.example","address":{"@type":"PostalAddress","streetAddress":"Ranade Road, Dadar West","addressLocality":"Mumbai","addressRegion":"Maharashtra","postalCode":"400028","addressCountry":"IN"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"20:00"}]}</script>
 </head>
@@ -33,10 +34,10 @@
     <a class="d-logo" href="/kits/sites/mithai-market/">Mithai Market</a>
     <nav class="d-nav" aria-label="Main"><a class="d-link" href="/kits/sites/mithai-market/shop/" aria-current="page">Shop</a><a class="d-link" href="/kits/sites/mithai-market/shop/?cat=gifts" >Gift boxes</a><a class="d-link" href="/kits/sites/mithai-market/#book" >Tasting</a><a class="d-link" href="/kits/sites/mithai-market/#visit" >Visit</a></nav>
     <div class="d-header-actions">
-      <a class="d-icon-btn d-header-wish" href="/kits/sites/mithai-market/wishlist/"><span aria-hidden="true">♡</span><span class="d-sr">Wishlist</span> <b data-sf-wishlist-count>0</b></a>
-      <button class="d-icon-btn" type="button" data-sf-cart-open aria-label="Cart 0 items">Cart <b data-sf-cart-count>0</b></button>
+      <a class="d-icon-btn d-header-wish" href="/kits/sites/mithai-market/wishlist/"><svg class="d-icon d-icon-heart" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20.3s-7.3-4.4-9.2-9A5.1 5.1 0 0 1 12 6.6a5.1 5.1 0 0 1 9.2 4.7c-1.9 4.6-9.2 9-9.2 9z"/></svg><span class="d-sr">Wishlist</span> <b data-sf-wishlist-count>0</b></a>
+      <button class="d-icon-btn" type="button" data-sf-cart-open aria-label="Cart 0 items"><svg class="d-icon d-icon-bag" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 8h14l-1.2 11.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9L5 8zM9 8V7a3 3 0 0 1 6 0v1"/></svg><span class="d-cart-word">Cart</span> <b data-sf-cart-count>0</b></button>
       <details class="d-menu">
-        <summary class="d-icon-btn">Menu</summary>
+        <summary class="d-icon-btn"><svg class="d-icon d-icon-menu" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span></summary>
         <nav class="d-menu-panel" aria-label="Menu"><a href="/kits/sites/mithai-market/shop/" aria-current="page">Shop</a><a href="/kits/sites/mithai-market/shop/?cat=gifts" >Gift boxes</a><a href="/kits/sites/mithai-market/#book" >Tasting</a><a href="/kits/sites/mithai-market/#visit" >Visit</a><a class="d-menu-wish" href="/kits/sites/mithai-market/wishlist/">Wishlist</a></nav>
       </details>
     </div>
@@ -61,7 +62,7 @@
       <h3 class="d-card-name" data-slot="name"></h3>
       <p class="d-card-price"><span data-slot="price"></span><s data-slot="mrp"></s><i data-slot="discount"></i></p>
       <p class="d-card-stock" data-slot="stock"></p>
-      <div class="d-card-actions"><select data-slot="variant"></select><button data-slot="add">Add to cart</button><button data-slot="wishlist">♡</button></div>
+      <div class="d-card-actions"><select data-slot="variant"></select><button data-slot="add">Add to cart</button><button data-slot="wishlist"></button></div>
     </div>
   </article>
 </template></div></div>
@@ -90,7 +91,8 @@
       <p>© Mithai Market. Your details are only used to reply to you or deliver your order.</p>
       <button type="button" data-sf-motion-toggle>Pause animations</button>
     </div>
-    <p class="d-muted" style="margin-top:20px;font-size:.8rem">This is a sample website made by Shopfront Studio to show the Bold &amp; vibrant design. The shop, products and prices are illustrative.</p>
+    <p class="d-muted d-credits" style="margin-top:20px;font-size:.8rem">Photos by <a class="d-link" href="https://www.pexels.com/@neeta-1471939" target="_blank" rel="noopener">Neeta</a>, <a class="d-link" href="https://www.pexels.com/@dropshado" target="_blank" rel="noopener">Sharath G.</a>, <a class="d-link" href="https://www.pexels.com/@mouriful" target="_blank" rel="noopener">Sanchari Nag</a>, <a class="d-link" href="https://www.pexels.com/@nishess-shakya-401526881" target="_blank" rel="noopener">Nishess Shakya</a>, <a class="d-link" href="https://www.pexels.com/@divigraphy" target="_blank" rel="noopener">Divya Jain</a>, <a class="d-link" href="https://www.pexels.com/@pure-punjabi-37402395" target="_blank" rel="noopener">Pure Punjabi</a>, <a class="d-link" href="https://www.pexels.com/@aditya-mara-425995080" target="_blank" rel="noopener">Aditya Mara</a>, <a class="d-link" href="https://www.pexels.com/@yogendra" target="_blank" rel="noopener">Yogendra Banjare</a>, <a class="d-link" href="https://www.pexels.com/@salva-amin-azad-736234677" target="_blank" rel="noopener">Salva Amin Azad</a>, <a class="d-link" href="https://www.pexels.com/@yankrukov" target="_blank" rel="noopener">Yan Krukau</a>, <a class="d-link" href="https://www.pexels.com/@rahimegul" target="_blank" rel="noopener">Rahime Gül</a>, <a class="d-link" href="https://www.pexels.com/@tamanna-rumee-52377920" target="_blank" rel="noopener">Tamanna Rumee</a>, <a class="d-link" href="https://www.pexels.com/@rajan-gaur-31612043" target="_blank" rel="noopener">Rajan Gaur</a> and <a class="d-link" href="https://www.pexels.com/@lara-jameson" target="_blank" rel="noopener">Lara Jameson</a> on <a class="d-link" href="https://www.pexels.com" target="_blank" rel="noopener">Pexels</a>.</p>
+    <p class="d-muted" style="margin-top:12px;font-size:.8rem">This is a sample website made by Shopfront Studio to show the Bold &amp; vibrant design. The shop, products and prices are illustrative.</p>
   </div>
 </footer>
 </body>

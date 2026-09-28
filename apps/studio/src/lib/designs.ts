@@ -31,7 +31,7 @@ export const DESIGNS: Record<Direction, DirectionInfo> = {
   },
   crafted: {
     key: 'crafted', name: 'Warm & crafted', feel: 'Like a handmade label: kraft-paper tones, soft serif with hand-drawn underlines, friendly shapes.',
-    bestFor: 'Bakeries, organic stores, home décor, handicrafts, clinics, schools', fonts: 'Fraunces & Work Sans',
+    bestFor: 'Bakeries, organic stores, home décor, handicrafts, clinics, schools', fonts: 'Fraunces & Karla',
     swatches: ['#f3e8d6', '#3b2a1e', '#a8481f', '#5f6f2f'], sample: { id: 'bandra-bake-house', name: 'Bandra Bake House', kind: 'Bakery, Bandra' },
   },
 };

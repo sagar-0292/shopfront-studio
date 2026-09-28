@@ -41,6 +41,15 @@ describe('card templates', () => {
     expect(sel.value).toBe('v2');
     expect(card.querySelector('[data-slot="price"]')!.textContent).toBe('From ₹180');
   });
+  it('draws the wishlist heart as an icon, never a symbol character', () => {
+    const card = fillCard(tpl(), products[0], { wished: true });
+    const btn = card.querySelector<HTMLButtonElement>('[data-slot="wishlist"]')!;
+    expect(btn.querySelector('svg.sf-icon-heart')).not.toBeNull();
+    expect(btn.textContent!.trim()).toBe('');
+    expect(btn.getAttribute('aria-pressed')).toBe('true');
+    expect(btn.getAttribute('aria-label')).toMatch(/^Remove .* from wishlist$/);
+  });
+
   it('never treats product text as HTML', () => {
     const card = fillCard(tpl(), { ...products[1], name: '<img src=x onerror=alert(1)>' }, { wished: false });
     expect(card.querySelector('[data-slot="name"]')!.innerHTML).toBe('&lt;img src=x onerror=alert(1)&gt;');

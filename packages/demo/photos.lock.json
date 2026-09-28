@@ -1,0 +1,1007 @@
+{
+ "aranya/bridal-bangles": {
+  "src": "/img/bridal-bangles-800.webp",
+  "srcset": "/img/bridal-bangles-400.webp 400w, /img/bridal-bangles-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "Bridal bangles on a hand with henna",
+  "credit": {
+   "provider": "pexels",
+   "id": "39605914",
+   "photographer": "The_Candid_House",
+   "photographerUrl": "https://www.pexels.com/@the_candid_house-2164321836",
+   "pageUrl": "https://www.pexels.com/photo/elegant-henna-and-bangles-on-indian-bridal-arm-39605914/"
+  },
+  "from": "pexels:39605914:0.8000:400,800:\"attention\":72"
+ },
+ "aranya/bride": {
+  "src": "/img/bride-1200.webp",
+  "srcset": "/img/bride-480.webp 480w, /img/bride-800.webp 800w, /img/bride-1200.webp 1200w",
+  "width": 1200,
+  "height": 900,
+  "alt": "Close-up of a bride in a silk saree and gold jewellery",
+  "credit": {
+   "provider": "pexels",
+   "id": "38773208",
+   "photographer": "Satyam vicky",
+   "photographerUrl": "https://www.pexels.com/@satyamvicky",
+   "pageUrl": "https://www.pexels.com/photo/elegant-indian-bride-in-traditional-saree-38773208/"
+  },
+  "from": "pexels:38773208:1.3333:480,800,1200:\"attention\":72"
+ },
+ "aranya/chandbali": {
+  "src": "/img/chandbali-800.webp",
+  "srcset": "/img/chandbali-400.webp 400w, /img/chandbali-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "Diamond chandbali earrings on red silk",
+  "credit": {
+   "provider": "pexels",
+   "id": "7981566",
+   "photographer": "Dhanjit Sharma",
+   "photographerUrl": "https://www.pexels.com/@dhanjit-sharma-58298906",
+   "pageUrl": "https://www.pexels.com/photo/a-pair-of-diamond-earrings-besides-dahlia-flowers-7981566/"
+  },
+  "from": "pexels:7981566:0.8000:400,800:\"attention\":72"
+ },
+ "aranya/diamond-band": {
+  "src": "/img/diamond-band-800.webp",
+  "srcset": "/img/diamond-band-400.webp 400w, /img/diamond-band-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "A diamond and gold band",
+  "credit": {
+   "provider": "pexels",
+   "id": "30541184",
+   "photographer": "Jana Kukebal",
+   "photographerUrl": "https://www.pexels.com/@janakukebal",
+   "pageUrl": "https://www.pexels.com/photo/elegant-diamond-and-gold-ring-on-abstract-background-30541184/"
+  },
+  "from": "pexels:30541184:0.8000:400,800:\"attention\":72"
+ },
+ "aranya/emerald-solitaire": {
+  "src": "/img/emerald-solitaire-800.webp",
+  "srcset": "/img/emerald-solitaire-400.webp 400w, /img/emerald-solitaire-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "An emerald and diamond cocktail ring on a hand",
+  "credit": {
+   "provider": "pexels",
+   "id": "39166728",
+   "photographer": "Karan Sahu",
+   "photographerUrl": "https://www.pexels.com/@karan-sahu-260664245",
+   "pageUrl": "https://www.pexels.com/photo/elegant-emerald-ring-on-hand-display-39166728/"
+  },
+  "from": "pexels:39166728:0.8000:400,800:\"attention\":72"
+ },
+ "aranya/gems": {
+  "src": "/img/gems-1000.webp",
+  "srcset": "/img/gems-400.webp 400w, /img/gems-700.webp 700w, /img/gems-1000.webp 1000w",
+  "width": 1000,
+  "height": 750,
+  "alt": "A round diamond beside a blue gemstone",
+  "credit": {
+   "provider": "pexels",
+   "id": "13412779",
+   "photographer": "Jimmy Chan",
+   "photographerUrl": "https://www.pexels.com/@jimbear",
+   "pageUrl": "https://www.pexels.com/photo/close-up-photo-of-gemstones-13412779/"
+  },
+  "from": "pexels:13412779:1.3333:400,700,1000:\"attention\":72"
+ },
+ "aranya/hero": {
+  "src": "/img/hero-1000.webp",
+  "srcset": "/img/hero-480.webp 480w, /img/hero-720.webp 720w, /img/hero-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "A bride wearing a gold choker and traditional jewellery",
+  "credit": {
+   "provider": "pexels",
+   "id": "33023960",
+   "photographer": "Aalamgir Studio",
+   "photographerUrl": "https://www.pexels.com/@aalamgir-studio-1772566091",
+   "pageUrl": "https://www.pexels.com/photo/elegant-south-asian-bride-in-traditional-attire-33023960/"
+  },
+  "from": "pexels:33023960:0.8000:480,720,1000:\"attention\":72"
+ },
+ "aranya/jhumka-pearl": {
+  "src": "/img/jhumka-pearl-800.webp",
+  "srcset": "/img/jhumka-pearl-400.webp 400w, /img/jhumka-pearl-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "An ornate gold jhumka earring",
+  "credit": {
+   "provider": "pexels",
+   "id": "37601639",
+   "photographer": "Dhrupal Shiyal",
+   "photographerUrl": "https://www.pexels.com/@dhrupal-shiyal-2155843159",
+   "pageUrl": "https://www.pexels.com/photo/elegant-gold-jhumka-earring-on-woman-s-ear-37601639/"
+  },
+  "from": "pexels:37601639:0.8000:400,800:\"attention\":72"
+ },
+ "aranya/kundan-choker": {
+  "src": "/img/kundan-choker-800.webp",
+  "srcset": "/img/kundan-choker-400.webp 400w, /img/kundan-choker-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "A kundan choker and earrings set with blue stones",
+  "credit": {
+   "provider": "pexels",
+   "id": "33154729",
+   "photographer": "Ishhaara Jewellery",
+   "photographerUrl": "https://www.pexels.com/@ishhaara-jewellery-2151367824",
+   "pageUrl": "https://www.pexels.com/photo/traditional-indian-kundan-jewelry-set-with-earrings-33154729/"
+  },
+  "from": "pexels:33154729:0.8000:400,800:\"attention\":72"
+ },
+ "aranya/pearl-bangles": {
+  "src": "/img/pearl-bangles-800.webp",
+  "srcset": "/img/pearl-bangles-400.webp 400w, /img/pearl-bangles-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "Pearls and gold bangles",
+  "credit": {
+   "provider": "pexels",
+   "id": "29522524",
+   "photographer": "Lala Jafarova",
+   "photographerUrl": "https://www.pexels.com/@lala-jafarova-550496762",
+   "pageUrl": "https://www.pexels.com/photo/elegant-jewelry-display-with-pearls-and-gold-29522524/"
+  },
+  "from": "pexels:29522524:0.8000:400,800:\"attention\":72"
+ },
+ "aranya/polish": {
+  "src": "/img/polish-1000.webp",
+  "srcset": "/img/polish-400.webp 400w, /img/polish-700.webp 700w, /img/polish-1000.webp 1000w",
+  "width": 1000,
+  "height": 750,
+  "alt": "A jeweller polishing a gold ring",
+  "credit": {
+   "provider": "pexels",
+   "id": "6262835",
+   "photographer": "Tima Miroshnichenko",
+   "photographerUrl": "https://www.pexels.com/@tima-miroshnichenko",
+   "pageUrl": "https://www.pexels.com/photo/close-up-photo-of-person-designing-a-ring-6262835/"
+  },
+  "from": "pexels:6262835:1.3333:400,700,1000:\"attention\":72"
+ },
+ "aranya/sapphire-drop": {
+  "src": "/img/sapphire-drop-800.webp",
+  "srcset": "/img/sapphire-drop-400.webp 400w, /img/sapphire-drop-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "An oval blue stone pendant on a fine chain",
+  "credit": {
+   "provider": "pexels",
+   "id": "9073784",
+   "photographer": "Letícia Higa",
+   "photographerUrl": "https://www.pexels.com/@higaleticia",
+   "pageUrl": "https://www.pexels.com/photo/pendant-with-blue-gemstone-near-crystal-piece-9073784/"
+  },
+  "from": "pexels:9073784:0.8000:400,800:\"attention\":72"
+ },
+ "aranya/setting": {
+  "src": "/img/setting-1000.webp",
+  "srcset": "/img/setting-400.webp 400w, /img/setting-700.webp 700w, /img/setting-1000.webp 1000w",
+  "width": 1000,
+  "height": 750,
+  "alt": "An artisan soldering a piece of jewellery with a torch",
+  "credit": {
+   "provider": "pexels",
+   "id": "15955333",
+   "photographer": "COPPERTIST WU",
+   "photographerUrl": "https://www.pexels.com/@coppertist-wu-313365563",
+   "pageUrl": "https://www.pexels.com/photo/close-up-of-person-making-a-pendant-15955333/"
+  },
+  "from": "pexels:15955333:1.3333:400,700,1000:\"attention\":72"
+ },
+ "aranya/sketch": {
+  "src": "/img/sketch-1000.webp",
+  "srcset": "/img/sketch-400.webp 400w, /img/sketch-700.webp 700w, /img/sketch-1000.webp 1000w",
+  "width": 1000,
+  "height": 750,
+  "alt": "Hands sketching jewellery designs at a desk",
+  "credit": {
+   "provider": "pexels",
+   "id": "1050312",
+   "photographer": "Andrea Piacquadio",
+   "photographerUrl": "https://www.pexels.com/@olly",
+   "pageUrl": "https://www.pexels.com/photo/jewelry-designer-designs-jewelries-on-paper-1050312/"
+  },
+  "from": "pexels:1050312:1.3333:400,700,1000:\"attention\":72"
+ },
+ "bandra-bake-house/brown-butter-cookie": {
+  "src": "/img/brown-butter-cookie-800.webp",
+  "srcset": "/img/brown-butter-cookie-400.webp 400w, /img/brown-butter-cookie-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "Chocolate chip cookies on a wooden table",
+  "credit": {
+   "provider": "pexels",
+   "id": "15014922",
+   "photographer": "Nishess Shakya",
+   "photographerUrl": "https://www.pexels.com/@nishess-shakya-401526881",
+   "pageUrl": "https://www.pexels.com/photo/close-up-photo-of-chocolate-chip-cookies-on-wooden-surface-15014922/"
+  },
+  "from": "pexels:15014922:0.8000:400,800:\"attention\":72"
+ },
+ "bandra-bake-house/butter-croissant": {
+  "src": "/img/butter-croissant-800.webp",
+  "srcset": "/img/butter-croissant-400.webp 400w, /img/butter-croissant-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "Golden, flaky butter croissants",
+  "credit": {
+   "provider": "pexels",
+   "id": "29850845",
+   "photographer": "Ivan Dražić",
+   "photographerUrl": "https://www.pexels.com/@ivan-drazic-20457695",
+   "pageUrl": "https://www.pexels.com/photo/close-up-of-freshly-baked-golden-croissants-29850845/"
+  },
+  "from": "pexels:29850845:0.8000:400,800:\"attention\":72"
+ },
+ "bandra-bake-house/chocolate-babka": {
+  "src": "/img/chocolate-babka-800.webp",
+  "srcset": "/img/chocolate-babka-400.webp 400w, /img/chocolate-babka-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "A sliced chocolate babka on a cutting board",
+  "credit": {
+   "provider": "pexels",
+   "id": "6150712",
+   "photographer": "Geraud pfeiffer",
+   "photographerUrl": "https://www.pexels.com/@geraud-pfeiffer",
+   "pageUrl": "https://www.pexels.com/photo/chocolate-babka-on-wooden-cutting-board-6150712/"
+  },
+  "from": "pexels:6150712:0.8000:400,800:\"attention\":72"
+ },
+ "bandra-bake-house/cinnamon-buns": {
+  "src": "/img/cinnamon-buns-800.webp",
+  "srcset": "/img/cinnamon-buns-400.webp 400w, /img/cinnamon-buns-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "Cinnamon buns on a checked cloth",
+  "credit": {
+   "provider": "pexels",
+   "id": "36854700",
+   "photographer": "Letícia Alvares",
+   "photographerUrl": "https://www.pexels.com/@leticia-alvares-1805702",
+   "pageUrl": "https://www.pexels.com/photo/freshly-baked-cinnamon-rolls-outdoors-36854700/"
+  },
+  "from": "pexels:36854700:0.8000:400,800:\"attention\":72"
+ },
+ "bandra-bake-house/counter": {
+  "src": "/img/counter-1000.webp",
+  "srcset": "/img/counter-400.webp 400w, /img/counter-700.webp 700w, /img/counter-1000.webp 1000w",
+  "width": 1000,
+  "height": 750,
+  "alt": "A baker arranging pastries in the shop counter",
+  "credit": {
+   "provider": "pexels",
+   "id": "21847830",
+   "photographer": "Kenneth Surillo",
+   "photographerUrl": "https://www.pexels.com/@kenzero14",
+   "pageUrl": "https://www.pexels.com/photo/man-choosing-pastry-in-a-store-21847830/"
+  },
+  "from": "pexels:21847830:1.3333:400,700,1000:\"attention\":72"
+ },
+ "bandra-bake-house/country-sourdough": {
+  "src": "/img/country-sourdough-800.webp",
+  "srcset": "/img/country-sourdough-400.webp 400w, /img/country-sourdough-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "A round sourdough loaf on a wooden board",
+  "credit": {
+   "provider": "pexels",
+   "id": "37703580",
+   "photographer": "Evans Joel",
+   "photographerUrl": "https://www.pexels.com/@evans-joel-930567223",
+   "pageUrl": "https://www.pexels.com/photo/rustic-sourdough-bread-on-wooden-surface-37703580/"
+  },
+  "from": "pexels:37703580:0.8000:400,800:\"attention\":72"
+ },
+ "bandra-bake-house/crumb": {
+  "src": "/img/crumb-1200.webp",
+  "srcset": "/img/crumb-480.webp 480w, /img/crumb-800.webp 800w, /img/crumb-1200.webp 1200w",
+  "width": 1200,
+  "height": 900,
+  "alt": "Halves of a fresh sourdough loaf showing the open crumb",
+  "credit": {
+   "provider": "pexels",
+   "id": "6605304",
+   "photographer": "Geraud pfeiffer",
+   "photographerUrl": "https://www.pexels.com/@geraud-pfeiffer",
+   "pageUrl": "https://www.pexels.com/photo/crop-person-with-cut-fresh-bread-6605304/"
+  },
+  "from": "pexels:6605304:1.3333:480,800,1200:\"attention\":72"
+ },
+ "bandra-bake-house/dough": {
+  "src": "/img/dough-1000.webp",
+  "srcset": "/img/dough-400.webp 400w, /img/dough-700.webp 700w, /img/dough-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Hands shaping balls of dough",
+  "credit": {
+   "provider": "pexels",
+   "id": "31695916",
+   "photographer": "damla selen demir",
+   "photographerUrl": "https://www.pexels.com/@damla-selen-demir-429137893",
+   "pageUrl": "https://www.pexels.com/photo/baker-handcrafting-dough-balls-in-kitchen-31695916/"
+  },
+  "from": "pexels:31695916:0.8000:400,700,1000:\"attention\":72"
+ },
+ "bandra-bake-house/hero": {
+  "src": "/img/hero-1000.webp",
+  "srcset": "/img/hero-480.webp 480w, /img/hero-720.webp 720w, /img/hero-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Loaves of bread on wooden bakery shelves",
+  "credit": {
+   "provider": "pexels",
+   "id": "35993723",
+   "photographer": "wal_ 172619",
+   "photographerUrl": "https://www.pexels.com/@wal_-172619-2156618639",
+   "pageUrl": "https://www.pexels.com/photo/rustic-bread-display-on-wooden-shelves-35993723/"
+  },
+  "from": "pexels:35993723:0.8000:480,720,1000:\"attention\":58"
+ },
+ "bandra-bake-house/ladi-pav": {
+  "src": "/img/ladi-pav-800.webp",
+  "srcset": "/img/ladi-pav-400.webp 400w, /img/ladi-pav-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "Golden soft pav buns, freshly baked",
+  "credit": {
+   "provider": "pexels",
+   "id": "13424742",
+   "photographer": "Judy Lai",
+   "photographerUrl": "https://www.pexels.com/@judy-lai-868714",
+   "pageUrl": "https://www.pexels.com/photo/close-up-photo-of-buns-13424742/"
+  },
+  "from": "pexels:13424742:0.8000:400,800:\"attention\":72"
+ },
+ "bandra-bake-house/mango-cheesecake": {
+  "src": "/img/mango-cheesecake-800.webp",
+  "srcset": "/img/mango-cheesecake-400.webp 400w, /img/mango-cheesecake-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "A slice of mango cheesecake with mint",
+  "credit": {
+   "provider": "pexels",
+   "id": "32402082",
+   "photographer": "Wolf Art",
+   "photographerUrl": "https://www.pexels.com/@wolfart",
+   "pageUrl": "https://www.pexels.com/photo/delicious-mango-cheesecake-slice-on-wooden-plate-32402082/"
+  },
+  "from": "pexels:32402082:0.8000:400,800:\"attention\":72"
+ },
+ "bandra-bake-house/rosemary-focaccia": {
+  "src": "/img/rosemary-focaccia-800.webp",
+  "srcset": "/img/rosemary-focaccia-400.webp 400w, /img/rosemary-focaccia-800.webp 800w",
+  "width": 800,
+  "height": 1000,
+  "alt": "Rosemary focaccia with a golden crust",
+  "credit": {
+   "provider": "pexels",
+   "id": "30666812",
+   "photographer": "Natalia Olivera",
+   "photographerUrl": "https://www.pexels.com/@nataliaolivera",
+   "pageUrl": "https://www.pexels.com/photo/freshly-baked-homemade-focaccia-bread-30666812/"
+  },
+  "from": "pexels:30666812:0.8000:400,800:\"attention\":72"
+ },
+ "bandra-bake-house/shaping": {
+  "src": "/img/shaping-1200.webp",
+  "srcset": "/img/shaping-480.webp 480w, /img/shaping-800.webp 800w, /img/shaping-1200.webp 1200w",
+  "width": 1200,
+  "height": 900,
+  "alt": "A baker shaping loaves on a tray",
+  "credit": {
+   "provider": "pexels",
+   "id": "30918892",
+   "photographer": "Travel with Lenses",
+   "photographerUrl": "https://www.pexels.com/@travel-with-lenses-734723610",
+   "pageUrl": "https://www.pexels.com/photo/artisan-bakery-bread-preparation-in-berlin-30918892/"
+  },
+  "from": "pexels:30918892:1.3333:480,800,1200:\"attention\":72"
+ },
+ "bandra-bake-house/starter": {
+  "src": "/img/starter-1200.webp",
+  "srcset": "/img/starter-480.webp 480w, /img/starter-800.webp 800w, /img/starter-1200.webp 1200w",
+  "width": 1200,
+  "height": 900,
+  "alt": "A baker measuring flour in a warm kitchen",
+  "credit": {
+   "provider": "pexels",
+   "id": "8175355",
+   "photographer": "Ron Lach",
+   "photographerUrl": "https://www.pexels.com/@ron-lach",
+   "pageUrl": "https://www.pexels.com/photo/a-close-up-shot-of-a-woman-holding-a-flour-8175355/"
+  },
+  "from": "pexels:8175355:1.3333:480,800,1200:\"attention\":72"
+ },
+ "demo/barfi": {
+  "src": "/kits/demo/assets/img/photos/barfi-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/barfi-400.webp 400w, /kits/demo/assets/img/photos/barfi-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Besan barfi topped with almonds and pistachios",
+  "credit": {
+   "provider": "pexels",
+   "id": "7182054",
+   "photographer": "Pure Punjabi",
+   "photographerUrl": "https://www.pexels.com/@pure-punjabi-37402395",
+   "pageUrl": "https://www.pexels.com/photo/indian-sweets-in-plate-on-table-7182054/"
+  },
+  "from": "pexels:7182054:1.0000:400,800:\"attention\":72"
+ },
+ "demo/bhujia": {
+  "src": "/kits/demo/assets/img/photos/bhujia-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/bhujia-400.webp 400w, /kits/demo/assets/img/photos/bhujia-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Crunchy golden namkeen sticks",
+  "credit": {
+   "provider": "pexels",
+   "id": "17480807",
+   "photographer": "Aditya Mara",
+   "photographerUrl": "https://www.pexels.com/@aditya-mara-425995080",
+   "pageUrl": "https://www.pexels.com/photo/crispy-fried-snacks-17480807/"
+  },
+  "from": "pexels:17480807:1.0000:400,800:\"attention\":72"
+ },
+ "demo/chakli": {
+  "src": "/kits/demo/assets/img/photos/chakli-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/chakli-400.webp 400w, /kits/demo/assets/img/photos/chakli-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "A platter of chakli spirals and festive snacks",
+  "credit": {
+   "provider": "pexels",
+   "id": "39524797",
+   "photographer": "Yogendra Banjare",
+   "photographerUrl": "https://www.pexels.com/@yogendra",
+   "pageUrl": "https://www.pexels.com/photo/traditional-indian-snack-platter-with-sweets-39524797/"
+  },
+  "from": "pexels:39524797:1.0000:400,800:\"attention\":72"
+ },
+ "demo/diya": {
+  "src": "/kits/demo/assets/img/photos/diya-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/diya-400.webp 400w, /kits/demo/assets/img/photos/diya-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "A clay diya glowing in the dark",
+  "credit": {
+   "provider": "pexels",
+   "id": "29629443",
+   "photographer": "Bakkaprabhu Uppar",
+   "photographerUrl": "https://www.pexels.com/@techcrazebk",
+   "pageUrl": "https://www.pexels.com/photo/diwali-lamp-with-glowing-flame-on-dark-background-29629443/"
+  },
+  "from": "pexels:29629443:1.0000:400,800:\"attention\":72"
+ },
+ "demo/dry-fruit-box": {
+  "src": "/kits/demo/assets/img/photos/dry-fruit-box-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/dry-fruit-box-400.webp 400w, /kits/demo/assets/img/photos/dry-fruit-box-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "A dry fruit gift box tied with a silver ribbon",
+  "credit": {
+   "provider": "pexels",
+   "id": "27291944",
+   "photographer": "Rahime Gül",
+   "photographerUrl": "https://www.pexels.com/@rahimegul",
+   "pageUrl": "https://www.pexels.com/photo/a-gift-box-with-flowers-and-nuts-in-it-27291944/"
+  },
+  "from": "pexels:27291944:1.0000:400,800:\"attention\":72"
+ },
+ "demo/gulab-jamun": {
+  "src": "/kits/demo/assets/img/photos/gulab-jamun-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/gulab-jamun-400.webp 400w, /kits/demo/assets/img/photos/gulab-jamun-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Gulab jamun in a white bowl with cashews",
+  "credit": {
+   "provider": "pexels",
+   "id": "15014919",
+   "photographer": "Nishess Shakya",
+   "photographerUrl": "https://www.pexels.com/@nishess-shakya-401526881",
+   "pageUrl": "https://www.pexels.com/photo/bowl-of-gulab-jamun-15014919/"
+  },
+  "from": "pexels:15014919:1.0000:400,800:\"attention\":72"
+ },
+ "demo/hamper": {
+  "src": "/kits/demo/assets/img/photos/hamper-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/hamper-400.webp 400w, /kits/demo/assets/img/photos/hamper-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Diwali gift boxes stacked with marigolds and fairy lights",
+  "credit": {
+   "provider": "pexels",
+   "id": "8819577",
+   "photographer": "Yan Krukau",
+   "photographerUrl": "https://www.pexels.com/@yankrukov",
+   "pageUrl": "https://www.pexels.com/photo/stacked-gifts-on-a-tray-8819577/"
+  },
+  "from": "pexels:8819577:1.0000:400,800:\"attention\":72"
+ },
+ "demo/kaju-katli": {
+  "src": "/kits/demo/assets/img/photos/kaju-katli-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/kaju-katli-400.webp 400w, /kits/demo/assets/img/photos/kaju-katli-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Kaju katli diamonds on a festive plate",
+  "credit": {
+   "provider": "pexels",
+   "id": "10514163",
+   "photographer": "Neeta",
+   "photographerUrl": "https://www.pexels.com/@neeta-1471939",
+   "pageUrl": "https://www.pexels.com/photo/kaju-katli-sweets-on-plate-10514163/"
+  },
+  "from": "pexels:10514163:1.0000:400,800:{\"x\":0.3,\"y\":0.8}:72"
+ },
+ "demo/mathri": {
+  "src": "/kits/demo/assets/img/photos/mathri-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/mathri-400.webp 400w, /kits/demo/assets/img/photos/mathri-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "A stack of crisp mathri on a steel plate",
+  "credit": {
+   "provider": "pexels",
+   "id": "37314048",
+   "photographer": "Salva Amin Azad",
+   "photographerUrl": "https://www.pexels.com/@salva-amin-azad-736234677",
+   "pageUrl": "https://www.pexels.com/photo/stack-of-traditional-cookies-with-leaf-on-plate-37314048/"
+  },
+  "from": "pexels:37314048:1.0000:400,800:\"attention\":72"
+ },
+ "demo/motichoor-ladoo": {
+  "src": "/kits/demo/assets/img/photos/motichoor-ladoo-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/motichoor-ladoo-400.webp 400w, /kits/demo/assets/img/photos/motichoor-ladoo-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Motichoor ladoos arranged in a gift box",
+  "credit": {
+   "provider": "pexels",
+   "id": "19151506",
+   "photographer": "Sharath G.",
+   "photographerUrl": "https://www.pexels.com/@dropshado",
+   "pageUrl": "https://www.pexels.com/photo/close-up-of-a-box-of-laddu-19151506/"
+  },
+  "from": "pexels:19151506:1.0000:400,800:\"attention\":72"
+ },
+ "demo/peda": {
+  "src": "/kits/demo/assets/img/photos/peda-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/peda-400.webp 400w, /kits/demo/assets/img/photos/peda-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Pedas topped with almonds on a white plate",
+  "credit": {
+   "provider": "pexels",
+   "id": "7986603",
+   "photographer": "Tamanna Rumee",
+   "photographerUrl": "https://www.pexels.com/@tamanna-rumee-52377920",
+   "pageUrl": "https://www.pexels.com/photo/plate-with-sweet-chocolate-dish-on-red-fabric-7986603/"
+  },
+  "from": "pexels:7986603:1.0000:400,800:\"attention\":72"
+ },
+ "demo/rasgulla": {
+  "src": "/kits/demo/assets/img/photos/rasgulla-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/rasgulla-400.webp 400w, /kits/demo/assets/img/photos/rasgulla-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Rasgullas soaking in sugar syrup",
+  "credit": {
+   "provider": "pexels",
+   "id": "35921862",
+   "photographer": "Sanchari Nag",
+   "photographerUrl": "https://www.pexels.com/@mouriful",
+   "pageUrl": "https://www.pexels.com/photo/traditional-indian-rasgulla-in-a-pot-35921862/"
+  },
+  "from": "pexels:35921862:1.0000:400,800:\"attention\":72"
+ },
+ "demo/soan-papdi": {
+  "src": "/kits/demo/assets/img/photos/soan-papdi-800.webp",
+  "srcset": "/kits/demo/assets/img/photos/soan-papdi-400.webp 400w, /kits/demo/assets/img/photos/soan-papdi-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Squares of flaky soan papdi on a rustic dish",
+  "credit": {
+   "provider": "pexels",
+   "id": "14723140",
+   "photographer": "Divya Jain",
+   "photographerUrl": "https://www.pexels.com/@divigraphy",
+   "pageUrl": "https://www.pexels.com/photo/photo-of-delicious-dessert-14723140/"
+  },
+  "from": "pexels:14723140:1.0000:400,800:\"attention\":72"
+ },
+ "demo/video-poster": {
+  "src": "/kits/demo/assets/img/photos/video-poster-960.webp",
+  "srcset": "/kits/demo/assets/img/photos/video-poster-960.webp 960w",
+  "width": 960,
+  "height": 540,
+  "alt": "A clay diya glowing in the dark",
+  "credit": {
+   "provider": "pexels",
+   "id": "29629443",
+   "photographer": "Bakkaprabhu Uppar",
+   "photographerUrl": "https://www.pexels.com/@techcrazebk",
+   "pageUrl": "https://www.pexels.com/photo/diwali-lamp-with-glowing-flame-on-dark-background-29629443/"
+  },
+  "from": "pexels:29629443:1.7778:960:\"attention\":72"
+ },
+ "ember/bar": {
+  "src": "/img/bar-1000.webp",
+  "srcset": "/img/bar-400.webp 400w, /img/bar-700.webp 700w, /img/bar-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Whiskey poured over ice at a dimly lit bar",
+  "credit": {
+   "provider": "pexels",
+   "id": "31162033",
+   "photographer": "Naci Berk Domaniç",
+   "photographerUrl": "https://www.pexels.com/@naciberkdomanic",
+   "pageUrl": "https://www.pexels.com/photo/pouring-whiskey-into-a-glass-at-a-bar-31162033/"
+  },
+  "from": "pexels:31162033:0.8000:400,700,1000:\"attention\":72"
+ },
+ "ember/booth": {
+  "src": "/img/booth-1000.webp",
+  "srcset": "/img/booth-400.webp 400w, /img/booth-700.webp 700w, /img/booth-1000.webp 1000w",
+  "width": 1000,
+  "height": 750,
+  "alt": "A warm, dimly lit dining room with wooden booths",
+  "credit": {
+   "provider": "pexels",
+   "id": "11923047",
+   "photographer": "Chris F",
+   "photographerUrl": "https://www.pexels.com/@chris-f-38966",
+   "pageUrl": "https://www.pexels.com/photo/clear-glass-bottle-on-brown-wooden-table-11923047/"
+  },
+  "from": "pexels:11923047:1.3333:400,700,1000:\"attention\":72"
+ },
+ "ember/chef": {
+  "src": "/img/chef-1000.webp",
+  "srcset": "/img/chef-400.webp 400w, /img/chef-700.webp 700w, /img/chef-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "A chef working a tall flame in the kitchen",
+  "credit": {
+   "provider": "pexels",
+   "id": "17326174",
+   "photographer": "Solehuddin Din",
+   "photographerUrl": "https://www.pexels.com/@solehuddin-din-147017742",
+   "pageUrl": "https://www.pexels.com/photo/flame-near-man-cooking-in-darkness-17326174/"
+  },
+  "from": "pexels:17326174:0.8000:400,700,1000:\"attention\":72"
+ },
+ "ember/chops": {
+  "src": "/img/chops-1000.webp",
+  "srcset": "/img/chops-400.webp 400w, /img/chops-700.webp 700w, /img/chops-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Grilled lamb chops with a red chilli sauce",
+  "credit": {
+   "provider": "pexels",
+   "id": "8862759",
+   "photographer": "Valeria Boltneva",
+   "photographerUrl": "https://www.pexels.com/@valeriya",
+   "pageUrl": "https://www.pexels.com/photo/close-up-photo-of-a-grilled-lamb-chops-8862759/"
+  },
+  "from": "pexels:8862759:0.8000:400,700,1000:\"attention\":72"
+ },
+ "ember/curry": {
+  "src": "/img/curry-1000.webp",
+  "srcset": "/img/curry-400.webp 400w, /img/curry-700.webp 700w, /img/curry-1000.webp 1000w",
+  "width": 1000,
+  "height": 750,
+  "alt": "A bowl of spicy curry on a dark wooden table",
+  "credit": {
+   "provider": "pexels",
+   "id": "10445627",
+   "photographer": "Alberta Studios",
+   "photographerUrl": "https://www.pexels.com/@iamabdullahsheik",
+   "pageUrl": "https://www.pexels.com/photo/a-bowl-of-curry-on-a-wooden-surface-10445627/"
+  },
+  "from": "pexels:10445627:1.3333:400,700,1000:\"attention\":72"
+ },
+ "ember/fire": {
+  "src": "/img/fire-1200.webp",
+  "srcset": "/img/fire-480.webp 480w, /img/fire-800.webp 800w, /img/fire-1200.webp 1200w",
+  "width": 1200,
+  "height": 900,
+  "alt": "Flames rising over a grill",
+  "credit": {
+   "provider": "pexels",
+   "id": "1275691",
+   "photographer": "Mateusz Dach",
+   "photographerUrl": "https://www.pexels.com/@mateusz-dach-99805",
+   "pageUrl": "https://www.pexels.com/photo/shallow-focus-photography-of-fire-1275691/"
+  },
+  "from": "pexels:1275691:1.3333:480,800,1200:\"attention\":72"
+ },
+ "ember/hero": {
+  "src": "/img/hero-2000.webp",
+  "srcset": "/img/hero-640.webp 640w, /img/hero-1000.webp 1000w, /img/hero-1400.webp 1400w, /img/hero-2000.webp 2000w",
+  "width": 2000,
+  "height": 1250,
+  "alt": "Glowing charcoal in a grill",
+  "credit": {
+   "provider": "pexels",
+   "id": "18299586",
+   "photographer": "Sergio Arteaga",
+   "photographerUrl": "https://www.pexels.com/@saarteaga",
+   "pageUrl": "https://www.pexels.com/photo/grilled-meat-on-the-barbecue-18299586/"
+  },
+  "from": "pexels:18299586:1.6000:640,1000,1400,2000:\"attention\":72"
+ },
+ "ember/interior": {
+  "src": "/img/interior-1200.webp",
+  "srcset": "/img/interior-480.webp 480w, /img/interior-800.webp 800w, /img/interior-1200.webp 1200w",
+  "width": 1200,
+  "height": 900,
+  "alt": "A bar counter with backlit shelves of bottles",
+  "credit": {
+   "provider": "pexels",
+   "id": "11828428",
+   "photographer": "Benhur Emmanuel",
+   "photographerUrl": "https://www.pexels.com/@benhur-emmanuel-83498627",
+   "pageUrl": "https://www.pexels.com/photo/wine-bottles-on-bar-interior-11828428/"
+  },
+  "from": "pexels:11828428:1.3333:480,800,1200:\"attention\":72"
+ },
+ "ember/tandoor": {
+  "src": "/img/tandoor-1000.webp",
+  "srcset": "/img/tandoor-400.webp 400w, /img/tandoor-700.webp 700w, /img/tandoor-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Bread baking on the wall of a clay tandoor",
+  "credit": {
+   "provider": "pexels",
+   "id": "32558920",
+   "photographer": "Valeria Boltneva",
+   "photographerUrl": "https://www.pexels.com/@valeriya",
+   "pageUrl": "https://www.pexels.com/photo/freshly-baked-bread-in-traditional-clay-oven-32558920/"
+  },
+  "from": "pexels:32558920:0.8000:400,700,1000:\"attention\":72"
+ },
+ "ember/tikka": {
+  "src": "/img/tikka-1000.webp",
+  "srcset": "/img/tikka-400.webp 400w, /img/tikka-700.webp 700w, /img/tikka-1000.webp 1000w",
+  "width": 1000,
+  "height": 750,
+  "alt": "Skewers cooking over open flames",
+  "credit": {
+   "provider": "pexels",
+   "id": "34013239",
+   "photographer": "eSewa Hotels",
+   "photographerUrl": "https://www.pexels.com/@esewa-hotels-2148698681",
+   "pageUrl": "https://www.pexels.com/photo/delicious-skewers-grilling-on-outdoor-bbq-34013239/"
+  },
+  "from": "pexels:34013239:1.3333:400,700,1000:\"attention\":72"
+ },
+ "mithai-market/assorted": {
+  "src": "/img/assorted-1000.webp",
+  "srcset": "/img/assorted-400.webp 400w, /img/assorted-700.webp 700w, /img/assorted-1000.webp 1000w",
+  "width": 1000,
+  "height": 1000,
+  "alt": "An assortment of Indian sweets on a plate",
+  "credit": {
+   "provider": "pexels",
+   "id": "9951856",
+   "photographer": "Rajan Gaur",
+   "photographerUrl": "https://www.pexels.com/@rajan-gaur-31612043",
+   "pageUrl": "https://www.pexels.com/photo/cakes-and-cookies-on-plate-9951856/"
+  },
+  "from": "pexels:9951856:1.0000:400,700,1000:\"attention\":72"
+ },
+ "mithai-market/barfi": {
+  "src": "/img/barfi-800.webp",
+  "srcset": "/img/barfi-400.webp 400w, /img/barfi-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Besan barfi topped with almonds and pistachios",
+  "credit": {
+   "provider": "pexels",
+   "id": "7182054",
+   "photographer": "Pure Punjabi",
+   "photographerUrl": "https://www.pexels.com/@pure-punjabi-37402395",
+   "pageUrl": "https://www.pexels.com/photo/indian-sweets-in-plate-on-table-7182054/"
+  },
+  "from": "pexels:7182054:1.0000:400,800:\"attention\":72"
+ },
+ "mithai-market/bhujia": {
+  "src": "/img/bhujia-800.webp",
+  "srcset": "/img/bhujia-400.webp 400w, /img/bhujia-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Crunchy golden namkeen sticks",
+  "credit": {
+   "provider": "pexels",
+   "id": "17480807",
+   "photographer": "Aditya Mara",
+   "photographerUrl": "https://www.pexels.com/@aditya-mara-425995080",
+   "pageUrl": "https://www.pexels.com/photo/crispy-fried-snacks-17480807/"
+  },
+  "from": "pexels:17480807:1.0000:400,800:\"attention\":72"
+ },
+ "mithai-market/chakli": {
+  "src": "/img/chakli-800.webp",
+  "srcset": "/img/chakli-400.webp 400w, /img/chakli-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "A platter of chakli spirals and festive snacks",
+  "credit": {
+   "provider": "pexels",
+   "id": "39524797",
+   "photographer": "Yogendra Banjare",
+   "photographerUrl": "https://www.pexels.com/@yogendra",
+   "pageUrl": "https://www.pexels.com/photo/traditional-indian-snack-platter-with-sweets-39524797/"
+  },
+  "from": "pexels:39524797:1.0000:400,800:\"attention\":72"
+ },
+ "mithai-market/dry-fruit-box": {
+  "src": "/img/dry-fruit-box-800.webp",
+  "srcset": "/img/dry-fruit-box-400.webp 400w, /img/dry-fruit-box-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "A dry fruit gift box tied with a silver ribbon",
+  "credit": {
+   "provider": "pexels",
+   "id": "27291944",
+   "photographer": "Rahime Gül",
+   "photographerUrl": "https://www.pexels.com/@rahimegul",
+   "pageUrl": "https://www.pexels.com/photo/a-gift-box-with-flowers-and-nuts-in-it-27291944/"
+  },
+  "from": "pexels:27291944:1.0000:400,800:\"attention\":72"
+ },
+ "mithai-market/festive": {
+  "src": "/img/festive-1200.webp",
+  "srcset": "/img/festive-480.webp 480w, /img/festive-800.webp 800w, /img/festive-1200.webp 1200w",
+  "width": 1200,
+  "height": 900,
+  "alt": "A woman holding a plate of sweets at a Diwali celebration",
+  "credit": {
+   "provider": "pexels",
+   "id": "8819846",
+   "photographer": "Yan Krukau",
+   "photographerUrl": "https://www.pexels.com/@yankrukov",
+   "pageUrl": "https://www.pexels.com/photo/a-woman-in-yellow-and-red-sari-holding-a-plate-of-food-8819846/"
+  },
+  "from": "pexels:8819846:1.3333:480,800,1200:\"attention\":72"
+ },
+ "mithai-market/gulab-jamun": {
+  "src": "/img/gulab-jamun-800.webp",
+  "srcset": "/img/gulab-jamun-400.webp 400w, /img/gulab-jamun-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Gulab jamun in a white bowl with cashews",
+  "credit": {
+   "provider": "pexels",
+   "id": "15014919",
+   "photographer": "Nishess Shakya",
+   "photographerUrl": "https://www.pexels.com/@nishess-shakya-401526881",
+   "pageUrl": "https://www.pexels.com/photo/bowl-of-gulab-jamun-15014919/"
+  },
+  "from": "pexels:15014919:1.0000:400,800:\"attention\":72"
+ },
+ "mithai-market/hamper": {
+  "src": "/img/hamper-800.webp",
+  "srcset": "/img/hamper-400.webp 400w, /img/hamper-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Diwali gift boxes stacked with marigolds and fairy lights",
+  "credit": {
+   "provider": "pexels",
+   "id": "8819577",
+   "photographer": "Yan Krukau",
+   "photographerUrl": "https://www.pexels.com/@yankrukov",
+   "pageUrl": "https://www.pexels.com/photo/stacked-gifts-on-a-tray-8819577/"
+  },
+  "from": "pexels:8819577:1.0000:400,800:\"attention\":72"
+ },
+ "mithai-market/kaju-katli": {
+  "src": "/img/kaju-katli-800.webp",
+  "srcset": "/img/kaju-katli-400.webp 400w, /img/kaju-katli-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Kaju katli diamonds on a festive plate",
+  "credit": {
+   "provider": "pexels",
+   "id": "10514163",
+   "photographer": "Neeta",
+   "photographerUrl": "https://www.pexels.com/@neeta-1471939",
+   "pageUrl": "https://www.pexels.com/photo/kaju-katli-sweets-on-plate-10514163/"
+  },
+  "from": "pexels:10514163:1.0000:400,800:{\"x\":0.3,\"y\":0.8}:72"
+ },
+ "mithai-market/mathri": {
+  "src": "/img/mathri-800.webp",
+  "srcset": "/img/mathri-400.webp 400w, /img/mathri-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "A stack of crisp mathri on a steel plate",
+  "credit": {
+   "provider": "pexels",
+   "id": "37314048",
+   "photographer": "Salva Amin Azad",
+   "photographerUrl": "https://www.pexels.com/@salva-amin-azad-736234677",
+   "pageUrl": "https://www.pexels.com/photo/stack-of-traditional-cookies-with-leaf-on-plate-37314048/"
+  },
+  "from": "pexels:37314048:1.0000:400,800:\"attention\":72"
+ },
+ "mithai-market/motichoor-ladoo": {
+  "src": "/img/motichoor-ladoo-800.webp",
+  "srcset": "/img/motichoor-ladoo-400.webp 400w, /img/motichoor-ladoo-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Motichoor ladoos arranged in a gift box",
+  "credit": {
+   "provider": "pexels",
+   "id": "19151506",
+   "photographer": "Sharath G.",
+   "photographerUrl": "https://www.pexels.com/@dropshado",
+   "pageUrl": "https://www.pexels.com/photo/close-up-of-a-box-of-laddu-19151506/"
+  },
+  "from": "pexels:19151506:1.0000:400,800:\"attention\":72"
+ },
+ "mithai-market/peda": {
+  "src": "/img/peda-800.webp",
+  "srcset": "/img/peda-400.webp 400w, /img/peda-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Pedas topped with almonds on a white plate",
+  "credit": {
+   "provider": "pexels",
+   "id": "7986603",
+   "photographer": "Tamanna Rumee",
+   "photographerUrl": "https://www.pexels.com/@tamanna-rumee-52377920",
+   "pageUrl": "https://www.pexels.com/photo/plate-with-sweet-chocolate-dish-on-red-fabric-7986603/"
+  },
+  "from": "pexels:7986603:1.0000:400,800:\"attention\":72"
+ },
+ "mithai-market/pointing": {
+  "src": "/img/pointing-1200.webp",
+  "srcset": "/img/pointing-480.webp 480w, /img/pointing-800.webp 800w, /img/pointing-1200.webp 1200w",
+  "width": 1200,
+  "height": 900,
+  "alt": "A customer in gold bangles choosing sweets at the counter",
+  "credit": {
+   "provider": "pexels",
+   "id": "8887000",
+   "photographer": "Lara Jameson",
+   "photographerUrl": "https://www.pexels.com/@lara-jameson",
+   "pageUrl": "https://www.pexels.com/photo/woman-hand-with-golden-bracelets-on-market-8887000/"
+  },
+  "from": "pexels:8887000:1.3333:480,800,1200:\"attention\":72"
+ },
+ "mithai-market/rasgulla": {
+  "src": "/img/rasgulla-800.webp",
+  "srcset": "/img/rasgulla-400.webp 400w, /img/rasgulla-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Rasgullas soaking in sugar syrup",
+  "credit": {
+   "provider": "pexels",
+   "id": "35921862",
+   "photographer": "Sanchari Nag",
+   "photographerUrl": "https://www.pexels.com/@mouriful",
+   "pageUrl": "https://www.pexels.com/photo/traditional-indian-rasgulla-in-a-pot-35921862/"
+  },
+  "from": "pexels:35921862:1.0000:400,800:\"attention\":72"
+ },
+ "mithai-market/soan-papdi": {
+  "src": "/img/soan-papdi-800.webp",
+  "srcset": "/img/soan-papdi-400.webp 400w, /img/soan-papdi-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Squares of flaky soan papdi on a rustic dish",
+  "credit": {
+   "provider": "pexels",
+   "id": "14723140",
+   "photographer": "Divya Jain",
+   "photographerUrl": "https://www.pexels.com/@divigraphy",
+   "pageUrl": "https://www.pexels.com/photo/photo-of-delicious-dessert-14723140/"
+  },
+  "from": "pexels:14723140:1.0000:400,800:\"attention\":72"
+ }
+}

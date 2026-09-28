@@ -4,13 +4,10 @@
    "id": "p1",
    "slug": "emerald-solitaire",
    "name": "The Emerald Solitaire",
-   "description": "A single Colombian emerald in 18k yellow gold, set by hand.",
+   "description": "A Colombian emerald framed in diamonds, set by hand in 18k yellow gold.",
    "price_paise": 18650000,
    "image": {
-    "src": "/img/emerald-solitaire.svg",
-    "alt": "The Emerald Solitaire",
-    "width": 600,
-    "height": 750
+    "$photo": "aranya/emerald-solitaire"
    },
    "category": {
     "slug": "rings",
@@ -26,15 +23,12 @@
   },
   {
    "id": "p2",
-   "slug": "polki-choker",
-   "name": "Polki Choker",
-   "description": "Uncut diamonds in a 22k gold choker, finished with meenakari on the reverse.",
+   "slug": "kundan-choker",
+   "name": "Kundan Choker Set",
+   "description": "Kundan choker with matching earrings, finished with blue stone drops and meenakari on the reverse.",
    "price_paise": 42500000,
    "image": {
-    "src": "/img/polki-choker.svg",
-    "alt": "Polki Choker",
-    "width": 600,
-    "height": 750
+    "$photo": "aranya/kundan-choker"
    },
    "category": {
     "slug": "necklaces",
@@ -48,14 +42,11 @@
   {
    "id": "p3",
    "slug": "jhumka-pearl",
-   "name": "Pearl Jhumkas",
-   "description": "Temple-style jhumkas with Basra pearl drops.",
+   "name": "Temple Jhumkas",
+   "description": "Temple-style gold jhumkas with fine granulation work.",
    "price_paise": 8900000,
    "image": {
-    "src": "/img/jhumka-pearl.svg",
-    "alt": "Pearl Jhumkas",
-    "width": 600,
-    "height": 750
+    "$photo": "aranya/jhumka-pearl"
    },
    "category": {
     "slug": "earrings",
@@ -68,15 +59,12 @@
   },
   {
    "id": "p4",
-   "slug": "ruby-kada",
-   "name": "Ruby Kada",
-   "description": "A hinged 22k kada set with Burmese rubies.",
+   "slug": "bridal-bangles",
+   "name": "Bridal Bangle Set",
+   "description": "A stacked set of 22k bangles made for the wedding day, sized to order.",
    "price_paise": 26400000,
    "image": {
-    "src": "/img/ruby-kada.svg",
-    "alt": "Ruby Kada",
-    "width": 600,
-    "height": 750
+    "$photo": "aranya/bridal-bangles"
    },
    "category": {
     "slug": "bangles",
@@ -91,13 +79,10 @@
    "id": "p5",
    "slug": "diamond-band",
    "name": "Eternity Band",
-   "description": "Brilliant-cut diamonds all the way round, in platinum.",
+   "description": "Brilliant-cut diamonds set all the way round a gold band.",
    "price_paise": 12400000,
    "image": {
-    "src": "/img/diamond-band.svg",
-    "alt": "Eternity Band",
-    "width": 600,
-    "height": 750
+    "$photo": "aranya/diamond-band"
    },
    "category": {
     "slug": "rings",
@@ -111,13 +96,10 @@
    "id": "p6",
    "slug": "sapphire-drop",
    "name": "Sapphire Drop Pendant",
-   "description": "A Ceylon sapphire on a fine gold chain.",
+   "description": "An oval sapphire cabochon on a fine gold chain.",
    "price_paise": 15800000,
    "image": {
-    "src": "/img/sapphire-drop.svg",
-    "alt": "Sapphire Drop Pendant",
-    "width": 600,
-    "height": 750
+    "$photo": "aranya/sapphire-drop"
    },
    "category": {
     "slug": "necklaces",
@@ -129,15 +111,12 @@
   },
   {
    "id": "p7",
-   "slug": "emerald-studs",
-   "name": "Emerald Chandbalis",
-   "description": "Crescent chandbalis with emerald beads.",
+   "slug": "chandbali",
+   "name": "Diamond Chandbalis",
+   "description": "Crescent chandbalis set with diamonds, light enough to wear all evening.",
    "price_paise": 11200000,
    "image": {
-    "src": "/img/emerald-studs.svg",
-    "alt": "Emerald Chandbalis",
-    "width": 600,
-    "height": 750
+    "$photo": "aranya/chandbali"
    },
    "category": {
     "slug": "earrings",
@@ -149,15 +128,12 @@
   },
   {
    "id": "p8",
-   "slug": "pearl-bangle",
-   "name": "Pearl Bangles, pair",
-   "description": "A pair of slim bangles lined with seed pearls.",
+   "slug": "pearl-bangles",
+   "name": "Pearl & Gold Bangles",
+   "description": "Slim gold bangles worn with a strand of Basra pearls.",
    "price_paise": 6400000,
    "image": {
-    "src": "/img/pearl-bangle.svg",
-    "alt": "Pearl Bangles, pair",
-    "width": 600,
-    "height": 750
+    "$photo": "aranya/pearl-bangles"
    },
    "category": {
     "slug": "bangles",

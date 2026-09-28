@@ -36,7 +36,7 @@ export function mountWishlist(el: HTMLElement, kit: Kit) {
     if (!kit.loaded) return;
     const items = kit.store.state.wishlist.map((id) => kit.byId.get(id)).filter(Boolean);
     if (items.length) list.setAttribute('role', 'list'); else list.removeAttribute('role');
-    list.replaceChildren(...(items.length ? items.map((p) => { const c = fillCard(tpl, p!, { wished: true }); c.setAttribute('role', 'listitem'); return c; }) : [h('p', { class: 'sf-note' }, 'Nothing saved yet. Tap ♡ on a product to save it here.')]));
+    list.replaceChildren(...(items.length ? items.map((p) => { const c = fillCard(tpl, p!, { wished: true }); c.setAttribute('role', 'listitem'); return c; }) : [h('p', { class: 'sf-note' }, 'Nothing saved yet. Tap the heart on a product to save it here.')]));
     el.dataset.count = String(items.length);
     rendered(list);
   };

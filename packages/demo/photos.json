@@ -1,0 +1,804 @@
+{
+ "_note": "Real stock photos for the demo pages and sample websites. Run: node tools/fetch-photos.ts (needs PEXELS_API_KEY only for photos not yet downloaded).",
+ "groups": {
+  "demo": {
+   "dir": "assets/img/photos",
+   "web": "/kits/demo/assets/img/photos",
+   "slots": {
+    "kaju-katli": {
+     "provider": "pexels",
+     "id": "10514163",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Kaju katli diamonds on a festive plate",
+     "focus": {
+      "x": 0.3,
+      "y": 0.8
+     }
+    },
+    "motichoor-ladoo": {
+     "provider": "pexels",
+     "id": "19151506",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Motichoor ladoos arranged in a gift box",
+     "focus": "attention"
+    },
+    "rasgulla": {
+     "provider": "pexels",
+     "id": "35921862",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Rasgullas soaking in sugar syrup",
+     "focus": "attention"
+    },
+    "gulab-jamun": {
+     "provider": "pexels",
+     "id": "15014919",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Gulab jamun in a white bowl with cashews",
+     "focus": "attention"
+    },
+    "soan-papdi": {
+     "provider": "pexels",
+     "id": "14723140",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Squares of flaky soan papdi on a rustic dish",
+     "focus": "attention"
+    },
+    "barfi": {
+     "provider": "pexels",
+     "id": "7182054",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Besan barfi topped with almonds and pistachios",
+     "focus": "attention"
+    },
+    "bhujia": {
+     "provider": "pexels",
+     "id": "17480807",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Crunchy golden namkeen sticks",
+     "focus": "attention"
+    },
+    "chakli": {
+     "provider": "pexels",
+     "id": "39524797",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A platter of chakli spirals and festive snacks",
+     "focus": "attention"
+    },
+    "mathri": {
+     "provider": "pexels",
+     "id": "37314048",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A stack of crisp mathri on a steel plate",
+     "focus": "attention"
+    },
+    "hamper": {
+     "provider": "pexels",
+     "id": "8819577",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Diwali gift boxes stacked with marigolds and fairy lights",
+     "focus": "attention"
+    },
+    "dry-fruit-box": {
+     "provider": "pexels",
+     "id": "27291944",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A dry fruit gift box tied with a silver ribbon",
+     "focus": "attention"
+    },
+    "peda": {
+     "provider": "pexels",
+     "id": "7986603",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Pedas topped with almonds on a white plate",
+     "focus": "attention"
+    },
+    "diya": {
+     "provider": "pexels",
+     "id": "29629443",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A clay diya glowing in the dark",
+     "focus": "attention"
+    },
+    "video-poster": {
+     "provider": "pexels",
+     "id": "29629443",
+     "aspect": 1.7777777777777777,
+     "widths": [
+      960
+     ],
+     "alt": "A clay diya glowing in the dark",
+     "focus": "attention"
+    }
+   }
+  },
+  "mithai-market": {
+   "dir": "sites/mithai-market/img",
+   "web": "/img",
+   "slots": {
+    "kaju-katli": {
+     "provider": "pexels",
+     "id": "10514163",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Kaju katli diamonds on a festive plate",
+     "focus": {
+      "x": 0.3,
+      "y": 0.8
+     }
+    },
+    "motichoor-ladoo": {
+     "provider": "pexels",
+     "id": "19151506",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Motichoor ladoos arranged in a gift box",
+     "focus": "attention"
+    },
+    "rasgulla": {
+     "provider": "pexels",
+     "id": "35921862",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Rasgullas soaking in sugar syrup",
+     "focus": "attention"
+    },
+    "gulab-jamun": {
+     "provider": "pexels",
+     "id": "15014919",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Gulab jamun in a white bowl with cashews",
+     "focus": "attention"
+    },
+    "soan-papdi": {
+     "provider": "pexels",
+     "id": "14723140",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Squares of flaky soan papdi on a rustic dish",
+     "focus": "attention"
+    },
+    "barfi": {
+     "provider": "pexels",
+     "id": "7182054",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Besan barfi topped with almonds and pistachios",
+     "focus": "attention"
+    },
+    "bhujia": {
+     "provider": "pexels",
+     "id": "17480807",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Crunchy golden namkeen sticks",
+     "focus": "attention"
+    },
+    "chakli": {
+     "provider": "pexels",
+     "id": "39524797",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A platter of chakli spirals and festive snacks",
+     "focus": "attention"
+    },
+    "mathri": {
+     "provider": "pexels",
+     "id": "37314048",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A stack of crisp mathri on a steel plate",
+     "focus": "attention"
+    },
+    "hamper": {
+     "provider": "pexels",
+     "id": "8819577",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Diwali gift boxes stacked with marigolds and fairy lights",
+     "focus": "attention"
+    },
+    "dry-fruit-box": {
+     "provider": "pexels",
+     "id": "27291944",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A dry fruit gift box tied with a silver ribbon",
+     "focus": "attention"
+    },
+    "peda": {
+     "provider": "pexels",
+     "id": "7986603",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Pedas topped with almonds on a white plate",
+     "focus": "attention"
+    },
+    "festive": {
+     "provider": "pexels",
+     "id": "8819846",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "A woman holding a plate of sweets at a Diwali celebration",
+     "focus": "attention"
+    },
+    "pointing": {
+     "provider": "pexels",
+     "id": "8887000",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "A customer in gold bangles choosing sweets at the counter",
+     "focus": "attention"
+    },
+    "assorted": {
+     "provider": "pexels",
+     "id": "9951856",
+     "aspect": 1,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "An assortment of Indian sweets on a plate",
+     "focus": "attention"
+    }
+   }
+  },
+  "aranya": {
+   "dir": "sites/aranya/img",
+   "web": "/img",
+   "slots": {
+    "emerald-solitaire": {
+     "provider": "pexels",
+     "id": "39166728",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "An emerald and diamond cocktail ring on a hand",
+     "focus": "attention"
+    },
+    "kundan-choker": {
+     "provider": "pexels",
+     "id": "33154729",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A kundan choker and earrings set with blue stones",
+     "focus": "attention"
+    },
+    "jhumka-pearl": {
+     "provider": "pexels",
+     "id": "37601639",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "An ornate gold jhumka earring",
+     "focus": "attention"
+    },
+    "bridal-bangles": {
+     "provider": "pexels",
+     "id": "39605914",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Bridal bangles on a hand with henna",
+     "focus": "attention"
+    },
+    "diamond-band": {
+     "provider": "pexels",
+     "id": "30541184",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A diamond and gold band",
+     "focus": "attention"
+    },
+    "sapphire-drop": {
+     "provider": "pexels",
+     "id": "9073784",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "An oval blue stone pendant on a fine chain",
+     "focus": "attention"
+    },
+    "chandbali": {
+     "provider": "pexels",
+     "id": "7981566",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Diamond chandbali earrings on red silk",
+     "focus": "attention"
+    },
+    "pearl-bangles": {
+     "provider": "pexels",
+     "id": "29522524",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Pearls and gold bangles",
+     "focus": "attention"
+    },
+    "hero": {
+     "provider": "pexels",
+     "id": "33023960",
+     "aspect": 0.8,
+     "widths": [
+      480,
+      720,
+      1000
+     ],
+     "alt": "A bride wearing a gold choker and traditional jewellery",
+     "focus": "attention"
+    },
+    "bride": {
+     "provider": "pexels",
+     "id": "38773208",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "Close-up of a bride in a silk saree and gold jewellery",
+     "focus": "attention"
+    },
+    "sketch": {
+     "provider": "pexels",
+     "id": "1050312",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Hands sketching jewellery designs at a desk",
+     "focus": "attention"
+    },
+    "gems": {
+     "provider": "pexels",
+     "id": "13412779",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A round diamond beside a blue gemstone",
+     "focus": "attention"
+    },
+    "setting": {
+     "provider": "pexels",
+     "id": "15955333",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "An artisan soldering a piece of jewellery with a torch",
+     "focus": "attention"
+    },
+    "polish": {
+     "provider": "pexels",
+     "id": "6262835",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A jeweller polishing a gold ring",
+     "focus": "attention"
+    }
+   }
+  },
+  "ember": {
+   "dir": "sites/ember/img",
+   "web": "/img",
+   "slots": {
+    "hero": {
+     "provider": "pexels",
+     "id": "18299586",
+     "aspect": 1.6,
+     "widths": [
+      640,
+      1000,
+      1400,
+      2000
+     ],
+     "alt": "Glowing charcoal in a grill",
+     "focus": "attention"
+    },
+    "fire": {
+     "provider": "pexels",
+     "id": "1275691",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "Flames rising over a grill",
+     "focus": "attention"
+    },
+    "tandoor": {
+     "provider": "pexels",
+     "id": "32558920",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Bread baking on the wall of a clay tandoor",
+     "focus": "attention"
+    },
+    "bar": {
+     "provider": "pexels",
+     "id": "31162033",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Whiskey poured over ice at a dimly lit bar",
+     "focus": "attention"
+    },
+    "interior": {
+     "provider": "pexels",
+     "id": "11828428",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "A bar counter with backlit shelves of bottles",
+     "focus": "attention"
+    },
+    "booth": {
+     "provider": "pexels",
+     "id": "11923047",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A warm, dimly lit dining room with wooden booths",
+     "focus": "attention"
+    },
+    "chef": {
+     "provider": "pexels",
+     "id": "17326174",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A chef working a tall flame in the kitchen",
+     "focus": "attention"
+    },
+    "tikka": {
+     "provider": "pexels",
+     "id": "34013239",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Skewers cooking over open flames",
+     "focus": "attention"
+    },
+    "chops": {
+     "provider": "pexels",
+     "id": "8862759",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Grilled lamb chops with a red chilli sauce",
+     "focus": "attention"
+    },
+    "curry": {
+     "provider": "pexels",
+     "id": "10445627",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A bowl of spicy curry on a dark wooden table",
+     "focus": "attention"
+    }
+   }
+  },
+  "bandra-bake-house": {
+   "dir": "sites/bandra-bake-house/img",
+   "web": "/img",
+   "slots": {
+    "country-sourdough": {
+     "provider": "pexels",
+     "id": "37703580",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A round sourdough loaf on a wooden board",
+     "focus": "attention"
+    },
+    "butter-croissant": {
+     "provider": "pexels",
+     "id": "29850845",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Golden, flaky butter croissants",
+     "focus": "attention"
+    },
+    "brown-butter-cookie": {
+     "provider": "pexels",
+     "id": "15014922",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Chocolate chip cookies on a wooden table",
+     "focus": "attention"
+    },
+    "chocolate-babka": {
+     "provider": "pexels",
+     "id": "6150712",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A sliced chocolate babka on a cutting board",
+     "focus": "attention"
+    },
+    "rosemary-focaccia": {
+     "provider": "pexels",
+     "id": "30666812",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Rosemary focaccia with a golden crust",
+     "focus": "attention"
+    },
+    "cinnamon-buns": {
+     "provider": "pexels",
+     "id": "36854700",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Cinnamon buns on a checked cloth",
+     "focus": "attention"
+    },
+    "ladi-pav": {
+     "provider": "pexels",
+     "id": "13424742",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Golden soft pav buns, freshly baked",
+     "focus": "attention"
+    },
+    "mango-cheesecake": {
+     "provider": "pexels",
+     "id": "32402082",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A slice of mango cheesecake with mint",
+     "focus": "attention"
+    },
+    "hero": {
+     "provider": "pexels",
+     "id": "35993723",
+     "aspect": 0.8,
+     "widths": [
+      480,
+      720,
+      1000
+     ],
+     "alt": "Loaves of bread on wooden bakery shelves",
+     "focus": "attention",
+     "quality": 58
+    },
+    "starter": {
+     "provider": "pexels",
+     "id": "8175355",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "A baker measuring flour in a warm kitchen",
+     "focus": "attention"
+    },
+    "shaping": {
+     "provider": "pexels",
+     "id": "30918892",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "A baker shaping loaves on a tray",
+     "focus": "attention"
+    },
+    "crumb": {
+     "provider": "pexels",
+     "id": "6605304",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "Halves of a fresh sourdough loaf showing the open crumb",
+     "focus": "attention"
+    },
+    "dough": {
+     "provider": "pexels",
+     "id": "31695916",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Hands shaping balls of dough",
+     "focus": "attention"
+    },
+    "counter": {
+     "provider": "pexels",
+     "id": "21847830",
+     "aspect": 1.3333333333333333,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A baker arranging pastries in the shop counter",
+     "focus": "attention"
+    }
+   }
+  }
+ }
+}

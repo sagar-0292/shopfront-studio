@@ -62,6 +62,31 @@ for (const s of SITES) {
   });
 }
 
+test('every picture is a real photo that loads, icons are line drawings, and photographers are credited', async ({ page }) => {
+  test.setTimeout(120_000);
+  const pages = [...SITES.flatMap((s) => [url(s.id), ...(s.shop ? [url(s.id, s.shop)] : [])]), '/kits/demo/sample.html', '/kits/demo/shop.html'];
+  for (const u of pages) {
+    await page.goto(u);
+    // Walk down the page so lazy photos load.
+    const h = await page.evaluate(() => document.documentElement.scrollHeight);
+    for (let y = 0; y < h; y += 500) { await page.evaluate((y) => window.scrollTo({ top: y, behavior: 'instant' }), y); await page.waitForTimeout(120); }
+    await page.waitForFunction(() => [...document.images].filter((i) => i.getBoundingClientRect().width > 0).every((i) => i.complete), null, { timeout: 20_000 });
+    const imgs = await page.locator('img:visible').evaluateAll((els) => els.map((e) => {
+      const i = e as HTMLImageElement;
+      return { src: i.currentSrc || i.src, ok: i.complete && i.naturalWidth > 0, alt: i.alt };
+    }));
+    expect(imgs.length, u).toBeGreaterThan(0);
+    for (const i of imgs) {
+      expect(i.src, `${u} uses a photo`).toMatch(/\.webp(\?|$)/);
+      expect(i.ok, `${i.src} loads`).toBe(true);
+    }
+    // Any SVG on the page is a small icon, never a picture.
+    const bigSvgs = await page.locator('svg:visible').evaluateAll((els) => els.filter((e) => e.getBoundingClientRect().width > 48).length);
+    expect(bigSvgs, `${u} has no drawn pictures`).toBe(0);
+    await expect(page.locator('footer')).toContainText(/Photos by .+ on Pexels\./);
+  }
+});
+
 test('category links open the shop already filtered', async ({ page }) => {
   await page.goto(url('mithai-market'));
   await page.getByRole('link', { name: /Gift boxes/ }).last().click();

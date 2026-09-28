@@ -10,8 +10,13 @@
     ]
   },
   "commerce": {
-    "latest": "1.1.0",
+    "latest": "1.2.0",
     "versions": [
+      {
+        "version": "1.2.0",
+        "released_at": "2026-09-28",
+        "notes": "Cleaner icons: the wishlist heart and the cart's close button are now drawn line icons (the heart fills in when a product is saved) instead of symbol characters, so they look the same on every phone and never appear as emoji. Product photos with several sizes now tell the browser how wide a card is, so phones download a small photo instead of the largest one."
+      },
       {
         "version": "1.1.0",
         "released_at": "2026-09-25",
@@ -25,8 +30,13 @@
     ]
   },
   "design": {
-    "latest": "1.0.0",
+    "latest": "1.1.0",
     "versions": [
+      {
+        "version": "1.1.0",
+        "released_at": "2026-09-28",
+        "notes": "Real photography only. Drawn placeholder artwork is gone: pictures are real stock photos (or the business's own), and a missing photo shows a calm block in the site's colours instead of a drawing. Two new sections inspired by current studio work: alternating photo-and-text rows, and a mixed grid of photos, short statements and numbers. Arrows, the wishlist heart, the cart and the menu button are drawn line icons instead of symbol characters. Sites credit their photographers in the footer. Any section can be given an anchor so menus can link straight to it. Fonts load lighter and never make headlines jump while loading."
+      },
       {
         "version": "1.0.0",
         "released_at": "2026-09-26",

@@ -8,10 +8,7 @@
    "price_paise": 89900,
    "mrp_paise": 99900,
    "image": {
-    "src": "/kits/demo/assets/img/kaju-katli.svg",
-    "alt": "Kaju Katli",
-    "width": 400,
-    "height": 400
+    "$photo": "demo/kaju-katli"
    },
    "category": {
     "slug": "sweets",
@@ -53,10 +50,7 @@
    "price_paise": 45000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/motichoor-ladoo.svg",
-    "alt": "Motichoor Ladoo",
-    "width": 400,
-    "height": 400
+    "$photo": "demo/motichoor-ladoo"
    },
    "category": {
     "slug": "sweets",
@@ -80,10 +74,7 @@
    "price_paise": 32000,
    "mrp_paise": 36000,
    "image": {
-    "src": "/kits/demo/assets/img/rasgulla.svg",
-    "alt": "Rasgulla (8 pcs)",
-    "width": 400,
-    "height": 400
+    "$photo": "demo/rasgulla"
    },
    "category": {
     "slug": "sweets",
@@ -106,10 +97,7 @@
    "price_paise": 34000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/gulab-jamun.svg",
-    "alt": "Gulab Jamun (8 pcs)",
-    "width": 400,
-    "height": 400
+    "$photo": "demo/gulab-jamun"
    },
    "category": {
     "slug": "sweets",
@@ -132,10 +120,7 @@
    "price_paise": 26000,
    "mrp_paise": 30000,
    "image": {
-    "src": "/kits/demo/assets/img/soan-papdi.svg",
-    "alt": "Soan Papdi",
-    "width": 400,
-    "height": 400
+    "$photo": "demo/soan-papdi"
    },
    "category": {
     "slug": "sweets",
@@ -158,10 +143,7 @@
    "price_paise": 68000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/barfi.svg",
-    "alt": "Malai Barfi",
-    "width": 400,
-    "height": 400
+    "$photo": "demo/barfi"
    },
    "category": {
     "slug": "sweets",
@@ -187,10 +169,7 @@
    "price_paise": 18000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/bhujia.svg",
-    "alt": "Bikaneri Bhujia 400 g",
-    "width": 400,
-    "height": 400
+    "$photo": "demo/bhujia"
    },
    "category": {
     "slug": "namkeen",
@@ -214,10 +193,7 @@
    "price_paise": 22000,
    "mrp_paise": 25000,
    "image": {
-    "src": "/kits/demo/assets/img/chakli.svg",
-    "alt": "Bhajani Chakli",
-    "width": 400,
-    "height": 400
+    "$photo": "demo/chakli"
    },
    "category": {
     "slug": "namkeen",
@@ -240,10 +216,7 @@
    "price_paise": 16000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/mathri.svg",
-    "alt": "Methi Mathri",
-    "width": 400,
-    "height": 400
+    "$photo": "demo/mathri"
    },
    "category": {
     "slug": "namkeen",
@@ -266,10 +239,7 @@
    "price_paise": 249900,
    "mrp_paise": 299900,
    "image": {
-    "src": "/kits/demo/assets/img/hamper.svg",
-    "alt": "Diwali Grand Hamper",
-    "width": 400,
-    "height": 400
+    "$photo": "demo/hamper"
    },
    "category": {
     "slug": "gifts",
@@ -296,10 +266,7 @@
    "price_paise": 145000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/dry-fruit-box.svg",
-    "alt": "Royal Dry Fruit Box",
-    "width": 400,
-    "height": 400
+    "$photo": "demo/dry-fruit-box"
    },
    "category": {
     "slug": "gifts",
@@ -322,10 +289,7 @@
    "price_paise": 52000,
    "mrp_paise": null,
    "image": {
-    "src": "/kits/demo/assets/img/peda.svg",
-    "alt": "Mathura Peda (500 g)",
-    "width": 400,
-    "height": 400
+    "$photo": "demo/peda"
    },
    "category": {
     "slug": "sweets",
@@ -347,7 +311,7 @@
    "type": "percent",
    "value": 10,
    "max_discount_paise": 50000,
-   "label": "DIWALI10 applied: 10% off, up to ₹500."
+   "label": "DIWALI10 applied: 10% off, up to \u20b9500."
   },
   {
    "code": "FIRST100",

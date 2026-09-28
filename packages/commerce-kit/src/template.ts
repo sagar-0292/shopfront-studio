@@ -1,3 +1,4 @@
+import { icon } from './icons';
 import type { Product } from './types';
 import { discountPercent, inr } from './money';
 import { inStock, mrpOf, priceOf, stockLabel } from './catalog';
@@ -61,7 +62,11 @@ export function fillCard(tpl: HTMLTemplateElement, p: Product, ctx: CardContext)
     if (!p.image?.src) { el.hidden = true; return; }
     el.src = p.image.src;
     el.alt = p.image.alt ?? p.name;
-    if (p.image.srcset) el.srcset = p.image.srcset;
+    if (p.image.srcset) {
+      el.srcset = p.image.srcset;
+      // Cards are a column of a grid: two across on phones, up to four on computers.
+      el.sizes = el.getAttribute('sizes') ?? '(min-width: 1100px) 25vw, (min-width: 700px) 33vw, 50vw';
+    }
     if (p.image.width) el.width = p.image.width;
     if (p.image.height) el.height = p.image.height;
     el.loading = 'lazy';
@@ -94,7 +99,7 @@ export function fillCard(tpl: HTMLTemplateElement, p: Product, ctx: CardContext)
     if (el instanceof HTMLButtonElement) el.type = 'button';
     el.setAttribute('aria-pressed', String(ctx.wished));
     el.setAttribute('aria-label', ctx.wished ? `Remove ${p.name} from wishlist` : `Save ${p.name} to wishlist`);
-    if (!el.textContent?.trim()) el.textContent = '♡';
+    if (!el.textContent?.trim() && !el.querySelector('svg')) el.append(icon('heart'));
   });
   return root;
 }
