@@ -30,10 +30,10 @@ export const HERO_SPLIT_SIZES = '(min-width: 960px) 42vw, 92vw';
 const inr = (paise: number) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: paise % 100 ? 2 : 0 }).format(paise / 100);
 const num = (i: number) => String(i + 1).padStart(2, '0');
 
-export function media(m: MediaT | undefined, ctx: Ctx, _seed: string, opts: { w?: number; h?: number; eager?: boolean; sizes?: string; lazy?: boolean } = {}): Raw {
+export function media(m: MediaT | undefined, ctx: Ctx, _seed: string, opts: { w?: number; h?: number; eager?: boolean; sizes?: string } = {}): Raw {
   // Without a photo, a calm block in the site's own colours (never a drawing).
   const blank = raw('<div class="d-blank"></div>');
-  const img = (i: z.infer<typeof Image>) => html`<img src="${asset(ctx, i.src)}" alt="${i.alt}" width="${i.width}" height="${i.height}" ${raw(i.srcset ? `srcset="${esc(srcsetOf(ctx, i.srcset))}" sizes="${esc(opts.sizes ?? '(min-width: 900px) 50vw, 100vw')}"` : '')} ${raw(opts.eager ? 'fetchpriority="high"' : opts.lazy === false ? 'decoding="async"' : 'loading="lazy" decoding="async"')}>`;
+  const img = (i: z.infer<typeof Image>) => html`<img src="${asset(ctx, i.src)}" alt="${i.alt}" width="${i.width}" height="${i.height}" ${raw(i.srcset ? `srcset="${esc(srcsetOf(ctx, i.srcset))}" sizes="${esc(opts.sizes ?? '(min-width: 900px) 50vw, 100vw')}"` : '')} ${raw(opts.eager ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"')}>`;
   if (!m) return blank;
   if ('image' in m) return img(m.image);
   if ('object' in m) {
@@ -350,12 +350,12 @@ export function section(s: SectionT, ctx: Ctx): Raw {
       </section>`;
     case 'photostrip': {
       // One set of photos gliding back and forth: no hidden duplicates for screen readers to trip on.
-      // They load straight away (small sizes): photos waiting off to the side would never be lazy-loaded.
+      // Each photo loads lazily as it glides (or is swiped) into view.
       // With animations off it becomes a row you can scroll (and reach by keyboard).
       const dur = Math.round((s.items.length * 360) / s.speed);
       return html`<section class="d-photostrip" id="${id}" aria-label="Photos" tabindex="0">
         <div class="${cls('d-strip-track', s.reverse && 'd-strip-track--reverse')}" style="${`--strip-dur:${dur}s`}">
-          ${s.items.map((m, i) => html`<div class="d-strip-item">${media(m, ctx, `${id}-p${i}`, { sizes: '(min-width: 900px) 20vw, 180px', lazy: false })}</div>`)}
+          ${s.items.map((m, i) => html`<div class="d-strip-item">${media(m, ctx, `${id}-p${i}`, { sizes: '(min-width: 900px) 20vw, 180px' })}</div>`)}
         </div>
       </section>`;
     }

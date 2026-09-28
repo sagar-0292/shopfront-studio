@@ -72,6 +72,8 @@ test('every picture is a real photo that loads, icons are line drawings, and pho
     // Walk down the page so lazy photos load.
     const h = await page.evaluate(() => document.documentElement.scrollHeight);
     for (let y = 0; y < h; y += 500) { await page.evaluate((y) => window.scrollTo({ top: y, behavior: 'instant' }), y); await page.waitForTimeout(120); }
+    // Photos waiting off to the side (gliding strip, swipe reel) load as they come into view; ask for them now.
+    await page.evaluate(() => document.querySelectorAll<HTMLImageElement>('img[loading="lazy"]').forEach((i) => { i.loading = 'eager'; }));
     await page.waitForFunction(() => [...document.images].filter((i) => i.getBoundingClientRect().width > 0).every((i) => i.complete), null, { timeout: 20_000 });
     const imgs = await page.locator('img:visible').evaluateAll((els) => els.map((e) => {
       const i = e as HTMLImageElement;
