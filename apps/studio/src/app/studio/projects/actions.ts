@@ -108,7 +108,7 @@ export const setDesign = safe(async (form) => {
   const { ctx, agency } = await requireAgency();
   const id = String(form.get('id'));
   const direction = form.get('design_direction');
-  if (!isDirection(direction)) throw new UserError('Please pick one of the four designs.');
+  if (!isDirection(direction)) throw new UserError('Please pick one of the designs on the list.');
   await withUser(ctx.user, async (db) => {
     const r = await db.query(`update sites set design_direction = $2 where id = $1 and organisation_id = $3 returning id`, [id, direction, agency.organisation_id]);
     if (!r.length) throw new UserError('This project could not be found, or you no longer have access to it.');

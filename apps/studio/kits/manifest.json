@@ -30,8 +30,13 @@
     ]
   },
   "design": {
-    "latest": "1.1.0",
+    "latest": "1.2.0",
     "versions": [
+      {
+        "version": "1.2.0",
+        "released_at": "2026-09-28",
+        "notes": "Two new design directions learned from award-winning studio sites: **Street poster** (towering condensed capitals, flat tomato red, cobalt and yellow, a black ticker; Anton and Archivo) and **Quiet luxury** (stone and bone white, a fine serif with italics, sage details and very large photographs; Instrument Serif and Inter Tight). A new hero sets the business name edge to edge over a big photo. Five new moving sections: a photo that stays pinned while the story scrolls past, a big typographic list that shows each line's photo, a row of photos you swipe sideways, photos gliding slowly across the page, and a split screen whose heading stays put while cards scroll. Sites can show a slim announcement bar above the header. Every new section still reads fully on phones and with animations turned off. Pages can have up to 30 sections."
+      },
       {
         "version": "1.1.0",
         "released_at": "2026-09-28",

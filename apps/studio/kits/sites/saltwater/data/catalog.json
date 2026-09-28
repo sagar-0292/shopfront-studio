@@ -1,0 +1,61 @@
+{
+ "products": [],
+ "bookings": {
+  "services": [
+   {
+    "id": "stay",
+    "name": "Stay at Saltwater (pick your arrival)",
+    "duration_minutes": 60,
+    "price_paise": 0
+   }
+  ],
+  "hours": {
+   "mon": [
+    [
+     "14:00",
+     "17:00"
+    ]
+   ],
+   "tue": [
+    [
+     "14:00",
+     "17:00"
+    ]
+   ],
+   "wed": [
+    [
+     "14:00",
+     "17:00"
+    ]
+   ],
+   "thu": [
+    [
+     "14:00",
+     "17:00"
+    ]
+   ],
+   "fri": [
+    [
+     "14:00",
+     "17:00"
+    ]
+   ],
+   "sat": [
+    [
+     "14:00",
+     "17:00"
+    ]
+   ],
+   "sun": [
+    [
+     "14:00",
+     "17:00"
+    ]
+   ]
+  },
+  "slot_minutes": 60,
+  "capacity": 4,
+  "blocked_dates": [],
+  "booked": {}
+ }
+}

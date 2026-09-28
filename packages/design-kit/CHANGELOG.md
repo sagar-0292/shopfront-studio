@@ -1,5 +1,8 @@
 # Design kit releases
 
+## 1.2.0 — 2026-09-28
+Two new design directions learned from award-winning studio sites: **Street poster** (towering condensed capitals, flat tomato red, cobalt and yellow, a black ticker; Anton and Archivo) and **Quiet luxury** (stone and bone white, a fine serif with italics, sage details and very large photographs; Instrument Serif and Inter Tight). A new hero sets the business name edge to edge over a big photo. Five new moving sections: a photo that stays pinned while the story scrolls past, a big typographic list that shows each line's photo, a row of photos you swipe sideways, photos gliding slowly across the page, and a split screen whose heading stays put while cards scroll. Sites can show a slim announcement bar above the header. Every new section still reads fully on phones and with animations turned off. Pages can have up to 30 sections.
+
 ## 1.1.0 — 2026-09-28
 Real photography only. Drawn placeholder artwork is gone: pictures are real stock photos (or the business's own), and a missing photo shows a calm block in the site's colours instead of a drawing. Two new sections inspired by current studio work: alternating photo-and-text rows, and a mixed grid of photos, short statements and numbers. Arrows, the wishlist heart, the cart and the menu button are drawn line icons instead of symbol characters. Sites credit their photographers in the footer. Any section can be given an anchor so menus can link straight to it. Fonts load lighter and never make headlines jump while loading.
 

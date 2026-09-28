@@ -40,6 +40,12 @@ function everything(direction: SiteDefT['direction'] = 'editorial'): Record<stri
         { type: 'contact', title: 'Visit us' },
         { type: 'rows', anchor: 'our-story', items: [{ title: 'The *starter*', text: 'Ten years old.', media: photo, link: { label: 'Order', href: '/shop/' } }, { title: 'The bake', text: 'At 5 am.', media: photo }] },
         { type: 'bento', tiles: [{ kind: 'photo', media: photo, size: 'big', caption: 'The counter' }, { kind: 'stat', value: '1962', label: 'Since' }, { kind: 'text', title: 'Pure *ghee*', text: 'Always.' }] },
+        { type: 'hero', variant: 'wordmark', headline: 'Chai, *loud*', media: photo, sticker: 'Open late' },
+        { type: 'scrolly', title: 'How we *make it*', steps: [{ title: 'Boil', text: 'Water and leaf.', media: photo }, { title: 'Pour', text: 'From a height.', media: photo }] },
+        { type: 'index', title: 'The menu', items: [{ title: 'Cutting chai', meta: '₹30', href: '/shop/', media: photo }, { title: 'Bun maska', media: photo }] },
+        { type: 'reel', title: 'Our *stalls*', items: [{ media: photo, title: 'Dadar' }, { media: photo, title: 'Bandra', text: 'By the station.' }, { media: photo, title: 'Fort' }] },
+        { type: 'photostrip', items: [photo, photo, photo, photo] },
+        { type: 'pinned', title: 'Why *us*', text: 'Three reasons.', cta: { label: 'Order', href: '/shop/' }, items: [{ title: 'Fresh', text: 'Every hour.', media: photo }, { title: 'Local', text: 'Assam leaf.' }] },
       ] },
       { path: '/shop/', title: 'Shop', description: 'Everything we make.', sections: [{ type: 'shop', title: 'All sweets' }] },
       { path: '/wishlist/', title: 'Wishlist', description: 'Saved.', sections: [{ type: 'wishlist' }] },
@@ -185,6 +191,45 @@ describe('renderSite', () => {
     expect(d.querySelector('.d-row--flip')).not.toBeNull();
     expect(d.querySelectorAll('.d-bento .d-tile')).toHaveLength(3);
     expect(d.querySelector('.d-row img')!.getAttribute('srcset')).toContain('400w');
+  });
+
+  it('builds the moving sections so they still read without animation', () => {
+    const def = everything('poster');
+    def.announcement = { text: 'Free delivery across Mumbai over ₹999', href: '/shop/' };
+    const d = doc(renderSite(def, V)['/index.html']);
+    // Announcement bar sits above the header and links into the site.
+    expect(d.querySelector('.d-announce + .d-header')).not.toBeNull();
+    expect(d.querySelector('.d-announce a')!.getAttribute('href')).toBe('/shop/');
+    // The giant name is decoration: hidden from screen readers, headline stays the h1.
+    const wm = d.querySelector('.d-hero--wordmark')!;
+    expect(wm.querySelector('.d-wordmark')!.getAttribute('aria-hidden')).toBe('true');
+    expect(wm.querySelector('.d-wordmark')!.getAttribute('style')).toBe('--chars:9');
+    expect(wm.querySelector('h1')!.textContent).toBe('Chai, loud');
+    // Scrolly: every step names its timeline, the pinned copy is hidden from screen readers,
+    // and each step also carries its own photo for phones and animations-off.
+    const sc = d.querySelector('.d-scrolly')!;
+    expect(sc.querySelector('.d-scrolly-stage')!.getAttribute('aria-hidden')).toBe('true');
+    const steps = [...sc.querySelectorAll('.d-scrolly-step')];
+    expect(steps.map((s) => s.getAttribute('style'))).toEqual(['view-timeline-name:--sc-s21-0', 'view-timeline-name:--sc-s21-1']);
+    expect(steps.every((s) => s.querySelector('.d-scrolly-photo img'))).toBe(true);
+    expect(sc.querySelector('.d-scrolly-grid')!.getAttribute('style')).toBe('timeline-scope:--sc-s21-0,--sc-s21-1');
+    // Index: linked lines are links, each with its photo.
+    expect(d.querySelectorAll('.d-index-item')).toHaveLength(2);
+    expect(d.querySelector('a.d-index-row')!.getAttribute('href')).toBe('/shop/');
+    expect(d.querySelectorAll('.d-index-thumb img')).toHaveLength(2);
+    // Reel: a keyboard-scrollable, named region.
+    const reel = d.querySelector('.d-reel-track')!;
+    expect(reel.getAttribute('tabindex')).toBe('0');
+    expect(reel.getAttribute('aria-label')).toBe('Our stalls');
+    expect(reel.querySelectorAll('figure')).toHaveLength(3);
+    // Photo strip: one set of photos (no hidden duplicates), timed by its length.
+    expect(d.querySelectorAll('.d-strip-item img')).toHaveLength(4);
+    expect(d.querySelector('.d-strip-track')!.getAttribute('style')).toBe('--strip-dur:36s');
+    // Pinned: heading, text, button and numbered cards.
+    const pin = d.querySelector('.d-pinned')!;
+    expect(pin.querySelector('h2')!.textContent).toBe('Why us');
+    expect(pin.querySelectorAll('.d-pinned-card')).toHaveLength(2);
+    expect(pin.querySelector('.d-btn')!.getAttribute('href')).toBe('/shop/');
   });
 
   it('refuses custom colours that are hard to read', () => {

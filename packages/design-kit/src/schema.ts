@@ -2,7 +2,7 @@
 // edit. Everything is validated before a page is built.
 import { z } from 'zod';
 
-export const DIRECTIONS = ['editorial', 'bold', 'cinematic', 'crafted'] as const;
+export const DIRECTIONS = ['editorial', 'bold', 'cinematic', 'crafted', 'poster', 'quiet'] as const;
 export type Direction = (typeof DIRECTIONS)[number];
 export const OBJECTS = ['ring', 'gem', 'knot', 'blob', 'cup', 'orbit', 'stack'] as const;
 
@@ -33,7 +33,8 @@ const anchor = z.string().regex(/^[a-z][a-z0-9-]{1,30}$/, 'Anchors are short low
 
 const S = {
   hero: z.object({
-    type: z.literal('hero'), anchor, variant: z.enum(['split', 'fullbleed', 'typographic', 'collage']),
+    // wordmark: the business name set edge to edge over a big photo (poster style).
+    type: z.literal('hero'), anchor, variant: z.enum(['split', 'fullbleed', 'typographic', 'collage', 'wordmark']),
     eyebrow: text(80).optional(), headline: text(140), lede: text(320).optional(), ctas: z.array(Cta).max(2).default([]),
     media: Media.optional(), collage: z.array(Media).max(3).optional(), sticker: text(40).optional(),
     background: z.enum(['none', 'aurora', 'particles', 'waves']).default('none'),
@@ -67,8 +68,22 @@ const S = {
       z.object({ kind: z.literal('stat'), value: text(12), label: text(60), size: z.enum(['normal', 'wide', 'tall', 'big']).default('normal'), tone: z.enum(['surface', 'accent', 'invert', 'pop']).default('accent') }),
     ])).min(3).max(8) }),
   wishlist: z.object({ type: z.literal('wishlist'), anchor, title: text(120).default('Your wishlist'), empty: text(160).default('Nothing saved yet. Tap the heart on anything you like.') }),
+  // A photo that stays put while the story scrolls past it, changing with each step.
+  scrolly: z.object({ type: z.literal('scrolly'), anchor, eyebrow: text(80).optional(), title: text(120).optional(),
+    steps: z.array(z.object({ eyebrow: text(60).optional(), title: text(100), text: text(400), media: Media })).min(2).max(6), tone: z.enum(['default', 'invert', 'surface']).default('default') }),
+  // A big typographic list; pointing at a line shows its photo (on phones, a small photo sits beside it).
+  index: z.object({ type: z.literal('index'), anchor, eyebrow: text(80).optional(), title: text(120).optional(),
+    items: z.array(z.object({ title: text(60), meta: text(60).optional(), href: href.optional(), media: Media })).min(2).max(10), tone: z.enum(['default', 'invert', 'surface']).default('default') }),
+  // A row of big photos you swipe or scroll sideways.
+  reel: z.object({ type: z.literal('reel'), anchor, eyebrow: text(80).optional(), title: text(120).optional(),
+    items: z.array(z.object({ media: Media, title: text(80), text: text(200).optional() })).min(3).max(12), tone: z.enum(['default', 'invert', 'surface']).default('default') }),
+  // Photos gliding slowly across the page, like a film strip.
+  photostrip: z.object({ type: z.literal('photostrip'), anchor, items: z.array(Media).min(4).max(12), speed: z.number().min(10).max(120).default(40), reverse: z.boolean().default(false) }),
+  // Split screen: the heading stays pinned on one side while cards scroll on the other.
+  pinned: z.object({ type: z.literal('pinned'), anchor, eyebrow: text(80).optional(), title: text(120), text: text(400).optional(), cta: Cta.optional(),
+    items: z.array(z.object({ title: text(80), text: text(300), media: Media.optional() })).min(2).max(8), tone: z.enum(['default', 'invert', 'surface', 'pop']).default('default') }),
 };
-export const Section = z.discriminatedUnion('type', [S.hero, S.marquee, S.statement, S.products, S.categories, S.story, S.features, S.gallery, S.menu, S.booking, S.quotes, S.stats, S.faq, S.cta, S.contact, S.shop, S.wishlist, S.rows, S.bento]);
+export const Section = z.discriminatedUnion('type', [S.hero, S.marquee, S.statement, S.products, S.categories, S.story, S.features, S.gallery, S.menu, S.booking, S.quotes, S.stats, S.faq, S.cta, S.contact, S.shop, S.wishlist, S.rows, S.bento, S.scrolly, S.index, S.reel, S.photostrip, S.pinned]);
 export type SectionT = z.infer<typeof Section>;
 export const SECTION_TYPES = Object.keys(S);
 
@@ -87,8 +102,10 @@ export const SiteDef = z.object({
   /** Photographers whose photos the site uses (shown in the footer). */
   credits: z.array(z.object({ name: text(80), url: z.string().regex(/^https:\/\/[^\s"'<>]+$/).max(300), source: z.enum(['Pexels', 'Unsplash']) })).max(80).default([]),
   palette: z.object({ bg: hex, surface: hex, ink: hex, muted: hex, line: hex, accent: hex, accentInk: hex }).partial().optional(),
+  /** A slim bar above the header: an offer, free delivery, a new launch. */
+  announcement: z.object({ text: text(100), href: href.optional() }).optional(),
   nav: z.array(Link).max(7).default([]),
   commerce: z.object({ source: z.record(z.string(), z.unknown()), delivery: z.record(z.string(), z.unknown()).optional(), payments: z.record(z.string(), z.unknown()).optional(), privacyUrl: z.string().optional() }).optional(),
-  pages: z.array(z.object({ path: z.string().regex(/^\/([\w-]+\/)*$/), title: text(70), description: text(160), sections: z.array(Section).min(1).max(20) })).min(1).max(20),
+  pages: z.array(z.object({ path: z.string().regex(/^\/([\w-]+\/)*$/), title: text(70), description: text(160), sections: z.array(Section).min(1).max(30) })).min(1).max(20),
 });
 export type SiteDefT = z.infer<typeof SiteDef>;

@@ -63,4 +63,24 @@ json('ember', {
   bookings: { services: [{ id: 'table', name: 'Table for dinner', duration_minutes: 120 }, { id: 'chef', name: "Chef's counter (8 seats)", duration_minutes: 150 }],
     hours: Object.fromEntries(['tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map((d) => [d, [['19:00', '23:00']]])), slot_minutes: 30, capacity: 6, blocked_dates: [], booked: {} },
 });
+// ---------------------------------------------------------------- Tapri (street poster chai bar)
+const tapri = [
+  ['t1', 'masala-blend', 'Tapri Masala Blend, 250 g', 'blends', 'Chai blends', 28000, 'Assam CTC with cardamom, cinnamon, clove and black pepper, the way we brew it at the counter.', 'spices', true, ['Bestseller']],
+  ['t2', 'adrak-blend', 'Adrak Chai Blend, 250 g', 'blends', 'Chai blends', 26000, 'Strong CTC with dried ginger. Add fresh ginger too if you like it loud.', 'ginger', true],
+  ['t3', 'kulhad-set', 'Kulhad Set of 6', 'serveware', 'Serveware', 45000, 'Hand-thrown clay cups from Khurja, the same ones on our counter.', 'kulhad', true],
+  ['t4', 'chai-rusk-box', 'Chai & Rusk Box', 'boxes', 'Boxes', 52000, 'A masala blend and a tin of toast rusks for dipping. Makes a good gift.', 'rusk', true, ['Gift']],
+];
+json('tapri', {
+  products: tapri.map(([id, slug, name, cat, catName, price, description, img, featured, badges]) => ({
+    id, slug, name, description, price_paise: price, image: photo(`tapri/${img}`),
+    category: { slug: cat, name: catName }, stock: 40, status: 'active', created_at: '2026-09-20', ...(featured ? { featured: true } : {}), ...(badges ? { badges } : {}),
+  })),
+});
+
+// ---------------------------------------------------------------- Saltwater (quiet luxury villa): bookings only
+json('saltwater', {
+  products: [],
+  bookings: { services: [{ id: 'stay', name: 'Stay at Saltwater (pick your arrival)', duration_minutes: 60, price_paise: 0 }],
+    hours: Object.fromEntries(['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].map((d) => [d, [['14:00', '17:00']]])), slot_minutes: 60, capacity: 4, blocked_dates: [], booked: {} },
+});
 console.log('Sample site catalogues written.');

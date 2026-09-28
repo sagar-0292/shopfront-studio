@@ -7,12 +7,12 @@ test.beforeAll(async () => {
   await sql(`update sites set design_direction = null where name = 'Mithai Market'`);
 });
 
-test('the Designs page shows all four looks with live previews', async ({ page }) => {
+test('the Designs page shows all six looks with live previews', async ({ page }) => {
   await logIn(page, 'tanvi@mumbai-studio.test');
   await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Designs' }).click();
   await expect(page.getByRole('heading', { name: 'Designs', level: 1 })).toBeVisible();
   const list = page.getByRole('list', { name: 'Design directions' });
-  for (const name of ['Editorial luxury', 'Bold & vibrant', 'Dark & cinematic', 'Warm & crafted']) {
+  for (const name of ['Editorial luxury', 'Bold & vibrant', 'Dark & cinematic', 'Warm & crafted', 'Street poster', 'Quiet luxury']) {
     await expect(list.getByRole('heading', { name, level: 2 })).toBeVisible();
   }
   // Each preview really shows its sample website, on a computer and on a phone.
@@ -40,6 +40,13 @@ test('a team member chooses a design for a project, and it is remembered', async
 
   await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Designs' }).click();
   await expect(page.getByText('Used by 1 project')).toBeVisible();
+
+  // The newer looks can be chosen too (the database knows about them).
+  await page.goto(url);
+  await card.getByRole('radio', { name: /Street poster/ }).check();
+  await card.getByRole('button', { name: 'Use this design' }).click();
+  await expect(card.getByText('Design set to Street poster.')).toBeVisible();
+  expect((await sql<{ design_direction: string }>(`select design_direction from sites where name = 'Mithai Market'`))[0].design_direction).toBe('poster');
 });
 
 test('a made-up design is refused with a plain message', async ({ page }) => {
@@ -48,7 +55,7 @@ test('a made-up design is refused with a plain message', async ({ page }) => {
   const radio = page.getByRole('radio', { name: /Dark & cinematic/ });
   await radio.evaluate((r: HTMLInputElement) => { r.value = 'neon'; r.checked = true; });
   await page.getByRole('button', { name: 'Use this design' }).click();
-  await expect(alertIn(page)).toHaveText('Please pick one of the four designs.');
+  await expect(alertIn(page)).toHaveText('Please pick one of the designs on the list.');
 });
 
 test('the Designs page works on a 360px phone', async ({ page }) => {

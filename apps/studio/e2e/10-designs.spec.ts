@@ -1,12 +1,14 @@
 import { test, expect, type Page } from '@playwright/test';
 import './helpers';
 
-// The four sample websites, one per design direction, built by the design kit.
+// The sample websites, one per design direction, built by the design kit.
 const SITES = [
   { id: 'aranya', direction: 'editorial', h1: 'Heirlooms, made slowly', shop: '/collection/' },
   { id: 'mithai-market', direction: 'bold', h1: "Life's sweeter in Dadar", shop: '/shop/' },
   { id: 'ember', direction: 'cinematic', h1: 'Cooked over fire', shop: null },
   { id: 'bandra-bake-house', direction: 'crafted', h1: 'Bread worth waking up for', shop: '/order/' },
+  { id: 'tapri', direction: 'poster', h1: 'Cutting chai, loud and proud', shop: '/shop/' },
+  { id: 'saltwater', direction: 'quiet', h1: 'Slow days by the Arabian Sea', shop: null, city: 'Alibaug' },
 ] as const;
 const url = (id: string, path = '/') => `/kits/sites/${id}${path}`;
 
@@ -36,7 +38,7 @@ for (const s of SITES) {
     await page.locator('footer').scrollIntoViewIfNeeded();
     await expect(page.getByRole('button', { name: 'Pause animations' })).toBeVisible();
     const ld = await page.locator('script[type="application/ld+json"]').first().textContent();
-    expect(JSON.parse(ld!).address.addressLocality).toBe('Mumbai');
+    expect(JSON.parse(ld!).address.addressLocality).toBe('city' in s ? s.city : 'Mumbai');
     expect(errors).toEqual([]);
   });
 
@@ -147,4 +149,50 @@ test('every internal link on the sample sites leads to a real page', async ({ pa
     }
   }
   expect(seen.size).toBeGreaterThan(8);
+});
+
+test('moving sections: pinned story photo, hover list, swipe reel and photo strip, with animations on and off', async ({ browser }) => {
+  // On a computer with animations on, the story photo stays pinned and changes with the steps.
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const page = await ctx.newPage();
+  await page.goto(url('tapri'));
+  const stage = page.locator('.d-scrolly-stage');
+  await stage.scrollIntoViewIfNeeded();
+  await expect(stage).toBeVisible();
+  await expect(page.locator('.d-scrolly-photo').first()).toBeHidden();
+  const last = page.locator('.d-scrolly-step').last();
+  await last.scrollIntoViewIfNeeded();
+  await expect.poll(() => page.locator('.d-scrolly-frame').last().evaluate((e) => Number(getComputedStyle(e).opacity))).toBeGreaterThan(0.9);
+  // Pointing at a menu line shows its photo.
+  const row = page.locator('.d-index-row').first();
+  await row.scrollIntoViewIfNeeded();
+  const thumb = row.locator('.d-index-thumb');
+  expect(Number(await thumb.evaluate((e) => getComputedStyle(e).opacity))).toBe(0);
+  await row.hover();
+  await expect.poll(() => thumb.evaluate((e) => Number(getComputedStyle(e).opacity))).toBe(1);
+  // The reel scrolls sideways with the keyboard.
+  const reel = page.locator('.d-reel-track');
+  await reel.focus();
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowRight');
+  await expect.poll(() => reel.evaluate((e) => e.scrollLeft)).toBeGreaterThan(0);
+  // The photo strip glides, and "Pause animations" stops it.
+  const strip = page.locator('.d-strip-track');
+  expect(await strip.evaluate((e) => getComputedStyle(e).animationPlayState)).toBe('running');
+  await page.getByRole('button', { name: 'Pause animations' }).click();
+  expect(await strip.evaluate((e) => getComputedStyle(e).animationPlayState)).toBe('paused');
+  // Paused, the story shows each photo beside its step instead.
+  await expect(page.locator('.d-scrolly-photo').first()).toBeVisible();
+  await ctx.close();
+
+  // Phones with animations off: every step has its photo, nothing moves, nothing overflows.
+  const phone = await browser.newContext({ viewport: { width: 360, height: 780 }, reducedMotion: 'reduce', isMobile: true, hasTouch: true });
+  const p = await phone.newPage();
+  await p.goto(url('saltwater'));
+  await expect(p.locator('.d-scrolly-stage')).toBeHidden();
+  for (const photo of await p.locator('.d-scrolly-photo').all()) { await photo.scrollIntoViewIfNeeded(); await expect(photo.locator('img')).toBeVisible(); }
+  expect(await p.locator('.d-strip-track').evaluate((e) => getComputedStyle(e).animationName)).toBe('none');
+  await expect(p.locator('.d-index-thumb img').first()).toBeVisible();
+  expect(await p.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
+  await phone.close();
 });

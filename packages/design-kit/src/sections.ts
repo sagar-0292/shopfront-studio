@@ -20,6 +20,8 @@ const MOTION: Record<Direction, { reveal: string; head: string; bg: { hero: stri
   bold: { reveal: 'up', head: 'up', bg: { hero: 'none', colors: '#2b0a3d,#c8135f,#ff9f1c,#6a1b9a' } },
   cinematic: { reveal: 'blur', head: 'blur', bg: { hero: 'particles', colors: '#0b0b0c,#ff5a1f,#ffb347' } },
   crafted: { reveal: 'up', head: 'up', bg: { hero: 'none', colors: '#f3e8d6,#e7cfa8,#d9a877,#f6eadb' } },
+  poster: { reveal: 'up', head: 'up', bg: { hero: 'none', colors: '#c8321a,#1e3bd6,#ffd23f' } },
+  quiet: { reveal: 'fade', head: 'mask', bg: { hero: 'none', colors: '#f1eee8,#e4e0d6,#d6e3d0' } },
 };
 export const motionFor = (d: Direction) => MOTION[d];
 /** How wide the split hero's photo is shown; the page also preloads it with these sizes. */
@@ -28,10 +30,10 @@ export const HERO_SPLIT_SIZES = '(min-width: 960px) 42vw, 92vw';
 const inr = (paise: number) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: paise % 100 ? 2 : 0 }).format(paise / 100);
 const num = (i: number) => String(i + 1).padStart(2, '0');
 
-export function media(m: MediaT | undefined, ctx: Ctx, _seed: string, opts: { w?: number; h?: number; eager?: boolean; sizes?: string } = {}): Raw {
+export function media(m: MediaT | undefined, ctx: Ctx, _seed: string, opts: { w?: number; h?: number; eager?: boolean; sizes?: string; lazy?: boolean } = {}): Raw {
   // Without a photo, a calm block in the site's own colours (never a drawing).
   const blank = raw('<div class="d-blank"></div>');
-  const img = (i: z.infer<typeof Image>) => html`<img src="${asset(ctx, i.src)}" alt="${i.alt}" width="${i.width}" height="${i.height}" ${raw(i.srcset ? `srcset="${esc(srcsetOf(ctx, i.srcset))}" sizes="${esc(opts.sizes ?? '(min-width: 900px) 50vw, 100vw')}"` : '')} ${raw(opts.eager ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"')}>`;
+  const img = (i: z.infer<typeof Image>) => html`<img src="${asset(ctx, i.src)}" alt="${i.alt}" width="${i.width}" height="${i.height}" ${raw(i.srcset ? `srcset="${esc(srcsetOf(ctx, i.srcset))}" sizes="${esc(opts.sizes ?? '(min-width: 900px) 50vw, 100vw')}"` : '')} ${raw(opts.eager ? 'fetchpriority="high"' : opts.lazy === false ? 'decoding="async"' : 'loading="lazy" decoding="async"')}>`;
   if (!m) return blank;
   if ('image' in m) return img(m.image);
   if ('object' in m) {
@@ -103,6 +105,21 @@ export function section(s: SectionT, ctx: Ctx): Raw {
             <div class="d-hero-foot">
               ${s.lede ? html`<p class="d-lede" data-sf-reveal="up" data-sf-delay="250">${s.lede}</p>` : raw('<span></span>')}
               ${s.ctas.length ? html`<div class="d-actions" style="margin-top:0" data-sf-reveal="up" data-sf-delay="400">${s.ctas.map((c, i) => btn(ctx, { ...c, style: i === 0 ? c.style : 'plain' }))}</div>` : ''}
+            </div>
+          </div>
+        </section>`;
+      }
+      if (s.variant === 'wordmark') {
+        // The name is decoration here (the logo and headline already say it), so screen readers skip it.
+        const name = ctx.site.name;
+        return html`<section class="d-hero d-hero--wordmark" id="${id}">
+          <p class="d-wordmark" aria-hidden="true" style="${`--chars:${Math.max(3, [...name].length)}`}">${name}</p>
+          <div class="d-wordmark-media">${media(s.media, ctx, `${id}-media`, { eager, sizes: '100vw' })}${s.sticker ? html`<span class="d-sticker" aria-hidden="true">${s.sticker}</span>` : ''}</div>
+          <div class="d-wrap d-wordmark-copy">
+            <div>${s.eyebrow ? html`<p class="d-eyebrow" data-sf-reveal="fade">${s.eyebrow}</p>` : ''}${H}</div>
+            <div>
+              ${s.lede ? html`<p class="d-lede" data-sf-reveal="up" data-sf-delay="200">${s.lede}</p>` : ''}
+              ${s.ctas.length ? html`<div class="d-actions" data-sf-reveal="up" data-sf-delay="300">${s.ctas.map((c, i) => btn(ctx, { ...c, style: i === 0 ? c.style : 'plain' }))}</div>` : ''}
             </div>
           </div>
         </section>`;
@@ -282,6 +299,79 @@ export function section(s: SectionT, ctx: Ctx): Raw {
             if (t.kind === 'stat') return html`<div class="${cls('d-tile d-tile--stat', size, toneCls)}" data-sf-reveal="up"><b class="d-display">${t.value}</b><span>${t.label}</span></div>`;
             return html`<div class="${cls('d-tile d-tile--text', size, toneCls)}" data-sf-reveal="up"><h3 class="d-display d-h3">${emph(t.title)}</h3>${t.text ? html`<p>${t.text}</p>` : ''}</div>`;
           })}</div>
+        </div>
+      </section>`;
+    case 'scrolly': {
+      // Each step names a scroll timeline; the pinned photo for that step fades in as the step
+      // reaches the middle of the screen. Browsers without scroll timelines, phones and people who
+      // turned animations off see each photo inline with its step instead.
+      const tl = (i: number) => `--sc-${id}-${i}`;
+      return html`<section class="${cls('d-section d-scrolly', tone(s.tone))}" id="${id}">
+        <div class="d-wrap">
+          ${head(ctx, s)}
+          <div class="d-scrolly-grid" style="${`timeline-scope:${s.steps.map((_, i) => tl(i)).join(',')}`}">
+            <div class="d-scrolly-stage" aria-hidden="true">${s.steps.map((st, i) => html`<div class="d-scrolly-frame" style="${`animation-timeline:${tl(i)}`}">${media(st.media, ctx, `${id}-f${i}`, { sizes: '45vw' })}</div>`)}</div>
+            <ol class="d-scrolly-steps">${s.steps.map((st, i) => html`<li class="d-scrolly-step" style="${`view-timeline-name:${tl(i)}`}">
+              <div class="d-scrolly-photo d-media-frame">${media(st.media, ctx, `${id}-s${i}`, { sizes: '92vw' })}</div>
+              <div class="d-scrolly-copy" data-sf-reveal="up">
+                <span class="d-scrolly-num">${num(i)}</span>
+                ${st.eyebrow ? html`<p class="d-eyebrow">${st.eyebrow}</p>` : ''}
+                <h3 class="d-display d-h3">${emph(st.title)}</h3>
+                <p class="d-lede">${st.text}</p>
+              </div>
+            </li>`)}</ol>
+          </div>
+        </div>
+      </section>`;
+    }
+    case 'index':
+      return html`<section class="${cls('d-section d-index', tone(s.tone))}" id="${id}">
+        <div class="d-wrap">
+          ${head(ctx, s)}
+          <ul class="d-index-list">${s.items.map((it, i) => {
+            const inner = html`<span class="d-index-thumb">${media(it.media, ctx, `${id}-i${i}`, { sizes: '(hover: hover) and (min-width: 900px) 24vw, 72px' })}</span>
+              <span class="d-index-num">${num(i)}</span>
+              <span class="d-index-title d-display">${it.title}</span>
+              ${it.meta ? html`<span class="d-index-meta">${it.meta}</span>` : ''}
+              ${it.href ? html`<span class="d-index-go">${icon('arrowUpRight', 22)}</span>` : ''}`;
+            return html`<li class="d-index-item" data-sf-reveal="up">${it.href ? html`<a class="d-index-row" href="${link(ctx, it.href)}">${inner}</a>` : html`<div class="d-index-row">${inner}</div>`}</li>`;
+          })}</ul>
+        </div>
+      </section>`;
+    case 'reel':
+      return html`<section class="${cls('d-section d-reel', tone(s.tone))}" id="${id}">
+        <div class="d-wrap">${head(ctx, s, html`<p class="d-reel-hint d-muted">Swipe ${icon('arrowRight', 16)}</p>`)}</div>
+        <div class="d-reel-track" tabindex="0" role="region" aria-label="${s.title ? s.title.replace(/\*/g, '') : 'Photos'}">
+          ${s.items.map((it, i) => html`<figure class="d-reel-item">
+            <div class="d-reel-media">${media(it.media, ctx, `${id}-r${i}`, { sizes: '(min-width: 900px) 34vw, 78vw' })}</div>
+            <figcaption><span class="d-reel-num">${num(i)}</span><b>${it.title}</b>${it.text ? html`<span class="d-muted">${it.text}</span>` : ''}</figcaption>
+          </figure>`)}
+        </div>
+      </section>`;
+    case 'photostrip': {
+      // One set of photos gliding back and forth: no hidden duplicates for screen readers to trip on.
+      // They load straight away (small sizes): photos waiting off to the side would never be lazy-loaded.
+      // With animations off it becomes a row you can scroll (and reach by keyboard).
+      const dur = Math.round((s.items.length * 360) / s.speed);
+      return html`<section class="d-photostrip" id="${id}" aria-label="Photos" tabindex="0">
+        <div class="${cls('d-strip-track', s.reverse && 'd-strip-track--reverse')}" style="${`--strip-dur:${dur}s`}">
+          ${s.items.map((m, i) => html`<div class="d-strip-item">${media(m, ctx, `${id}-p${i}`, { sizes: '(min-width: 900px) 20vw, 180px', lazy: false })}</div>`)}
+        </div>
+      </section>`;
+    }
+    case 'pinned':
+      return html`<section class="${cls('d-section d-pinned', tone(s.tone))}" id="${id}">
+        <div class="d-wrap d-pinned-grid">
+          <div class="d-pinned-head">
+            ${s.eyebrow ? html`<p class="d-eyebrow" data-sf-reveal="fade">${s.eyebrow}</p>` : ''}
+            <h2 class="d-display d-h2" data-sf-split="words">${emph(s.title)}</h2>
+            ${s.text ? html`<p class="d-lede" data-sf-reveal="up">${s.text}</p>` : ''}
+            ${s.cta ? html`<div class="d-actions" style="margin-top:8px">${btn(ctx, s.cta)}</div>` : ''}
+          </div>
+          <ol class="d-pinned-list">${s.items.map((it, i) => html`<li class="d-pinned-card" data-sf-reveal="up">
+            ${it.media ? html`<div class="d-pinned-media d-media-frame">${media(it.media, ctx, `${id}-c${i}`, { sizes: '(min-width: 900px) 48vw, 92vw' })}</div>` : ''}
+            <div class="d-pinned-copy"><span class="d-pinned-num">${num(i)}</span><h3 class="d-display d-h3">${emph(it.title)}</h3><p class="d-muted">${it.text}</p></div>
+          </li>`)}</ol>
         </div>
       </section>`;
     case 'wishlist':

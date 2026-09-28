@@ -1003,5 +1003,425 @@
    "pageUrl": "https://www.pexels.com/photo/photo-of-delicious-dessert-14723140/"
   },
   "from": "pexels:14723140:1.0000:400,800:\"attention\":72"
+ },
+ "saltwater/arches": {
+  "src": "/img/arches-1000.webp",
+  "srcset": "/img/arches-400.webp 400w, /img/arches-700.webp 700w, /img/arches-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "White arches and steps in soft light",
+  "credit": {
+   "provider": "pexels",
+   "id": "7882491",
+   "photographer": "Valeriya Kobzar",
+   "photographerUrl": "https://www.pexels.com/@valeriya-kobzar-42371713",
+   "pageUrl": "https://www.pexels.com/photo/white-stone-buildings-under-clear-sky-7882491/"
+  },
+  "from": "pexels:7882491:0.8000:400,700,1000:\"attention\":72"
+ },
+ "saltwater/beach": {
+  "src": "/img/beach-1000.webp",
+  "srcset": "/img/beach-400.webp 400w, /img/beach-700.webp 700w, /img/beach-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Palm trees along a quiet beach",
+  "credit": {
+   "provider": "pexels",
+   "id": "36698095",
+   "photographer": "Bliss ‎‎‎‎",
+   "photographerUrl": "https://www.pexels.com/@bliss",
+   "pageUrl": "https://www.pexels.com/photo/serene-tropical-beach-with-palm-trees-36698095/"
+  },
+  "from": "pexels:36698095:0.8000:400,700,1000:\"attention\":72"
+ },
+ "saltwater/bed": {
+  "src": "/img/bed-1000.webp",
+  "srcset": "/img/bed-400.webp 400w, /img/bed-700.webp 700w, /img/bed-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "A white linen bed beside a reading lamp",
+  "credit": {
+   "provider": "pexels",
+   "id": "7749046",
+   "photographer": "Max Vakhtbovych",
+   "photographerUrl": "https://www.pexels.com/@artbovich",
+   "pageUrl": "https://www.pexels.com/photo/black-and-white-table-lamp-on-brown-wooden-table-beside-bed-7749046/"
+  },
+  "from": "pexels:7749046:0.8000:400,700,1000:\"attention\":72"
+ },
+ "saltwater/breakfast": {
+  "src": "/img/breakfast-1200.webp",
+  "srcset": "/img/breakfast-480.webp 480w, /img/breakfast-800.webp 800w, /img/breakfast-1200.webp 1200w",
+  "width": 1200,
+  "height": 960,
+  "alt": "Breakfast laid out on a shaded terrace",
+  "credit": {
+   "provider": "pexels",
+   "id": "4497545",
+   "photographer": "Souranshi Fashion and Lifestyle Magazine",
+   "photographerUrl": "https://www.pexels.com/@souranshi-fashion-and-lifestyle-magazine-2959920",
+   "pageUrl": "https://www.pexels.com/photo/outdoor-patio-with-brown-wicker-furniture-sofa-set-4497545/"
+  },
+  "from": "pexels:4497545:1.2500:480,800,1200:\"attention\":72"
+ },
+ "saltwater/coast": {
+  "src": "/img/coast-1200.webp",
+  "srcset": "/img/coast-480.webp 480w, /img/coast-800.webp 800w, /img/coast-1200.webp 1200w",
+  "width": 1200,
+  "height": 960,
+  "alt": "Aerial view of a long beach on the Konkan coast",
+  "credit": {
+   "provider": "pexels",
+   "id": "4691622",
+   "photographer": "Sameer Prabhat",
+   "photographerUrl": "https://www.pexels.com/@sameer-prabhat-3012480",
+   "pageUrl": "https://www.pexels.com/photo/aerial-view-of-blue-sea-4691622/"
+  },
+  "from": "pexels:4691622:1.2500:480,800,1200:\"attention\":72"
+ },
+ "saltwater/coffee": {
+  "src": "/img/coffee-1000.webp",
+  "srcset": "/img/coffee-400.webp 400w, /img/coffee-700.webp 700w, /img/coffee-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Morning coffee on a linen bedcover",
+  "credit": {
+   "provider": "pexels",
+   "id": "9502859",
+   "photographer": "Justyna Grochowska",
+   "photographerUrl": "https://www.pexels.com/@justyna-grochowska-105199216",
+   "pageUrl": "https://www.pexels.com/photo/a-cup-of-coffee-on-linen-9502859/"
+  },
+  "from": "pexels:9502859:0.8000:400,700,1000:\"attention\":72"
+ },
+ "saltwater/dinner": {
+  "src": "/img/dinner-1000.webp",
+  "srcset": "/img/dinner-400.webp 400w, /img/dinner-700.webp 700w, /img/dinner-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "A candlelit table set by the rocks at sunset",
+  "credit": {
+   "provider": "pexels",
+   "id": "5864598",
+   "photographer": "Rachel Claire",
+   "photographerUrl": "https://www.pexels.com/@rachel-claire",
+   "pageUrl": "https://www.pexels.com/photo/candles-on-a-dinner-table-set-outdoors-5864598/"
+  },
+  "from": "pexels:5864598:0.8000:400,700,1000:\"attention\":72"
+ },
+ "saltwater/hero": {
+  "src": "/img/hero-2000.webp",
+  "srcset": "/img/hero-640.webp 640w, /img/hero-1000.webp 1000w, /img/hero-1400.webp 1400w, /img/hero-2000.webp 2000w",
+  "width": 2000,
+  "height": 1250,
+  "alt": "An infinity pool at sunset, framed by palms and a thatched roof",
+  "credit": {
+   "provider": "pexels",
+   "id": "34790496",
+   "photographer": "kevin yung",
+   "photographerUrl": "https://www.pexels.com/@kevin-yung-2152346613",
+   "pageUrl": "https://www.pexels.com/photo/luxury-villa-pool-at-sunset-in-bali-indonesia-34790496/"
+  },
+  "from": "pexels:34790496:1.6000:640,1000,1400,2000:\"attention\":72"
+ },
+ "saltwater/patio": {
+  "src": "/img/patio-1200.webp",
+  "srcset": "/img/patio-480.webp 480w, /img/patio-800.webp 800w, /img/patio-1200.webp 1200w",
+  "width": 1200,
+  "height": 960,
+  "alt": "A shaded patio with wicker chairs and plants",
+  "credit": {
+   "provider": "pexels",
+   "id": "31111359",
+   "photographer": "casa lalla takerkoust",
+   "photographerUrl": "https://www.pexels.com/@casa-lalla-takerkoust-2150099384",
+   "pageUrl": "https://www.pexels.com/photo/charming-outdoor-patio-in-moroccan-villa-31111359/"
+  },
+  "from": "pexels:31111359:1.2500:480,800,1200:\"attention\":72"
+ },
+ "saltwater/pool": {
+  "src": "/img/pool-1000.webp",
+  "srcset": "/img/pool-400.webp 400w, /img/pool-700.webp 700w, /img/pool-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Sun loungers beside an infinity pool at dusk",
+  "credit": {
+   "provider": "pexels",
+   "id": "20975727",
+   "photographer": "Ahmet ÇÖTÜR",
+   "photographerUrl": "https://www.pexels.com/@ahmetcotur",
+   "pageUrl": "https://www.pexels.com/photo/resort-patio-with-mountain-view-20975727/"
+  },
+  "from": "pexels:20975727:0.8000:400,700,1000:\"attention\":72"
+ },
+ "saltwater/room": {
+  "src": "/img/room-1200.webp",
+  "srcset": "/img/room-480.webp 480w, /img/room-800.webp 800w, /img/room-1200.webp 1200w",
+  "width": 1200,
+  "height": 960,
+  "alt": "A calm white bedroom with a window onto the sea",
+  "credit": {
+   "provider": "pexels",
+   "id": "28054888",
+   "photographer": "Ahmet ÇÖTÜR",
+   "photographerUrl": "https://www.pexels.com/@ahmetcotur",
+   "pageUrl": "https://www.pexels.com/photo/a-bedroom-with-a-large-bed-and-sliding-glass-doors-28054888/"
+  },
+  "from": "pexels:28054888:1.2500:480,800,1200:\"attention\":72"
+ },
+ "saltwater/shore": {
+  "src": "/img/shore-1200.webp",
+  "srcset": "/img/shore-480.webp 480w, /img/shore-800.webp 800w, /img/shore-1200.webp 1200w",
+  "width": 1200,
+  "height": 960,
+  "alt": "A quiet beach and green headland under a cloudy sky",
+  "credit": {
+   "provider": "pexels",
+   "id": "12634172",
+   "photographer": "Ritesh Singhsiddharth",
+   "photographerUrl": "https://www.pexels.com/@ritesh-singhsiddharth-339327",
+   "pageUrl": "https://www.pexels.com/photo/a-beach-under-a-cloudy-sky-12634172/"
+  },
+  "from": "pexels:12634172:1.2500:480,800,1200:\"attention\":72"
+ },
+ "saltwater/wall": {
+  "src": "/img/wall-1000.webp",
+  "srcset": "/img/wall-400.webp 400w, /img/wall-700.webp 700w, /img/wall-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "A white wall, wooden shutters and a palm against a blue sky",
+  "credit": {
+   "provider": "pexels",
+   "id": "28243788",
+   "photographer": "Burkay Canatar",
+   "photographerUrl": "https://www.pexels.com/@burkaycanatar",
+   "pageUrl": "https://www.pexels.com/photo/canon-palma-de-mallorca-28243788/"
+  },
+  "from": "pexels:28243788:0.8000:400,700,1000:\"attention\":72"
+ },
+ "saltwater/yoga": {
+  "src": "/img/yoga-1000.webp",
+  "srcset": "/img/yoga-400.webp 400w, /img/yoga-700.webp 700w, /img/yoga-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Yoga mats laid out on a wooden deck by the sea",
+  "credit": {
+   "provider": "pexels",
+   "id": "36895637",
+   "photographer": "rachid bendhiba",
+   "photographerUrl": "https://www.pexels.com/@rachid-bendhiba-2151490392",
+   "pageUrl": "https://www.pexels.com/photo/serene-yoga-deck-overlooking-moroccan-coast-36895637/"
+  },
+  "from": "pexels:36895637:0.8000:400,700,1000:\"attention\":72"
+ },
+ "tapri/break": {
+  "src": "/img/break-1000.webp",
+  "srcset": "/img/break-400.webp 400w, /img/break-700.webp 700w, /img/break-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Workers on a tea break, holding glasses of chai",
+  "credit": {
+   "provider": "pexels",
+   "id": "28588984",
+   "photographer": "Nishant Aneja",
+   "photographerUrl": "https://www.pexels.com/@nishantaneja",
+   "pageUrl": "https://www.pexels.com/photo/construction-worker-taking-a-tea-break-outdoors-28588984/"
+  },
+  "from": "pexels:28588984:0.8000:400,700,1000:\"attention\":72"
+ },
+ "tapri/clay-pour": {
+  "src": "/img/clay-pour-1000.webp",
+  "srcset": "/img/clay-pour-400.webp 400w, /img/clay-pour-700.webp 700w, /img/clay-pour-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Tea poured into a clay cup, steam rising",
+  "credit": {
+   "provider": "pexels",
+   "id": "8286220",
+   "photographer": "Deepak Ramesha",
+   "photographerUrl": "https://www.pexels.com/@deepak-ramesha-294760",
+   "pageUrl": "https://www.pexels.com/photo/a-person-holding-a-cup-8286220/"
+  },
+  "from": "pexels:8286220:0.8000:400,700,1000:\"attention\":72"
+ },
+ "tapri/ginger": {
+  "src": "/img/ginger-800.webp",
+  "srcset": "/img/ginger-400.webp 400w, /img/ginger-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "A glass of masala chai with fresh ginger",
+  "credit": {
+   "provider": "pexels",
+   "id": "29650995",
+   "photographer": "Abhinav Singh",
+   "photographerUrl": "https://www.pexels.com/@abhinav-singh-17121852",
+   "pageUrl": "https://www.pexels.com/photo/masala-chai-with-ginger-on-marble-surface-29650995/"
+  },
+  "from": "pexels:29650995:1.0000:400,800:\"attention\":72"
+ },
+ "tapri/glass": {
+  "src": "/img/glass-1000.webp",
+  "srcset": "/img/glass-400.webp 400w, /img/glass-700.webp 700w, /img/glass-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "A glass of creamy masala chai",
+  "credit": {
+   "provider": "pexels",
+   "id": "37186989",
+   "photographer": "vishranthanadka7",
+   "photographerUrl": "https://www.pexels.com/@vishranthanadka7-2159659255",
+   "pageUrl": "https://www.pexels.com/photo/authentic-indian-masala-chai-glass-close-up-37186989/"
+  },
+  "from": "pexels:37186989:0.8000:400,700,1000:\"attention\":72"
+ },
+ "tapri/glasses": {
+  "src": "/img/glasses-1000.webp",
+  "srcset": "/img/glasses-400.webp 400w, /img/glasses-700.webp 700w, /img/glasses-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Chai poured into a row of small glasses",
+  "credit": {
+   "provider": "pexels",
+   "id": "34324342",
+   "photographer": "Jinshu Pulpatta",
+   "photographerUrl": "https://www.pexels.com/@jinshu-pulpatta-2151876856",
+   "pageUrl": "https://www.pexels.com/photo/street-vendor-pouring-traditional-chai-34324342/"
+  },
+  "from": "pexels:34324342:0.8000:400,700,1000:\"attention\":72"
+ },
+ "tapri/hero": {
+  "src": "/img/hero-2000.webp",
+  "srcset": "/img/hero-640.webp 640w, /img/hero-1000.webp 1000w, /img/hero-1400.webp 1400w, /img/hero-2000.webp 2000w",
+  "width": 2000,
+  "height": 1250,
+  "alt": "Chai poured from a height at a tea stall, steam rising",
+  "credit": {
+   "provider": "pexels",
+   "id": "18413480",
+   "photographer": "GOWTHAM AGM",
+   "photographerUrl": "https://www.pexels.com/@gowtham-agm-609630353",
+   "pageUrl": "https://www.pexels.com/photo/man-pouring-hot-drink-through-a-sieve-18413480/"
+  },
+  "from": "pexels:18413480:1.6000:640,1000,1400,2000:\"attention\":72"
+ },
+ "tapri/kettle": {
+  "src": "/img/kettle-1000.webp",
+  "srcset": "/img/kettle-400.webp 400w, /img/kettle-700.webp 700w, /img/kettle-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Chai poured from a brass kettle",
+  "credit": {
+   "provider": "pexels",
+   "id": "10389156",
+   "photographer": "Swastik Arora",
+   "photographerUrl": "https://www.pexels.com/@swastikarora",
+   "pageUrl": "https://www.pexels.com/photo/traditional-chai-making-10389156/"
+  },
+  "from": "pexels:10389156:0.8000:400,700,1000:\"attention\":72"
+ },
+ "tapri/kulhad": {
+  "src": "/img/kulhad-800.webp",
+  "srcset": "/img/kulhad-400.webp 400w, /img/kulhad-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Masala chai in clay kulhads",
+  "credit": {
+   "provider": "pexels",
+   "id": "36662612",
+   "photographer": "Sagar Mali",
+   "photographerUrl": "https://www.pexels.com/@sagar-mali-2977768",
+   "pageUrl": "https://www.pexels.com/photo/traditional-clay-cup-masala-chai-street-vendor-36662612/"
+  },
+  "from": "pexels:36662612:1.0000:400,800:\"attention\":72"
+ },
+ "tapri/pour": {
+  "src": "/img/pour-1000.webp",
+  "srcset": "/img/pour-400.webp 400w, /img/pour-700.webp 700w, /img/pour-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "Tea poured from a height into a steel pot",
+  "credit": {
+   "provider": "pexels",
+   "id": "31002370",
+   "photographer": "Amar .M",
+   "photographerUrl": "https://www.pexels.com/@amresh444",
+   "pageUrl": "https://www.pexels.com/photo/indian-street-vendor-pouring-chai-tea-31002370/"
+  },
+  "from": "pexels:31002370:0.8000:400,700,1000:\"attention\":72"
+ },
+ "tapri/rusk": {
+  "src": "/img/rusk-800.webp",
+  "srcset": "/img/rusk-400.webp 400w, /img/rusk-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "A glass of chai with toast rusks",
+  "credit": {
+   "provider": "pexels",
+   "id": "2697931",
+   "photographer": "Shantanu Pal",
+   "photographerUrl": "https://www.pexels.com/@shantanu-pal-938952",
+   "pageUrl": "https://www.pexels.com/photo/glass-of-coffee-drink-2697931/"
+  },
+  "from": "pexels:2697931:1.0000:400,800:\"attention\":72"
+ },
+ "tapri/samosa": {
+  "src": "/img/samosa-800.webp",
+  "srcset": "/img/samosa-400.webp 400w, /img/samosa-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Samosas with green and tamarind chutney",
+  "credit": {
+   "provider": "pexels",
+   "id": "9027521",
+   "photographer": "I Own My Food Art",
+   "photographerUrl": "https://www.pexels.com/@i-own-my-food-art-76108785",
+   "pageUrl": "https://www.pexels.com/photo/crunchy-samosa-over-a-ceramic-plate-9027521/"
+  },
+  "from": "pexels:9027521:1.0000:400,800:\"attention\":72"
+ },
+ "tapri/spices": {
+  "src": "/img/spices-800.webp",
+  "srcset": "/img/spices-400.webp 400w, /img/spices-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Cinnamon sticks and whole spices on a wooden plate",
+  "credit": {
+   "provider": "pexels",
+   "id": "37832983",
+   "photographer": "Ns.Angga SR",
+   "photographerUrl": "https://www.pexels.com/@ns-angga-sr-3069734",
+   "pageUrl": "https://www.pexels.com/photo/aromatic-spices-on-rustic-wooden-plate-37832983/"
+  },
+  "from": "pexels:37832983:1.0000:400,800:\"attention\":72"
+ },
+ "tapri/stall": {
+  "src": "/img/stall-1000.webp",
+  "srcset": "/img/stall-400.webp 400w, /img/stall-700.webp 700w, /img/stall-1000.webp 1000w",
+  "width": 1000,
+  "height": 1250,
+  "alt": "A colourful roadside tea stall",
+  "credit": {
+   "provider": "pexels",
+   "id": "36780495",
+   "photographer": "Abhishek Mehta",
+   "photographerUrl": "https://www.pexels.com/@abhishekmehtasviewfinder",
+   "pageUrl": "https://www.pexels.com/photo/traditional-indian-street-tea-stall-in-panchgani-36780495/"
+  },
+  "from": "pexels:36780495:0.8000:400,700,1000:\"attention\":72"
+ },
+ "tapri/vada-pav": {
+  "src": "/img/vada-pav-800.webp",
+  "srcset": "/img/vada-pav-400.webp 400w, /img/vada-pav-800.webp 800w",
+  "width": 800,
+  "height": 800,
+  "alt": "Vada pav with fried green chillies and chutney",
+  "credit": {
+   "provider": "pexels",
+   "id": "17433337",
+   "photographer": "Aditya Mara",
+   "photographerUrl": "https://www.pexels.com/@aditya-mara-425995080",
+   "pageUrl": "https://www.pexels.com/photo/roll-with-fried-meat-and-green-chili-17433337/"
+  },
+  "from": "pexels:17433337:1.0000:400,800:\"attention\":72"
  }
 }

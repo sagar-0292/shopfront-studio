@@ -7,3 +7,7 @@
 @font-face{font-family:'Manrope Fallback';src:local('Arial'),local('Helvetica'),local('Liberation Sans'),local('Roboto');size-adjust:100.27%;ascent-override:106.71%;descent-override:29.92%;line-gap-override:0%}
 @font-face{font-family:'Fraunces Fallback';src:local('Times New Roman'),local('Times'),local('Liberation Serif'),local('Noto Serif');size-adjust:92.89%;ascent-override:105.50%;descent-override:27.99%;line-gap-override:0%}
 @font-face{font-family:'Karla Fallback';src:local('Arial'),local('Helvetica'),local('Liberation Sans'),local('Roboto');size-adjust:99.16%;ascent-override:92.78%;descent-override:25.21%;line-gap-override:0%}
+@font-face{font-family:'Anton Fallback';src:local('Arial'),local('Helvetica'),local('Liberation Sans'),local('Roboto');size-adjust:88.62%;ascent-override:133.15%;descent-override:37.24%;line-gap-override:0%}
+@font-face{font-family:'Archivo Fallback';src:local('Arial'),local('Helvetica'),local('Liberation Sans'),local('Roboto');size-adjust:97.73%;ascent-override:90.04%;descent-override:21.49%;line-gap-override:0%}
+@font-face{font-family:'Instrument Serif Fallback';src:local('Times New Roman'),local('Times'),local('Liberation Serif'),local('Noto Serif');size-adjust:82.74%;ascent-override:119.66%;descent-override:37.47%;line-gap-override:0%}
+@font-face{font-family:'Inter Tight Fallback';src:local('Arial'),local('Helvetica'),local('Liberation Sans'),local('Roboto');size-adjust:95.15%;ascent-override:101.94%;descent-override:25.22%;line-gap-override:0%}

@@ -1,0 +1,82 @@
+{
+ "products": [
+  {
+   "id": "t1",
+   "slug": "masala-blend",
+   "name": "Tapri Masala Blend, 250 g",
+   "description": "Assam CTC with cardamom, cinnamon, clove and black pepper, the way we brew it at the counter.",
+   "price_paise": 28000,
+   "image": {
+    "$photo": "tapri/spices"
+   },
+   "category": {
+    "slug": "blends",
+    "name": "Chai blends"
+   },
+   "stock": 40,
+   "status": "active",
+   "created_at": "2026-09-20",
+   "featured": true,
+   "badges": [
+    "Bestseller"
+   ]
+  },
+  {
+   "id": "t2",
+   "slug": "adrak-blend",
+   "name": "Adrak Chai Blend, 250 g",
+   "description": "Strong CTC with dried ginger. Add fresh ginger too if you like it loud.",
+   "price_paise": 26000,
+   "image": {
+    "$photo": "tapri/ginger"
+   },
+   "category": {
+    "slug": "blends",
+    "name": "Chai blends"
+   },
+   "stock": 40,
+   "status": "active",
+   "created_at": "2026-09-20",
+   "featured": true
+  },
+  {
+   "id": "t3",
+   "slug": "kulhad-set",
+   "name": "Kulhad Set of 6",
+   "description": "Hand-thrown clay cups from Khurja, the same ones on our counter.",
+   "price_paise": 45000,
+   "image": {
+    "$photo": "tapri/kulhad"
+   },
+   "category": {
+    "slug": "serveware",
+    "name": "Serveware"
+   },
+   "stock": 40,
+   "status": "active",
+   "created_at": "2026-09-20",
+   "featured": true
+  },
+  {
+   "id": "t4",
+   "slug": "chai-rusk-box",
+   "name": "Chai & Rusk Box",
+   "description": "A masala blend and a tin of toast rusks for dipping. Makes a good gift.",
+   "price_paise": 52000,
+   "image": {
+    "$photo": "tapri/rusk"
+   },
+   "category": {
+    "slug": "boxes",
+    "name": "Boxes"
+   },
+   "stock": 40,
+   "status": "active",
+   "created_at": "2026-09-20",
+   "featured": true,
+   "badges": [
+    "Gift"
+   ]
+  }
+ ]
+}

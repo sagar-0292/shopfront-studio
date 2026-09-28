@@ -23,8 +23,10 @@ export const PRELOAD: Record<Direction, string[]> = {
   bold: ['bricolage-grotesque-normal.woff2'],
   cinematic: ['syne-normal.woff2'],
   crafted: ['fraunces-normal.woff2'],
+  poster: ['anton-normal.woff2'],
+  quiet: ['instrument-serif-normal.woff2'],
 };
-const THEME_COLOR: Record<Direction, string> = { editorial: '#f7f3ec', bold: '#fff6e5', cinematic: '#0b0b0c', crafted: '#f3e8d6' };
+const THEME_COLOR: Record<Direction, string> = { editorial: '#f7f3ec', bold: '#fff6e5', cinematic: '#0b0b0c', crafted: '#f3e8d6', poster: '#c8321a', quiet: '#f1eee8' };
 const COMMERCE_SECTIONS = new Set<SectionT['type']>(['products', 'shop', 'booking', 'wishlist']);
 
 export class DesignError extends Error {}
@@ -96,6 +98,7 @@ ${structuredData(def, page)}
 <body>
 <a class="d-skip" href="#main">Skip to content</a>
 <div class="d-progress" data-sf-progress></div>
+${def.announcement ? html`<div class="d-announce"><div class="d-wrap">${def.announcement.href ? html`<a href="${link(ctxBase, def.announcement.href)}">${def.announcement.text} <span class="d-arrow">${icon('arrowRight', 14)}</span></a>` : def.announcement.text}</div></div>` : ''}
 ${header(def, page, ctxBase)}
 <main id="main">
 ${sections}
@@ -177,7 +180,7 @@ function heroPreload(page: Page, base: string): Raw | '' {
   const i = hero.media.image;
   const at = (u: string) => (u.startsWith('/') ? base + u : u);
   const set = i.srcset ? i.srcset.split(',').map((p) => { const [u, ...d] = p.trim().split(/\s+/); return [at(u), ...d].join(' '); }).join(', ') : '';
-  const sizes = hero.variant === 'fullbleed' ? '100vw' : HERO_SPLIT_SIZES;
+  const sizes = hero.variant === 'fullbleed' || hero.variant === 'wordmark' ? '100vw' : HERO_SPLIT_SIZES;
   return set
     ? html`<link rel="preload" as="image" href="${at(i.src)}" imagesrcset="${set}" imagesizes="${sizes}" fetchpriority="high">`
     : html`<link rel="preload" as="image" href="${at(i.src)}" fetchpriority="high">`;

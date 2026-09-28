@@ -1,10 +1,10 @@
-# Designs: four looks, one page builder
+# Designs: six looks, one page builder
 
 Every client website is built from a **page description** (a small, checked JSON file) by the
 **design kit** (`packages/design-kit`). The AI Builder (Phase 3) will write these descriptions; a person can
 edit them too. The kit turns a description into finished pages that already meet our quality bar.
 
-## The four design directions
+## The six design directions
 
 | Direction | Feels like | Type | Colours | Sample |
 |---|---|---|---|---|
@@ -12,14 +12,30 @@ edit them too. The kit turns a description into finished pages that already meet
 | Bold & vibrant | A festival poster | Bricolage Grotesque + DM Sans | Cream, magenta, saffron | Mithai Market (sweet shop) — `/kits/sites/mithai-market` |
 | Dark & cinematic | A film title sequence | Syne + Manrope | Near-black, ember orange | Ember (restaurant) — `/kits/sites/ember` |
 | Warm & crafted | A handmade label | Fraunces + Karla | Kraft paper, terracotta, olive | Bandra Bake House (bakery) — `/kits/sites/bandra-bake-house` |
+| Street poster | A gig poster | Anton + Archivo | Tomato red, cobalt, yellow, black | Tapri (chai bar) — `/kits/sites/tapri` |
+| Quiet luxury | A gallery | Instrument Serif + Inter Tight | Stone, bone white, sage | Saltwater (villa stay) — `/kits/sites/saltwater` |
 
 All fonts are open-source and hosted with the site (no Google requests from visitors' phones). Each font has
 a size-matched stand-in, so text doesn't jump when the real font arrives.
 
+The last two (design kit 1.2.0) came from studying award-winning sites: DIKO and Flying Papers (the name as a
+poster), MORAL and Pebble (giant type over photography, announcement bar), Fabric and agency sites (big
+typographic lists), Lusion and Teenage Engineering (sideways motion), and this month's luxury Awwwards winners.
+
 ## Sections
-Hero (split, full-bleed, typographic, collage), marquee, statement, products, categories, sideways-scrolling
+Hero (split, full-bleed, typographic, collage, wordmark — the name edge to edge over a big photo), marquee, statement, products, categories, sideways-scrolling
 story, features, gallery, restaurant menu (with veg / non-veg marks), booking, reviews, numbers, questions,
-call to action, contact (map link, WhatsApp, opening hours), shop, wishlist.
+call to action, contact (map link, WhatsApp, opening hours), shop, wishlist, alternating photo rows, bento grid.
+
+Moving sections (1.2.0), each fully readable on phones and with animations off:
+- **Pinned story** (`scrolly`): a photo stays put while steps scroll past and change it. Without scroll-timeline
+  support, on phones, or with animations off, each step shows its own photo instead.
+- **Hover list** (`index`): huge one-line items; pointing at one reveals its photo. Phones show a small photo beside it.
+- **Swipe reel** (`reel`): big photos you swipe or arrow-key sideways.
+- **Photo strip** (`photostrip`): photos gliding slowly back and forth; stops with "Pause animations".
+- **Split screen** (`pinned`): the heading stays on one side while cards scroll on the other.
+
+A site can also show a slim **announcement bar** above the header (`announcement`).
 
 Headlines can mark a highlighted word with `*asterisks*`: `"Bread worth *waking up* for"`.
 
@@ -41,7 +57,7 @@ Headlines can mark a highlighted word with `*asterisks*`: `"Bread worth *waking 
   real browser, 360px phones, animations off, cart, booking, menu, links) and `08-lighthouse` (90+ on phones).
 
 ## In the studio
-- **Designs** (side menu) shows the four looks with live previews of each sample site on a computer and a
+- **Designs** (side menu) shows all six looks with live previews of each sample site on a computer and a
   phone, what each suits, its fonts and colours, and how many of your projects use it.
 - On a project, the **Design** card is where the team picks the look. Anyone in the agency can choose it;
   business owners can't change it. The website's design-kit version is shown with the other kits and, like

@@ -12,7 +12,7 @@ Allow about an hour. Do the steps in order.
      backups and stops the project pausing after a week of no use.
 3. **Create the database tables and security rules:** open **SQL Editor → New query**, paste the whole of
    `supabase/migrations/20260925000001_foundation.sql`, click **Run**. It should say "Success. No rows returned".
-   Then do the same with `20260925000002_kit_versions.sql`, `20260925000003_references_payments.sql` and `20260926000004_design_direction.sql`. (Later phases add more files to that folder;
+   Then do the same with `20260925000002_kit_versions.sql`, `20260925000003_references_payments.sql`, `20260926000004_design_direction.sql` and `20260928000005_more_design_directions.sql`. (Later phases add more files to that folder;
    run each new one once, in name order.)
 4. **Create the app's limited database login.** In a new SQL Editor query, run this, replacing the password with a
    long random one (save it):

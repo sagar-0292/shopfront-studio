@@ -103,7 +103,7 @@ export default async function ProjectPage({ params, searchParams }: PageProps<'/
       <Card>
         <CardTitle
           title="Design"
-          description={<>The look of this website: fonts, colours, layouts and animation style. <Link className="text-primary underline" href="/studio/designs">Compare all four designs</Link>.</>}
+          description={<>The look of this website: fonts, colours, layouts and animation style. <Link className="text-primary underline" href="/studio/designs">Compare all the designs</Link>.</>}
           action={site.design_direction ? <Badge tone="good">{DESIGNS[site.design_direction].name}</Badge> : <Badge tone="warn">Not chosen yet</Badge>}
         />
         <ActionForm action={setDesign} submitLabel="Use this design">

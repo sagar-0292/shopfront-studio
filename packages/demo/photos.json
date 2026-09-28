@@ -799,6 +799,350 @@
      "focus": "attention"
     }
    }
+  },
+  "tapri": {
+   "dir": "sites/tapri/img",
+   "web": "/img",
+   "slots": {
+    "hero": {
+     "provider": "pexels",
+     "id": "18413480",
+     "aspect": 1.6,
+     "widths": [
+      640,
+      1000,
+      1400,
+      2000
+     ],
+     "alt": "Chai poured from a height at a tea stall, steam rising",
+     "focus": "attention"
+    },
+    "pour": {
+     "provider": "pexels",
+     "id": "31002370",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Tea poured from a height into a steel pot",
+     "focus": "attention"
+    },
+    "kettle": {
+     "provider": "pexels",
+     "id": "10389156",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Chai poured from a brass kettle",
+     "focus": "attention"
+    },
+    "glasses": {
+     "provider": "pexels",
+     "id": "34324342",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Chai poured into a row of small glasses",
+     "focus": "attention"
+    },
+    "kulhad": {
+     "provider": "pexels",
+     "id": "36662612",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Masala chai in clay kulhads",
+     "focus": "attention"
+    },
+    "stall": {
+     "provider": "pexels",
+     "id": "36780495",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A colourful roadside tea stall",
+     "focus": "attention"
+    },
+    "vada-pav": {
+     "provider": "pexels",
+     "id": "17433337",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Vada pav with fried green chillies and chutney",
+     "focus": "attention"
+    },
+    "samosa": {
+     "provider": "pexels",
+     "id": "9027521",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Samosas with green and tamarind chutney",
+     "focus": "attention"
+    },
+    "spices": {
+     "provider": "pexels",
+     "id": "37832983",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "Cinnamon sticks and whole spices on a wooden plate",
+     "focus": "attention"
+    },
+    "ginger": {
+     "provider": "pexels",
+     "id": "29650995",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A glass of masala chai with fresh ginger",
+     "focus": "attention"
+    },
+    "rusk": {
+     "provider": "pexels",
+     "id": "2697931",
+     "aspect": 1,
+     "widths": [
+      400,
+      800
+     ],
+     "alt": "A glass of chai with toast rusks",
+     "focus": "attention"
+    },
+    "clay-pour": {
+     "provider": "pexels",
+     "id": "8286220",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Tea poured into a clay cup, steam rising",
+     "focus": "attention"
+    },
+    "glass": {
+     "provider": "pexels",
+     "id": "37186989",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A glass of creamy masala chai",
+     "focus": "attention"
+    },
+    "break": {
+     "provider": "pexels",
+     "id": "28588984",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Workers on a tea break, holding glasses of chai",
+     "focus": "attention"
+    }
+   }
+  },
+  "saltwater": {
+   "dir": "sites/saltwater/img",
+   "web": "/img",
+   "slots": {
+    "hero": {
+     "provider": "pexels",
+     "id": "34790496",
+     "aspect": 1.6,
+     "widths": [
+      640,
+      1000,
+      1400,
+      2000
+     ],
+     "alt": "An infinity pool at sunset, framed by palms and a thatched roof",
+     "focus": "attention"
+    },
+    "pool": {
+     "provider": "pexels",
+     "id": "20975727",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Sun loungers beside an infinity pool at dusk",
+     "focus": "attention"
+    },
+    "room": {
+     "provider": "pexels",
+     "id": "28054888",
+     "aspect": 1.25,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "A calm white bedroom with a window onto the sea",
+     "focus": "attention"
+    },
+    "bed": {
+     "provider": "pexels",
+     "id": "7749046",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A white linen bed beside a reading lamp",
+     "focus": "attention"
+    },
+    "coffee": {
+     "provider": "pexels",
+     "id": "9502859",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Morning coffee on a linen bedcover",
+     "focus": "attention"
+    },
+    "beach": {
+     "provider": "pexels",
+     "id": "36698095",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Palm trees along a quiet beach",
+     "focus": "attention"
+    },
+    "coast": {
+     "provider": "pexels",
+     "id": "4691622",
+     "aspect": 1.25,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "Aerial view of a long beach on the Konkan coast",
+     "focus": "attention"
+    },
+    "shore": {
+     "provider": "pexels",
+     "id": "12634172",
+     "aspect": 1.25,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "A quiet beach and green headland under a cloudy sky",
+     "focus": "attention"
+    },
+    "breakfast": {
+     "provider": "pexels",
+     "id": "4497545",
+     "aspect": 1.25,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "Breakfast laid out on a shaded terrace",
+     "focus": "attention"
+    },
+    "dinner": {
+     "provider": "pexels",
+     "id": "5864598",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A candlelit table set by the rocks at sunset",
+     "focus": "attention"
+    },
+    "arches": {
+     "provider": "pexels",
+     "id": "7882491",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "White arches and steps in soft light",
+     "focus": "attention"
+    },
+    "wall": {
+     "provider": "pexels",
+     "id": "28243788",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "A white wall, wooden shutters and a palm against a blue sky",
+     "focus": "attention"
+    },
+    "yoga": {
+     "provider": "pexels",
+     "id": "36895637",
+     "aspect": 0.8,
+     "widths": [
+      400,
+      700,
+      1000
+     ],
+     "alt": "Yoga mats laid out on a wooden deck by the sea",
+     "focus": "attention"
+    },
+    "patio": {
+     "provider": "pexels",
+     "id": "31111359",
+     "aspect": 1.25,
+     "widths": [
+      480,
+      800,
+      1200
+     ],
+     "alt": "A shaded patio with wicker chairs and plants",
+     "focus": "attention"
+    }
+   }
   }
  }
 }

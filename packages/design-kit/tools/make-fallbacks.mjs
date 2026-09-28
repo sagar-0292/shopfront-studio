@@ -17,6 +17,10 @@ const FAMILIES = [
   ['Manrope', 'manrope-normal.woff2', 'sans'],
   ['Fraunces', 'fraunces-normal.woff2', 'serif'],
   ['Karla', 'karla-normal.woff2', 'sans'],
+  ['Anton', 'anton-normal.woff2', 'sans'],
+  ['Archivo', 'archivo-normal.woff2', 'sans'],
+  ['Instrument Serif', 'instrument-serif-normal.woff2', 'serif'],
+  ['Inter Tight', 'inter-tight-normal.woff2', 'sans'],
 ];
 // Built-in fonts that share Arial's / Times New Roman's measurements on most devices.
 const LOCAL = { sans: ["local('Arial')", "local('Helvetica')", "local('Liberation Sans')", "local('Roboto')"], serif: ["local('Times New Roman')", "local('Times')", "local('Liberation Serif')", "local('Noto Serif')"] };

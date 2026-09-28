@@ -1,0 +1,426 @@
+{
+  "direction": "quiet",
+  "site": {
+    "id": "sample-saltwater",
+    "name": "Saltwater",
+    "tagline": "A four-room house by the sea at Kihim, Alibaug.",
+    "description": "Saltwater is a four-room whitewashed house by the sea at Kihim, Alibaug: slow days, a long table, and the Konkan coast two hours from Mumbai.",
+    "phone": "+912141234567",
+    "whatsapp": "+919820077889",
+    "email": "stay@saltwater.example",
+    "address": {
+      "street": "Kihim Beach Road",
+      "area": "Kihim",
+      "city": "Alibaug",
+      "state": "Maharashtra",
+      "pincode": "402201"
+    },
+    "hours": [
+      {
+        "days": "Mon – Sun",
+        "open": "09:00",
+        "close": "21:00"
+      }
+    ],
+    "businessType": "LodgingBusiness",
+    "sampleNotice": "This is a sample website made by Shopfront Studio to show the Quiet luxury design. Saltwater and its rooms are illustrative."
+  },
+  "announcement": {
+    "text": "Monsoon stays are open: June to September, from ₹18,000 a night",
+    "href": "/#book"
+  },
+  "nav": [
+    {
+      "label": "Rooms",
+      "href": "/rooms/"
+    },
+    {
+      "label": "A day here",
+      "href": "/#days"
+    },
+    {
+      "label": "Stay",
+      "href": "/#book"
+    },
+    {
+      "label": "Find us",
+      "href": "/#visit"
+    }
+  ],
+  "commerce": {
+    "source": {
+      "type": "json",
+      "url": "/data/catalog.json"
+    }
+  },
+  "pages": [
+    {
+      "path": "/",
+      "title": "Saltwater — A four-room house by the sea in Alibaug",
+      "description": "A whitewashed four-room house by the sea at Kihim, Alibaug, two hours from Mumbai. Meals, bicycles and ferry pick-up included. Book your stay.",
+      "sections": [
+        {
+          "type": "hero",
+          "variant": "wordmark",
+          "eyebrow": "Kihim, Alibaug · Four rooms",
+          "headline": "Slow days by the *Arabian Sea*",
+          "lede": "A whitewashed house, four rooms and one long table, two hours from Mumbai by ferry and road.",
+          "ctas": [
+            {
+              "label": "Plan a stay",
+              "href": "#book"
+            },
+            {
+              "label": "See the rooms",
+              "href": "/rooms/"
+            }
+          ],
+          "media": {
+            "image": {
+              "$photo": "saltwater/hero"
+            }
+          }
+        },
+        {
+          "type": "statement",
+          "text": "Four rooms. One long table. *No* television.",
+          "meta": [
+            "Kihim beach, 3 minutes' walk",
+            "2 hours from Mumbai",
+            "Sleeps ten"
+          ]
+        },
+        {
+          "type": "reel",
+          "eyebrow": "The house",
+          "title": "Light, lime and *salt*",
+          "items": [
+            {
+              "media": {
+                "image": {
+                  "$photo": "saltwater/pool"
+                }
+              },
+              "title": "The pool",
+              "text": "Warm at dusk, lit by lanterns."
+            },
+            {
+              "media": {
+                "image": {
+                  "$photo": "saltwater/arches"
+                }
+              },
+              "title": "The courtyard",
+              "text": "Lime-washed arches that stay cool at noon."
+            },
+            {
+              "media": {
+                "image": {
+                  "$photo": "saltwater/bed"
+                }
+              },
+              "title": "The rooms",
+              "text": "Linen, cane and nothing you don't need."
+            },
+            {
+              "media": {
+                "image": {
+                  "$photo": "saltwater/wall"
+                }
+              },
+              "title": "The walls",
+              "text": "Repainted white every October."
+            },
+            {
+              "media": {
+                "image": {
+                  "$photo": "saltwater/dinner"
+                }
+              },
+              "title": "The table",
+              "text": "Candles, the sea, and whatever came in on the boats."
+            }
+          ]
+        },
+        {
+          "type": "scrolly",
+          "anchor": "days",
+          "eyebrow": "A day here",
+          "title": "A day at *Saltwater*",
+          "steps": [
+            {
+              "eyebrow": "7 am",
+              "title": "Yoga on the *deck*",
+              "text": "An hour of gentle yoga facing the sea, with a teacher from the village. Or sleep in; nobody minds.",
+              "media": {
+                "image": {
+                  "$photo": "saltwater/yoga"
+                }
+              }
+            },
+            {
+              "eyebrow": "9 am",
+              "title": "A long *breakfast*",
+              "text": "Poha, eggs any way, papaya from the garden and filter coffee, served until you're done.",
+              "media": {
+                "image": {
+                  "$photo": "saltwater/breakfast"
+                }
+              }
+            },
+            {
+              "eyebrow": "Noon",
+              "title": "The beach, *empty*",
+              "text": "Kihim is quiet on weekdays. Take the bicycles, towels and a basket of lunch.",
+              "media": {
+                "image": {
+                  "$photo": "saltwater/beach"
+                }
+              }
+            },
+            {
+              "eyebrow": "8 pm",
+              "title": "Dinner by *candlelight*",
+              "text": "Konkani fish curry, bhakri and sol kadhi at the long table, or by the rocks if the tide allows.",
+              "media": {
+                "image": {
+                  "$photo": "saltwater/dinner"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "photostrip",
+          "items": [
+            {
+              "image": {
+                "$photo": "saltwater/coast"
+              }
+            },
+            {
+              "image": {
+                "$photo": "saltwater/coffee"
+              }
+            },
+            {
+              "image": {
+                "$photo": "saltwater/shore"
+              }
+            },
+            {
+              "image": {
+                "$photo": "saltwater/room"
+              }
+            },
+            {
+              "image": {
+                "$photo": "saltwater/patio"
+              }
+            },
+            {
+              "image": {
+                "$photo": "saltwater/pool"
+              }
+            },
+            {
+              "image": {
+                "$photo": "saltwater/beach"
+              }
+            },
+            {
+              "image": {
+                "$photo": "saltwater/arches"
+              }
+            }
+          ],
+          "speed": 30,
+          "reverse": true
+        },
+        {
+          "type": "index",
+          "eyebrow": "Four rooms",
+          "title": "Choose a *room*",
+          "items": [
+            {
+              "title": "The Sea Room",
+              "meta": "King bed · sea view",
+              "href": "/rooms/",
+              "media": {
+                "image": {
+                  "$photo": "saltwater/room"
+                }
+              }
+            },
+            {
+              "title": "The Garden Room",
+              "meta": "Queen bed · opens to the lawn",
+              "href": "/rooms/",
+              "media": {
+                "image": {
+                  "$photo": "saltwater/bed"
+                }
+              }
+            },
+            {
+              "title": "The Courtyard Room",
+              "meta": "Twin beds · under the arches",
+              "href": "/rooms/",
+              "media": {
+                "image": {
+                  "$photo": "saltwater/arches"
+                }
+              }
+            },
+            {
+              "title": "The Loft",
+              "meta": "King bed · reading nook",
+              "href": "/rooms/",
+              "media": {
+                "image": {
+                  "$photo": "saltwater/coffee"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "pinned",
+          "eyebrow": "Hosted, not managed",
+          "title": "Everything is *included*",
+          "text": "One price for the room, three meals and the little things. No bill at the end.",
+          "items": [
+            {
+              "title": "Meals from our *kitchen*",
+              "text": "Breakfast, lunch and dinner, cooked by Sunita and her team with fish from Revdanda and vegetables from the village."
+            },
+            {
+              "title": "Ferry *pick-up*",
+              "text": "We meet you at Mandwa jetty and drive you the twenty minutes to the house."
+            },
+            {
+              "title": "Bicycles and *towels*",
+              "text": "Six bicycles, beach towels, umbrellas and a picnic basket, whenever you want them."
+            }
+          ]
+        },
+        {
+          "type": "booking",
+          "eyebrow": "Stay",
+          "title": "Plan your *stay*",
+          "text": "Choose the day you'll arrive and we'll confirm your room and dates on WhatsApp within the hour. Two-night minimum at weekends.",
+          "service": "stay",
+          "days": 21
+        },
+        {
+          "type": "faq",
+          "title": "Before you *come*",
+          "items": [
+            {
+              "q": "How do we get there from Mumbai?",
+              "a": "Take the ferry from the Gateway of India to Mandwa (about an hour). We'll pick you up from the jetty. By road it's about three hours."
+            },
+            {
+              "q": "Are children and pets welcome?",
+              "a": "Children of all ages, yes. Pets by arrangement: tell us when you book."
+            },
+            {
+              "q": "Can we book the whole house?",
+              "a": "Yes, for up to ten guests. Ask us on WhatsApp for dates and the whole-house rate."
+            }
+          ]
+        },
+        {
+          "type": "contact",
+          "eyebrow": "Find us",
+          "title": "By the *sea* at Kihim",
+          "media": {
+            "image": {
+              "$photo": "saltwater/shore"
+            }
+          }
+        },
+        {
+          "type": "cta",
+          "headline": "The sea is *waiting*",
+          "ctas": [
+            {
+              "label": "Plan a stay",
+              "href": "#book"
+            }
+          ],
+          "tone": "invert"
+        }
+      ]
+    },
+    {
+      "path": "/rooms/",
+      "title": "Rooms",
+      "description": "The four rooms at Saltwater, Alibaug: the Sea Room, the Garden Room, the Courtyard Room and the Loft.",
+      "sections": [
+        {
+          "type": "rows",
+          "eyebrow": "Four rooms",
+          "title": "The *rooms*",
+          "items": [
+            {
+              "eyebrow": "King bed · sea view",
+              "title": "The Sea *Room*",
+              "text": "The biggest room, on the first floor, with a wall of windows onto the water and a deep bath.",
+              "media": {
+                "image": {
+                  "$photo": "saltwater/room"
+                }
+              },
+              "link": {
+                "label": "Plan a stay",
+                "href": "/#book"
+              }
+            },
+            {
+              "eyebrow": "Queen bed · lawn",
+              "title": "The Garden *Room*",
+              "text": "On the ground floor with its own door onto the lawn. Good for early risers.",
+              "media": {
+                "image": {
+                  "$photo": "saltwater/bed"
+                }
+              }
+            },
+            {
+              "eyebrow": "Twin beds · courtyard",
+              "title": "The Courtyard *Room*",
+              "text": "Under the arches, cool through the afternoon. Two single beds that push together.",
+              "media": {
+                "image": {
+                  "$photo": "saltwater/arches"
+                }
+              }
+            },
+            {
+              "eyebrow": "King bed · reading nook",
+              "title": "The *Loft*",
+              "text": "Up in the eaves, with a reading nook and a small balcony for morning coffee.",
+              "media": {
+                "image": {
+                  "$photo": "saltwater/coffee"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "cta",
+          "headline": "Come for *two nights*",
+          "ctas": [
+            {
+              "label": "Plan a stay",
+              "href": "/#book"
+            }
+          ],
+          "tone": "invert"
+        }
+      ]
+    }
+  ]
+}

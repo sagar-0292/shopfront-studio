@@ -1,6 +1,6 @@
-// The four design directions, as the studio describes them to people.
+// The design directions, as the studio describes them to people.
 // The looks themselves live in the design kit (packages/design-kit).
-export const DIRECTIONS = ['editorial', 'bold', 'cinematic', 'crafted'] as const;
+export const DIRECTIONS = ['editorial', 'bold', 'cinematic', 'crafted', 'poster', 'quiet'] as const;
 export type Direction = (typeof DIRECTIONS)[number];
 
 export type DirectionInfo = {
@@ -33,6 +33,16 @@ export const DESIGNS: Record<Direction, DirectionInfo> = {
     key: 'crafted', name: 'Warm & crafted', feel: 'Like a handmade label: kraft-paper tones, soft serif with hand-drawn underlines, friendly shapes.',
     bestFor: 'Bakeries, organic stores, home décor, handicrafts, clinics, schools', fonts: 'Fraunces & Karla',
     swatches: ['#f3e8d6', '#3b2a1e', '#a8481f', '#5f6f2f'], sample: { id: 'bandra-bake-house', name: 'Bandra Bake House', kind: 'Bakery, Bandra' },
+  },
+  poster: {
+    key: 'poster', name: 'Street poster', feel: 'Like a gig poster: the name in towering capitals edge to edge, flat tomato red, cobalt and yellow, a black ticker.',
+    bestFor: 'Street food, chai and juice bars, streetwear, gyms, music and events, youth brands', fonts: 'Anton & Archivo',
+    swatches: ['#c8321a', '#f4efe6', '#1e3bd6', '#ffd23f'], sample: { id: 'tapri', name: 'Tapri', kind: 'Chai bar, Dadar West' },
+  },
+  quiet: {
+    key: 'quiet', name: 'Quiet luxury', feel: 'Like a gallery: stone and bone white, a fine serif with italics, sage details and very large photographs.',
+    bestFor: 'Villas and boutique stays, spas, skincare, interiors, architects, wellness', fonts: 'Instrument Serif & Inter Tight',
+    swatches: ['#f1eee8', '#161513', '#34422f', '#d6e3d0'], sample: { id: 'saltwater', name: 'Saltwater', kind: 'Villa stay, Alibaug' },
   },
 };
 
