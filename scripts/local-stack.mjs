@@ -176,7 +176,11 @@ http
       const b = JSON.parse(body);
       const blocks = b.messages[0].content;
       lastClaudeRequest = { model: b.model, stream: b.stream, blocks: blocks.map((c) => ({ type: c.type, title: c.title, media: c.source?.media_type, text: c.type === 'text' ? c.text.slice(0, 200) : undefined })), brief: blocks.at(-1).text };
-      const answer = 'Here is the website.\n```json\n' + readFileSync(join(root, 'apps/studio/kits/sites/saltwater/example.json'), 'utf8') + '\n```';
+      // "Fill in the details for me" gets the details it would find on the pretend clinic website (2e).
+      const fillIn = blocks.at(-1).text.includes('FILL-IN-THE-BRIEF');
+      const answer = fillIn
+        ? '```json\n' + JSON.stringify({ about: 'A calm family dental clinic in Bandra, open since 1998.', offer: 'Cleaning – ₹1,200\nRoot canal – from ₹6,500', street: '14 Hill Road', area: 'Bandra West', pincode: '400050', hours: 'Mon – Sat 10am – 7pm', reviews: '“Painless and kind.” – Anjali R., Google review', phone: '+91 98200 55555' }) + '\n```'
+        : 'Here is the website.\n```json\n' + readFileSync(join(root, 'apps/studio/kits/sites/saltwater/example.json'), 'utf8') + '\n```';
       res.writeHead(200, { 'content-type': 'text/event-stream' });
       const send = (type, data) => res.write(`event: ${type}\ndata: ${JSON.stringify({ type, ...data })}\n\n`);
       send('message_start', { message: { usage: { input_tokens: 12000 } } });
@@ -187,6 +191,23 @@ http
     });
   })
   .listen(PORTS.anthropic, '127.0.0.1');
+
+// 2e. A pretend business website, for "Fill in the details for me" (the studio reads it like any website).
+const clinic = (title, body, links = '') => `<!doctype html><html><head><title>${title}</title><meta name="description" content="Family dentists in Bandra since 1998"></head>
+<body><nav><a href="/">Home</a><a href="/about/">About us</a><a href="/treatments/">Treatments &amp; prices</a><a href="/careers/">Careers</a>${links}</nav><main>${body}</main></body></html>`;
+const CLINIC = {
+  '/': clinic('Kapoor Dental, Bandra', '<h1>Gentle dentistry in Bandra</h1><p>A calm family dental clinic on Hill Road.</p><a href="tel:+919820055555">Call us</a>'),
+  '/about/': clinic('About Kapoor Dental', '<h1>Since 1998</h1><p>Dr Kapoor opened the clinic at 14 Hill Road, Bandra West, Mumbai 400050.</p>'),
+  '/treatments/': clinic('Treatments', '<h1>Treatments</h1><ul><li>Cleaning – ₹1,200</li><li>Root canal – from ₹6,500</li></ul>'),
+};
+http
+  .createServer((req, res) => {
+    const page = CLINIC[req.url];
+    if (!page) { res.statusCode = 404; return res.end('Not found'); }
+    res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
+    res.end(page);
+  })
+  .listen(PORTS.business, '127.0.0.1');
 
 // 3. Login server
 const gotrue = spawn(gotrueBin, ['serve'], { env: gotrueEnv, stdio: 'inherit' });

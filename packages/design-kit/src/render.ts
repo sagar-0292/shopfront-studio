@@ -5,6 +5,7 @@ import { section, link, HERO_SPLIT_SIZES, type Ctx } from './sections';
 import { icon } from './icons';
 import { SiteDef, type Direction, type SiteDefT, type SectionT } from './schema';
 import { checkPalette, isDark } from './contrast';
+import { PAIRINGS, styleAttributes, styleDeclarations } from './style';
 
 export type RenderOptions = {
   /** Where kits are served, e.g. "/kits" or "https://kits.shopfront.in". */
@@ -67,12 +68,14 @@ function renderPage(def: SiteDefT, page: Page, opts: RenderOptions): string {
   const hasCommerce = !!def.commerce;
   const ctxBase = { base };
   const designUrl = `${kits}/design/${v.design}`;
-  const sections = page.sections.map((s, index) => section(s, { dir, site: def.site, palette: def.palette, hasCommerce, index, base } satisfies Ctx));
+  const sections = page.sections.map((s, index) => section(s, { dir, site: def.site, palette: def.palette, hasCommerce, index, base, type: def.style?.type } satisfies Ctx));
   const isHome = page.path === '/';
   const title = isHome ? page.title : `${page.title} – ${def.site.name}`;
   const canonical = def.site.url ? def.site.url + page.path : null;
 
-  return '<!doctype html>\n' + html`<html lang="en-IN" class="${`d-${dir}`}" data-sf-smooth data-sf-cursor>
+  const attrs = raw(Object.entries(styleAttributes(def.style)).map(([k, v]) => ` ${k}="${esc(v)}"`).join(''));
+  const preload = def.style?.type ? [PAIRINGS[def.style.type].preload] : PRELOAD[dir];
+  return '<!doctype html>\n' + html`<html lang="en-IN" class="${`d-${dir}`}"${attrs} data-sf-smooth data-sf-cursor>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -88,11 +91,11 @@ ${canonical ? html`<link rel="canonical" href="${canonical}">` : ''}
 <meta property="og:locale" content="en_IN">
 ${canonical ? html`<meta property="og:url" content="${canonical}">` : ''}
 <script>document.documentElement.classList.add('sf-js')</script>
-${PRELOAD[dir].map((f) => html`<link rel="preload" href="${`${designUrl}/fonts/${f}`}" as="font" type="font/woff2" crossorigin>`)}
+${preload.map((f) => html`<link rel="preload" href="${`${designUrl}/fonts/${f}`}" as="font" type="font/woff2" crossorigin>`)}
 ${heroPreload(page, base)}
 ${stylesheet(`${kits}/motion/${v.motion}/sf-motion.css`, opts)}
 ${hasCommerce ? stylesheet(`${kits}/commerce/${v.commerce}/sf-commerce.css`, opts) : ''}
-${stylesheet(`${designUrl}/${dir}.css`, opts)}
+${stylesheet(`${designUrl}/${dir}.css`, opts, String(paletteStyle(def)))}
 ${paletteStyle(def)}
 <script type="module" src="${`${kits}/motion/${v.motion}/sf-motion.js`}"></script>
 ${hasCommerce ? html`<script type="module" src="${`${kits}/commerce/${v.commerce}/sf-commerce.js`}"></script>
@@ -115,9 +118,22 @@ ${footer(def, ctxBase)}
 
 /** A stylesheet, written into the page when its text was given (addresses inside it, like fonts,
  *  are made to point next to where the file lives), otherwise linked. */
-function stylesheet(href: string, opts: RenderOptions): Raw {
-  const css = opts.styles?.[href];
-  if (css === undefined) return html`<link rel="stylesheet" href="${href}">`;
+const FONT_FACE = /@font-face\s*\{[^}]*\}/g;
+/** Drops the @font-face rules of families nothing names (the kit declares all of them; a page uses two or three). */
+export function onlyUsedFonts(css: string, extra = ''): string {
+  const rest = css.replace(FONT_FACE, '') + extra;
+  return css.replace(FONT_FACE, (face) => {
+    const family = /font-family:\s*(["']?)([^;"'}]+)\1/.exec(face)?.[2]?.trim();
+    if (!family) return face;
+    const esc = family.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`(["'])${esc}\\1|[:,]\\s*${esc}\\s*[,;})]`).test(rest) ? face : '';
+  });
+}
+
+function stylesheet(href: string, opts: RenderOptions, extra = ''): Raw {
+  const raw0 = opts.styles?.[href];
+  if (raw0 === undefined) return html`<link rel="stylesheet" href="${href}">`;
+  const css = onlyUsedFonts(raw0, extra);
   const dir = href.slice(0, href.lastIndexOf('/') + 1);
   return raw(`<style>${css.replace(/url\((['"]?)\.\//g, `url($1${dir}`).replace(/<\/style/gi, '<\\/style')}</style>`);
 }
@@ -202,12 +218,15 @@ function heroPreload(page: Page, base: string): Raw | '' {
 }
 
 function paletteStyle(def: SiteDefT): Raw | '' {
-  const p = def.palette;
-  if (!p || !Object.keys(p).length) return '';
+  const p = def.palette ?? {};
+  const style = styleDeclarations(def.style);
+  if (!Object.keys(p).length && !style.length) return '';
   const map: Record<string, string> = { bg: '--c-bg', surface: '--c-surface', ink: '--c-ink', muted: '--c-muted', line: '--c-line', accent: '--c-accent', accentInk: '--c-accent-ink' };
   const decls = [...Object.entries(p).filter(([, v]) => v).map(([k, v]) => `${map[k]}:${v}`),
     // Gradient and glow backdrops are tinted more gently on a dark page, so light text stays readable.
-    ...(p.bg && isDark(p.bg) ? ['--bd-mix:18%', 'color-scheme:dark'] : [])].join(';');
+    ...(p.bg && isDark(p.bg) ? ['--bd-mix:18%', 'color-scheme:dark'] : []),
+    // The site's own type, scale, corners and spacing. Values come from fixed lists, so this is safe to inline.
+    ...style].join(';');
   // Values are validated as #rrggbb by the schema, so this is safe to inline.
   return raw(`<style>.d-${def.direction}{${decls}}</style>`);
 }

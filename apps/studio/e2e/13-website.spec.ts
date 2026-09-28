@@ -29,11 +29,40 @@ test('a project page leads to creating its website, once a design is chosen', as
   await expect(page.getByText('Design set to Quiet luxury.')).toBeVisible();
 });
 
+test('“Fill in the details for me” reads their current website and fills in the empty details', async ({ page }) => {
+  await logIn(page, FOUNDER);
+  await openProject(page, 'Kapoor Dental');
+  await page.getByRole('link', { name: 'Create website' }).click();
+  // Instagram can't be read; that's explained in plain words.
+  await page.getByLabel('Their current website').fill('instagram.com/kapoordental');
+  await page.getByRole('button', { name: 'Fill in the details for me' }).click();
+  await expect(alertIn(page)).toContainText('Instagram and Facebook pages can only be read when logged in');
+
+  // Something the team already typed.
+  await sql(`update sites set website_brief = '{"audience": "Families in Bandra"}' where name = 'Kapoor Dental'`);
+  await page.reload();
+  await page.getByLabel('Their current website').fill('http://127.0.0.1:54329/');
+  await page.getByRole('button', { name: 'Fill in the details for me' }).click();
+  await expect(page.getByText(/Filled in: What the business does, What they sell, Street address, Area, PIN code, Opening hours, Reviews\./)).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText('Read 3 pages of their website.')).toBeVisible();
+  // The fields show what was found; what the team typed is kept.
+  await expect(page.getByLabel(/What does the business do/)).toHaveValue('A calm family dental clinic in Bandra, open since 1998.');
+  await expect(page.getByLabel('Street address')).toHaveValue('14 Hill Road');
+  await expect(page.getByLabel(/Who are their customers/)).toHaveValue('Families in Bandra');
+  await expect(page.getByLabel('Their current website')).toHaveValue('http://127.0.0.1:54329/');
+  // Claude was sent the pages that matter (not the careers page), as text.
+  const sent = await (await fetch('http://127.0.0.1:54328/last')).json() as { brief: string };
+  expect(sent.brief).toContain('Root canal – from ₹6,500');
+  expect(sent.brief).toContain('14 Hill Road, Bandra West');
+  expect(sent.brief).toContain('Contact links: tel:+919820055555');
+  expect(sent.brief).not.toContain('/careers/ (');
+});
+
 test('the team describes the business and uploads the logo; the brief for Claude includes both', async ({ page }) => {
   await logIn(page, FOUNDER);
   await openProject(page, 'Kapoor Dental');
   await page.getByRole('link', { name: 'Create website' }).click();
-  await expect(page.getByText('Look: Quiet luxury')).toBeVisible();
+  await expect(page.getByRole('status').filter({ hasText: 'Look: Quiet luxury' })).toBeVisible();
 
   await page.getByLabel(/What does the business do/).fill('A calm family dental clinic in Bandra, open since 1998, known for painless root canals.');
   await page.getByLabel('Street address').fill('14 Hill Road');
@@ -41,7 +70,7 @@ test('the team describes the business and uploads the logo; the brief for Claude
   await page.getByLabel('PIN code').fill('400050');
   await page.getByLabel('City').fill('Mumbai');
   await page.getByLabel('Opening hours').fill('Mon – Sat 10am – 7pm');
-  await page.getByRole('button', { name: 'Save' }).click();
+  await page.getByRole('button', { name: 'Save', exact: true }).click();
   await expect(page.getByText('Saved. The brief for Claude below now includes these details.')).toBeVisible();
 
   // A two-colour logo, made in the browser.
@@ -78,6 +107,8 @@ test('the team describes the business and uploads the logo; the brief for Claude
   expect(brief).toMatch(/Logo colours: #1f4e5f/);
   expect(brief).toContain('price-list.txt');
   expect(brief).toContain('This site takes bookings');
+  expect(brief).toContain('- Their current website (for reference; the new one replaces it): http://127.0.0.1:54329/');
+  expect(brief).toContain('## Art direction'); // new projects are on design kit 2.0
   await expect(page.getByRole('button', { name: 'Copy the brief' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Open Claude ↗' })).toHaveAttribute('href', 'https://claude.ai/new');
 

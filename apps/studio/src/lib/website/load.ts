@@ -19,7 +19,7 @@ export type FileMeta = {
   width: number | null; height: number | null; colours: string[]; size: number; has_small: boolean;
 };
 
-export const EMPTY_BRIEF: BriefInput = { about: '', offer: '', audience: '', street: '', area: '', city: '', state: '', pincode: '', hours: '', instagram: '', reviews: '', notes: '' };
+export const EMPTY_BRIEF: BriefInput = { about: '', offer: '', audience: '', street: '', area: '', city: '', state: '', pincode: '', hours: '', instagram: '', reviews: '', notes: '', website: '' };
 
 /** Everything the website builder needs about one project, read with the person's own permissions. */
 export async function loadProjectWebsite(db: Db, siteId: string, orgId: string) {

@@ -3,7 +3,7 @@
 import { DESIGNS, type Direction } from '@/lib/designs';
 import { label } from '@/lib/catalog';
 import { SITE_TYPES } from '@/lib/catalog';
-import { RECIPES, SECTION_REFERENCE } from './format';
+import { RECIPES, SECTION_REFERENCE, STYLE_REFERENCE } from './format';
 
 /** What the team tells us about the business (saved on the project). */
 export type BriefInput = {
@@ -19,6 +19,8 @@ export type BriefInput = {
   instagram: string;
   reviews: string;
   notes: string;
+  /** Their current website, if they have one (read by "Fill in the details for me"). */
+  website: string;
 };
 
 export type BriefFacts = {
@@ -58,7 +60,8 @@ export type Material = {
   documents: { filename: string; label: string }[];
 };
 
-export function buildBrief(direction: Direction, facts: BriefFacts, input: BriefInput, example: unknown, material: Material): string {
+/** `pairings` is the design kit's type pairing list (from 2.0), or null when the project's kit has no art direction. */
+export function buildBrief(direction: Direction, facts: BriefFacts, input: BriefInput, example: unknown, material: Material, pairings: string | null = null): string {
   const d = DESIGNS[direction];
   const sells = facts.siteTypes.some((t) => ['online_store', 'whatsapp_catalogue', 'marketplace'].includes(t));
   const books = facts.siteTypes.includes('bookings');
@@ -68,14 +71,14 @@ website for the business below. Your answer is read by a program, so reply with 
 ## The business
 - Name: ${facts.name}
 ${line('Kind of business', facts.businessKind)}${line('What they do', input.about)}${line('What they sell or offer (with prices if known)', input.offer)}${line('Who their customers are', input.audience)}- City: ${[input.area, facts.city, facts.state].filter(Boolean).join(', ')}
-${line('Address', [input.street, input.area, facts.city, input.pincode].filter(Boolean).join(', '))}${line('Opening hours', input.hours)}${line('Phone', facts.phone)}${line('WhatsApp', facts.whatsapp)}${line('Instagram', input.instagram)}${line('Real customer reviews (use only these, word for word)', input.reviews)}${line('Anything else', input.notes)}- Kind of website: ${facts.siteTypes.map((t) => (t === 'other' && facts.siteTypeOther ? facts.siteTypeOther : label(SITE_TYPES, t))).join(', ')}
+${line('Address', [input.street, input.area, facts.city, input.pincode].filter(Boolean).join(', '))}${line('Opening hours', input.hours)}${line('Phone', facts.phone)}${line('WhatsApp', facts.whatsapp)}${line('Instagram', input.instagram)}${line('Their current website (for reference; the new one replaces it)', input.website)}${line('Real customer reviews (use only these, word for word)', input.reviews)}${line('Anything else', input.notes)}- Kind of website: ${facts.siteTypes.map((t) => (t === 'other' && facts.siteTypeOther ? facts.siteTypeOther : label(SITE_TYPES, t))).join(', ')}
 - Language: ${facts.languages.includes('hi') ? 'English, with a few natural Hindi words where they feel right' : 'Indian English'}
 
 ${materialSection(material)}## The look: ${d.name}
 ${d.feel}
-Fonts ${d.fonts}; colours, spacing and animation are built in.
+${pairings ? 'Default fonts' : 'Fonts'} ${d.fonts}; colours, spacing and animation are built in.
 ${RECIPES[direction]}
-
+${pairings ? `\n## Art direction (fonts, scale, shapes, photo grading)\n${STYLE_REFERENCE(pairings)}\n` : ''}
 ## What makes it high-end (follow all of these)
 1. Specific, not generic. Use real details from the business above: places, ingredients, materials, names, times.
    Never write filler like "quality you can trust", "one-stop shop", "we are passionate", "best in town", "welcome to our website".
@@ -98,7 +101,7 @@ ${sells ? '8. This site sells online: include "products" (every real product or 
   "tagline": "one line (max 160)",
   "description": "what the business is, for Google (40-300 characters)",
   "businessType": "one schema.org type, e.g. Bakery, Restaurant, JewelryStore, CafeOrCoffeeShop, LodgingBusiness, Store",
-  "announcement": {"text": "optional slim bar at the top, e.g. a delivery offer", "href": "/shop/"},
+${pairings ? '  "style": {"type": "…", "scale": "…", "headlineCase": "…", "shape": "…", "space": "…", "buttons": "…", "photos": "…"},\n' : ''}  "announcement": {"text": "optional slim bar at the top, e.g. a delivery offer", "href": "/shop/"},
   "nav": [{"label": "Shop", "href": "/shop/"}, ... up to 5],
   "pages": [{"path": "/", "title": "…", "description": "…", "sections": [ … ]}, {"path": "/shop/", …}],
   "products": [{"name", "description", "price" (rupees), "mrp"? (rupees, only if discounted), "category",

@@ -11,8 +11,10 @@ import { compareVersions, manifest } from '@/lib/kits';
 import { DESIGNS } from '@/lib/designs';
 import { buildBrief } from '@/lib/website/brief';
 import { exampleFor, loadProjectWebsite } from '@/lib/website/load';
-import { buildSite, generateWebsite, removeFile, saveBrief, uploadFile, useLatestDesignKit } from './actions';
+import { buildSite, fillInBrief, generateWebsite, pasteFillIn, removeFile, saveBrief, saveWebsite, uploadFile, useLatestDesignKit } from './actions';
 import { claudeConnected } from '@/lib/website/claude';
+import { fillInPrompt } from '@/lib/website/autofill';
+import { styleGuide } from '@/lib/website/render';
 
 export const metadata: Metadata = { title: 'Website' };
 // Claude takes 1–3 minutes to write a whole website (Vercel allows up to 5).
@@ -50,11 +52,17 @@ export default async function WebsitePage({ params }: PageProps<'/studio/project
       logoColours: logo?.colours ?? [],
       photos: photos.map((f) => ({ name: f.name, label: f.label })),
       documents: documents.map((f) => ({ filename: f.filename, label: f.label })),
-    })
+    }, await styleGuide(site.design_kit_version, direction))
     : null;
   const preview = `/studio/projects/${id}/website/preview/`;
   const website = site.website;
   const connected = claudeConnected();
+  // Copy-and-paste fill-in: claude.ai visits the website itself and reads the attached documents.
+  const fillDocs = documents.filter((f) => ['application/pdf', 'text/plain'].includes(f.mime)).map((f) => f.filename);
+  const fillText = !connected && (brief.website || fillDocs.length)
+    ? fillInPrompt({ name: site.name, url: brief.website || null, pages: null, documents: fillDocs })
+    : null;
+  const briefKey = String((site.website_brief as { filled_at?: string } | null)?.filled_at ?? 'typed');
 
   return (
     <div className="max-w-4xl space-y-6">
@@ -62,7 +70,7 @@ export default async function WebsitePage({ params }: PageProps<'/studio/project
       <PageHeader
         eyebrow={site.name}
         title="Website"
-        description="Tell us about the business, add their logo and material, and Claude creates the website in the chosen look. Check the preview, then download it for Netlify."
+        description="Add what the business already has (logo, photos, current website, brochures), let Claude fill in the details, and Claude creates the website in the chosen look. Check the preview, then download it for Netlify."
         action={website ? <Badge tone="good">Built {formatDate(site.website_built_at!)}</Badge> : <Badge tone="warn">Not built yet</Badge>}
       />
 
@@ -77,15 +85,89 @@ export default async function WebsitePage({ params }: PageProps<'/studio/project
       )}
       {behind && (
         <Card>
-          <CardTitle title={`Design kit ${latestDesign} is available`} description="It adds the business’s own logo in the header. This project stays on its version until the agency owner moves it." />
+          <CardTitle title={`Design kit ${latestDesign} is available`} description="It lets Claude art-direct each website: 21 font pairings, headline sizes, shapes, button styles and photo colour grading chosen for this business. This project stays on its version until the agency owner moves it." />
           {isOwner
             ? <ActionForm action={useLatestDesignKit} submitLabel={`Use design kit ${latestDesign}`}><input type="hidden" name="id" value={id} /></ActionForm>
             : <p className="text-sm text-muted">Ask the agency owner to move this project to {latestDesign}.</p>}
         </Card>
       )}
 
-      <Step n={1} title="About the business" done={!!brief.about} description="Facts only you know. Phone, WhatsApp and email come from the client details on the project page.">
-        <ActionForm action={saveBrief} submitLabel="Save">
+      <Step n={1} title="What they already have (optional)" done={files.length > 0 || !!brief.website}
+        description="Their logo goes in the header and its colours become the website’s colours. Their photos are used alongside stock photos. Their current website, brochures, menus and price lists fill in step 2 for you.">
+        <MaterialUploader siteId={id} action={uploadFile} />
+        {files.length > 0 && (
+          <ul className="mt-5 divide-y divide-line rounded-xl border border-line" aria-label="Uploaded material">
+            {files.map((f) => (
+              <li key={f.id} className="flex flex-wrap items-center gap-4 p-3">
+                {f.kind !== 'document'
+                  // eslint-disable-next-line @next/next/no-img-element -- private preview thumbnail, served by the studio
+                  ? <img src={`${preview}img/own/${f.name}.webp`} alt="" width={56} height={56} className="size-14 rounded-lg border border-line bg-card object-contain" />
+                  : <span aria-hidden className="grid size-14 place-items-center rounded-lg border border-line text-xs font-bold text-muted">{f.filename.split('.').pop()?.toUpperCase()}</span>}
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-medium">{f.kind === 'logo' ? 'Logo' : f.kind === 'photo' ? `Photo “${f.name}”` : f.filename}</p>
+                  <p className="truncate text-xs text-muted">{[f.label, kb(f.size), f.width ? `${f.width}×${f.height}` : ''].filter(Boolean).join(' · ')}</p>
+                  {f.colours.length > 0 && f.kind === 'logo' && (
+                    <p className="mt-1 flex items-center gap-1 text-xs text-muted">Colours:{f.colours.map((c) => <span key={c} title={c} className="inline-block size-4 rounded-full border border-line" style={{ background: c }} />)}</p>
+                  )}
+                </div>
+                <ActionForm action={removeFile} submitLabel="Remove" variant="ghost" className="flex items-center gap-2">
+                  <input type="hidden" name="id" value={id} />
+                  <input type="hidden" name="file_id" value={f.id} />
+                </ActionForm>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="mt-6 rounded-xl border border-line bg-accent-soft/40 p-4">
+          <h3 className="font-semibold">Fill in the details for me</h3>
+          <p className="mt-1 text-sm text-muted">
+            Claude reads their current website (the home page and pages like About, Menu and Contact) and any PDF or text documents
+            uploaded above, then fills in step 2. Anything you’ve already typed is kept. You check it before creating the website.
+          </p>
+          {connected ? (
+            <ActionForm action={fillInBrief} submitLabel="Fill in the details for me" pendingLabel="Reading their website and documents… about 30 seconds" className="mt-4 space-y-4">
+              <input type="hidden" name="id" value={id} />
+              <Field label="Their current website (if they have one)" htmlFor="website" hint="Instagram and Facebook pages can’t be read: paste their bio into step 2 instead.">
+                <Input id="website" name="website" inputMode="url" maxLength={300} defaultValue={brief.website} placeholder="mithaimarket.in" />
+              </Field>
+            </ActionForm>
+          ) : (
+            <div className="mt-4 space-y-4">
+              <ActionForm action={saveWebsite} submitLabel="Use this address" variant="ghost">
+                <input type="hidden" name="id" value={id} />
+                <Field label="Their current website (if they have one)" htmlFor="website" hint="Instagram and Facebook pages can’t be read: paste their bio into step 2 instead.">
+                  <Input id="website" name="website" inputMode="url" maxLength={300} defaultValue={brief.website} placeholder="mithaimarket.in" />
+                </Field>
+              </ActionForm>
+              {fillText && (
+                <>
+                  <ol className="list-decimal space-y-1 pl-5 text-sm">
+                    <li>Click <strong>Copy the request</strong>, then <strong>Open Claude</strong> (start a new chat).</li>
+                    {documents.length > 0 && <li>Click <strong>Download material</strong> and attach the documents to the chat.</li>}
+                    <li>Paste, send, then copy Claude’s whole reply and paste it below.</li>
+                  </ol>
+                  <div className="flex flex-wrap gap-3">
+                    <CopyButton text={fillText} label="Copy the request" />
+                    <a className="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-semibold hover:border-primary/40" href="https://claude.ai/new" target="_blank" rel="noopener">Open Claude ↗</a>
+                    {documents.length > 0 && <a className="inline-flex items-center rounded-full border border-line px-4 py-2 text-sm font-semibold hover:border-primary/40" href={`/studio/projects/${id}/website/material`}>Download material (.zip)</a>}
+                  </div>
+                  <ActionForm action={pasteFillIn} submitLabel="Fill in step 2">
+                    <input type="hidden" name="id" value={id} />
+                    <Field label="Claude’s reply with the details" htmlFor="fill-answer">
+                      <Textarea id="fill-answer" name="answer" required rows={5} className="font-mono text-xs" placeholder='{"about": "…", "offer": "…"}' />
+                    </Field>
+                  </ActionForm>
+                </>
+              )}
+            </div>
+          )}
+        </div>
+      </Step>
+
+      <Step n={2} title="About the business" done={!!brief.about} description="Check what was filled in and add facts only you know. Phone, WhatsApp and email come from the client details on the project page.">
+        {/* Re-created after each fill-in, so the fields show what "Fill in the details for me" found. */}
+        <ActionForm key={briefKey} action={saveBrief} submitLabel="Save">
           <input type="hidden" name="id" value={id} />
           <Field label="What does the business do? What makes it special?" htmlFor="about">
             <Textarea id="about" name="about" required rows={4} maxLength={2000} defaultValue={brief.about}
@@ -121,38 +203,10 @@ export default async function WebsitePage({ params }: PageProps<'/studio/project
         </ActionForm>
       </Step>
 
-      <Step n={2} title="The business’s own material (optional)" done={files.length > 0}
-        description="Their logo goes in the header and its colours become the website’s colours. Their photos are used alongside stock photos. Brochures, menus and price lists are read by Claude for facts and wording.">
-        <MaterialUploader siteId={id} action={uploadFile} />
-        {files.length > 0 && (
-          <ul className="mt-5 divide-y divide-line rounded-xl border border-line" aria-label="Uploaded material">
-            {files.map((f) => (
-              <li key={f.id} className="flex flex-wrap items-center gap-4 p-3">
-                {f.kind !== 'document'
-                  // eslint-disable-next-line @next/next/no-img-element -- private preview thumbnail, served by the studio
-                  ? <img src={`${preview}img/own/${f.name}.webp`} alt="" width={56} height={56} className="size-14 rounded-lg border border-line bg-card object-contain" />
-                  : <span aria-hidden className="grid size-14 place-items-center rounded-lg border border-line text-xs font-bold text-muted">{f.filename.split('.').pop()?.toUpperCase()}</span>}
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium">{f.kind === 'logo' ? 'Logo' : f.kind === 'photo' ? `Photo “${f.name}”` : f.filename}</p>
-                  <p className="truncate text-xs text-muted">{[f.label, kb(f.size), f.width ? `${f.width}×${f.height}` : ''].filter(Boolean).join(' · ')}</p>
-                  {f.colours.length > 0 && f.kind === 'logo' && (
-                    <p className="mt-1 flex items-center gap-1 text-xs text-muted">Colours:{f.colours.map((c) => <span key={c} title={c} className="inline-block size-4 rounded-full border border-line" style={{ background: c }} />)}</p>
-                  )}
-                </div>
-                <ActionForm action={removeFile} submitLabel="Remove" variant="ghost" className="flex items-center gap-2">
-                  <input type="hidden" name="id" value={id} />
-                  <input type="hidden" name="file_id" value={f.id} />
-                </ActionForm>
-              </li>
-            ))}
-          </ul>
-        )}
-      </Step>
-
       <Step n={3} title="Create the website" done={!!website}
-        description="Claude writes every page in the chosen look from the details above, the uploaded material and a finished example of the look. The studio then checks it, finds real photos and builds it.">
+        description="Claude art-directs and writes every page in the chosen look from the details above, the uploaded material and a finished example of the look: its own fonts, sizes, shapes and photo colours for this business. The studio then checks it, finds real photos and builds it.">
         {!briefText ? (
-          <p className="text-sm text-muted">{direction ? 'Fill in step 1 first.' : 'Choose a design and fill in step 1 first.'}</p>
+          <p className="text-sm text-muted">{direction ? 'Fill in step 2 first.' : 'Choose a design and fill in step 2 first.'}</p>
         ) : (
           <div className="space-y-5">
             {connected ? (

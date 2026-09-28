@@ -10,7 +10,7 @@
   --display-weight: 850; --display-tracking: -0.035em; --display-leading: 0.9; --display-case: none;
   --eyebrow-tracking: 0.12em; --radius-card: 22px; --radius-btn: 999px; --radius-media: 22px;
   --section-pad: clamp(64px, 9vw, 130px); --hero-scale: 1.05;
-  --wm-char: 0.62; --wm-case: uppercase; --wm-tracking: -0.02em; --wm-ink: #fff4e0;
+  --wm-char: 0.62; --wm-case: uppercase; --wm-track: -0.02; --wm-ink: #fff4e0;
   --frame: #151313; --gap: clamp(6px, 0.9vw, 12px); --panel-radius: clamp(20px, 3vw, 40px);
   background: var(--frame);
 }

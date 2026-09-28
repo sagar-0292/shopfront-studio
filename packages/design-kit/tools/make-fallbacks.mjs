@@ -22,9 +22,31 @@ const FAMILIES = [
   ['Instrument Serif', 'instrument-serif-normal.woff2', 'serif'],
   ['Inter Tight', 'inter-tight-normal.woff2', 'sans'],
   ['Mona Sans', 'mona-sans-normal.woff2', 'sans'],
+  ['Bodoni Moda', 'bodoni-moda-normal.woff2', 'serif'],
+  ['Hanken Grotesk', 'hanken-grotesk-normal.woff2', 'sans'],
+  ['Playfair Display', 'playfair-display-normal.woff2', 'serif'],
+  ['Source Sans 3', 'source-sans-3-normal.woff2', 'sans'],
+  ['Libre Caslon Display', 'libre-caslon-display-normal.woff2', 'serif'],
+  ['Libre Caslon Text', 'libre-caslon-text-normal.woff2', 'serif'],
+  ['Newsreader', 'newsreader-normal.woff2', 'serif'],
+  ['IBM Plex Mono', 'ibm-plex-mono-normal.woff2', 'mono'],
+  ['Gloock', 'gloock-normal.woff2', 'serif'],
+  ['Figtree', 'figtree-normal.woff2', 'sans'],
+  ['Young Serif', 'young-serif-normal.woff2', 'serif'],
+  ['Onest', 'onest-normal.woff2', 'sans'],
+  ['DM Serif Display', 'dm-serif-display-normal.woff2', 'serif'],
+  ['Italiana', 'italiana-normal.woff2', 'serif'],
+  ['Space Grotesk', 'space-grotesk-normal.woff2', 'sans'],
+  ['Space Mono', 'space-mono-normal.woff2', 'mono'],
+  ['Unbounded', 'unbounded-normal.woff2', 'sans'],
+  ['Bebas Neue', 'bebas-neue-normal.woff2', 'sans'],
+  ['Libre Franklin', 'libre-franklin-normal.woff2', 'sans'],
+  ['Epilogue', 'epilogue-normal.woff2', 'sans'],
+  ['Outfit', 'outfit-normal.woff2', 'sans'],
+  ['Big Shoulders Display', 'big-shoulders-display-normal.woff2', 'sans'],
 ];
 // Built-in fonts that share Arial's / Times New Roman's measurements on most devices.
-const LOCAL = { sans: ["local('Arial')", "local('Helvetica')", "local('Liberation Sans')", "local('Roboto')"], serif: ["local('Times New Roman')", "local('Times')", "local('Liberation Serif')", "local('Noto Serif')"] };
+const LOCAL = { mono: ["local('Courier New')", "local('Menlo')", "local('Liberation Mono')", "local('Roboto Mono')"], sans: ["local('Arial')", "local('Helvetica')", "local('Liberation Sans')", "local('Roboto')"], serif: ["local('Times New Roman')", "local('Times')", "local('Liberation Serif')", "local('Noto Serif')"] };
 const SAMPLE = 'The quick brown fox jumps over the lazy dog. Sweets made fresh every morning, 1962 – ₹1,25,000';
 
 const browser = await chromium.launch();

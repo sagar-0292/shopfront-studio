@@ -1,10 +1,20 @@
 import { html, raw, emph, safeHref, cls, esc, type Raw } from './html';
 import { backgroundColours } from './contrast';
 import { icon } from './icons';
+import { DEFAULT_PAIRING } from './style';
+import { METRIC_CHARS, WIDTHS } from './metrics';
+
+/** How wide a name is, in em, set in capitals in the headline font (unknown characters count as an average letter). */
+export function nameWidth(name: string, type: string): number {
+  const w = WIDTHS[type];
+  if (!w) return [...name].length * 0.6;
+  const avg = w.slice(0, 26).reduce((a, b) => a + b, 0) / 26;
+  return [...name.toUpperCase()].reduce((sum, c) => { const i = METRIC_CHARS.indexOf(c); return sum + (i >= 0 ? w[i] : avg); }, 0);
+}
 import type { z } from 'zod';
 import type { Direction, MediaT, SectionT, SiteDefT, Image } from './schema';
 
-export type Ctx = { dir: Direction; site: SiteDefT['site']; palette?: SiteDefT['palette']; hasCommerce: boolean; index: number; base: string };
+export type Ctx = { dir: Direction; site: SiteDefT['site']; palette?: SiteDefT['palette']; hasCommerce: boolean; index: number; base: string; type?: string };
 
 /** Site paths ("/shop/") are prefixed with where the site is served ("/kits/sites/ember"). */
 export function link(ctx: Pick<Ctx, 'base'>, href: string): string {
@@ -130,7 +140,7 @@ function sectionInner(s: SectionT, ctx: Ctx): Raw {
         // The name is decoration here (the logo and headline already say it), so screen readers skip it.
         const name = ctx.site.name;
         return html`<section class="d-hero d-hero--wordmark" id="${id}">
-          <p class="d-wordmark" aria-hidden="true" style="${`--chars:${Math.max(3, [...name].length)}`}">${name}</p>
+          <p class="d-wordmark" aria-hidden="true" style="${`--chars:${Math.max(3, [...name].length)};--wm-em:${Math.max(1.5, nameWidth(name, ctx.type ?? DEFAULT_PAIRING[ctx.dir])).toFixed(3)}`}">${name}</p>
           <div class="d-wordmark-media">${media(s.media, ctx, `${id}-media`, { eager, sizes: '100vw' })}${s.sticker ? sticker(s.sticker) : ''}</div>
           <div class="d-wrap d-wordmark-copy">
             <div>${s.eyebrow ? html`<p class="d-eyebrow" data-sf-reveal="fade">${s.eyebrow}</p>` : ''}${H}</div>

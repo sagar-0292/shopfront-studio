@@ -1,6 +1,7 @@
 // The page definition: what the AI Builder (Phase 3) produces and a human can
 // edit. Everything is validated before a page is built.
 import { z } from 'zod';
+import { BUTTONS, PAIRING_IDS, PHOTO_TONES, SCALES, SHAPES, SPACES } from './style';
 
 export const DIRECTIONS = ['editorial', 'bold', 'cinematic', 'crafted', 'poster', 'quiet', 'block'] as const;
 export type Direction = (typeof DIRECTIONS)[number];
@@ -108,6 +109,11 @@ export const SiteDef = z.object({
   }),
   /** Photographers whose photos the site uses (shown in the footer). */
   credits: z.array(z.object({ name: text(80), url: z.string().regex(/^https:\/\/[^\s"'<>]+$/).max(300), source: z.enum(['Pexels', 'Unsplash']) })).max(80).default([]),
+  /** Art direction for this site: its own type pairing, scale, corners, spacing, buttons and photo grading. */
+  style: z.object({
+    type: z.enum(PAIRING_IDS).optional(), scale: z.enum(SCALES).optional(), headlineCase: z.enum(['auto', 'upper', 'normal']).optional(),
+    shape: z.enum(SHAPES).optional(), space: z.enum(SPACES).optional(), buttons: z.enum(BUTTONS).optional(), photos: z.enum(PHOTO_TONES).optional(),
+  }).optional(),
   palette: z.object({ bg: hex, surface: hex, ink: hex, muted: hex, line: hex, accent: hex, accentInk: hex }).partial().optional(),
   /** A slim bar above the header: an offer, free delivery, a new launch. */
   announcement: z.object({ text: text(100), href: href.optional() }).optional(),

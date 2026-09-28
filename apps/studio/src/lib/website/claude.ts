@@ -56,7 +56,7 @@ async function readStream(body: ReadableStream<Uint8Array>) {
   return { text, input, output, stop };
 }
 
-export async function askClaude(brief: string, attachments: Attachment[] = [], f: typeof fetch = fetch): Promise<ClaudeReply> {
+export async function askClaude(brief: string, attachments: Attachment[] = [], f: typeof fetch = fetch, maxTokens = 32000): Promise<ClaudeReply> {
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) throw new UserError('Automatic building isn’t connected yet: add ANTHROPIC_API_KEY to the server settings. Or use the copy-and-paste route below.');
   const model = process.env.ANTHROPIC_MODEL || DEFAULT_MODEL;
@@ -67,7 +67,7 @@ export async function askClaude(brief: string, attachments: Attachment[] = [], f
     r = await f(`${base}/v1/messages`, {
       method: 'POST',
       headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-      body: JSON.stringify({ model, max_tokens: 32000, stream: true, messages: [{ role: 'user', content: content(brief, attachments) }] }),
+      body: JSON.stringify({ model, max_tokens: maxTokens, stream: true, messages: [{ role: 'user', content: content(brief, attachments) }] }),
       signal: AbortSignal.timeout(280_000),
     });
   } catch {

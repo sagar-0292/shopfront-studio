@@ -6,7 +6,9 @@ import { unzipSync, strFromU8 } from 'fflate';
 import { Answer, SECTION_REFERENCE } from '@/lib/website/format';
 import { buildWebsite, parseAnswer, parseHours, type BuildInput } from '@/lib/website/build';
 import { buildBrief, type BriefFacts, type BriefInput } from '@/lib/website/brief';
-import { renderPages, websiteZip } from '@/lib/website/render';
+import { renderPages, styleGuide, usedFonts, websiteZip } from '@/lib/website/render';
+import { fillInPrompt, isFillInPrompt, mergeFillIn, parseFillIn } from '@/lib/website/autofill';
+import { isPrivateAddress, pageText, pickPages, websiteUrl } from '@/lib/website/read-site';
 import { DESIGNS, DIRECTIONS } from '@/lib/designs';
 import { manifest } from '@/lib/kits';
 
@@ -25,7 +27,7 @@ const fakePexels: typeof fetch = async (url) => {
 };
 
 const facts: BriefFacts = { name: 'Test Shop', businessKind: 'Sweet shop', siteTypeOther: '', city: 'Mumbai', state: 'Maharashtra', phone: '+919820012345', whatsapp: '+919820012345', email: 'hi@test.example', siteTypes: ['online_store', 'bookings'], languages: ['en'] };
-const input: BriefInput = { about: 'A family sweet shop in Dadar.', offer: 'Kaju katli ₹1,100/kg', audience: '', street: '12 Ranade Road', area: 'Dadar West', city: '', state: '', pincode: '400028', hours: 'Mon – Sat 10am – 8:30pm\nSun 11:00-14:00', instagram: '@testshop', reviews: '', notes: '' };
+const input: BriefInput = { about: 'A family sweet shop in Dadar.', offer: 'Kaju katli ₹1,100/kg', audience: '', street: '12 Ranade Road', area: 'Dadar West', city: '', state: '', pincode: '400028', hours: 'Mon – Sat 10am – 8:30pm\nSun 11:00-14:00', instagram: '@testshop', reviews: '', notes: '', website: '' };
 const base = (answer: unknown, extra: Partial<BuildInput> = {}): BuildInput => ({
   answer: Answer.parse(answer), direction: 'bold', site: { id: '11111111-1111-1111-1111-111111111111', name: 'Test Shop' },
   facts, input, own: [], payments: null, fetch: fakePexels, ...extra,
@@ -180,6 +182,35 @@ describe('the brief', () => {
     expect(plain).not.toContain('own material');
   });
 
+  it('from design kit 2.0, Claude art-directs the site: the brief lists the type pairings, and its choice is built', async () => {
+    const guide = await styleGuide(versions().design, 'poster');
+    expect(guide).toMatch(/^ {2}vogue {6}Bodoni Moda \+ Hanken Grotesk: /m);
+    expect(guide).toContain('The look\'s own pairing is "anton"');
+    expect(await styleGuide('1.3.0', 'poster')).toBeNull(); // older kits have no art direction
+    const text = buildBrief('poster', facts, input, example('poster'), { logoColours: [], photos: [], documents: [] }, guide);
+    expect(text).toContain('## Art direction');
+    expect(text).toContain('"style": {"type": "…"');
+    expect(buildBrief('poster', facts, input, {}, { logoColours: [], photos: [], documents: [] })).not.toContain('Art direction');
+
+    const styled = { ...example('poster'), style: { type: 'unbounded', scale: 'huge', shape: 'round', buttons: 'pill', photos: 'duotone' } };
+    const w = await buildWebsite(base(styled, { direction: 'poster', styled: true }));
+    const home = (await renderPages(w, versions(), { base: '', noindex: false }))['/index.html'];
+    expect(home).toMatch(/<html[^>]* data-type="unbounded"[^>]* data-buttons="pill"[^>]* data-photos="duotone"/);
+    expect(home).toContain('unbounded-normal.woff2');
+    // A project still on an older kit keeps the look's fonts, and is told how to get the new ones.
+    const old = await buildWebsite(base(styled, { direction: 'poster', styled: false }));
+    expect(old.def.style).toBeUndefined();
+    expect(old.notes.join(' ')).toMatch(/older than 2\.0/);
+    // A choice that isn't in the kit is explained by the design kit.
+    const bad = await buildWebsite(base({ ...styled, style: { type: 'comic-sans' } }, { direction: 'poster', styled: true }));
+    await expect(renderPages(bad, versions(), { base: '', noindex: false })).rejects.toThrow(/style.*type/);
+  });
+
+  it('the download carries only the fonts the website uses', () => {
+    const css = '@font-face{font-family:"Anton";src:url(./fonts/anton-normal.woff2)}@font-face{font-family:Bodoni Moda;src:url(./fonts/bodoni-moda-normal.woff2)}@font-face{font-family:"Inter Tight";src:url(./fonts/inter-tight-normal.woff2)}@font-face{font-family:"Inter";src:url(./fonts/inter-normal.woff2)}.d-poster{--f-display:"Anton","Anton Fallback",sans-serif}';
+    expect(usedFonts(css, ['<style>.d-poster{--f-body:\'Inter Tight\', \'Inter Tight Fallback\', system-ui}</style>']).sort()).toEqual(['anton-normal.woff2', 'inter-tight-normal.woff2']);
+  });
+
   it('every sample example is valid in Claude’s format', () => {
     for (const d of DIRECTIONS) {
       const p = join(kits, 'sites', DESIGNS[d].sample.id, 'example.json');
@@ -221,5 +252,54 @@ describe('asking Claude automatically', () => {
     await expect(askClaude('b', [], cut)).rejects.toThrow(/longer than one answer allows/);
     delete process.env.ANTHROPIC_API_KEY;
     await expect(askClaude('b', [], cut)).rejects.toThrow(/ANTHROPIC_API_KEY/);
+  });
+});
+
+describe('filling in the details from their website and documents', () => {
+  it('reads a web page: title, description, structured data, contact links and text, without scripts or styles', () => {
+    const html = `<html><head><title>Mithai Market &amp; Co</title><meta name="description" content="Sweets since 1962">
+      <script type="application/ld+json">{"@type":"Bakery","telephone":"+91 98200 12345"}</script><style>.x{}</style></head>
+      <body><nav><a href="/about-us/">Our story</a><a href="/menu">Menu</a><a href="https://other.example/menu">Elsewhere</a><a href="/cart">Cart</a>
+      <a href="tel:+919820012345">Call</a><a href="https://wa.me/919820012345">WhatsApp</a></nav>
+      <h1>Kaju katli</h1><p>₹1,100 per kg</p><script>alert(1)</script><img src="a.jpg" alt="Our shop in Dadar"></body></html>`;
+    const p = pageText(html, new URL('https://www.mithai.example/'));
+    expect(p.title).toBe('Mithai Market & Co');
+    expect(p.text).toContain('description: Sweets since 1962');
+    expect(p.text).toContain('"telephone":"+91 98200 12345"');
+    expect(p.text).toContain('Contact links: tel:+919820012345 https://wa.me/919820012345');
+    expect(p.text).toContain('## Kaju katli');
+    expect(p.text).toContain('₹1,100 per kg');
+    expect(p.text).toContain('[photo: Our shop in Dadar]');
+    expect(p.text).not.toMatch(/alert|\.x\{/);
+    // Only useful pages on the same site are read next.
+    expect(pickPages(p, new URL('https://mithai.example/')).map(String)).toEqual(['https://www.mithai.example/about-us/', 'https://www.mithai.example/menu']);
+  });
+
+  it('only reads public web addresses', () => {
+    for (const ip of ['127.0.0.1', '10.1.2.3', '172.16.0.1', '192.168.1.1', '169.254.169.254', '100.64.0.1', '0.0.0.0', '::1', 'fd00::1', 'fe80::1', '::ffff:127.0.0.1']) expect(isPrivateAddress(ip), ip).toBe(true);
+    for (const ip of ['8.8.8.8', '151.101.1.1', '2606:4700::1111']) expect(isPrivateAddress(ip), ip).toBe(false);
+    expect(websiteUrl('mithaimarket.in').toString()).toBe('https://mithaimarket.in/');
+    expect(() => websiteUrl('http://169.254.169.254/latest/meta-data')).toThrow(/private network/);
+    expect(() => websiteUrl('http://localhost/')).toThrow(/doesn’t look like a website/);
+    expect(() => websiteUrl('https://example.in:8080/')).toThrow(/port/);
+    expect(() => websiteUrl('ftp://example.in/')).toThrow(/http or https/);
+    expect(() => websiteUrl('https://www.instagram.com/mithaimarket/')).toThrow(/Instagram and Facebook/);
+  });
+
+  it('asks Claude for the brief’s fields, and fills only what the team left empty', () => {
+    const prompt = fillInPrompt({ name: 'Mithai Market', url: 'https://mithai.example/', pages: [{ url: 'https://mithai.example/', title: 'Home', text: 'Kaju katli ₹1,100', links: [] }], documents: ['menu.pdf'] });
+    expect(isFillInPrompt(prompt)).toBe(true);
+    expect(prompt).toContain('Kaju katli ₹1,100');
+    expect(prompt).toContain('menu.pdf');
+    expect(prompt).toContain('Never guess or invent');
+    expect(fillInPrompt({ name: 'X', url: 'https://x.example/', pages: null, documents: [] })).toContain('Visit it');
+
+    const fill = parseFillIn('Here you go:\n```json\n{"about": "Sweets since 1962.", "offer": "Kaju katli – ₹1,100 per kg", "pincode": 400028, "state": "maharashtra", "instagram": "https://instagram.com/mithai.market", "city": "Pune", "hours": "", "phone": "+91 98200 12345"}\n```');
+    const { brief, filled } = mergeFillIn({ ...input, about: '', offer: '', city: 'Mumbai', pincode: '', state: '', instagram: '' }, fill);
+    expect(brief).toMatchObject({ about: 'Sweets since 1962.', offer: 'Kaju katli – ₹1,100 per kg', pincode: '400028', state: 'Maharashtra', instagram: '@mithai.market', city: 'Mumbai' });
+    expect(filled).toEqual(['What the business does', 'What they sell', 'State', 'PIN code', 'Instagram']);
+    expect(fill.phone).toBe('+91 98200 12345');
+    expect(mergeFillIn(input, parseFillIn('{"pincode": "4000"}')).filled).toEqual([]); // a wrong PIN code is left out
+    expect(() => parseFillIn('I could not open the website')).toThrow(/complete answer/);
   });
 });

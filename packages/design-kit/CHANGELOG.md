@@ -1,5 +1,8 @@
 # Design kit releases
 
+## 2.0.0 — 2026-09-29
+Every site can now have its own art direction on top of its look (`style`), so two sites in the same look feel like different brands. **21 type pairings** (22 new self-hosted font families, among them Bodoni Moda, Playfair Display, Libre Caslon, Newsreader, Gloock, Young Serif, DM Serif Display, Italiana, Space Grotesk, Unbounded, Bebas Neue, Epilogue, Outfit and Big Shoulders), each tuned for weight, spacing, line height, capitals and how a highlighted word looks. Also per site: headline size (calm, bold, huge), capitals or not, corners (sharp, soft, round), spacing (airy, balanced, compact), buttons (solid, outline, pill, underline) and photo colour grading (warm, cool, soft, vivid, black and white, or a duotone in the brand colour) so stock photos look like one shoot. Only the fonts a page uses are downloaded. Sites without `style` look exactly as before. Major version because `style` is new input older versions refuse.
+
 ## 1.3.0 — 2026-09-29
 A business's own logo can replace its name in the header (`site.logo`), sized to sit neatly on phones and computers.
 

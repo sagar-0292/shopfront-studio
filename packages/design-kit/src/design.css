@@ -25,10 +25,10 @@ h1, h2, h3, h4 { margin: 0; font-weight: inherit; }
 
 /* type */
 .d-display { font-family: var(--f-display); font-weight: var(--display-weight); letter-spacing: var(--display-tracking); line-height: var(--display-leading); text-transform: var(--display-case); text-wrap: balance; }
-.d-h1 { font-size: clamp(3rem, calc(9vw * var(--hero-scale)), calc(7.2rem * var(--hero-scale))); }
-.d-h2 { font-size: clamp(2.4rem, 6vw, 6.2rem); }
+.d-h1 { font-size: clamp(3rem, calc(9vw * var(--hero-scale) * var(--scale, 1)), calc(7.2rem * var(--hero-scale) * var(--scale, 1))); }
+.d-h2 { font-size: clamp(2.2rem, calc(6vw * var(--scale, 1)), calc(6.2rem * var(--scale, 1))); }
 .d-h3 { font-size: clamp(1.5rem, 2.4vw, 2.3rem); line-height: 1.05; }
-.d-eyebrow { display: inline-flex; align-items: center; gap: 12px; font: 600 0.75rem/1 var(--f-body); letter-spacing: var(--eyebrow-tracking); text-transform: uppercase; color: var(--c-muted); }
+.d-eyebrow { display: inline-flex; align-items: center; gap: 12px; font: var(--accent-weight, 600) 0.75rem/1 var(--f-accent, var(--f-body)); letter-spacing: var(--eyebrow-tracking); text-transform: uppercase; color: var(--c-muted); }
 .d-eyebrow::before { content: ''; width: 28px; height: 1px; background: currentColor; }
 .d-lede { font-size: clamp(1.05rem, 1.2vw + 0.6rem, 1.35rem); line-height: 1.55; color: var(--c-muted); max-width: 38rem; text-wrap: pretty; }
 .d-muted { color: var(--c-muted); }
@@ -101,7 +101,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: inherit; }
 .d-hero--fullbleed .d-hero-grid { min-height: 0; padding-block: clamp(120px, 20vh, 220px) clamp(48px, 8vw, 96px); align-items: end; }
 .d-hero--fullbleed .d-lede, .d-hero--fullbleed .d-eyebrow { color: rgba(255,255,255,.85); }
 .d-hero--typographic .d-hero-grid { min-height: auto; padding-block: clamp(64px, 12vw, 180px) clamp(40px, 6vw, 80px); }
-.d-hero--typographic .d-h1 { font-size: clamp(3.6rem, calc(13.5vw * var(--hero-scale)), calc(10.8rem * var(--hero-scale))); }
+.d-hero--typographic .d-h1 { font-size: clamp(3.6rem, calc(13.5vw * var(--hero-scale) * var(--scale, 1)), calc(10.8rem * var(--hero-scale) * var(--scale, 1))); }
 .d-hero--typographic .d-hero-foot { display: grid; gap: 24px; align-items: end; }
 @media (min-width: 900px) { .d-hero--typographic .d-hero-foot { grid-template-columns: 1fr auto; } }
 .d-hero--collage .d-hero-grid { position: relative; z-index: 1; text-align: center; justify-items: center; }
@@ -121,7 +121,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: inherit; }
 .d-marquee--outline span { color: transparent; -webkit-text-stroke: 1.5px var(--c-ink); }
 
 /* statement */
-.d-statement p[data-sf-split] { font: var(--display-weight) clamp(1.9rem, 4.6vw, 4.6rem)/1.08 var(--f-display); letter-spacing: var(--display-tracking); text-transform: none; max-width: 22ch; text-wrap: balance; }
+.d-statement p[data-sf-split] { font: var(--display-weight) clamp(1.9rem, calc(4.6vw * var(--scale, 1)), calc(4.6rem * var(--scale, 1)))/1.08 var(--f-display); letter-spacing: var(--display-tracking); text-transform: none; max-width: 22ch; text-wrap: balance; }
 .d-statement--wide p[data-sf-split] { max-width: 30ch; }
 .d-statement-meta { margin-top: clamp(28px, 4vw, 48px); display: flex; gap: 24px; flex-wrap: wrap; color: var(--c-muted); }
 
@@ -297,8 +297,8 @@ h1, h2, h3, h4 { margin: 0; font-weight: inherit; }
 /* wordmark hero: the name set edge to edge, the photo tucked under it */
 .d-hero--wordmark { padding-top: clamp(4px, 1.2vw, 16px); }
 .d-wordmark { position: relative; z-index: 2; margin: 0 0 -0.2em; white-space: nowrap; text-align: center; pointer-events: none;
-  font: var(--wm-weight, var(--display-weight)) calc((100vw - clamp(24px, 4vw, 64px)) / (var(--chars) * var(--wm-char, .6)))/.8 var(--f-display);
-  letter-spacing: var(--wm-tracking, -0.02em); text-transform: var(--wm-case, uppercase); color: var(--wm-ink, var(--c-ink)); }
+  font: var(--wm-weight, var(--display-weight)) calc((100vw - clamp(24px, 4vw, 64px)) * .98 / (var(--wm-em, calc(var(--chars) * var(--wm-char, .6))) + var(--chars) * var(--wm-track, -0.02)))/.8 var(--f-display);
+  letter-spacing: calc(var(--wm-track, -0.02) * 1em); text-transform: var(--wm-case, uppercase); color: var(--wm-ink, var(--c-ink)); }
 .d-wordmark-media { position: relative; z-index: 1; height: clamp(340px, 76svh, 860px); margin-inline: clamp(12px, 2vw, 32px); overflow: hidden; border-radius: var(--radius-media); }
 .d-wordmark-media > img, .d-wordmark-media > .d-blank { width: 100%; height: 100%; object-fit: cover; }
 .d-wordmark-media .d-sticker { position: absolute; right: 4%; bottom: 6%; z-index: 2; }
@@ -404,3 +404,37 @@ h1, h2, h3, h4 { margin: 0; font-weight: inherit; }
 .d-bd--accent, .d-bd--pop { --c-muted: currentColor; --c-line: color-mix(in srgb, currentColor 25%, transparent); }
 .d-bd--accent .d-btn:not(.d-btn--solid), .d-bd--pop .d-btn:not(.d-btn--solid) { color: inherit; border-color: currentColor; }
 .d-bd--accent .d-eyebrow, .d-bd--pop .d-eyebrow { color: inherit; }
+
+/* ---------------------------------------------------------------------------
+   Per-site style (design kit 2.0): the site's own type pairing, buttons and photo grading.
+   The look sets structure and motion; these make each client's site its own brand.
+   --------------------------------------------------------------------------- */
+html[data-type] .d-display em, html[data-type] .d-statement p em { font-style: var(--em-style, normal); }
+html[data-type] :is(.d-index-num, .d-reel-num, .d-card-meta, .d-contact-list dt, .d-footer h2, .d-hours caption) { font-family: var(--f-accent, var(--f-body)); }
+html[data-type] .d-logo { text-transform: var(--display-case); }
+
+/* Buttons */
+html[data-buttons] .d-btn { border: 0; letter-spacing: 0.01em; text-transform: none; font-size: 0.95rem; }
+html[data-buttons="solid"] .d-btn, html[data-buttons="pill"] .d-btn { background: var(--c-ink); color: var(--c-bg); box-shadow: none; }
+html[data-buttons="solid"] .d-btn.d-btn--solid, html[data-buttons="pill"] .d-btn.d-btn--solid { background: var(--c-accent); color: var(--c-accent-ink); }
+html[data-buttons="pill"] .d-btn { border-radius: 999px; padding-inline: 30px; }
+html[data-buttons="outline"] .d-btn { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; }
+html[data-buttons="outline"] .d-btn.d-btn--solid { background: var(--c-ink); color: var(--c-bg); box-shadow: none; }
+html[data-buttons="underline"] .d-btn { background: none; color: inherit; border-radius: 0; padding: 0 2px; box-shadow: inset 0 -2px 0 currentColor; }
+html[data-buttons="underline"] .d-btn.d-btn--solid { box-shadow: inset 0 -3px 0 var(--c-accent); font-weight: 700; }
+html[data-buttons="underline"] .d-btn:hover { box-shadow: inset 0 -2.2em 0 color-mix(in srgb, currentColor 10%, transparent); }
+
+/* Photo grading: every photo looks like part of one shoot. Product photos and logos keep their true colours. */
+html[data-photos] main img:not(.d-card img, .d-logo img) { transition: filter .6s; }
+html[data-photos="warm"] main img:not(.d-card img) { filter: sepia(0.16) saturate(1.08) contrast(1.02) brightness(1.02); }
+html[data-photos="cool"] main img:not(.d-card img) { filter: saturate(0.88) contrast(1.04) hue-rotate(-6deg) brightness(1.02); }
+html[data-photos="soft"] main img:not(.d-card img) { filter: saturate(0.78) contrast(0.92) brightness(1.06); }
+html[data-photos="vivid"] main img:not(.d-card img) { filter: saturate(1.22) contrast(1.06); }
+html[data-photos="mono"] main img:not(.d-card img) { filter: grayscale(1) contrast(1.08); }
+html[data-photos="mono"] main :is(a, figure, div):hover > img:not(.d-card img) { filter: grayscale(0.2) contrast(1.02); }
+/* Duotone: black-and-white photos printed in the site's accent colour. */
+html[data-photos="duotone"] main :is(div, figure, a, span):has(> img):not(.d-card-media) { background-color: var(--c-accent); }
+html[data-photos="duotone"] main img:not(.d-card img) { filter: grayscale(1) contrast(1.12) brightness(1.08); mix-blend-mode: multiply; }
+html[data-type="mona"] .d-wordmark { font-stretch: 125%; }
+/* Word-by-word reveals mask each word; leave room for deep descenders (g, y, commas) in tight display type. */
+.d-display .sf-w { padding-bottom: .24em; margin-bottom: -.24em; }

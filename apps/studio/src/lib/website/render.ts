@@ -10,7 +10,13 @@ import type { Website } from './build';
 // Renders a saved website with the exact kit versions the project is pinned to, for the
 // studio preview and for the download that goes on Netlify (or any static host).
 
-type DesignKit = { renderSite(def: unknown, opts: Record<string, unknown>): Record<string, string> };
+type Pairing = { name: string; mood: string; display: { family: string }; body: { family: string } };
+type DesignKit = {
+  renderSite(def: unknown, opts: Record<string, unknown>): Record<string, string>;
+  /** From design kit 2.0: the type pairings and style options a site can choose. */
+  PAIRINGS?: Record<string, Pairing>;
+  DEFAULT_PAIRING?: Record<string, string>;
+};
 export type Versions = { motion: string; commerce: string; design: string };
 
 const kits = new Map<string, Promise<DesignKit>>();
@@ -23,7 +29,17 @@ export function designKit(version: string): Promise<DesignKit> {
   return kits.get(version)!;
 }
 
-const needsCommerce = (w: Website) => !!(w.def as { commerce?: unknown }).commerce;
+/** The art-direction choices for Claude (fonts and style), or null on design kits before 2.0. */
+export async function styleGuide(version: string, direction: string): Promise<string | null> {
+  const kit = await designKit(version);
+  if (!kit.PAIRINGS) return null;
+  const pairings = Object.entries(kit.PAIRINGS)
+    .map(([id, p]) => `  ${id.padEnd(11)}${p.display.family}${p.body.family !== p.display.family ? ` + ${p.body.family}` : ''}: ${p.mood}`).join('\n');
+  return `${pairings}
+(The look's own pairing is "${kit.DEFAULT_PAIRING?.[direction] ?? ''}".)`;
+}
+
+const needsCommerce =(w: Website) => !!(w.def as { commerce?: unknown }).commerce;
 
 /** The stylesheets a page links, so they can be written into the page itself (faster first paint). */
 function styles(v: Versions, direction: string, commerce: boolean) {
@@ -85,7 +101,22 @@ Also works on Cloudflare Pages, Vercel or any web host: upload the folder as it 
 The website must be at the top of its address (example.in/), not in a sub-folder.
 `;
 
-export type OwnFile = { name: string; data: Uint8Array; small: Uint8Array | null };
+/** Font files of the families the look or the pages actually name (the kit declares every family it ships). */
+export function usedFonts(css: string, pages: string[]): string[] {
+  const FACE = /@font-face\s*\{[^}]*\}/g;
+  const rest = [css, ...pages].map((t) => t.replace(FACE, '')).join('\n');
+  const files = new Set<string>();
+  for (const [face] of css.matchAll(FACE)) {
+    const family = /font-family:\s*(["']?)([^;"'}]+)\1/.exec(face)?.[2]?.trim();
+    const file = /url\(\.\/fonts\/([\w.-]+\.woff2)\)/.exec(face)?.[1];
+    if (!family || !file) continue;
+    const esc = family.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (new RegExp(`(["'])${esc}\\1|[:,]\\s*${esc}\\s*[,;}]`).test(rest)) files.add(file);
+  }
+  return [...files];
+}
+
+export type OwnFile ={ name: string; data: Uint8Array; small: Uint8Array | null };
 
 /** The whole website as one .zip file, ready to drag onto Netlify Drop. */
 export async function websiteZip(w: Website, v: Versions, siteName: string, own: OwnFile[]): Promise<Uint8Array> {
@@ -99,16 +130,16 @@ export async function websiteZip(w: Website, v: Versions, siteName: string, own:
     files[`img/own/${f.name}.webp`] = f.data;
     if (f.small) files[`img/own/${f.name}-800.webp`] = f.small;
   }
-  // Kit files the pages load: motion (always), commerce (shops and bookings), and this look's fonts.
+  // Kit files the pages load: motion (always), commerce (shops and bookings), and the fonts the pages use.
   const k = kitsDir();
   const addDir = (sub: string) => { for (const p of filesUnder(join(k, sub))) files[`kits/${relative(k, p)}`] = readFileSync(p); };
   addDir(`motion/${v.motion}`);
   if (needsCommerce(w)) addDir(`commerce/${v.commerce}`);
   const direction = String((w.def as { direction?: string }).direction);
   const css = readFileSync(join(k, 'design', v.design, `${direction}.css`), 'utf8');
-  for (const m of css.matchAll(/url\(\.\/fonts\/([\w.-]+\.woff2)\)/g)) {
-    const p = join(k, 'design', v.design, 'fonts', m[1]);
-    if (existsSync(p)) files[`kits/design/${v.design}/fonts/${m[1]}`] = readFileSync(p);
+  for (const f of usedFonts(css, Object.values(pages))) {
+    const p = join(k, 'design', v.design, 'fonts', f);
+    if (existsSync(p)) files[`kits/design/${v.design}/fonts/${f}`] = readFileSync(p);
   }
   files['_headers'] = enc.encode(HEADERS);
   files['README.txt'] = enc.encode(README(siteName));

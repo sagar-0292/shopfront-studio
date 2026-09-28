@@ -8,7 +8,7 @@
   --display-weight: 400; --display-tracking: 0; --display-leading: 0.92; --display-case: uppercase;
   --eyebrow-tracking: 0.18em; --radius-card: 4px; --radius-btn: 4px; --radius-media: 4px;
   --section-pad: clamp(72px, 10vw, 150px); --hero-scale: 1.15;
-  --wm-char: 0.4; --c-field: #c8321a; --wm-tracking: -0.01em; --wm-ink: #ffffff;
+  --wm-char: 0.4; --c-field: #c8321a; --wm-track: -0.01; --wm-ink: #ffffff;
 }
 .d-poster .d-display em { font-style: normal; color: var(--c-accent); }
 .d-poster .d-btn { background: var(--c-ink); color: var(--c-bg); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85rem; }

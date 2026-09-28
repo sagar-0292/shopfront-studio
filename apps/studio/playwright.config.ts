@@ -77,6 +77,8 @@ export default defineConfig({
         // Local stand-in for Claude.
         ANTHROPIC_API_KEY: ANTHROPIC_TEST_KEY,
         ANTHROPIC_API_URL: `http://127.0.0.1:${PORTS.anthropic}`,
+        // "Fill in the details for me" may read the pretend business website on this machine (tests only).
+        WEBSITE_READER_ALLOW_PRIVATE: '1',
       },
     },
   ],

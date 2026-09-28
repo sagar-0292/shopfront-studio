@@ -15,7 +15,7 @@ function sign(payload) {
 const exp = 2000000000; // 2033
 export const ANON_KEY = sign({ iss: 'supabase-local', role: 'anon', exp });
 
-export const PORTS = { gateway: 54321, gotrue: 9999, smtp: 54325, mail: 54324, razorpay: 54326, pexels: 54327, anthropic: 54328 };
+export const PORTS = { gateway: 54321, gotrue: 9999, smtp: 54325, mail: 54324, razorpay: 54326, pexels: 54327, anthropic: 54328, business: 54329 };
 // Local stand-in for the Pexels photo search (see scripts/local-stack.mjs).
 export const PEXELS_TEST_KEY = 'local-only-pexels-key';
 // Local stand-in for Claude (the Anthropic API).

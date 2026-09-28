@@ -31,6 +31,8 @@ export const Answer = z.object({
   description: z.string().trim().min(20).max(300),
   businessType: z.string().regex(/^[A-Za-z]{3,40}$/, 'businessType is one schema.org word, like Bakery').default('LocalBusiness'),
   palette: z.record(z.string(), z.string()).optional(),
+  // Art direction (design kit 2.0+); the kit checks each choice when the site is built.
+  style: z.record(z.string(), z.string()).optional(),
   announcement: z.object({ text: z.string(), href: z.string().optional() }).optional(),
   nav: z.array(z.object({ label: z.string(), href: z.string() })).max(7).default([]),
   pages: z.array(z.record(z.string(), z.unknown())).min(1).max(12),
@@ -97,6 +99,25 @@ reel        title?; eyebrow?; items [3-12 {"media": PHOTO, "title", "text"?}]   
 photostrip  items [4-12 PHOTO]; speed? 20-80; reverse? true|false   (photos gliding across the page)
 pinned      title; eyebrow?; text?; cta? CTA; tone?; items [2-8 {"title", "text", "media"? PHOTO}]   (heading stays while cards scroll)
 `.trim();
+
+/** How Claude art-directs one site, given the kit's type pairings (design kit 2.0+). */
+export const STYLE_REFERENCE = (pairings: string) => `
+Every business deserves its own identity, so choose a "style" that fits THIS business, its customers and its city.
+Don't settle for the look's default fonts unless they are truly the best fit, and avoid what every other site does.
+"style": {
+  "type": one type pairing id from this list (display font + text font: when to use it):
+${pairings}
+  "scale": "calm" | "bold" | "huge"            headline size: huge for confident, loud brands; calm for quiet, premium ones
+  "headlineCase": "auto" | "upper" | "normal"   capitals or not ("auto" follows the pairing)
+  "shape": "sharp" | "soft" | "round"           corners of photos, cards and buttons
+  "space": "airy" | "balanced" | "compact"      room between sections: airy feels luxurious, compact feels energetic
+  "buttons": "solid" | "outline" | "pill" | "underline"
+  "photos": "natural" | "warm" | "cool" | "soft" | "vivid" | "mono" | "duotone"
+            colour grading that makes every stock photo look like one shoot ("duotone" tints photos in the accent
+            colour: dramatic, best for poster-like brands; "mono" is black and white: editorial, architectural)
+}
+Make the choices agree with each other and with the palette: e.g. a heritage jeweller → "vogue", calm, sharp, airy,
+underline, warm; a street-food brand → "anton", huge, sharp, compact, solid, vivid.`.trim();
 
 /** How each look is composed at its best: the order of sections and what makes it feel high-end. */
 export const RECIPES: Record<Direction, string> = {

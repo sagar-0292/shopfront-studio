@@ -1,6 +1,6 @@
 {
   "name": "@shopfront/design-kit",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "Award-level section designs in four directions, and the renderer that turns a page definition (JSON) into a finished website.",
   "private": true,
   "type": "module",

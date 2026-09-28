@@ -80,6 +80,8 @@ export type BuildInput = {
   input: BriefInput;
   own: OwnImage[];
   payments: Record<string, unknown> | null;
+  /** The project's design kit takes art direction ("style", from 2.0). */
+  styled?: boolean;
   fetch?: typeof fetch;
 };
 
@@ -173,6 +175,7 @@ export async function buildWebsite(b: BuildInput): Promise<Website> {
   const instagram = input.instagram.trim()
     ? (/^https:\/\//.test(input.instagram.trim()) ? input.instagram.trim() : `https://www.instagram.com/${input.instagram.trim().replace(/^@/, '')}`)
     : null;
+  if (answer.style && !b.styled) notes.push('Claude chose fonts and a style for this site, but this project’s design kit is older than 2.0, so the look’s own fonts were used. Move the project to the newest design kit (below) and build again to use them.');
   const logo = b.own.find((o) => o.kind === 'logo');
   const payments = b.payments ? Object.fromEntries(Object.entries(b.payments).filter(([k]) => k !== 'online')) : { whatsapp: !!facts.whatsapp };
   if (b.payments && 'online' in b.payments) notes.push('Card and net-banking payments need the online checkout, which comes with hosting on Shopfront. The downloaded site takes WhatsApp, UPI and cash-on-delivery orders.');
@@ -188,6 +191,7 @@ export async function buildWebsite(b: BuildInput): Promise<Website> {
     },
     credits: found.credits,
     ...(answer.palette ? { palette: answer.palette } : {}),
+    ...(answer.style && b.styled ? { style: answer.style } : {}),
     ...(answer.announcement ? { announcement: answer.announcement } : {}),
     nav: answer.nav,
     ...(usesCommerce ? { commerce: { source: { type: 'json', url: '/data/catalog.json' }, payments } } : {}),

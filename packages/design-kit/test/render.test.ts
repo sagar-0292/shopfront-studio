@@ -1,6 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { PAIRINGS, PAIRING_IDS, DEFAULT_PAIRING } from '../src/style';
+import { nameWidth } from '../src/sections';
+import { WIDTHS, METRIC_CHARS } from '../src/metrics';
+import { onlyUsedFonts } from '../src/render';
 import { renderSite, DesignError, DIRECTIONS, SECTION_TYPES, DEFAULTS, checkPalette, contrast as checkContrast, safeHref, emph, type SiteDefT } from '../src';
 
 const V = { versions: { motion: '1.0.0', commerce: '1.1.0', design: '1.0.0' } };
@@ -193,6 +197,20 @@ describe('renderSite', () => {
     expect(d.querySelector('.d-row img')!.getAttribute('srcset')).toContain('400w');
   });
 
+  it('writes into a page only the fonts it uses', () => {
+    const css = '@font-face{font-family:"Anton";src:url(./a.woff2)}@font-face{font-family:Anton Fallback;src:local(Arial)}@font-face{font-family:"Gloock";src:url(./g.woff2)}.d-poster{--f-display:"Anton","Anton Fallback",sans-serif}';
+    expect(onlyUsedFonts(css)).toBe('@font-face{font-family:"Anton";src:url(./a.woff2)}@font-face{font-family:Anton Fallback;src:local(Arial)}.d-poster{--f-display:"Anton","Anton Fallback",sans-serif}');
+    // A site's own pairing (in its style block) keeps that font.
+    expect(onlyUsedFonts(css, `<style>.d-poster{--f-display:'Gloock', 'Gloock Fallback', serif}</style>`)).toContain('g.woff2');
+  });
+
+  it('has measured letter widths for every pairing (re-run tools/measure-fonts.mjs after adding one)', () => {
+    for (const id of PAIRING_IDS) {
+      expect(WIDTHS[id], id).toHaveLength(METRIC_CHARS.length);
+      expect(Math.min(...WIDTHS[id].slice(0, 26)), id).toBeGreaterThan(0.15);
+    }
+  });
+
   it('builds the moving sections so they still read without animation', () => {
     const def = everything('poster');
     def.announcement = { text: 'Free delivery across Mumbai over ₹999', href: '/shop/' };
@@ -203,7 +221,13 @@ describe('renderSite', () => {
     // The giant name is decoration: hidden from screen readers, headline stays the h1.
     const wm = d.querySelector('.d-hero--wordmark')!;
     expect(wm.querySelector('.d-wordmark')!.getAttribute('aria-hidden')).toBe('true');
-    expect(wm.querySelector('.d-wordmark')!.getAttribute('style')).toBe('--chars:9');
+    // Sized from the measured width of each letter in the headline font, so the name fills the screen exactly.
+    const em = (x: Document) => Number(/--wm-em:([\d.]+)/.exec(x.querySelector('.d-wordmark')!.getAttribute('style')!)![1]);
+    expect(wm.querySelector('.d-wordmark')!.getAttribute('style')).toMatch(/^--chars:9;--wm-em:[\d.]+$/);
+    expect(em(d)).toBeCloseTo(nameWidth(def.site.name, 'anton'), 3);
+    // A wide font (Unbounded) needs more room than condensed Anton for the same name.
+    const wide = doc(renderSite({ ...def, style: { type: 'unbounded' } }, V)['/index.html']);
+    expect(em(wide)).toBeGreaterThan(em(d) * 1.5);
     expect(wm.querySelector('h1')!.textContent).toBe('Chai, loud');
     // A sticker carries its words once as text and once as letters for the turning circle (hidden from screen readers).
     const st = wm.querySelector('.d-sticker')!;
@@ -276,6 +300,44 @@ describe('renderSite', () => {
     expect(img.getAttribute('src')).toBe('/p/img/own/logo.webp');
     expect(img.getAttribute('alt')).toBe('Test Shop');
     expect(d.querySelector('.d-logo')!.classList.contains('d-logo--image')).toBe(true);
+  });
+
+  it('gives each site its own type pairing and style, on top of its look', () => {
+    const def = everything('quiet');
+    def.style = { type: 'vogue', scale: 'huge', shape: 'round', space: 'airy', buttons: 'pill', photos: 'duotone', headlineCase: 'upper' };
+    const out = renderSite(def, V)['/index.html'];
+    const d = doc(out);
+    const html = d.documentElement;
+    expect(html.className).toBe('d-quiet');
+    expect(html.getAttribute('data-type')).toBe('vogue');
+    expect(html.getAttribute('data-buttons')).toBe('pill');
+    expect(html.getAttribute('data-photos')).toBe('duotone');
+    const css = [...d.querySelectorAll('style')].map((x) => x.textContent).join('');
+    expect(css).toContain("--f-display:'Bodoni Moda', 'Bodoni Moda Fallback', 'Times New Roman', serif");
+    expect(css).toContain("--f-body:'Hanken Grotesk', 'Hanken Grotesk Fallback', system-ui, sans-serif");
+    expect(css).toContain('--display-case:uppercase');
+    expect(css).toContain('--scale:1.22');
+    expect(css).toContain('--radius-btn:999px');
+    // The pairing's headline font is requested first.
+    expect(d.querySelector('link[rel="preload"][as="font"]')!.getAttribute('href')).toBe('/kits/design/1.0.0/fonts/bodoni-moda-normal.woff2');
+  });
+
+  it('every pairing names fonts that ship with the kit, and each look has a default', () => {
+    const fonts = readFileSync(join(__dirname, '../fonts/fonts.css'), 'utf8');
+    const fallbacks = readFileSync(join(__dirname, '../fonts/fallbacks.css'), 'utf8');
+    for (const id of PAIRING_IDS) {
+      const p = PAIRINGS[id] as { display: { family: string }; body: { family: string }; accent?: { family: string }; preload: string };
+      for (const f of [p.display, p.body, p.accent].filter(Boolean) as { family: string }[]) {
+        expect(fonts, `${id}: ${f.family}`).toContain(`font-family:'${f.family}'`);
+        expect(fallbacks, `${id}: ${f.family} fallback`).toContain(`'${f.family} Fallback'`);
+      }
+      expect(fonts, `${id} preload`).toContain(`url(./${p.preload})`);
+    }
+    for (const d of DIRECTIONS) expect(PAIRING_IDS).toContain(DEFAULT_PAIRING[d]);
+    // A site without a style renders exactly as its look.
+    const plain = doc(renderSite(everything('crafted'), V)['/index.html']);
+    expect(plain.documentElement.hasAttribute('data-type')).toBe(false);
+    expect(() => renderSite({ ...everything(), style: { type: 'comic-sans' } }, V)).toThrow(DesignError);
   });
 
   it('refuses custom colours that are hard to read', () => {
