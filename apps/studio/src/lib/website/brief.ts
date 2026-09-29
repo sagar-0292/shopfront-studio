@@ -3,7 +3,7 @@
 import { DESIGNS, type Direction } from '@/lib/designs';
 import { label } from '@/lib/catalog';
 import { SITE_TYPES } from '@/lib/catalog';
-import { RECIPES, SECTION_REFERENCE, STYLE_REFERENCE } from './format';
+import { RECIPES, SELLING_RULES, sectionReference, STYLE_REFERENCE } from './format';
 
 /** What the team tells us about the business (saved on the project). */
 export type BriefInput = {
@@ -60,8 +60,12 @@ export type Material = {
   documents: { filename: string; label: string }[];
 };
 
-/** `pairings` is the design kit's type pairing list (from 2.0), or null when the project's kit has no art direction. */
-export function buildBrief(direction: Direction, facts: BriefFacts, input: BriefInput, example: unknown, material: Material, pairings: string | null = null): string {
+/**
+ * `kit` says what the project's design kit version can build: its type pairings (2.0+), its sections,
+ * and the phone action bar (2.1+). Without it the brief offers every section and no art direction.
+ */
+export function buildBrief(direction: Direction, facts: BriefFacts, input: BriefInput, example: unknown, material: Material, kit: { pairings?: string | null; sections?: string[]; actionBar?: boolean } = {}): string {
+  const pairings = kit.pairings ?? null;
   const d = DESIGNS[direction];
   const sells = facts.siteTypes.some((t) => ['online_store', 'whatsapp_catalogue', 'marketplace'].includes(t));
   const books = facts.siteTypes.includes('bookings');
@@ -79,6 +83,9 @@ ${d.feel}
 ${pairings ? 'Default fonts' : 'Fonts'} ${d.fonts}; colours, spacing and animation are built in.
 ${RECIPES[direction]}
 ${pairings ? `\n## Art direction (fonts, scale, shapes, photo grading)\n${STYLE_REFERENCE(pairings)}\n` : ''}
+## What makes people buy (learned from big brands' websites)
+${SELLING_RULES({ sells, books, actionBar: !!kit.actionBar, trust: !kit.sections || kit.sections.includes('trust') })}
+
 ## What makes it high-end (follow all of these)
 1. Specific, not generic. Use real details from the business above: places, ingredients, materials, names, times.
    Never write filler like "quality you can trust", "one-stop shop", "we are passionate", "best in town", "welcome to our website".
@@ -101,7 +108,7 @@ ${sells ? '8. This site sells online: include "products" (every real product or 
   "tagline": "one line (max 160)",
   "description": "what the business is, for Google (40-300 characters)",
   "businessType": "one schema.org type, e.g. Bakery, Restaurant, JewelryStore, CafeOrCoffeeShop, LodgingBusiness, Store",
-${pairings ? '  "style": {"type": "…", "scale": "…", "headlineCase": "…", "shape": "…", "space": "…", "buttons": "…", "photos": "…"},\n' : ''}  "announcement": {"text": "optional slim bar at the top, e.g. a delivery offer", "href": "/shop/"},
+${pairings ? '  "style": {"type": "…", "scale": "…", "headlineCase": "…", "shape": "…", "space": "…", "buttons": "…", "photos": "…"},\n' : ''}${kit.actionBar ? '  "actionBar": {"actions": [{"label": "Call", "href": "tel:+91…", "icon": "phone"}, {"label": "Order on WhatsApp", "href": "https://wa.me/91…", "icon": "chat"}]},\n' : ''}  "announcement": {"text": "optional slim bar at the top, e.g. a delivery offer", "href": "/shop/"},
   "nav": [{"label": "Shop", "href": "/shop/"}, ... up to 5],
   "pages": [{"path": "/", "title": "…", "description": "…", "sections": [ … ]}, {"path": "/shop/", …}],
   "products": [{"name", "description", "price" (rupees), "mrp"? (rupees, only if discounted), "category",
@@ -115,7 +122,7 @@ ${material.logoColours.length
     : 'Don\'t add colours ("palette"): the look has them.'}
 
 ## Sections you can use
-${SECTION_REFERENCE}
+${sectionReference(kit.sections)}
 
 ## A finished example in the same look (a different business). Match this standard, not its words.
 ${JSON.stringify(example)}

@@ -163,6 +163,24 @@
           "tone": "surface"
         },
         {
+          "type": "trust",
+          "tone": "default",
+          "items": [
+            {
+              "icon": "shield",
+              "title": "BIS hallmarked gold"
+            },
+            {
+              "icon": "check",
+              "title": "Certified stones"
+            },
+            {
+              "icon": "hand",
+              "title": "Made by hand in Kala Ghoda"
+            }
+          ]
+        },
+        {
           "type": "rows",
           "anchor": "atelier",
           "eyebrow": "How a piece is made",
@@ -240,7 +258,8 @@
           "text": "Sit with us at the atelier, try pieces on in natural light, and talk through a commission. There is no charge and no obligation.",
           "service": "viewing",
           "days": 14,
-          "backdrop": "grid"
+          "backdrop": "grid",
+          "anchor": "book"
         },
         {
           "type": "faq",
@@ -322,5 +341,19 @@
     "line": "#2b4b3f",
     "accent": "#d4b26a",
     "accentInk": "#0f2f25"
+  },
+  "actionBar": {
+    "actions": [
+      {
+        "label": "Call",
+        "href": "tel:+912222840011",
+        "icon": "phone"
+      },
+      {
+        "label": "Book a viewing",
+        "href": "/#book",
+        "icon": "calendar"
+      }
+    ]
   }
 }

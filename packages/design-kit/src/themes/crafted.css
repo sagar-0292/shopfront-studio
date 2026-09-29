@@ -1,6 +1,8 @@
 /* WARM & CRAFTED — kraft-paper tones, soft serif with italics, grainy paper texture,
    hand-drawn underlines, wavy dividers, rounded organic shapes. */
 .d-crafted {
+  /* the buying colour: the same as this look's main (solid) button */
+  --c-buy: var(--c-ink); --c-buy-ink: var(--c-bg);
   --c-bg: #f3e8d6; --c-surface: #fbf5ea; --c-ink: #3b2a1e; --c-muted: #6f5a47; --c-line: #dcc8aa;
   --c-accent: #a8481f; --c-accent-ink: #fff8ee; --c-invert-bg: #3b2a1e; --c-invert-ink: #f3e8d6; --c-invert-muted: #cdb89c; --c-invert-accent: #e8a06a;
   --c-pop: #5f6f2f; --c-pop-ink: #fbf5ea;

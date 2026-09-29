@@ -16,6 +16,7 @@ type DesignKit = {
   /** From design kit 2.0: the type pairings and style options a site can choose. */
   PAIRINGS?: Record<string, Pairing>;
   DEFAULT_PAIRING?: Record<string, string>;
+  SECTION_TYPES: string[];
 };
 export type Versions = { motion: string; commerce: string; design: string };
 
@@ -39,7 +40,15 @@ export async function styleGuide(version: string, direction: string): Promise<st
 (The look's own pairing is "${kit.DEFAULT_PAIRING?.[direction] ?? ''}".)`;
 }
 
-const needsCommerce =(w: Website) => !!(w.def as { commerce?: unknown }).commerce;
+/** What the project's design kit version can build, so the brief only offers that. */
+export type KitGuide = { pairings: string | null; sections: string[]; actionBar: boolean };
+export async function kitGuide(version: string, direction: string): Promise<KitGuide> {
+  const kit = await designKit(version);
+  // The trust strip and the phone action bar arrived together (design kit 2.1).
+  return { pairings: await styleGuide(version, direction), sections: kit.SECTION_TYPES, actionBar: kit.SECTION_TYPES.includes('trust') };
+}
+
+const needsCommerce = (w: Website) => !!(w.def as { commerce?: unknown }).commerce;
 
 /** The stylesheets a page links, so they can be written into the page itself (faster first paint). */
 function styles(v: Versions, direction: string, commerce: boolean) {

@@ -129,7 +129,7 @@ function toExample(def, catalog) {
   } : undefined;
   return {
     tagline: def.site.tagline, description: def.site.description, businessType: def.site.businessType,
-    ...(def.palette ? { palette: def.palette } : {}), ...(def.announcement ? { announcement: def.announcement } : {}),
+    ...(def.palette ? { palette: def.palette } : {}), ...(def.announcement ? { announcement: def.announcement } : {}), ...(def.actionBar ? { actionBar: def.actionBar } : {}),
     nav: def.nav ?? [], pages: conv(def.pages), ...(products.length ? { products } : {}), ...(bookings ? { bookings } : {}),
   };
 }

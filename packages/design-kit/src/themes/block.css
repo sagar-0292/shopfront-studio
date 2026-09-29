@@ -45,7 +45,6 @@
 .d-block .d-eyebrow { color: var(--c-ink); font-stretch: 125%; }
 .d-block .d-eyebrow::before { width: 10px; height: 10px; border-radius: 50%; }
 .d-block .d-card { background: var(--c-surface); }
-.d-block .d-card-actions [data-slot="add"] { background: var(--c-ink); color: var(--c-bg); }
 .d-block .d-marquee { border: 0; font-stretch: 125%; }
 .d-block .d-marquee span::after { width: .5em; height: .5em; background: currentColor; }
 

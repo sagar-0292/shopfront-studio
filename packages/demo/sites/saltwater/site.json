@@ -314,7 +314,8 @@
           "text": "Choose the day you'll arrive and we'll confirm your room and dates on WhatsApp within the hour. Two-night minimum at weekends.",
           "service": "stay",
           "days": 21,
-          "backdrop": "sky"
+          "backdrop": "sky",
+          "anchor": "book"
         },
         {
           "type": "faq",
@@ -436,5 +437,19 @@
     "line": "#c6d4d9",
     "accent": "#1f4e5f",
     "accentInk": "#f1f6f7"
+  },
+  "actionBar": {
+    "actions": [
+      {
+        "label": "WhatsApp",
+        "href": "https://wa.me/919820077889",
+        "icon": "chat"
+      },
+      {
+        "label": "Book your stay",
+        "href": "/#book",
+        "icon": "calendar"
+      }
+    ]
   }
 }

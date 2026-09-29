@@ -1,6 +1,8 @@
 /* BOLD & VIBRANT — colour-block sections, huge chunky grotesque type, stickers,
    pill buttons, playful motion. */
 .d-bold {
+  /* the buying colour: the same as this look's main (solid) button */
+  --c-buy: var(--c-pop); --c-buy-ink: var(--c-pop-ink);
   --c-bg: #fff6e5; --c-surface: #ffffff; --c-ink: #22061f; --c-muted: #6e4c66; --c-line: #f0d9c2;
   --c-accent: #c8135f; --c-accent-ink: #ffffff; --c-invert-bg: #2b0a3d; --c-invert-ink: #fff6e5; --c-invert-muted: #d9c3e3; --c-invert-accent: #ff9f1c;
   --c-pop: #ff9f1c; --c-pop-ink: #22061f;

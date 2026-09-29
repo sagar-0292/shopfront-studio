@@ -271,6 +271,24 @@
           "backdrop": "dots"
         },
         {
+          "type": "trust",
+          "items": [
+            {
+              "icon": "truck",
+              "title": "Free delivery over ₹499",
+              "text": "Across Mumbai"
+            },
+            {
+              "icon": "cash",
+              "title": "Cash on delivery or UPI"
+            },
+            {
+              "icon": "leaf",
+              "title": "Chai brewed to order"
+            }
+          ]
+        },
+        {
           "type": "pinned",
           "eyebrow": "Why Tapri",
           "title": "The corner stall, *cleaned up*",
@@ -413,5 +431,19 @@
     "line": "#4a63e3",
     "accent": "#ffd23f",
     "accentInk": "#141210"
+  },
+  "actionBar": {
+    "actions": [
+      {
+        "label": "Call",
+        "href": "tel:+912224301122",
+        "icon": "phone"
+      },
+      {
+        "label": "Order on WhatsApp",
+        "href": "https://wa.me/919820055667",
+        "icon": "chat"
+      }
+    ]
   }
 }

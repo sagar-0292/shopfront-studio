@@ -2,6 +2,20 @@
  "tagline": "Kitchen & bar. Cooked over fire in Lower Parel.",
  "description": "Ember is a wood-fire kitchen and cocktail bar in Lower Parel, Mumbai, cooking coastal and North-West Frontier food over charcoal and mango wood.",
  "businessType": "Restaurant",
+ "actionBar": {
+  "actions": [
+   {
+    "label": "Call",
+    "href": "tel:+912240041234",
+    "icon": "phone"
+   },
+   {
+    "label": "Book a table",
+    "href": "/#book",
+    "icon": "calendar"
+   }
+  ]
+ },
  "nav": [
   {
    "label": "Menu",
@@ -239,7 +253,8 @@
      "text": "Book a table for up to six, or the eight-seat chef's counter. For larger groups, message us on WhatsApp.",
      "service": "table",
      "days": 14,
-     "tone": "surface"
+     "tone": "surface",
+     "anchor": "book"
     },
     {
      "type": "faq",

@@ -6,7 +6,8 @@ import { unzipSync, strFromU8 } from 'fflate';
 import { Answer, SECTION_REFERENCE } from '@/lib/website/format';
 import { buildWebsite, parseAnswer, parseHours, type BuildInput } from '@/lib/website/build';
 import { buildBrief, type BriefFacts, type BriefInput } from '@/lib/website/brief';
-import { renderPages, styleGuide, usedFonts, websiteZip } from '@/lib/website/render';
+import { kitGuide, renderPages, styleGuide, usedFonts, websiteZip } from '@/lib/website/render';
+import { sectionReference } from '@/lib/website/format';
 import { fillInPrompt, isFillInPrompt, mergeFillIn, parseFillIn } from '@/lib/website/autofill';
 import { isPrivateAddress, pageText, pickPages, websiteUrl } from '@/lib/website/read-site';
 import { DESIGNS, DIRECTIONS } from '@/lib/designs';
@@ -187,23 +188,54 @@ describe('the brief', () => {
     expect(guide).toMatch(/^ {2}vogue {6}Bodoni Moda \+ Hanken Grotesk: /m);
     expect(guide).toContain('The look\'s own pairing is "anton"');
     expect(await styleGuide('1.3.0', 'poster')).toBeNull(); // older kits have no art direction
-    const text = buildBrief('poster', facts, input, example('poster'), { logoColours: [], photos: [], documents: [] }, guide);
+    const text = buildBrief('poster', facts, input, example('poster'), { logoColours: [], photos: [], documents: [] }, { pairings: guide });
     expect(text).toContain('## Art direction');
     expect(text).toContain('"style": {"type": "…"');
     expect(buildBrief('poster', facts, input, {}, { logoColours: [], photos: [], documents: [] })).not.toContain('Art direction');
 
     const styled = { ...example('poster'), style: { type: 'unbounded', scale: 'huge', shape: 'round', buttons: 'pill', photos: 'duotone' } };
-    const w = await buildWebsite(base(styled, { direction: 'poster', styled: true }));
+    const w = await buildWebsite(base(styled, { direction: 'poster', kit: { pairings: 'yes', actionBar: true } }));
     const home = (await renderPages(w, versions(), { base: '', noindex: false }))['/index.html'];
     expect(home).toMatch(/<html[^>]* data-type="unbounded"[^>]* data-buttons="pill"[^>]* data-photos="duotone"/);
     expect(home).toContain('unbounded-normal.woff2');
     // A project still on an older kit keeps the look's fonts, and is told how to get the new ones.
-    const old = await buildWebsite(base(styled, { direction: 'poster', styled: false }));
+    const old = await buildWebsite(base(styled, { direction: 'poster', kit: { pairings: null, actionBar: false } }));
     expect(old.def.style).toBeUndefined();
     expect(old.notes.join(' ')).toMatch(/older than 2\.0/);
     // A choice that isn't in the kit is explained by the design kit.
-    const bad = await buildWebsite(base({ ...styled, style: { type: 'comic-sans' } }, { direction: 'poster', styled: true }));
+    const bad = await buildWebsite(base({ ...styled, style: { type: 'comic-sans' } }, { direction: 'poster', kit: { pairings: 'yes', actionBar: true } }));
     await expect(renderPages(bad, versions(), { base: '', noindex: false })).rejects.toThrow(/style.*type/);
+  });
+
+  it('teaches Claude what makes people buy, and offers only what the project’s kit can build', async () => {
+    const kit = await kitGuide(versions().design, 'bold');
+    expect(kit.actionBar).toBe(true);
+    const text = buildBrief('bold', facts, input, example('bold'), { logoColours: [], photos: [], documents: [] }, kit);
+    expect(text).toContain('## What makes people buy');
+    expect(text).toContain('"categories" row with "style": "circles" right after the hero');
+    expect(text).toContain('Add a "trust" strip');
+    expect(text).toContain('Use ONE buying colour');
+    expect(text).toContain('Never fake urgency');
+    expect(text).toContain('Book now → "#book"'); // this business takes bookings
+    expect(text).toContain('"actionBar": {"actions"');
+    expect(text).toMatch(/^trust {7}items/m);
+    // A project on design kit 1.3.0 isn't offered the trust strip, round categories or the action bar.
+    const old = await kitGuide('1.3.0', 'bold');
+    expect(old).toMatchObject({ pairings: null, actionBar: false });
+    const oldText = buildBrief('bold', facts, input, {}, { logoColours: [], photos: [], documents: [] }, old);
+    expect(oldText).not.toMatch(/^trust /m);
+    expect(oldText).not.toContain('"circles"');
+    expect(oldText).not.toContain('actionBar');
+    expect(oldText).toMatch(/^categories {2}title; eyebrow\?; items \[2-10 [^\n]*\]$/m);
+    expect(sectionReference(['hero'])).toMatch(/^hero /m);
+    expect(sectionReference(['hero'])).not.toMatch(/^marquee /m);
+    expect(sectionReference(['hero'])).toContain('PHOTO means'); // the shared notes stay
+
+    // The action bar Claude writes is built on 2.1, and dropped on older kits.
+    const withBar = { ...example('bold'), actionBar: { actions: [{ label: 'Order on WhatsApp', href: 'https://wa.me/919820012345', icon: 'chat' }] } };
+    const w = await buildWebsite(base(withBar, { kit }));
+    expect((await renderPages(w, versions(), { base: '', noindex: false }))['/index.html']).toContain('class="d-actionbar"');
+    expect((await buildWebsite(base(withBar, { kit: old }))).def.actionBar).toBeUndefined();
   });
 
   it('the download carries only the fonts the website uses', () => {

@@ -30,8 +30,13 @@
     ]
   },
   "design": {
-    "latest": "2.0.0",
+    "latest": "2.1.0",
     "versions": [
+      {
+        "version": "2.1.0",
+        "released_at": "2026-09-29",
+        "notes": "What big shops put where to help people buy (learned from Apple, boAt, Mamaearth, SUGAR, Haldiram's, IKEA, Glossier, Allbirds, The Leela, Urban Company and others). A **trust strip** section for the promises that make people comfortable buying: delivery, cash on delivery, easy returns, secure payment, freshness (line icons, two columns on phones). **Round category shortcuts** (`categories` with `style: \"circles\"`), the shop-by-category row big shops put in the first screen; it swipes sideways on phones. A **phone action bar** (`actionBar`): one or two actions, like \"Order on WhatsApp\" or \"Book a table\", fixed within thumb reach at the bottom of phone screens. The palette check now also makes sure buttons stand out from the page background (at least 3:1). Category rows can have up to 10 items."
+      },
       {
         "version": "2.0.0",
         "released_at": "2026-09-29",

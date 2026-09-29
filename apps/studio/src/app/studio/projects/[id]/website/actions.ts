@@ -10,7 +10,7 @@ import { buildWebsite, parseAnswer } from '@/lib/website/build';
 import { buildBrief } from '@/lib/website/brief';
 import { askClaude, type Attachment } from '@/lib/website/claude';
 import type { AnswerT } from '@/lib/website/format';
-import { renderPages, styleGuide } from '@/lib/website/render';
+import { kitGuide, renderPages } from '@/lib/website/render';
 import { exampleFor, loadProjectWebsite } from '@/lib/website/load';
 import { fillInPrompt, mergeFillIn, parseFillIn, type FillInT } from '@/lib/website/autofill';
 import { readWebsite, websiteUrl } from '@/lib/website/read-site';
@@ -151,7 +151,7 @@ async function buildAndSave(db: Db, p: Loaded, answer: AnswerT, extraNotes: stri
   const website = await buildWebsite({
     answer, direction: p.site.design_direction, site: { id: p.site.id, name: p.site.name },
     facts: p.facts, input: p.brief, own: p.own, payments: p.payments,
-    styled: (await styleGuide(p.site.design_kit_version, p.site.design_direction)) !== null,
+    kit: await kitGuide(p.site.design_kit_version, p.site.design_direction),
   });
   website.notes.push(...extraNotes);
   // The design kit checks every page; anything it can't build is explained in plain words.
@@ -206,7 +206,7 @@ export const generateWebsite = safe(async (form) => {
     logoColours: p.files.find((f) => f.kind === 'logo')?.colours ?? [],
     photos: p.files.filter((f) => f.kind === 'photo').map((f) => ({ name: f.name, label: f.label })),
     documents: p.files.filter((f) => f.kind === 'document' && !skipped.includes(f.filename)).map((f) => ({ filename: f.filename, label: f.label })),
-  }, await styleGuide(p.site.design_kit_version, p.site.design_direction!));
+  }, await kitGuide(p.site.design_kit_version, p.site.design_direction!));
   const reply = await askClaude(brief, attachments);
   const answer = parseAnswer(reply.text);
   const notes = [

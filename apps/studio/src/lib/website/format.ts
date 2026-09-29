@@ -33,6 +33,8 @@ export const Answer = z.object({
   palette: z.record(z.string(), z.string()).optional(),
   // Art direction (design kit 2.0+); the kit checks each choice when the site is built.
   style: z.record(z.string(), z.string()).optional(),
+  // The phone action bar (design kit 2.1+); checked by the kit.
+  actionBar: z.object({ actions: z.array(z.record(z.string(), z.unknown())) }).optional(),
   announcement: z.object({ text: z.string(), href: z.string().optional() }).optional(),
   nav: z.array(z.object({ label: z.string(), href: z.string() })).max(7).default([]),
   pages: z.array(z.record(z.string(), z.unknown())).min(1).max(12),
@@ -75,7 +77,11 @@ marquee     items [2-10 short words]; outline? true|false; speed? 20-120; revers
 statement   text (max 400, one strong idea); eyebrow?; meta? [up to 4 short facts]; tone? "default"|"invert"|"surface"|"pop"
 products    title; eyebrow?; featured? true|false; category? (a product category name); limit? 1-24; sort? "featured"|"price-asc"|"newest";
             link? {"label","href"}   (shows products from "products" below)
-categories  title; eyebrow?; items [2-8 {"name", "href" e.g. "/shop/?cat=gifts", "media": PHOTO}]
+categories  title; eyebrow?; items [2-10 {"name", "href" e.g. "/shop/?cat=gifts", "media": PHOTO}];
+            style? "tiles" (big photo tiles) | "circles" (a compact row of round shortcuts, for right after the hero)
+trust       items [2-5 {"icon", "title" (max 40), "text"? (max 90)}]; title?; tone? "surface"|"default"|"invert"
+            icon: truck|cash|returns|shield|leaf|star|gift|check|clock|pin|phone|chat|calendar|hand|heart|bag
+            (the promises that make people comfortable buying; only true ones)
 story       title?; eyebrow?; panels [2-6 {"title", "text" (max 300), "media"? PHOTO}]   (sideways-scrolling panels)
 features    title; eyebrow?; items [2-6 {"title" (max 60), "text" (max 240)}]; tone?
 gallery     title; eyebrow?; items [3-12 {"media": PHOTO, "caption"?, "ratio"? "square"|"portrait"|"landscape"}]
@@ -99,6 +105,45 @@ reel        title?; eyebrow?; items [3-12 {"media": PHOTO, "title", "text"?}]   
 photostrip  items [4-12 PHOTO]; speed? 20-80; reverse? true|false   (photos gliding across the page)
 pinned      title; eyebrow?; text?; cta? CTA; tone?; items [2-8 {"title", "text", "media"? PHOTO}]   (heading stays while cards scroll)
 `.trim();
+
+/** The section reference, limited to the sections the project's design kit version has. */
+export function sectionReference(types?: string[]): string {
+  if (!types) return SECTION_REFERENCE;
+  const circles = types.includes('trust'); // round category shortcuts arrived with the trust strip (2.1)
+  let keep = true;
+  return SECTION_REFERENCE.split('\n').filter((l) => {
+    const section = /^([a-z]+) {2,}/.exec(l)?.[1];
+    if (section) keep = types.includes(section);
+    return keep && (circles || !/^\s+style\? "tiles"/.test(l));
+  }).map((l) => (!circles && l.startsWith('categories') ? l.replace(/;$/, '') : l)).join('\n');
+}
+
+/**
+ * What big brands' websites do to help people buy (Apple, boAt, Mamaearth, SUGAR, Haldiram's, IKEA,
+ * Glossier, Allbirds, The Leela, Urban Company, FabIndia…; see docs/SELLING.md), as rules for Claude.
+ */
+export function SELLING_RULES(o: { sells: boolean; books: boolean; actionBar: boolean; trust: boolean }): string {
+  const rules = [
+    'The first screen makes ONE clear promise with ONE main button: the thing visitors most need to do (order, shop, book, call). A second button, if any, is quieter.',
+    o.sells && `Shops: put a "categories" row${o.trust ? ' with "style": "circles"' : ''} right after the hero (3-8 shortcuts, what people come for), and the bestsellers ("products" with "featured": true) within the first two screens, before any long story.`,
+    o.trust && 'Add a "trust" strip near the top (right after the hero or the first products) with 3-4 promises that are TRUE for this business: delivery area or free-delivery amount, cash on delivery or UPI, returns or exchange, freshness, handmade, certified, how fast they reply. Never invent a promise; leave one out rather than guess.',
+    'Put proof next to the moment of choosing: real reviews ("quotes") right after the products or services, real numbers ("stats") only if given. Customers trust other customers and real numbers more than adjectives.',
+    'Speak to occasions when they fit: festivals (Diwali, Rakhi, Eid, Christmas), weddings, gifting, corporate orders. Indian shoppers buy for occasions.',
+    'Before the end, an "faq" answers what stops people buying: delivery, payment, returns, timings, parking or booking changes. Then "contact", then a closing "cta".',
+    '"announcement" carries the one real offer or the free-delivery amount, in one short line (only if true).',
+    o.actionBar && `Add "actionBar": on phones the main action stays within thumb reach. Its LAST action is the main one (filled); an optional first one is quieter. E.g. ${o.books ? '[Call, Book now → "#book"]' : o.sells ? '[Call, Order on WhatsApp] or [WhatsApp, Shop now → "/shop/"]' : '[Call, WhatsApp us]'}. Use the real phone ("tel:+91…") and WhatsApp ("https://wa.me/91…") above; labels max 28 characters; icons as in "trust".`,
+  ].filter(Boolean);
+  const colours = [
+    'Use ONE buying colour. The design kit already gives every buy, order and book button the same colour; don\'t compete with it by putting another bright colour on big blocks next to the products. When you set "accent", choose one that stands out from the page: dark or bright on a light background.',
+    'Keep the backgrounds calm and light where products and prices are shown: the photos bring the colour. Use an "accent" or "pop" backdrop at most once, and never behind the products.',
+    'Offers and savings stand out in words ("20% off", "free delivery over ₹999"), not in a second loud button colour. Never fake urgency: no countdowns, no "only 2 left", no discounts that aren’t real.',
+    'Match the price level: premium businesses (jewellery, hotels, spas, designers) use fewer buttons, more space and one quiet accent (bronze, deep green, ink); everyday brands (snacks, fashion, gadgets, sweets) show offers and products higher up with a brighter accent.',
+  ];
+  return `Where things go:
+${rules.map((r, i) => `${i + 1}. ${r}`).join('\n')}
+Colours:
+${colours.map((r) => `- ${r}`).join('\n')}`;
+}
 
 /** How Claude art-directs one site, given the kit's type pairings (design kit 2.0+). */
 export const STYLE_REFERENCE = (pairings: string) => `

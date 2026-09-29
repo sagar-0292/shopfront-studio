@@ -186,10 +186,26 @@ function sectionInner(s: SectionT, ctx: Ctx): Raw {
         </div>
       </section>`;
     case 'categories':
+      if (s.style === 'circles') {
+        // Round shortcuts: swipe sideways on phones, one row on computers.
+        return html`<section class="d-section d-section--tight" id="${id}">
+        <div class="d-wrap">
+          <h2 class="d-circles-title">${s.title}</h2>
+          <ul class="d-circles" role="list">${s.items.map((c, i) => html`<li><a class="d-circle" href="${link(ctx, c.href)}"><span class="d-circle-img">${media(c.media, ctx, `${id}-cat${i}`, { w: 240, h: 240, sizes: '120px' })}</span><span class="d-circle-label">${c.name}</span></a></li>`)}</ul>
+        </div>
+      </section>`;
+      }
       return html`<section class="d-section" id="${id}">
         <div class="d-wrap">
           ${head(ctx, s)}
           <div class="d-cat-grid" data-sf-stagger="90">${s.items.map((c, i) => html`<a class="d-cat" href="${link(ctx, c.href)}" data-sf-reveal="${mv.reveal}" data-sf-cursor-label="Shop">${media(c.media, ctx, `${id}-cat${i}`, { w: 600, h: 800, sizes: '(min-width: 900px) 25vw, 50vw' })}<span class="d-cat-label">${c.name}${icon('arrowUpRight', 22)}</span></a>`)}</div>
+        </div>
+      </section>`;
+    case 'trust':
+      return html`<section class="${cls('d-trust', tone(s.tone))}" id="${id}" aria-label="${s.title ?? 'Our promises'}">
+        <div class="d-wrap">
+          ${s.title ? html`<h2 class="d-trust-title">${s.title}</h2>` : ''}
+          <ul class="d-trust-list" role="list">${s.items.map((t) => html`<li class="d-trust-item">${icon(t.icon, 28)}<span><strong>${t.title}</strong>${t.text ? html`<span class="d-muted">${t.text}</span>` : ''}</span></li>`)}</ul>
         </div>
       </section>`;
     case 'story':

@@ -1,6 +1,7 @@
 // The page definition: what the AI Builder (Phase 3) produces and a human can
 // edit. Everything is validated before a page is built.
 import { z } from 'zod';
+import { PROMISE_ICONS } from './icons';
 import { BUTTONS, PAIRING_IDS, PHOTO_TONES, SCALES, SHAPES, SPACES } from './style';
 
 export const DIRECTIONS = ['editorial', 'bold', 'cinematic', 'crafted', 'poster', 'quiet', 'block'] as const;
@@ -48,7 +49,10 @@ const S = {
   marquee: z.object({ type: z.literal('marquee'), anchor, backdrop, items: z.array(text(60)).min(2).max(10), outline: z.boolean().default(false), speed: z.number().min(10).max(200).default(60), reverse: z.boolean().default(false) }),
   statement: z.object({ type: z.literal('statement'), anchor, backdrop, eyebrow: text(80).optional(), text: text(400), meta: z.array(text(80)).max(4).default([]), tone: z.enum(['default', 'invert', 'surface', 'pop']).default('default') }),
   products: z.object({ type: z.literal('products'), anchor, backdrop, eyebrow: text(80).optional(), title: text(120), link: Link.optional(), featured: z.boolean().default(false), category: z.string().max(60).optional(), limit: z.number().int().min(1).max(24).default(8), sort: z.enum(['featured', 'price-asc', 'price-desc', 'newest', 'discount']).default('featured'), tone: z.enum(['default', 'invert', 'surface']).default('default') }),
-  categories: z.object({ type: z.literal('categories'), anchor, backdrop, eyebrow: text(80).optional(), title: text(120), items: z.array(z.object({ name: text(40), href, media: Media })).min(2).max(8) }),
+  // "circles": a row of round shortcuts, the shop-by-category row big shops put in the first screen.
+  categories: z.object({ type: z.literal('categories'), anchor, backdrop, eyebrow: text(80).optional(), title: text(120), items: z.array(z.object({ name: text(40), href, media: Media })).min(2).max(10), style: z.enum(['tiles', 'circles']).default('tiles') }),
+  // The promises that make people comfortable buying (delivery, cash on delivery, returns, secure payment…).
+  trust: z.object({ type: z.literal('trust'), anchor, backdrop, title: text(120).optional(), items: z.array(z.object({ icon: z.enum(PROMISE_ICONS), title: text(40), text: text(90).optional() })).min(2).max(5), tone: z.enum(['default', 'invert', 'surface']).default('surface') }),
   story: z.object({ type: z.literal('story'), anchor, backdrop, eyebrow: text(80).optional(), title: text(120).optional(), panels: z.array(z.object({ title: text(80), text: text(300), media: Media.optional() })).min(2).max(6) }),
   features: z.object({ type: z.literal('features'), anchor, backdrop, eyebrow: text(80).optional(), title: text(120), items: z.array(z.object({ title: text(60), text: text(240) })).min(2).max(6), tone: z.enum(['default', 'invert', 'surface']).default('default') }),
   gallery: z.object({ type: z.literal('gallery'), anchor, backdrop, eyebrow: text(80).optional(), title: text(120), items: z.array(z.object({ media: Media, caption: text(120).optional(), ratio: z.enum(['square', 'portrait', 'landscape']).default('portrait') })).min(3).max(12) }),
@@ -89,7 +93,7 @@ const S = {
   pinned: z.object({ type: z.literal('pinned'), anchor, backdrop, eyebrow: text(80).optional(), title: text(120), text: text(400).optional(), cta: Cta.optional(),
     items: z.array(z.object({ title: text(80), text: text(300), media: Media.optional() })).min(2).max(8), tone: z.enum(['default', 'invert', 'surface', 'pop']).default('default') }),
 };
-export const Section = z.discriminatedUnion('type', [S.hero, S.marquee, S.statement, S.products, S.categories, S.story, S.features, S.gallery, S.menu, S.booking, S.quotes, S.stats, S.faq, S.cta, S.contact, S.shop, S.wishlist, S.rows, S.bento, S.scrolly, S.index, S.reel, S.photostrip, S.pinned]);
+export const Section = z.discriminatedUnion('type', [S.hero, S.marquee, S.statement, S.products, S.categories, S.trust, S.story, S.features, S.gallery, S.menu, S.booking, S.quotes, S.stats, S.faq, S.cta, S.contact, S.shop, S.wishlist, S.rows, S.bento, S.scrolly, S.index, S.reel, S.photostrip, S.pinned]);
 export type SectionT = z.infer<typeof Section>;
 export const SECTION_TYPES = Object.keys(S);
 
@@ -117,6 +121,8 @@ export const SiteDef = z.object({
   palette: z.object({ bg: hex, surface: hex, ink: hex, muted: hex, line: hex, accent: hex, accentInk: hex }).partial().optional(),
   /** A slim bar above the header: an offer, free delivery, a new launch. */
   announcement: z.object({ text: text(100), href: href.optional() }).optional(),
+  // A bar fixed to the bottom of phone screens with the one or two things a visitor most wants to do.
+  actionBar: z.object({ actions: z.array(z.object({ label: text(28), href, icon: z.enum(PROMISE_ICONS).optional() })).min(1).max(2) }).optional(),
   nav: z.array(Link).max(7).default([]),
   commerce: z.object({ source: z.record(z.string(), z.unknown()), delivery: z.record(z.string(), z.unknown()).optional(), payments: z.record(z.string(), z.unknown()).optional(), privacyUrl: z.string().optional() }).optional(),
   pages: z.array(z.object({ path: z.string().regex(/^\/([\w-]+\/)*$/), title: text(70), description: text(160), sections: z.array(Section).min(1).max(30) })).min(1).max(20),

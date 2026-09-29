@@ -1,6 +1,8 @@
 /* QUIET LUXURY — gallery calm: stone and bone white, a fine high-contrast serif
    with italics, hairline rules, sage details, very large photographs, slow fades. */
 .d-quiet {
+  /* the buying colour: the same as this look's main (solid) button */
+  --c-buy: var(--c-ink); --c-buy-ink: var(--c-bg);
   --c-bg: #f1eee8; --c-surface: #faf8f4; --c-ink: #161513; --c-muted: #625e57; --c-line: #dcd7cd;
   --c-accent: #34422f; --c-accent-ink: #f1eee8; --c-invert-bg: #161513; --c-invert-ink: #f1eee8; --c-invert-muted: #a9a49a; --c-invert-accent: #cfd8c4;
   --c-pop: #d6e3d0; --c-pop-ink: #161513;

@@ -1,6 +1,8 @@
 /* EDITORIAL LUXURY — magazine layouts, whisper-thin serif display, ivory and ink,
    dark-gold details, sharp corners, lots of air. */
 .d-editorial {
+  /* the buying colour: the same as this look's main (solid) button */
+  --c-buy: var(--c-ink); --c-buy-ink: var(--c-bg);
   --c-bg: #f7f3ec; --c-surface: #fffdf8; --c-ink: #1c1917; --c-muted: #6b635a; --c-line: #e2d9cc;
   --c-accent: #7a5a1e; --c-accent-ink: #fffdf8; --c-invert-bg: #1c1917; --c-invert-ink: #f7f3ec; --c-invert-muted: #b9ae9f; --c-invert-accent: #d4b26a;
   --c-pop: #0f3d2e; --c-pop-ink: #f7f3ec;

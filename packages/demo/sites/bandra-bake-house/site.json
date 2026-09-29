@@ -124,6 +124,23 @@
           "backdrop": "dots"
         },
         {
+          "type": "trust",
+          "items": [
+            {
+              "icon": "clock",
+              "title": "Out of the oven at 7 am"
+            },
+            {
+              "icon": "cash",
+              "title": "Cash on delivery or UPI"
+            },
+            {
+              "icon": "chat",
+              "title": "Order on WhatsApp"
+            }
+          ]
+        },
+        {
           "type": "rows",
           "anchor": "our-bread",
           "eyebrow": "Our bread",
@@ -326,5 +343,19 @@
     "line": "#e0bd5a",
     "accent": "#a8481f",
     "accentInk": "#fff8ee"
+  },
+  "actionBar": {
+    "actions": [
+      {
+        "label": "Call",
+        "href": "tel:+919820055443",
+        "icon": "phone"
+      },
+      {
+        "label": "Order on WhatsApp",
+        "href": "https://wa.me/919820055443",
+        "icon": "chat"
+      }
+    ]
   }
 }

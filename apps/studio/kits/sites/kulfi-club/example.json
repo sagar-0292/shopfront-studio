@@ -6,6 +6,20 @@
   "text": "Kulfi boxes delivered frozen across Mumbai, free over ₹799",
   "href": "/shop/"
  },
+ "actionBar": {
+  "actions": [
+   {
+    "label": "WhatsApp",
+    "href": "https://wa.me/919820011978",
+    "icon": "chat"
+   },
+   {
+    "label": "Shop kulfi",
+    "href": "/shop/",
+    "icon": "bag"
+   }
+  ]
+ },
  "nav": [
   {
    "label": "Shop",
@@ -77,6 +91,24 @@
       "label": "See everything",
       "href": "/shop/"
      }
+    },
+    {
+     "type": "trust",
+     "items": [
+      {
+       "icon": "truck",
+       "title": "Delivered frozen",
+       "text": "Across Mumbai, free over ₹799"
+      },
+      {
+       "icon": "cash",
+       "title": "Cash on delivery or UPI"
+      },
+      {
+       "icon": "leaf",
+       "title": "Slow-reduced kulfi, real-fruit lollies"
+      }
+     ]
     },
     {
      "type": "rows",

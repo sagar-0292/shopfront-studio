@@ -32,6 +32,7 @@ function everything(direction: SiteDefT['direction'] = 'editorial'): Record<stri
         { type: 'statement', text: 'We *care*.', meta: ['Est. 1962'] },
         { type: 'products', title: 'Bestsellers', featured: true, link: { label: 'All', href: '/shop/' } },
         { type: 'categories', title: 'Browse', items: [{ name: 'Sweets', href: '/shop/?cat=sweets', media: photo }, { name: 'Namkeen', href: '/shop/?cat=namkeen', media: { object: 'ring', label: 'A gold ring' } }] },
+        { type: 'trust', items: [{ icon: 'truck', title: 'Free delivery over ₹499', text: 'Across Mumbai, next day' }, { icon: 'cash', title: 'Cash on delivery' }, { icon: 'returns', title: 'Easy 7-day returns' }] },
         { type: 'story', title: 'Our story', panels: [{ title: 'One', text: 'First.' }, { title: 'Two', text: 'Second.', media: { video: { src: '/v.webm', poster: '/v.jpg' } } }] },
         { type: 'features', title: 'Why us', items: [{ title: 'A', text: 'a' }, { title: 'B', text: 'b' }] },
         { type: 'gallery', title: 'Gallery', items: [{ media: photo }, { media: photo, ratio: 'square' }, { media: { model: '/m/diya.glb', label: 'A clay lamp' } }] },
@@ -239,9 +240,9 @@ describe('renderSite', () => {
     const sc = d.querySelector('.d-scrolly')!;
     expect(sc.querySelector('.d-scrolly-stage')!.getAttribute('aria-hidden')).toBe('true');
     const steps = [...sc.querySelectorAll('.d-scrolly-step')];
-    expect(steps.map((s) => s.getAttribute('style'))).toEqual(['view-timeline-name:--sc-s21-0', 'view-timeline-name:--sc-s21-1']);
+    expect(steps.map((s) => s.getAttribute('style'))).toEqual(['view-timeline-name:--sc-s22-0', 'view-timeline-name:--sc-s22-1']);
     expect(steps.every((s) => s.querySelector('.d-scrolly-photo img'))).toBe(true);
-    expect(sc.querySelector('.d-scrolly-grid')!.getAttribute('style')).toBe('timeline-scope:--sc-s21-0,--sc-s21-1');
+    expect(sc.querySelector('.d-scrolly-grid')!.getAttribute('style')).toBe('timeline-scope:--sc-s22-0,--sc-s22-1');
     // Index: linked lines are links, each with its photo.
     expect(d.querySelectorAll('.d-index-item')).toHaveLength(2);
     expect(d.querySelector('a.d-index-row')!.getAttribute('href')).toBe('/shop/');
@@ -340,9 +341,37 @@ describe('renderSite', () => {
     expect(() => renderSite({ ...everything(), style: { type: 'comic-sans' } }, V)).toThrow(DesignError);
   });
 
+  it('builds what big shops use to help people buy: trust strip, round categories, phone action bar', () => {
+    const def = everything('bold');
+    def.actionBar = { actions: [{ label: 'Call us', href: 'tel:+919820012345', icon: 'phone' }, { label: 'Order on WhatsApp', href: 'https://wa.me/919820012345', icon: 'chat' }] };
+    (def.pages as { sections: Record<string, unknown>[] }[])[0].sections.unshift({ type: 'categories', style: 'circles', title: 'Shop by category', items: [{ name: 'Sweets', href: '/shop/?cat=sweets', media: photo }, { name: 'Namkeen', href: '/shop/?cat=namkeen', media: photo }] });
+    const d = doc(renderSite(def, V)['/index.html']);
+    // Trust strip: a labelled list, line icons (never emoji), each promise as text.
+    const trust = d.querySelector('.d-trust')!;
+    expect(trust.getAttribute('aria-label')).toBe('Our promises');
+    expect([...trust.querySelectorAll('.d-trust-item strong')].map((e) => e.textContent)).toEqual(['Free delivery over ₹499', 'Cash on delivery', 'Easy 7-day returns']);
+    expect(trust.querySelectorAll('svg.d-icon')).toHaveLength(3);
+    // Round category shortcuts are a list of links with their names.
+    expect([...d.querySelectorAll('.d-circles .d-circle')].map((a) => [a.getAttribute('href'), a.textContent!.trim()])).toEqual([['/shop/?cat=sweets', 'Sweets'], ['/shop/?cat=namkeen', 'Namkeen']]);
+    // The phone action bar: after the footer, leaves room for itself, outside links open in a new tab.
+    const bar = d.querySelector('nav.d-actionbar')!;
+    expect(bar.getAttribute('aria-label')).toBe('Quick actions');
+    expect(d.body.classList.contains('has-actionbar')).toBe(true);
+    expect([...bar.querySelectorAll('a')].map((a) => [a.textContent, a.getAttribute('target')])).toEqual([['Call us', null], ['Order on WhatsApp', '_blank']]);
+    // The last action is the main one: the look's solid button, in the site's one buying colour.
+    expect([...bar.querySelectorAll('a')].map((a) => a.className)).toEqual(['d-btn', 'd-btn d-btn--solid']);
+    // Without an action bar nothing changes.
+    expect(doc(renderSite(everything('bold'), V)['/index.html']).body.className).toBe('');
+    expect(() => renderSite({ ...everything('bold'), actionBar: { actions: [] } }, V)).toThrow(DesignError);
+  });
+
   it('refuses custom colours that are hard to read', () => {
     expect(checkPalette('editorial', { ink: '#cccccc' })[0]).toMatch(/Main text on the page background is too faint/);
     expect(checkPalette('editorial', { accent: '#123456' })).toEqual([]);
+    // Buttons must stand out from the page (a pale teal on white would not).
+    expect(checkPalette('poster', { bg: '#ffffff', accent: '#5ec4c4', accentInk: '#000000' })).toEqual([expect.stringMatching(/Buttons don't stand out from the page background \(2\.\d:1/)]);
+    // Where the buying colour is the ink (editorial) or outlined in ink (bold), a pale accent is fine.
+    expect(checkPalette('editorial', { bg: '#ffffff', accent: '#5ec4c4', accentInk: '#000000' })).toEqual([]);
     const def = everything();
     def.palette = { accent: '#ffe066', accentInk: '#ffffff' };
     expect(() => renderSite(def, V)).toThrow(/Button text on the accent colour/);

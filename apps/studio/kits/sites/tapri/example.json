@@ -15,6 +15,20 @@
   "text": "Free delivery on chai blends over ₹499 across Mumbai",
   "href": "/shop/"
  },
+ "actionBar": {
+  "actions": [
+   {
+    "label": "Call",
+    "href": "tel:+912224301122",
+    "icon": "phone"
+   },
+   {
+    "label": "Order on WhatsApp",
+    "href": "https://wa.me/919820055667",
+    "icon": "chat"
+   }
+  ]
+ },
  "nav": [
   {
    "label": "Shop blends",
@@ -271,6 +285,24 @@
       "href": "/shop/"
      },
      "backdrop": "dots"
+    },
+    {
+     "type": "trust",
+     "items": [
+      {
+       "icon": "truck",
+       "title": "Free delivery over ₹499",
+       "text": "Across Mumbai"
+      },
+      {
+       "icon": "cash",
+       "title": "Cash on delivery or UPI"
+      },
+      {
+       "icon": "leaf",
+       "title": "Chai brewed to order"
+      }
+     ]
     },
     {
      "type": "pinned",

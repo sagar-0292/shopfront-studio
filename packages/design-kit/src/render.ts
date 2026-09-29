@@ -102,7 +102,7 @@ ${hasCommerce ? html`<script type="module" src="${`${kits}/commerce/${v.commerce
 <script type="application/json" id="sf-config">${raw(json(commerceConfig(def, base)))}</script>` : ''}
 ${structuredData(def, page)}
 </head>
-<body>
+<body${raw(def.actionBar ? ' class="has-actionbar"' : '')}>
 <a class="d-skip" href="#main">Skip to content</a>
 <div class="d-progress" data-sf-progress></div>
 ${def.announcement ? html`<div class="d-announce"><div class="d-wrap">${def.announcement.href ? html`<a href="${link(ctxBase, def.announcement.href)}">${def.announcement.text} <span class="d-arrow">${icon('arrowRight', 14)}</span></a>` : def.announcement.text}</div></div>` : ''}
@@ -111,6 +111,7 @@ ${header(def, page, ctxBase)}
 ${sections}
 </main>
 ${footer(def, ctxBase)}
+${def.actionBar ? html`<nav class="d-actionbar" aria-label="Quick actions">${def.actionBar.actions.map((a, i) => html`<a class="${cls('d-btn', (i === def.actionBar!.actions.length - 1) && 'd-btn--solid')}" href="${link(ctxBase, a.href)}"${raw(/^https?:/.test(a.href) ? ' target="_blank" rel="noopener"' : '')}>${a.icon ? icon(a.icon, 20) : ''}<span>${a.label}</span></a>`)}</nav>` : ''}
 </body>
 </html>
 `.value;

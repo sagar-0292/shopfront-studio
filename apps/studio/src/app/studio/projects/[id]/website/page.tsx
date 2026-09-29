@@ -14,7 +14,7 @@ import { exampleFor, loadProjectWebsite } from '@/lib/website/load';
 import { buildSite, fillInBrief, generateWebsite, pasteFillIn, removeFile, saveBrief, saveWebsite, uploadFile, useLatestDesignKit } from './actions';
 import { claudeConnected } from '@/lib/website/claude';
 import { fillInPrompt } from '@/lib/website/autofill';
-import { styleGuide } from '@/lib/website/render';
+import { kitGuide } from '@/lib/website/render';
 
 export const metadata: Metadata = { title: 'Website' };
 // Claude takes 1–3 minutes to write a whole website (Vercel allows up to 5).
@@ -52,7 +52,7 @@ export default async function WebsitePage({ params }: PageProps<'/studio/project
       logoColours: logo?.colours ?? [],
       photos: photos.map((f) => ({ name: f.name, label: f.label })),
       documents: documents.map((f) => ({ filename: f.filename, label: f.label })),
-    }, await styleGuide(site.design_kit_version, direction))
+    }, await kitGuide(site.design_kit_version, direction))
     : null;
   const preview = `/studio/projects/${id}/website/preview/`;
   const website = site.website;

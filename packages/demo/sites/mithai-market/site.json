@@ -106,6 +106,40 @@
           "backdrop": "glow"
         },
         {
+          "type": "categories",
+          "title": "Shop by category",
+          "items": [
+            {
+              "name": "Sweets",
+              "href": "/shop/?cat=sweets",
+              "media": {
+                "image": {
+                  "$photo": "mithai-market/barfi"
+                }
+              }
+            },
+            {
+              "name": "Namkeen",
+              "href": "/shop/?cat=namkeen",
+              "media": {
+                "image": {
+                  "$photo": "mithai-market/chakli"
+                }
+              }
+            },
+            {
+              "name": "Gift boxes",
+              "href": "/shop/?cat=gifts",
+              "media": {
+                "image": {
+                  "$photo": "mithai-market/hamper"
+                }
+              }
+            }
+          ],
+          "style": "circles"
+        },
+        {
           "type": "marquee",
           "items": [
             "Pure ghee",
@@ -127,6 +161,29 @@
             "href": "/shop/"
           },
           "backdrop": "dots"
+        },
+        {
+          "type": "trust",
+          "items": [
+            {
+              "icon": "truck",
+              "title": "Same-day delivery",
+              "text": "Across Mumbai"
+            },
+            {
+              "icon": "cash",
+              "title": "Cash on delivery or UPI"
+            },
+            {
+              "icon": "leaf",
+              "title": "Made fresh every morning",
+              "text": "In pure desi ghee"
+            },
+            {
+              "icon": "gift",
+              "title": "Gift boxes for every occasion"
+            }
+          ]
         },
         {
           "type": "bento",
@@ -184,41 +241,6 @@
             }
           ],
           "backdrop": "grid"
-        },
-        {
-          "type": "categories",
-          "eyebrow": "Browse",
-          "title": "What are you *craving*?",
-          "items": [
-            {
-              "name": "Sweets",
-              "href": "/shop/?cat=sweets",
-              "media": {
-                "image": {
-                  "$photo": "mithai-market/barfi"
-                }
-              }
-            },
-            {
-              "name": "Namkeen",
-              "href": "/shop/?cat=namkeen",
-              "media": {
-                "image": {
-                  "$photo": "mithai-market/chakli"
-                }
-              }
-            },
-            {
-              "name": "Gift boxes",
-              "href": "/shop/?cat=gifts",
-              "media": {
-                "image": {
-                  "$photo": "mithai-market/hamper"
-                }
-              }
-            }
-          ],
-          "backdrop": "pop"
         },
         {
           "type": "rows",
@@ -332,5 +354,19 @@
     "line": "#7a75b8",
     "accent": "#ffd166",
     "accentInk": "#22061f"
+  },
+  "actionBar": {
+    "actions": [
+      {
+        "label": "Call",
+        "href": "tel:+919820012345",
+        "icon": "phone"
+      },
+      {
+        "label": "Order on WhatsApp",
+        "href": "https://wa.me/919820012345",
+        "icon": "chat"
+      }
+    ]
   }
 }

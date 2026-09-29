@@ -11,6 +11,20 @@
   "accent": "#ffd166",
   "accentInk": "#22061f"
  },
+ "actionBar": {
+  "actions": [
+   {
+    "label": "Call",
+    "href": "tel:+919820012345",
+    "icon": "phone"
+   },
+   {
+    "label": "Order on WhatsApp",
+    "href": "https://wa.me/919820012345",
+    "icon": "chat"
+   }
+  ]
+ },
  "nav": [
   {
    "label": "Shop",
@@ -78,6 +92,46 @@
      "backdrop": "glow"
     },
     {
+     "type": "categories",
+     "title": "Shop by category",
+     "items": [
+      {
+       "name": "Sweets",
+       "href": "/shop/?cat=sweets",
+       "media": {
+        "$photo": {
+         "q": "Besan barfi topped with almonds and pistachios",
+         "alt": "Besan barfi topped with almonds and pistachios",
+         "shape": "square"
+        }
+       }
+      },
+      {
+       "name": "Namkeen",
+       "href": "/shop/?cat=namkeen",
+       "media": {
+        "$photo": {
+         "q": "A platter of chakli spirals and festive snacks",
+         "alt": "A platter of chakli spirals and festive snacks",
+         "shape": "square"
+        }
+       }
+      },
+      {
+       "name": "Gift boxes",
+       "href": "/shop/?cat=gifts",
+       "media": {
+        "$photo": {
+         "q": "Diwali gift boxes stacked with marigolds and fairy lights",
+         "alt": "Diwali gift boxes stacked with marigolds and fairy lights",
+         "shape": "square"
+        }
+       }
+      }
+     ],
+     "style": "circles"
+    },
+    {
      "type": "marquee",
      "items": [
       "Pure ghee",
@@ -99,6 +153,29 @@
       "href": "/shop/"
      },
      "backdrop": "dots"
+    },
+    {
+     "type": "trust",
+     "items": [
+      {
+       "icon": "truck",
+       "title": "Same-day delivery",
+       "text": "Across Mumbai"
+      },
+      {
+       "icon": "cash",
+       "title": "Cash on delivery or UPI"
+      },
+      {
+       "icon": "leaf",
+       "title": "Made fresh every morning",
+       "text": "In pure desi ghee"
+      },
+      {
+       "icon": "gift",
+       "title": "Gift boxes for every occasion"
+      }
+     ]
     },
     {
      "type": "bento",
@@ -162,47 +239,6 @@
       }
      ],
      "backdrop": "grid"
-    },
-    {
-     "type": "categories",
-     "eyebrow": "Browse",
-     "title": "What are you *craving*?",
-     "items": [
-      {
-       "name": "Sweets",
-       "href": "/shop/?cat=sweets",
-       "media": {
-        "$photo": {
-         "q": "Besan barfi topped with almonds and pistachios",
-         "alt": "Besan barfi topped with almonds and pistachios",
-         "shape": "square"
-        }
-       }
-      },
-      {
-       "name": "Namkeen",
-       "href": "/shop/?cat=namkeen",
-       "media": {
-        "$photo": {
-         "q": "A platter of chakli spirals and festive snacks",
-         "alt": "A platter of chakli spirals and festive snacks",
-         "shape": "square"
-        }
-       }
-      },
-      {
-       "name": "Gift boxes",
-       "href": "/shop/?cat=gifts",
-       "media": {
-        "$photo": {
-         "q": "Diwali gift boxes stacked with marigolds and fairy lights",
-         "alt": "Diwali gift boxes stacked with marigolds and fairy lights",
-         "shape": "square"
-        }
-       }
-      }
-     ],
-     "backdrop": "pop"
     },
     {
      "type": "rows",

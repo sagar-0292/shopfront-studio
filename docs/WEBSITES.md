@@ -28,6 +28,9 @@ Every project has a **Website** page (project page → **Create website**). It t
      pairings, headline size, capitals, corners, spacing, button style and photo colour grading, so two sites in the
      same look feel like different brands. Projects on an older kit keep the look's fonts until the owner moves them
      to the newest kit.
+   - **What makes people buy** (design kit 2.1 and newer): the brief also carries the placement and colour rules
+     learned from big brands' websites (see [SELLING.md](SELLING.md)): category shortcuts and bestsellers early, a
+     trust strip with true promises, proof next to products, one buying colour, and a phone action bar.
    - The brief contains the business, the chosen look, rules that keep the site high-end (specific copy, no
      invented facts or reviews, section rhythm, photo search phrases), the section reference, and a finished
      sample site in the same look as the standard to match.

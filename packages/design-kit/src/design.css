@@ -15,7 +15,8 @@ h1, h2, h3, h4 { margin: 0; font-weight: inherit; }
 /* commerce kit follows the direction */
 /* :root:root outranks the commerce kit's own :root defaults */
 :root:root { --sf-ink: var(--c-ink); --sf-muted: var(--c-muted); --sf-surface: var(--c-surface); --sf-page: var(--c-bg); --sf-line: var(--c-line);
-  --sf-accent: var(--c-accent); --sf-accent-ink: var(--c-accent-ink); --sf-radius: var(--radius-card); --sf-cursor-color: var(--c-accent); }
+  /* One buying colour per site: add-to-cart uses the same colour as the look's main button (--c-buy). */
+  --sf-accent: var(--c-buy, var(--c-accent)); --sf-accent-ink: var(--c-buy-ink, var(--c-accent-ink)); --sf-radius: var(--radius-card); --sf-cursor-color: var(--c-accent); }
 
 .d-wrap { width: min(1320px, 100% - clamp(32px, 6vw, 96px)); margin-inline: auto; }
 .d-skip { position: absolute; left: -999px; top: 8px; z-index: 2000; background: var(--c-surface); color: var(--c-ink); padding: 10px 14px; }
@@ -143,7 +144,7 @@ h1, h2, h3, h4 { margin: 0; font-weight: inherit; }
 .d-card-stock { margin: 0; font-size: 0.8rem; color: var(--c-muted); }
 .d-card-actions { display: flex; gap: 8px; margin-top: auto; padding-top: 10px; flex-wrap: wrap; }
 .d-card-actions select { min-height: 44px; border: 1px solid var(--c-line); border-radius: min(var(--radius-btn), 12px); background: var(--c-surface); color: var(--c-ink); padding: 0 10px; max-width: 100%; font: inherit; }
-.d-card-actions [data-slot="add"] { flex: 1; min-height: 44px; border: 0; border-radius: var(--radius-btn); background: var(--c-ink); color: var(--c-bg); font: 600 0.9rem/1 var(--f-body); cursor: pointer; }
+.d-card-actions [data-slot="add"] { flex: 1; min-height: 44px; border: 0; border-radius: var(--radius-btn); background: var(--c-buy, var(--c-accent)); color: var(--c-buy-ink, var(--c-accent-ink)); font: 600 0.9rem/1 var(--f-body); cursor: pointer; }
 .d-card-actions [data-slot="add"]:disabled { opacity: .45; cursor: not-allowed; }
 .d-card-actions [data-slot="wishlist"] { width: 44px; height: 44px; border-radius: 999px; border: 1px solid var(--c-line); background: var(--c-surface); color: var(--c-ink); cursor: pointer; font-size: 1.05rem; }
 
@@ -416,6 +417,7 @@ html[data-type] .d-logo { text-transform: var(--display-case); }
 /* Buttons */
 html[data-buttons] .d-btn { border: 0; letter-spacing: 0.01em; text-transform: none; font-size: 0.95rem; }
 html[data-buttons="solid"] .d-btn, html[data-buttons="pill"] .d-btn { background: var(--c-ink); color: var(--c-bg); box-shadow: none; }
+html[data-buttons="solid"], html[data-buttons="pill"] { --c-buy: var(--c-ink); --c-buy-ink: var(--c-bg); }
 html[data-buttons="solid"] .d-btn.d-btn--solid, html[data-buttons="pill"] .d-btn.d-btn--solid { background: var(--c-accent); color: var(--c-accent-ink); }
 html[data-buttons="pill"] .d-btn { border-radius: 999px; padding-inline: 30px; }
 html[data-buttons="outline"] .d-btn { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; }
@@ -438,3 +440,35 @@ html[data-photos="duotone"] main img:not(.d-card img) { filter: grayscale(1) con
 html[data-type="mona"] .d-wordmark { font-stretch: 125%; }
 /* Word-by-word reveals mask each word; leave room for deep descenders (g, y, commas) in tight display type. */
 .d-display .sf-w { padding-bottom: .24em; margin-bottom: -.24em; }
+
+/* Trust strip: the promises that make people comfortable buying (learned from big Indian shops' product pages). */
+.d-trust { padding-block: clamp(22px, 3.2vw, 40px); border-block: 1px solid var(--c-line); }
+.d-trust-title { margin: 0 0 18px; font: 600 0.8rem/1.2 var(--f-accent, var(--f-body)); letter-spacing: .14em; text-transform: uppercase; color: var(--c-muted); }
+.d-trust-list { display: grid; gap: 18px 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); margin: 0; padding: 0; list-style: none; }
+.d-trust-item { display: flex; gap: 14px; align-items: center; }
+.d-trust-item .d-icon { flex: none; color: var(--c-accent); }
+.d-trust-item > span { display: grid; gap: 2px; font-size: .95rem; line-height: 1.3; }
+.d-trust-item .d-muted { font-size: .85rem; }
+@media (max-width: 599px) { .d-trust-list { grid-template-columns: 1fr 1fr; gap: 16px; } .d-trust-item { flex-direction: column; align-items: flex-start; gap: 8px; } }
+
+/* Round category shortcuts (shop by category). */
+.d-circles-title { margin: 0 0 clamp(16px, 2.4vw, 28px); font: var(--display-weight) clamp(1.3rem, 2.2vw, 1.9rem)/1.1 var(--f-display); letter-spacing: var(--display-tracking); text-transform: var(--display-case); text-align: center; }
+.d-circles { display: flex; gap: clamp(14px, 2.4vw, 28px); margin: 0; padding: 4px 2px 8px; list-style: none; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; }
+.d-circles::-webkit-scrollbar { display: none; }
+.d-circles > li { flex: none; scroll-snap-align: start; }
+.d-circle { display: grid; justify-items: center; gap: 10px; width: clamp(84px, 11vw, 132px); text-decoration: none; color: inherit; text-align: center; }
+.d-circle-img { display: block; width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--c-surface); box-shadow: 0 0 0 1px var(--c-line); transition: box-shadow .3s; }
+.d-circle-img > img, .d-circle-img > svg { width: 100%; height: 100%; object-fit: cover; }
+.d-circle:hover .d-circle-img, .d-circle:focus-visible .d-circle-img { box-shadow: 0 0 0 3px var(--c-accent); }
+.d-circle-label { font-size: .9rem; font-weight: 600; line-height: 1.2; }
+@media (min-width: 900px) { .d-circles { justify-content: center; flex-wrap: wrap; overflow: visible; } }
+
+/* Phone action bar: the main action always within thumb reach (like big shops' sticky "Add to cart").
+   Its buttons are the look's own: the main one is the solid button, in the site's one buying colour. */
+.d-actionbar { display: none; }
+@media (max-width: 720px) {
+  .d-actionbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 900; display: flex; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)); background: var(--c-bg); border-top: 1px solid var(--c-line); box-shadow: 0 -8px 24px rgba(0,0,0,.08); }
+  .d-actionbar .d-btn { flex: 1 1 0; justify-content: center; gap: 8px; min-height: 48px; padding-inline: 14px; white-space: nowrap; overflow: hidden; }
+  .d-actionbar .d-btn:not(.d-btn--solid) { flex: 0 1 auto; }
+  body.has-actionbar { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+}

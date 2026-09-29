@@ -36,8 +36,13 @@ const PAIRS: [fg: 'ink' | 'muted' | 'accentInk' | 'accent', bg: 'bg' | 'surface'
 export function checkPalette(dir: Direction, palette: Partial<Record<string, string>> | undefined): string[] {
   if (!palette) return [];
   const p = { ...DEFAULTS[dir], ...Object.fromEntries(Object.entries(palette).filter(([, v]) => v)) } as Colours;
-  return PAIRS.filter(([f, b]) => contrast(p[f], p[b]) < 4.5).map(([f, b, what]) =>
+  const out = PAIRS.filter(([f, b]) => contrast(p[f], p[b]) < 4.5).map(([f, b, what]) =>
     `${what} is too faint to read (${contrast(p[f], p[b]).toFixed(1)}:1, needs at least 4.5:1). Try a darker or lighter ${f === 'accentInk' ? 'button text' : 'text'} colour.`);
+  // The buying colour must stand out from the page (big shops keep one strong button colour; WCAG asks 3:1 for
+  // controls). It is the accent in most looks; the ink in editorial, crafted and quiet (always readable); Festival
+  // outlines its buttons in ink, so any colour works there.
+  if (!['editorial', 'crafted', 'quiet', 'bold'].includes(dir) && contrast(p.accent, p.bg) < 3) out.push(`Buttons don't stand out from the page background (${contrast(p.accent, p.bg).toFixed(1)}:1, needs at least 3:1). Make the accent colour darker or brighter than the background.`);
+  return out;
 }
 
 /** Colours for an animated background: the section's own fill first, then the dots/glows drawn on it. */
